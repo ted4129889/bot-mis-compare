@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <txt>
+        <field>
+            <fieldName>class</fieldName>
+            <length>1</length>
+        </field>
+        <field>
+            <fieldName>pidno</fieldName>
+            <length>10</length>
+        </field>
+        <field>
+            <fieldName>actno</fieldName>
+            <length>12</length>
+        </field>
+        <field>
+            <fieldName>type</fieldName>
+            <length>1</length>
+        </field>
+        <field>
+            <fieldName>bcode</fieldName>
+            <length>4</length>
+        </field>
+        <field>
+            <fieldName>scop</fieldName>
+            <length>1</length>
+        </field>
+        <field>
+            <fieldName>ntbal</fieldName>
+            <length>16</length>
+        </field>
+        <field>
+            <fieldName>ntbal_last</fieldName>
+            <length>16</length>
+        </field>
+    </txt>
+</data>
+

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>mis.botsrdb.db_ftxac_dds</table>
+    <field>
+        <fieldName>db-ftxac-cifkey</fieldName>
+        <maskType>1</maskType>
+    </field>
+</data>
+

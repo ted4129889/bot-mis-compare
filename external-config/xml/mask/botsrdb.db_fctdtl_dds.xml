@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>mis.botsrdb.db_fctdtl_dds</table>
+    <field>
+        <fieldName>db-fctdtl-actno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db-fctdtl-mactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db-fctdtl-trnact</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db-fctdtl-lactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db-fctdtl-nactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+</data>
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>mis.botsrdb.db_actcmp_dds</table>
+    <field>
+        <fieldName>db-actcmp-hentpno</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db-actcmp-actno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db-actcmp-cmpname</fieldName>
+        <maskType>4</maskType>
+    </field>
+    <field>
+        <fieldName>db-actcmp-addr</fieldName>
+        <maskType>5</maskType>
+    </field>
+    <field>
+        <fieldName>db-actcmp-csrno</fieldName>
+        <maskType>7</maskType>
+    </field>
+    <field>
+        <fieldName>db-actcmp-cphone</fieldName>
+        <maskType>7</maskType>
+    </field>
+</data>
+

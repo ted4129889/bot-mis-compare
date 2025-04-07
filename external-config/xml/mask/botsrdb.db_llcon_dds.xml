@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>mis.botsrdb.db_llcon_dds</table>
+    <field>
+        <fieldName>db-llcon-pidno</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db-llcon-entpno</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db-llcon-bsid</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db-llcon-actno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db-llcon-ipactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db-llcon-apact</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db-llcon-payact</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db-llcon-oactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db-llcon-trpact</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db-llcon-bkact</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db-llcon-telno</fieldName>
+        <maskType>7</maskType>
+    </field>
+</data>
+

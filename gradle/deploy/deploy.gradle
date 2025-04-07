@@ -1,0 +1,92 @@
+import static org.gradle.internal.logging.text.StyledTextOutput.Style
+import org.gradle.internal.logging.text.StyledTextOutputFactory
+def out = services.get(StyledTextOutputFactory).create("gradle-color-output")
+
+apply plugin: "org.hidetake.ssh"
+
+def privateKey = file(System.properties['user.home'] + "/.ssh/id_rsa")
+
+def deploy_remotes = [
+        DEV_server: [
+            env: ['dev'],
+            app_home: '/app/fsap/fsap-mis',
+            jar_name: 'mis.jar',
+            is_jboss: false,
+            //spring_config_filename: 'DEV.MGW1.config.yml',
+            server: [
+                identity: privateKey,
+                host: '172.17.24.18',
+                user: 'apuser'
+            ]
+        ],
+        SIT_server: [
+            env: ['sit'],
+            app_home: '/home/jbossadm/war',
+            jar_name: 'bot-mis-app.war',
+            is_jboss: true,
+            //spring_config_filename: 'DEV.OGW1.config.yml',
+            server: [
+                identity: privateKey,
+                host: '10.1.9.211',
+                user: 'jbossadm'
+            ]
+        ]
+]
+
+task sshInfo {
+    doFirst {
+        logger.quiet "\n\n\u001b[32mLoading private key for deploy at location ${privateKey} \u001B[0m\n\n"
+    }
+}
+
+ssh.settings {
+    dryRun = project.hasProperty('dryRun')
+    //pty = true
+    encoding = 'UTF-8'
+    knownHosts = allowAnyHosts
+    timeoutSec = 600
+    jschLog = true
+}
+
+task deploy() {
+    doLast {
+        def system_prop = System.getProperties()
+        def env = system_prop.get('env', 'SIT')
+        if (deploy.enabled) {
+            deploy_remotes.findAll(x -> x.value.env.contains(env)).each {
+                def server_name = it.getKey()
+                def server_config = it.getValue()
+                if (server_config.is_jboss) {
+                    ssh.run {
+                        session(server_config.server) {
+                            out.withStyle(Style.Info).println "\n\n\tput ${server_config.jar_name} to remote $server_name : $server_config.app_home \n\n"
+                            put from: bootWar.archiveFile.get().asFile.path, into: "${server_config.app_home}/${server_config.jar_name}", logging: 'stdout'
+                            execute """
+                            cd $server_config.app_home
+                            chmod 775 $server_config.jar_name
+                            /jboss/bin/jboss-cli.sh --connect --command="deploy $server_config.app_home/$server_config.jar_name --force"
+                            exit
+                            """, logging: 'stdout'
+                        }
+                    }
+                } else {
+                    ssh.run {
+                        session(server_config.server) {
+                            //execute "mkdir -p ${server_config.app_home}/boot/config", logging: 'stdout'
+                            execute """
+                            cd $server_config.app_home
+                            sh ./stop.sh               
+                            """, logging: 'stdout'
+                            out.withStyle(Style.Info).println "\n\n\tput ${server_config.jar_name} to remote $server_name : $server_config.app_home \n\n"
+                            put from: bootJar.archiveFile.get().asFile.path, into: "${server_config.app_home}/${server_config.jar_name}", logging: 'stdout'
+                            execute """
+                            cd $server_config.app_home
+                            sh ./run.sh               
+                            """, logging: 'stdout'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

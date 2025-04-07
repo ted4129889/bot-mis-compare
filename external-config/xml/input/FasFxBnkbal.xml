@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <txt>
+        <field>
+            <fieldName>type</fieldName>
+            <length>1</length>
+        </field>
+        <field>
+            <fieldName>tday</fieldName>
+            <length>8</length>
+        </field>
+        <field>
+            <fieldName>bkcur</fieldName>
+            <length>2</length>
+        </field>
+        <field>
+            <fieldName>bksrno</fieldName>
+            <length>3</length>
+        </field>
+        <field>
+            <fieldName>dbamt</fieldName>
+            <length>13</length>
+        </field>
+        <field>
+            <fieldName>cramt</fieldName>
+            <length>13</length>
+        </field>
+        <field>
+            <fieldName>bkbal</fieldName>
+            <length>15</length>
+        </field>
+        <field>
+            <fieldName>lbal</fieldName>
+            <length>15</length>
+        </field>
+    </txt>
+</data>
+

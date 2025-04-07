@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <txt>
+        <field>
+            <fieldName>brno</fieldName>
+            <length>3</length>
+        </field>
+        <field>
+            <fieldName>actno</fieldName>
+            <length>12</length>
+        </field>
+        <field>
+            <fieldName>entpno</fieldName>
+            <length>8</length>
+        </field>
+        <field>
+            <fieldName>filler</fieldName>
+            <length>2</length>
+        </field>
+        <field>
+            <fieldName>sharid</fieldName>
+            <length>2</length>
+        </field>
+        <field>
+            <fieldName>cycid</fieldName>
+            <length>1</length>
+        </field>
+        <field>
+            <fieldName>csdate</fieldName>
+            <length>8</length>
+        </field>
+        <field>
+            <fieldName>cedate</fieldName>
+            <length>8</length>
+        </field>
+        <field>
+            <fieldName>fitirt</fieldName>
+            <length>8</length>
+        </field>
+        <field>
+            <fieldName>sgaid</fieldName>
+            <length>2</length>
+        </field>
+        <field>
+            <fieldName>sgaper</fieldName>
+            <length>7</length>
+        </field>
+        <field>
+            <fieldName>filler</fieldName>
+            <length>1</length>
+        </field>
+    </txt>
+</data>
+

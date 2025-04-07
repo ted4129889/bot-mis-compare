@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>mis.botlddb.db_lcon_dds</table>
+    <field>
+        <fieldName>db-lcon-entpno</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db-lcon-pidno</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db-lcon-bsid</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db-lcon-lentpno</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db-lcon-actno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db-lcon-autact</fieldName>
+        <maskType>2</maskType>
+    </field>
+</data>
+

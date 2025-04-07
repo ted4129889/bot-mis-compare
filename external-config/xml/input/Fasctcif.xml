@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <txt>
+        <field>
+            <fieldName>cusno</fieldName>
+            <length>10</length>
+        </field>
+        <field>
+            <fieldName>brno</fieldName>
+            <length>3</length>
+        </field>
+    </txt>
+</data>
+

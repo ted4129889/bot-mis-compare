@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>mis.botsrdb.db_ladv_dds</table>
+    <field>
+        <fieldName>db-ladv-actno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db-ladv-oactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+</data>
+

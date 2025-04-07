@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <txt>
+        <field>
+            <fieldName>bcode</fieldName>
+            <length>4</length>
+        </field>
+        <field>
+            <fieldName>bal</fieldName>
+            <length>13</length>
+        </field>
+    </txt>
+</data>
+

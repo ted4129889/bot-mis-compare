@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>mis.botsddb.db_cthtr_dds</table>
+    <field>
+        <fieldName>db-cthtr-actno</fieldName>
+        <maskType>2</maskType>
+    </field>
+</data>
+

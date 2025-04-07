@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>mis.botsrdb.db_glblmr_dds</table>
+    <field>
+        <fieldName>db-glblmr-unino</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db-glblmr-aounino</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db-glblmr-actno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db-glblmr-oactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db-glblmr-dpactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+</data>
+

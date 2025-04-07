@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>mis.botsrdb.db_cadtl_dds</table>
+    <field>
+        <fieldName>db-cadtl-cifkey</fieldName>
+        <maskType>1</maskType>
+    </field>
+</data>
+

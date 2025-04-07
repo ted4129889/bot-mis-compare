@@ -1,0 +1,227 @@
+buildscript {
+    dependencies {
+        classpath(
+                // https://plugins.gradle.org/plugin/org.hidetake.ssh
+                'org.hidetake:core:2.11.2'
+        )
+    }
+}
+
+plugins {
+    id 'java'
+    id 'war'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+
+    id 'maven-publish'
+    id 'com.diffplug.spotless'
+}
+
+apply from: "$rootProject.projectDir/gradle/deploy/deploy.gradle"
+
+group = 'com.bot'
+version = '0.0.1-SNAPSHOT'
+
+def ioGrpcVer = '1.68.0' // CURRENT_GRPC_VERSION
+def protobufVer = '4.28.3';
+def mapStructVer = '1.5.5.Final'
+
+
+def swaggerAnnVer = '2.2.10'
+def beanUtilVer = '1.9.4'
+def openfeign = '12.5'
+def jodaTime = '2.12.5'
+def commonsLang3 = '3.14.0'
+
+dependencies {
+    implementation("com.bot.mis:txcontrol:1.0.0")
+    //XML功能
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.2")
+
+    // API IN
+    implementation project(":apiin")
+    // COMMON
+    implementation project(":common")
+    //NATIVE_Query
+    implementation project("dbs_nativeQuery")
+
+//api
+    implementation project(":maskapi")
+    implementation project(":compareapi")
+//service
+    implementation project(":maskservice")
+    implementation project(":compareservice")
+}
+
+def sourceFilter = { env ->
+    sourceSets {
+        main {
+            java {
+                srcDir "src/main/java"
+            }
+            resources {
+                includes = ["application.yml", "application-*.yml", "apiNode_*.yml", "logback.xml", "MgGlobal.yml", "IdConvert.yml","xml/**/*.xml"]
+
+            }
+        }
+    }
+}
+bootJar {
+    archiveFileName = "bot-mis-app.jar"
+}
+
+bootWar {
+    sourceFilter("")
+    archiveFileName = "bot-mis-app.war"
+    webInf { from 'webapp/WEB-INF' }
+    doFirst {
+        delete("${buildDir}/resources/main/application-local.yml")
+        delete("${buildDir}/resources/main/application-dev.yml")
+        delete("${buildDir}/resources/main/application-uat.yml")
+        delete("${buildDir}/resources/main/application-sit.yml")
+        println("${buildDir}")
+    }
+}
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xlint:deprecation" << "-Xlint:unchecked"
+}
+tasks.register("bootJar_local") {
+    group("build")
+    description "local env"
+    dependsOn 'clean'
+    sourceFilter("local")
+    finalizedBy("bootJar")
+}
+
+task bootRun_Local {
+    group("build")
+    description "run local."
+    dependsOn "bootJar_local"
+    finalizedBy "bootRun"
+}
+
+assemble.dependsOn bootJar
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'com.diffplug.spotless'
+
+    spotless {
+        java {
+            // Use the default importOrder configuration
+            importOrder()
+            removeUnusedImports()
+
+            googleJavaFormat('1.17.0').aosp().reflowLongStrings().groupArtifact('com.google.googlejavaformat:google-java-format')
+            formatAnnotations()
+
+            licenseHeader '/* (C) $YEAR */' // or licenseHeaderFile
+        }
+    }
+
+    ext {
+        set('snippetsDir', file("build/generated-snippets"))
+        set('springCloudVersion', "2024.0.0")
+    }
+
+    java {
+        sourceCompatibility = '17'
+    }
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    repositories {
+        mavenLocal()
+        maven {
+            url 'http://220.135.109.130:8082/repository/bot_group_maven/'
+            allowInsecureProtocol = true
+        }
+    }
+
+    configurations.all {
+        exclude group: "commons-lang", module: "commons-lang"
+        exclude group: "org.latencyutils"
+        exclude group: "org.hdrhistogram"
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-batch'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-data-ldap'
+        implementation 'org.springframework.boot:spring-boot-starter-integration'
+        implementation 'org.springframework.boot:spring-boot-starter-mail'
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
+        implementation 'org.springframework.boot:spring-boot-starter-webflux'
+        implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+        implementation 'org.springframework.integration:spring-integration-jpa'
+        implementation 'org.springframework.integration:spring-integration-mail'
+        implementation 'org.springframework.integration:spring-integration-webflux'
+        implementation 'org.springframework.integration:spring-integration-sftp'
+        implementation 'org.springframework.security:spring-security-messaging'
+        // 新增 snakeyaml
+        implementation 'org.yaml:snakeyaml:2.1'
+
+        implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
+
+//        implementation 'net.i2p.crypto:eddsa:0.3.0'
+        implementation "org.mapstruct:mapstruct:${mapStructVer}"
+        implementation "com.google.protobuf:protobuf-java-util:${protobufVer}"
+        implementation 'javax.annotation:javax.annotation-api:1.3.2'
+        implementation "commons-beanutils:commons-beanutils:${beanUtilVer}"
+        implementation "org.apache.commons:commons-lang3:${commonsLang3}"
+
+        implementation "joda-time:joda-time:${jodaTime}"
+
+        implementation "io.github.openfeign:feign-okhttp:${openfeign}"
+        implementation "io.swagger.core.v3:swagger-annotations:${swaggerAnnVer}"
+
+        implementation "io.grpc:grpc-stub:${ioGrpcVer}"
+        implementation "io.grpc:grpc-protobuf:${ioGrpcVer}"
+        implementation "io.grpc:grpc-netty-shaded:${ioGrpcVer}"
+        implementation "io.grpc:grpc-api:${ioGrpcVer}"
+        implementation "io.grpc:grpc-netty:${ioGrpcVer}"
+
+
+        compileOnly 'org.projectlombok:lombok'
+        developmentOnly 'org.springframework.boot:spring-boot-devtools'
+        runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+        annotationProcessor 'org.projectlombok:lombok'
+        annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVer}"
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'io.projectreactor:reactor-test'
+        testImplementation 'org.springframework.batch:spring-batch-test'
+        testImplementation 'org.springframework.integration:spring-integration-test'
+        testImplementation 'org.springframework.security:spring-security-test'
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    }
+
+    compileJava {
+        dependsOn 'spotlessApply'
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+}
+
+tasks.named("bootJar") {
+    archiveClassifier = 'boot'
+}

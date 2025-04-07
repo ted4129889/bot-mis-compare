@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: local
+#  config:
+#    import:
+#      - optional:classpath:application-local.yml
+#      - optional:/app/fsap/fsap-mis/application-config.yml
+#      - optional:/app/config/application-config.yml
+  doubleLine: 0

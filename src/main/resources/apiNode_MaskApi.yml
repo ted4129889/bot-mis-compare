@@ -1,0 +1,8 @@
+apili:
+  - name: MaskApi
+    fmtId: CL_BATCH_I
+    txType: U # I:查詢類,U:更新類
+    service:
+      #D900201
+      - name : MaskService
+

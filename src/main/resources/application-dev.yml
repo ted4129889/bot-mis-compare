@@ -1,0 +1,100 @@
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,shutdown,info
+
+spring:
+  config:
+    import: file:external-parameters.properties
+  ds:
+    url: jdbc:sqlserver://${DB_IP}:${DB_PORT};database=${DB_NAME};encrypt=true;trustServerCertificate=true;
+    cn: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    ur: ${DB_USERNAME}
+    pw: ${DB_PASSWORD}
+  jpa:
+    database-platform: org.hibernate.dialect.SQLServerDialect
+    generate-ddl: false
+    properties:
+      hibernate:
+        jdbc:
+          fetch_size: 50
+          batch_size: 30
+        show_sql: true
+        format_sql: true
+  log:
+    path: "LOG/MIS/"
+  application:
+    name: mis
+    rec: true
+    pt: false
+    fsapSyncFg: false
+
+  fsapSyncSftp:
+    host: 220.135.109.130
+    port: 55688
+    usr: weblogic
+    pw: 1qaz2wsx
+    poolsize: 20
+    timeout: 20000
+    localroot: ../temp/
+    remoteroot: /home/weblogic/uploadTemp/
+
+server:
+  port: 80
+  address: 0.0.0.0
+  compression:
+    enabled: true
+
+grpc:
+  server:
+    port: 8081
+    address: "0.0.0.0"
+    corePoolSize: 50
+    maxPoolSize: 200
+    threadQueueSize: 200
+
+astar:
+  binPath: "astar/"
+
+apiNodes: >
+  apiNode_MaskApi.yml
+
+xmlPath: "external-config/xml/"
+batchFilePath: "batch-file/"
+
+idConvertFile: "IdConvert.yml"
+
+localFile:
+  mis:
+    batch:
+      bots_input: "${batchFilePath}bots_input/"
+      bots_output: "${batchFilePath}bots_output/"
+      input: "${batchFilePath}input/"
+      output: "${batchFilePath}output/"
+    xml:
+      input:
+        directory: "${xmlPath}input/"
+      output:
+        directory: "${xmlPath}output/"
+      mask:
+        directory: "${xmlPath}mask/"
+        convert: "${xmlPath}mask/convert/"
+
+
+externalSort:
+  blockSize: 100000
+
+app:
+  file-processing:
+    max-lines: 2000
+    timeout: 5000
+
+jasypt:
+  encryptor:
+    password: ${ENC_KEY}
+    algorithm: ${ALGORITHM}
+    iv-generator-classname: ${IV_GENERATOR_CLASSNAME}

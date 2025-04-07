@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>mis.botsrdb.db_feiln_dds</table>
+    <field>
+        <fieldName>db-feiln-cifkey</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db-feiln-lnact</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db-feiln-pbactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+</data>
+

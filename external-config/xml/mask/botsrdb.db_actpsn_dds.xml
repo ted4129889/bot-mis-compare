@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>mis.botsrdb.db_actpsn_dds</table>
+    <field>
+        <fieldName>db-actpsn-actno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db-actpsn-name</fieldName>
+        <maskType>4</maskType>
+    </field>
+    <field>
+        <fieldName>db-actpsn-addr</fieldName>
+        <maskType>5</maskType>
+    </field>
+    <field>
+        <fieldName>db-actpsn-osrno</fieldName>
+        <maskType>7</maskType>
+    </field>
+</data>
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>mis.botsrdb.db_gldptr_dds</table>
+    <field>
+        <fieldName>db-gldptr-herit</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db-gldptr-actno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db-gldptr-trnact</fieldName>
+        <maskType>2</maskType>
+    </field>
+</data>
+

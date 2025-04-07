@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <mapping>
+        <number>0</number>
+        <chara>1</chara>
+    </mapping>
+    <mapping>
+        <number>1</number>
+        <chara>2</chara>
+    </mapping>
+    <mapping>
+        <number>2</number>
+        <chara>3</chara>
+    </mapping>
+    <mapping>
+        <number>3</number>
+        <chara>4</chara>
+    </mapping>
+    <mapping>
+        <number>4</number>
+        <chara>5</chara>
+    </mapping>
+    <mapping>
+        <number>5</number>
+        <chara>6</chara>
+    </mapping>
+    <mapping>
+        <number>6</number>
+        <chara>7</chara>
+    </mapping>
+    <mapping>
+        <number>7</number>
+        <chara>8</chara>
+    </mapping>
+    <mapping>
+        <number>8</number>
+        <chara>9</chara>
+    </mapping>
+    <mapping>
+        <number>9</number>
+        <chara>0</chara>
+    </mapping>
+</data>

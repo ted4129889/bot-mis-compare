@@ -2,11 +2,11 @@
 <data>
     <mapping>
         <number>0</number>
-        <chara>G</chara>
+        <chara>N</chara>
     </mapping>
     <mapping>
         <number>1</number>
-        <chara>#</chara>
+        <chara>J</chara>
     </mapping>
     <mapping>
         <number>2</number>
@@ -14,11 +14,11 @@
     </mapping>
     <mapping>
         <number>3</number>
-        <chara>p</chara>
+        <chara>u</chara>
     </mapping>
     <mapping>
         <number>4</number>
-        <chara>Y</chara>
+        <chara>f</chara>
     </mapping>
     <mapping>
         <number>5</number>
@@ -26,18 +26,19 @@
     </mapping>
     <mapping>
         <number>6</number>
-        <chara>a</chara>
+        <chara>y</chara>
     </mapping>
     <mapping>
         <number>7</number>
-        <chara>!</chara>
+        <chara>j</chara>
     </mapping>
     <mapping>
         <number>8</number>
-        <chara>U</chara>
+        <chara>I</chara>
     </mapping>
     <mapping>
         <number>9</number>
-        <chara>5</chara>
+        <chara>U</chara>
     </mapping>
 </data>
+

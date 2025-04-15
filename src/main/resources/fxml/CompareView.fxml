@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.bot.ui.controller.CompareViewController">
+    <top>
+        <VBox spacing="10" alignment="CENTER_LEFT">
+            <!--            <Region HBox.hgrow="ALWAYS"/>-->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Button fx:id="btnLoadFile1" text="選擇檔案 1" onAction="#loadFile1" prefWidth="100"/>
+                <Label fx:id="labelFile1" text="未選擇" maxWidth="250"/>
+                <Label id="space" prefWidth="300"/>
+                <Button fx:id="btnLoadFile2" text="選擇檔案 2" onAction="#loadFile2" prefWidth="100"/>
+                <Label fx:id="labelFile2" text="未選擇" maxWidth="250"/>
+            </HBox>
+            <HBox alignment="CENTER_LEFT">
+                <Button text="比對" onAction="#compareFiles"/>
+            </HBox>
+        </VBox>
+    </top>
+    <center>
+        <SplitPane dividerPositions="0.5">
+            <TextArea fx:id="textArea1" wrapText="true" editable="false"/>
+            <TextArea fx:id="textArea2" wrapText="true" editable="false"/>
+        </SplitPane>
+    </center>
+</BorderPane>

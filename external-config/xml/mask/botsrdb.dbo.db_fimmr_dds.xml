@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>botsrdb_sync.dbo.db_fimmr_dds</table>
+    <field>
+        <fieldName>db_fimmr_entpno</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db_fimmr_lnactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_fimmr_ovduact</fieldName>
+        <maskType>2</maskType>
+    </field>
+</data>
+

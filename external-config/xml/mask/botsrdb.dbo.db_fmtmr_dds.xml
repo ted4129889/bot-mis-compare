@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>botsrdb_sync.dbo.db_fmtmr_dds</table>
+    <field>
+        <fieldName>db_fmtmr_actno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_fmtmr_mactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+</data>
+

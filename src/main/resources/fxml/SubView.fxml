@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml" fx:controller="com.bot.ui.controller.SubViewController">
+    <ComboBox fx:id="envComboBox" />
+    <Button fx:id="btnMaskData"  text="執行產生遮蔽SQL檔" onAction="#btnMaskData"/>
+    <Button fx:id="btnMaskRunSql"  text="執行SQL檔" onAction="#btnMaskRunSql"/>
+</VBox>

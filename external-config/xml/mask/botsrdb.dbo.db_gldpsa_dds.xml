@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>botsrdb_sync.dbo.db_gldpsa_dds</table>
+    <field>
+        <fieldName>db_gldpsa_actno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_gldpsa_saactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+</data>
+

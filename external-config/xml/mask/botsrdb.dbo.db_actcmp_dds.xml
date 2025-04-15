@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>botsrdb_sync.dbo.db_actcmp_dds</table>
+    <field>
+        <fieldName>db_actcmp_hentpno</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db_actcmp_actno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_actcmp_cmpname</fieldName>
+        <maskType>4</maskType>
+    </field>
+    <field>
+        <fieldName>db_actcmp_addr</fieldName>
+        <maskType>5</maskType>
+    </field>
+    <field>
+        <fieldName>db_actcmp_csrno</fieldName>
+        <maskType>7</maskType>
+    </field>
+    <field>
+        <fieldName>db_actcmp_cphone</fieldName>
+        <maskType>7</maskType>
+    </field>
+</data>
+

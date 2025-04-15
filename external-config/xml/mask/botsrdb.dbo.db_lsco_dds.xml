@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>botsrdb_sync.dbo.db_lsco_dds</table>
+    <field>
+        <fieldName>db_lsco_pidno</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db_lsco_actno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_lsco_ipactn</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_lsco_trpact</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_lsco_name</fieldName>
+        <maskType>4</maskType>
+    </field>
+    <field>
+        <fieldName>db_lsco_tela</fieldName>
+        <maskType>7</maskType>
+    </field>
+</data>
+

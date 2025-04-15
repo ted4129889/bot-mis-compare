@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>botlddb_sync.dbo.db_lcon_dds</table>
+    <field>
+        <fieldName>db_lcon_entpno</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db_lcon_pidno</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db_lcon_bsid</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db_lcon_lentpno</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db_lcon_actno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_lcon_autact</fieldName>
+        <maskType>2</maskType>
+    </field>
+</data>
+

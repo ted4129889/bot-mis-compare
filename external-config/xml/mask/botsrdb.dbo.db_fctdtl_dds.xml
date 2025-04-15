@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>botsrdb_sync.dbo.db_fctdtl_dds</table>
+    <field>
+        <fieldName>db_fctdtl_actno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_fctdtl_mactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_fctdtl_trnact</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_fctdtl_lactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_fctdtl_nactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+</data>
+

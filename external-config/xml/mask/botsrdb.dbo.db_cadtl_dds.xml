@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>botsrdb_sync.dbo.db_cadtl_dds</table>
+    <field>
+        <fieldName>db_cadtl_cifkey</fieldName>
+        <maskType>1</maskType>
+    </field>
+</data>
+

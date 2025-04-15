@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>botsrdb_sync.dbo.db_llcon_dds</table>
+    <field>
+        <fieldName>db_llcon_pidno</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db_llcon_entpno</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db_llcon_bsid</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db_llcon_actno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_llcon_ipactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_llcon_apact</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_llcon_payact</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_llcon_oactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_llcon_trpact</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_llcon_bkact</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_llcon_telno</fieldName>
+        <maskType>7</maskType>
+    </field>
+</data>
+

@@ -1,0 +1,45 @@
+<configuration>
+    <!-- 控制日誌級別 (INFO, DEBUG, WARN, ERROR) -->
+    <logger name="com.bot" level="INFO" />
+
+    <timestamp key="DATE" datePattern="yyyy-MM-dd"/>
+
+    <!-- 控制台輸出 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 基本檔案輸出 -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <!-- 前日期的 log 檔案 -->
+        <file>app-${DATE}.log</file>
+        <!-- 根據大小與日期滾動的策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+
+            <!-- 歷史檔案名稱格式（帶日期與序號） -->
+            <fileNamePattern>app-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+
+            <!-- 單個檔案大小上限（5MB） -->
+            <maxFileSize>5MB</maxFileSize>
+
+            <!-- 保留 30 天的日誌檔案 -->
+            <maxHistory>30</maxHistory>
+
+            <!-- 總共最大儲存空間 (1GB) -->
+            <totalSizeCap>1GB</totalSizeCap>
+
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 級別 -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>

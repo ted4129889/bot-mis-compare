@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>botsrdb_sync.dbo.db_fcmr_dds</table>
+    <field>
+        <fieldName>db_fcmr_unino</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db_fcmr_aounino</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db_fcmr_pidno</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db_fcmr_mactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_fcmr_moactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_fcmr_miactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+</data>
+

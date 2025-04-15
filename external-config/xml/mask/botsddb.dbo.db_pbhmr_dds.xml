@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>botsddb_sync.dbo.db_pbhmr_dds</table>
+    <field>
+        <fieldName>db_pbhmr_entpno</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db_pbhmr_pidno</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db_pbhmr_cmpentpno</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db_pbhmr_actno</fieldName>
+        <maskType>2</maskType>
+    </field>
+</data>
+

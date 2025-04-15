@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>botsrdb_sync.dbo.db_gldptr_dds</table>
+    <field>
+        <fieldName>db_gldptr_herit</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db_gldptr_actno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_gldptr_trnact</fieldName>
+        <maskType>2</maskType>
+    </field>
+</data>
+

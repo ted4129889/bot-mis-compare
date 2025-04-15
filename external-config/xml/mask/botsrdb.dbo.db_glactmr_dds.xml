@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>botsrdb_sync.dbo.db_glactmr_dds</table>
+    <field>
+        <fieldName>db_glactmr_unino</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db_glactmr_actno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_glactmr_ltfxactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_glactmr_ebact</fieldName>
+        <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_glactmr_ltdpactno</fieldName>
+        <maskType>2</maskType>
+    </field>
+</data>
+

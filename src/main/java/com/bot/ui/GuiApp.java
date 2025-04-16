@@ -24,9 +24,9 @@ public class GuiApp extends Application {
     }
 
     public void start(Stage primaryStage) throws IOException {
-        maskToolView();
+//        maskToolView();
 
-//        compareToolView();
+        compareToolView();
         //關閉介面同時關閉執行序
         close();
     }

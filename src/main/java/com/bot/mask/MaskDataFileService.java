@@ -48,6 +48,11 @@ public class MaskDataFileService {
     private static final String CHARSET_UTF8 = "UTF-8";
 
     public boolean exec() {
+        return exec("","","");
+    }
+
+    //    功能雷同 但是中間可能會有稍微不同做法
+    public boolean exec(String condition,String cNewPath,String cOldPath) {
         LogProcess.info("執行資料檔案遮蔽處理...");
         //允許的路徑
         String tbotOutputPath = FilenameUtils.normalize(botOutputPath);
@@ -66,7 +71,17 @@ public class MaskDataFileService {
 
         }
         LogProcess.info("讀取 external-config/xml/bot_output 資料夾下的 DailyBatchFileDefinition.xml 定義檔內有" + xmlDataList.size() + "組 <data> 格式");
+        //C = compare,M = mask  => both of DATA PROCESS
+        if ("C".equals(condition)) {
+            //TODO 取得新舊資料，兩個檔都要弄成Map，比對，(外加的是 可以顯示比對欄位
+            pairingProfile2(xmlDataList, tbotOutputPath);
+        } else {
+            pairingProfile(xmlDataList, tbotOutputPath);
+        }
+        return true;
+    }
 
+    private void pairingProfile(List<XmlData> xmlDataList, String tbotOutputPath) {
         int calcuTotal = 0;
         //台銀原檔案路徑
         List<String> folderList = getFilePaths(tbotOutputPath);
@@ -107,8 +122,50 @@ public class MaskDataFileService {
         }
 
         LogProcess.info("產出遮蔽後的檔案在 batch-file/bot_output_mask 資料夾,有" + calcuTotal + "個檔案");
+    }
 
-        return true;
+
+    private void pairingProfile2(List<XmlData> xmlDataList, String tbotOutputPath) {
+        int calcuTotal = 0;
+        //台銀原檔案路徑
+        List<String> folderList = getFilePaths(tbotOutputPath);
+        LogProcess.info("在batch-file/bot_output資料夾內的檔案有" + folderList.size() + "個，清單如下...");
+        LogProcess.info(folderList.toString());
+        for (String requestedFilePath : folderList) {
+            //允許路徑
+            requestedFilePath = FilenameUtils.normalize(requestedFilePath);
+            try {
+
+
+                for (XmlData data : xmlDataList) {
+                    if (requestedFilePath.contains(data.getFileName())) {
+
+                        LogProcess.info("bot_output file name = " + requestedFilePath);
+
+                        List<String> outputData = performMasking(requestedFilePath, data);
+
+                        //重新指向資料夾路徑
+                        String reNamePath = requestedFilePath.replace("bot_output", "bot_output_mask");
+
+                        //確認允許路徑
+                        String maskPath = FilenameUtils.normalize(reNamePath);
+
+                        //刪除原檔案
+                        textFileUtil.deleteFile(maskPath);
+
+                        //輸出檔案
+                        textFileUtil.writeFileContent(maskPath, outputData, CHARSET_BIG5);
+
+                        calcuTotal++;
+                    }
+                }
+
+            } catch (Exception e) {
+                LogProcess.info("XmlToInsertGenerator.sqlConvInsertTxt error");
+            }
+        }
+
+        LogProcess.info("產出遮蔽後的檔案在 batch-file/bot_output_mask 資料夾,有" + calcuTotal + "個檔案");
     }
 
     /**
@@ -180,7 +237,6 @@ public class MaskDataFileService {
         int dataLength = bytes.length;
 
 
-
         //先比對檔案資料長度是否與定義檔加總一致
         if (xmlLength != dataLength) {
             LogProcess.info("xml length = " + xmlLength + " VS data length = " + dataLength);
@@ -219,7 +275,7 @@ public class MaskDataFileService {
                 try {
                     //進行遮蔽處理
                     String valueMask = dataMasker.applyMask(value, maskType);
-                    LogProcess.info("maskType =" + maskType + ",value = \"" + value + "\" masked result => \"" + valueMask+"\"");
+                    LogProcess.info("maskType =" + maskType + ",value = \"" + value + "\" masked result => \"" + valueMask + "\"");
                     s.append(valueMask);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);

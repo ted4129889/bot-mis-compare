@@ -49,8 +49,11 @@ dependencies {
     implementation 'org.openjfx:javafx-fxml:23.0.2'
     //Apache Commons IO庫
     implementation 'commons-io:commons-io:2.18.0'
-    //暫時使用，判斷
-    implementation 'com.googlecode.juniversalchardet:juniversalchardet:1.0.3'
+
+    //excel
+    implementation 'org.apache.poi:poi:5.4.0'
+    implementation 'org.apache.poi:poi-ooxml:5.4.0'
+
 }
 
 javafx {

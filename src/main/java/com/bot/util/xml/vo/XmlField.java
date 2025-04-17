@@ -40,6 +40,6 @@ public class XmlField {
     private String maskType;
 
     @JacksonXmlProperty(localName = "primaryKey")
-    private boolean primaryKey;
+    private String primaryKey;
     // Getters and Setters
 }

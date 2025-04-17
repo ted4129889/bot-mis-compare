@@ -53,7 +53,7 @@ public class GuiApp extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CompareView.fxml"));
         loader.setControllerFactory(springContext::getBean); // 結合 Spring
 
-        Scene scene = new Scene(loader.load(),900,600);
+        Scene scene = new Scene(loader.load(),1000,600);
         stageAll.setTitle("CompareView");
         stageAll.setScene(scene);
         //禁止視窗調整

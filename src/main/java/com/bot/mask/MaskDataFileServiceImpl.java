@@ -54,6 +54,9 @@ public class MaskDataFileServiceImpl implements MaskDataFileService {
     List<String> columnAList = new ArrayList<>();
     List<String> columnBList = new ArrayList<>();
     List<String> columnList = new ArrayList<>();
+    boolean existflag = false;
+
+    String outPutFile = "";
 
     @Override
     public boolean exec() {
@@ -101,15 +104,24 @@ public class MaskDataFileServiceImpl implements MaskDataFileService {
 
     @Override
     public List<String> getDataKey() {
-        LogProcess.info("dataKey =" + dataKey);
+//        LogProcess.info("dataKey =" + dataKey);
         return dataKey;
     }
 
     @Override
     public List<String> getColumnList() {
         LogProcess.info("columnList =" + columnList);
-
         return columnList;
+    }
+
+    @Override
+    public boolean fileExists() {
+        return existflag;
+    }
+
+    @Override
+    public String getFileName() {
+        return outPutFile;
     }
 
 
@@ -163,14 +175,15 @@ public class MaskDataFileServiceImpl implements MaskDataFileService {
         //允許路徑
         cFile = FilenameUtils.normalize(cFile);
 
-
         cList = new ArrayList<>();
         dataKey = new ArrayList<>();
-        try {
 
+        try {
+            existflag = false;
             for (XmlData data : xmlDataList) {
                 if (cFile.contains(data.getFileName())) {
-
+                    outPutFile = data.getFileName();
+                    existflag = true;
                     LogProcess.info("bot_output file name = " + cFile);
 
                     performMasking(cFile, data, uiTextArea);
@@ -185,8 +198,8 @@ public class MaskDataFileServiceImpl implements MaskDataFileService {
                         aFileData.addAll(cList);
                     }
 
-
                 }
+
             }
 
         } catch (Exception e) {
@@ -255,6 +268,7 @@ public class MaskDataFileServiceImpl implements MaskDataFileService {
             LogProcess.info("XmlToReadFile.exec error");
         }
 
+
         return result;
     }
 
@@ -308,7 +322,7 @@ public class MaskDataFileServiceImpl implements MaskDataFileService {
      * @param line         單筆資料串
      * @return 回傳遮罩後的資料
      */
-    private String processField(List<XmlField> xmlFieldList, String line) {
+    private String processField(List<XmlField> xmlFieldList, String line, int index) {
         Charset charset = Charset.forName("Big5");
         Charset charset2 = Charset.forName("UTF-8");
 
@@ -371,6 +385,8 @@ public class MaskDataFileServiceImpl implements MaskDataFileService {
             }
             map.put(fieledName, value);
         }
+        map.put("row", String.valueOf(index));
+
         cList.add(map);
         return s.toString();
     }
@@ -389,15 +405,15 @@ public class MaskDataFileServiceImpl implements MaskDataFileService {
 
         //輸出資料
         List<String> outputData = new ArrayList<>();
-
-        String allowedPath = FilenameUtils.normalize(botOutputPath);
-
+        //計算筆數用
+        int index = 0;
         // 確認檔案路徑 是否與 允許的路徑匹配
         // 讀取檔案內容
         lines = textFileUtil.readFileContent(fileName, CHARSET_BIG5);
         for (String s : lines) {
+            index++;
 //                LogProcess.info("line =" + s);
-            outputData.add(processField(xmlFieldList, s));
+            outputData.add(processField(xmlFieldList, s, index));
         }
 
         return outputData;

@@ -5,10 +5,12 @@ import com.bot.ui.GuiApp;
 import javafx.application.Application;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 
-
-@SpringBootApplication
+//exclude = {DataSourceAutoConfiguration.class 可不用啟動時自動加載資料庫連線
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+//@SpringBootApplication
 public class Main {
 
     public static void main(String[] args) {
@@ -22,7 +24,6 @@ public class Main {
 
         // 執行JavaFX 應用
         Application.launch(GuiApp.class, args);
-
 
     }
 

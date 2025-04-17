@@ -2,6 +2,7 @@ package com.bot.output;
 
 
 import com.bot.compare.CompareDataService;
+import com.bot.log.LogProcess;
 import com.bot.util.excel.MakeExcel;
 import com.bot.util.files.TextFileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,19 +14,24 @@ import java.util.*;
 public class CompareFileExportImpl {
     @Autowired
     private MakeExcel makeExcel;
-
     @Autowired
     private CompareDataService compareDataService;
     @Autowired
     private TextFileUtil textFileUtil;
 
-    public void run(List<Map<String, String>> aData, List<Map<String, String>> bData, List<String> dataKey, List<String> filterColList) {
+    public void run(String fileName, List<Map<String, String>> aData, List<Map<String, String>> bData, List<String> dataKey, List<String> filterColList) {
 
-        textFileUtil.deleteFile("outputResult.xlsx");
-        makeExcel.open("outputResult.xlsx", "BotData");
+        String outPutFile = fileName +"_ComparisonResults.xlsx";
+        //刪除檔案
+        textFileUtil.deleteFile(outPutFile);
 
+        //開起檔案
+        makeExcel.open(outPutFile, "BotData");
+
+        //台銀檔案資料
         botFilePage(aData);
 
+        //MIS檔案資料
         misFilePage(bData);
 
         //處理比對資料(篩選部分)
@@ -57,6 +63,7 @@ public class CompareFileExportImpl {
                 col++;
             }
         }
+        makeExcel.autoSizeColumn(1, col);
 
 
     }
@@ -75,6 +82,8 @@ public class CompareFileExportImpl {
                 col++;
             }
         }
+        makeExcel.autoSizeColumn(1, col);
+
     }
 
     private void comparePage() {
@@ -95,6 +104,7 @@ public class CompareFileExportImpl {
                 col++;
             }
         }
+        makeExcel.autoSizeColumn(1, col);
 
 
     }
@@ -109,7 +119,7 @@ public class CompareFileExportImpl {
         int row = 1;
 
 
-        makeExcel.setValue(row, col, "以下為新檔案缺少的資料(第幾筆)");
+        makeExcel.setValue(row, col, "以下為產出檔案缺少的資料，第幾筆看「BotData」");
         makeExcel.setValue(row, col + 1, "主鍵");
 
         for (Map.Entry<String, Map<String, String>> r : compareDataService.getMissingData().entrySet()) {
@@ -122,6 +132,9 @@ public class CompareFileExportImpl {
             makeExcel.setValue(row, col, "第" + num + "筆");
             makeExcel.setValue(row, col + 1, key);
         }
+
+        makeExcel.autoSizeColumn(1, col);
+
     }
 
     private void extraPage() {
@@ -134,7 +147,7 @@ public class CompareFileExportImpl {
         int row = 1;
 
 
-        makeExcel.setValue(row, col, "以下為新檔案多出來的資料(第幾筆)");
+        makeExcel.setValue(row, col, "以下為產出檔案多出來的資料，第幾筆看「MisData」");
         makeExcel.setValue(row, col + 1, "主鍵");
 
         for (Map.Entry<String, Map<String, String>> r : compareDataService.getExtraData().entrySet()) {
@@ -147,6 +160,7 @@ public class CompareFileExportImpl {
             makeExcel.setValue(row, col, "第" + num + "筆");
             makeExcel.setValue(row, col + 1, key);
         }
+        makeExcel.autoSizeColumn(1, col);
 
 
     }

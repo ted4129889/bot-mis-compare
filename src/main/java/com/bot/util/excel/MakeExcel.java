@@ -197,8 +197,6 @@ public class MakeExcel {
 
         sellValueType(pCell, val);
 
-        openedSheet.autoSizeColumn(col);
-
         LogProcess.info("set Value = " + val.toString());
     }
 
@@ -286,7 +284,6 @@ public class MakeExcel {
      */
     public void useSheet(String sheetName) {
         useSheet(sheetName, "");
-
     }
 
     /**
@@ -333,4 +330,19 @@ public class MakeExcel {
             throw new IllegalStateException("Workbook 已經關閉，無法操作");
         }
     }
+
+
+    /**
+     * 指定要使用的Sheet<br>
+     *
+     * @param minCol 最小欄位
+     * @param maxCol 最大欄位
+     */
+    public void autoSizeColumn(int minCol, int maxCol) {
+        for (int i = 0; i < 3; i++) {
+            openedSheet.autoSizeColumn(i);
+        }
+
+    }
+
 }

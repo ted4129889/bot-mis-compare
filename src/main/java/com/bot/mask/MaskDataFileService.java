@@ -19,4 +19,8 @@ public interface MaskDataFileService {
 
     List<String> getColumnList();
 
+   boolean fileExists();
+
+   String getFileName();
+
 }

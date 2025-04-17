@@ -4,13 +4,9 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
@@ -24,9 +20,13 @@ public class GuiApp extends Application {
     }
 
     public void start(Stage primaryStage) throws IOException {
+        stageAll = primaryStage;
+        //遮蔽工具畫面
 //        maskToolView();
-
+        //檔案比對工具畫面
         compareToolView();
+
+//        scrollSyncController();
         //關閉介面同時關閉執行序
         close();
     }
@@ -54,7 +54,19 @@ public class GuiApp extends Application {
         loader.setControllerFactory(springContext::getBean); // 結合 Spring
 
         Scene scene = new Scene(loader.load(),1000,600);
-        stageAll.setTitle("CompareView");
+        stageAll.setTitle("Text File Comparison Tool");
+        stageAll.setScene(scene);
+        //禁止視窗調整
+        stageAll.setResizable(false);
+        stageAll.show();
+
+    }
+    private void scrollSyncController() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ScrollView.fxml"));
+        loader.setControllerFactory(springContext::getBean); // 結合 Spring
+
+        Scene scene = new Scene(loader.load(),1000,600);
+        stageAll.setTitle("scrollTest");
         stageAll.setScene(scene);
         //禁止視窗調整
         stageAll.setResizable(false);

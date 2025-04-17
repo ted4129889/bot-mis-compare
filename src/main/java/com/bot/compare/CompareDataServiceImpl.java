@@ -32,9 +32,11 @@ public class CompareDataServiceImpl implements CompareDataService {
         //最後輸出結果
         result = new ArrayList<>();
         Map<String, String> map = new LinkedHashMap<>();
-        map.put("desc", "資料結果說明差異");
-        map.put("oldData", "原檔欄位");
-        map.put("newData", "新產出欄位");
+        map.put("desc", "資料結果，第幾筆看「MisData」");
+        map.put("pk", "PrimaryKey");
+        map.put("col", "欄位");
+        map.put("oldData", "原始檔案的值");
+        map.put("newData", "新產出檔案的值");
         result.add(map);
         //符合的資料
         matchMap = new LinkedHashMap<>();
@@ -44,6 +46,8 @@ public class CompareDataServiceImpl implements CompareDataService {
         extraMap = new LinkedHashMap<>();
         //欄位
         columns = new ArrayList<>();
+        LogProcess.info("aData bef = " + aData);
+        LogProcess.info("bData bef= " + bData);
 
         aData = aData.stream()
                 .map(row -> filterFieldsBySelection(row, filterColList))
@@ -52,7 +56,8 @@ public class CompareDataServiceImpl implements CompareDataService {
         bData = bData.stream()
                 .map(row -> filterFieldsBySelection(row, filterColList))
                 .collect(Collectors.toList());
-
+        LogProcess.info("aData = " + aData);
+        LogProcess.info("bData = " + bData);
 
         Map<String, Map<String, String>> aDataMap = buildIndex(aData, dynamicKeys);
 
@@ -122,27 +127,38 @@ public class CompareDataServiceImpl implements CompareDataService {
         return result;
     }
 
+    /***
+     * 將匹配到的資料串，根據欄位一一比對處理
+     * */
     private void processData(int index, String key, Map<String, String> aRow, Map<String, String> bRow) {
 
         Map<String, String> map = new LinkedHashMap<>();
 
-        boolean flag = true;
+        String key_row = "row";
 
+        //已知的檔案欄位
         for (String c : columns) {
+            //用欄位對 A B資料 取得同一個欄位值
+
             if (!Objects.equals(aRow.get(c), bRow.get(c))) {
-                String desc = "第" + index + "筆，key=" + key + ",欄位為=" + c;
+                map = new LinkedHashMap<>();
+
+                String desc = "第" + bRow.get(key_row) + "筆";
                 String oldData = aRow.get(c);
                 String newData = bRow.get(c);
+
+                LogProcess.info("desc = " + desc);
+
                 map.put("desc", desc);
+                map.put("pk", key);
+                map.put("col", c);
                 map.put("oldData", oldData);
                 map.put("newData", newData);
-                flag = false;
+                result.add(map);
             }
 
         }
-        if (!flag) {
-            result.add(map);
-        }
+
     }
 
     /**
@@ -200,8 +216,21 @@ public class CompareDataServiceImpl implements CompareDataService {
 
     //過濾欄位
     public Map<String, String> filterFieldsBySelection(Map<String, String> original, List<String> selectedFields) {
-        return original.entrySet().stream()
+        Map<String, String> filtered = original.entrySet().stream()
                 .filter(entry -> selectedFields.contains(entry.getKey()))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (a, b) -> a, LinkedHashMap::new));
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (a, b) -> a,
+                        LinkedHashMap::new
+                ));
+
+        // 加回 "row" 欄位（前提是原始就有）
+        //這是筆數
+        if (original.containsKey("row")) {
+            filtered.put("row", original.get("row"));
+        }
+
+        return filtered;
     }
 }

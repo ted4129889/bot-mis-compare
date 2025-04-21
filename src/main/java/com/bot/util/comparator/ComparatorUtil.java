@@ -89,10 +89,10 @@ public class ComparatorUtil {
     private static Comparator<Object> getSmartComparator(boolean ascending, boolean nullsFirst) {
         Comparator<Object> base = (o1, o2) -> {
 
-            LogProcess.info("ascending =" + nullsFirst);
-            LogProcess.info("nullsFirst =" + nullsFirst);
-            LogProcess.info("o1 =" + o1);
-            LogProcess.info("o2 =" + o2);
+//            LogProcess.info("ascending =" + nullsFirst);
+//            LogProcess.info("nullsFirst =" + nullsFirst);
+//            LogProcess.info("o1 =" + o1);
+//            LogProcess.info("o2 =" + o2);
             if (o1 == null && o2 == null) return 0;
             if (o1 == null) return nullsFirst ? -1 : 1;
             if (o2 == null) return nullsFirst ? 1 : -1;

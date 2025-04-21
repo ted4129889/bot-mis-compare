@@ -137,12 +137,26 @@ public class MaskDataFileServiceImpl implements MaskDataFileService {
             //允許的路徑(JSON)
             String fieldSettingFile = FilenameUtils.normalize(fieldSettinngFile);
 
-            LogProcess.info("fieldSettingFile =" + fieldSettingFile);
+            LogProcess.info("config file is exist: " + fieldSettingFile);
             File allowedFile = new File(fieldSettingFile);
 
             ObjectMapper mapper = new ObjectMapper();
             jsonFile = mapper.readValue(allowedFile, new TypeReference<>() {
             });
+
+
+            File folder = new File("ComparisonResult");
+
+            if (!folder.exists()) {
+                boolean created = folder.mkdirs(); // 可建立多層路徑
+                if (created) {
+                    System.out.println("created folder：ComparisonResult");
+                } else {
+                    System.out.println("create fail");
+                }
+            }
+
+
         } catch (IOException e) {
 
             throw new RuntimeException(e);
@@ -209,7 +223,7 @@ public class MaskDataFileServiceImpl implements MaskDataFileService {
                 for (XmlData data : xmlDataList) {
                     if (requestedFilePath.contains(data.getFileName())) {
 
-                        LogProcess.info("bot_output file name = " + requestedFilePath);
+//                        LogProcess.info("bot_output file name = " + requestedFilePath);
 
                         List<String> outputData = performMasking(requestedFilePath, data, "");
 
@@ -253,7 +267,7 @@ public class MaskDataFileServiceImpl implements MaskDataFileService {
                 if (cFile.contains(data.getFileName())) {
                     outPutFile = data.getFileName();
                     existflag = true;
-                    LogProcess.info("bot_output file name = " + cFile);
+//                    LogProcess.info("bot_output file name = " + cFile);
 
                     performMasking(cFile, data, uiTextArea);
 
@@ -532,7 +546,7 @@ public class MaskDataFileServiceImpl implements MaskDataFileService {
                 try {
                     //進行遮蔽處理
                     String valueMask = dataMasker.applyMask(value, maskType);
-                    LogProcess.info("maskType =" + maskType + ",value = \"" + value + "\" masked result => \"" + valueMask + "\"");
+//                    LogProcess.info("maskType =" + maskType + ",value = \"" + value + "\" masked result => \"" + valueMask + "\"");
                     s.append(valueMask);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);

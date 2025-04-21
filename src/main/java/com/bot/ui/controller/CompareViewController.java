@@ -55,7 +55,10 @@ public class CompareViewController {
     private Button btnCompare;
     @FXML
     private Button btnFieldSetting;
-
+    @FXML
+    private RadioButton radioExcel;
+    @FXML
+    private RadioButton radioCsv;
     @FXML
     private Label labelFile1;
     @FXML
@@ -95,6 +98,8 @@ public class CompareViewController {
         //預設按鈕為不啟用
         btnCompare.setDisable(true);
         btnFieldSetting.setDisable(true);
+
+        chooseFileType();
 
         // 設定多選模式(FXML上也要多)
 //        listView1.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE)。;
@@ -143,6 +148,13 @@ public class CompareViewController {
     }
 
 
+    private void chooseFileType(){
+        ToggleGroup exportGroup = new ToggleGroup();
+        radioExcel.setToggleGroup(exportGroup);
+        radioCsv.setToggleGroup(exportGroup);
+        radioExcel.setDisable(true);
+        radioCsv.setDisable(true);
+    }
     /**
      * 將資料夾拖曳到ListView
      */
@@ -264,6 +276,8 @@ public class CompareViewController {
             if (!showAlert("檔案名稱不存在定義檔")) {
                 btnFieldSetting.setDisable(true);
                 btnCompare.setDisable(true);
+                radioExcel.setDisable(true);
+                radioCsv.setDisable(true);
                 return;
             }
         }
@@ -274,6 +288,8 @@ public class CompareViewController {
             if (!showAlert("新舊檔案有缺少檔案")) {
                 btnFieldSetting.setDisable(true);
                 btnCompare.setDisable(true);
+                radioExcel.setDisable(true);
+                radioCsv.setDisable(true);
                 return;
             }
         }
@@ -303,9 +319,13 @@ public class CompareViewController {
 
             btnFieldSetting.setDisable(false);
             btnCompare.setDisable(false);
+            radioExcel.setDisable(false);
+            radioCsv.setDisable(false);
         } else {
             btnFieldSetting.setDisable(true);
             btnCompare.setDisable(true);
+            radioExcel.setDisable(true);
+            radioCsv.setDisable(true);
             if (!showAlert("檔案名稱不存在定義檔")) return;
         }
 
@@ -460,7 +480,8 @@ public class CompareViewController {
 
         if (!oldFileNameMap.isEmpty() && !newFileNameMap.isEmpty()) {
             btnCompare.setDisable(false);
-
+            radioExcel.setDisable(false);
+            radioCsv.setDisable(false);
             //都有在才會執行讀取設定檔案
             loadFieldSetting();
         }
@@ -584,7 +605,16 @@ public class CompareViewController {
     @FXML
     public void compareFiles() {
 
-        maskDataFileService.exec("", "", oldFileNameMap, newFileNameMap, saveFileCongigMap);
+        if (radioExcel.isSelected()) {
+            // 輸出 EXCEL
+            compareFileExportImpl.chooseExportFileType = radioExcel.getText();
+        } else if (radioCsv.isSelected()) {
+            // 輸出 CSV
+            compareFileExportImpl.chooseExportFileType = radioCsv.getText();
+        }
+
+        // 輸出 Excel
+            maskDataFileService.exec("", "", oldFileNameMap, newFileNameMap, saveFileCongigMap);
 
         showAlert("比對完成!");
 
@@ -873,6 +903,8 @@ public class CompareViewController {
         sortSelectionBox.getChildren().clear();
         btnFieldSetting.setDisable(true);
         btnCompare.setDisable(true);
+        radioExcel.setDisable(true);
+        radioCsv.setDisable(true);
     }
 
 }

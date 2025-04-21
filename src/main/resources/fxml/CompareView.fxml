@@ -2,10 +2,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.geometry.Insets?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.bot.ui.controller.CompareViewController"
             stylesheets="@fxmlStyle.css">
-    <top>
-        <VBox spacing="10" alignment="CENTER_LEFT">
+    <top >
+        <VBox spacing="10"  alignment="CENTER_LEFT">
+            <!--  這段是與下方間距拉開-->
+            <BorderPane.margin>
+                <Insets bottom="20" />
+            </BorderPane.margin>
             <HBox spacing="10" alignment="CENTER_LEFT">
                 <Button fx:id="btnLoadFolder1" text="選擇原始檔案資料夾的位置" onAction="#loadFolder1" prefWidth="200"
                         styleClass="label bold"/>
@@ -18,6 +23,11 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
 
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="匯出格式：" styleClass="label bold"/>
+                    <RadioButton fx:id="radioExcel" text="excel" selected="true"/>
+                    <RadioButton fx:id="radioCsv" text="csv"/>
+                </HBox>
                 <Button fx:id="btnCompare" text="比對並匯出結果" onAction="#compareFiles" disable="true"
                         styleClass="label bold"/>
                 <Button fx:id="btnClear" text="清除畫面" onAction="#clearScreen" styleClass="label bold"/>
@@ -26,8 +36,8 @@
     </top>
 
     <center>
-        <HBox>
-            <VBox prefWidth="350" maxWidth="350">
+        <HBox >
+            <VBox spacing="5" prefWidth="350" maxWidth="350">
                 <HBox>
                     <VBox prefWidth="175" VBox.vgrow="ALWAYS">
                         <Label text="主鍵欄位：" styleClass="label bold"/>

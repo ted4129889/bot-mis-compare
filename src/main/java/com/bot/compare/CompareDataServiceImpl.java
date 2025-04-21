@@ -209,7 +209,7 @@ public class CompareDataServiceImpl implements CompareDataService {
                 String oldData = aRow.get(c);
                 String newData = bRow.get(c);
 
-                LogProcess.info("desc = " + desc);
+//                LogProcess.info("desc = " + desc);
 
                 map.put("desc", desc);
                 map.put("pkGrp", groupKey);

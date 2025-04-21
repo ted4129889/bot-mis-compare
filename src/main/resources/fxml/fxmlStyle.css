@@ -1,0 +1,15 @@
+/* style.css */
+.label {
+    -fx-font-size: 16px;
+    -fx-font-family: "Microsoft JhengHei", "Arial", sans-serif;
+}
+
+.label_12 {
+    -fx-font-size: 12px;
+    -fx-font-family: "Microsoft JhengHei", "Arial", sans-serif;
+}
+
+
+.label.bold {
+    -fx-font-weight: bold;
+}

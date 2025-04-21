@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<!--這是單一檔案比對用的(會顯示內容的)-->
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.bot.ui.controller.CompareSingleFileViewController">
+    <top>
+        <VBox spacing="10" alignment="CENTER_LEFT">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Button fx:id="btnLoadFolder1" text="選擇原始檔案資料夾的位置" onAction="#loadFolder1" prefWidth="200" />
+                <Label fx:id="labelFile1" text="未選擇"  prefWidth="500" maxWidth="500" />
+<!--                以下是選擇文字檔案-->
+<!--                <Button fx:id="btnLoadFile1" text="選擇原始檔案" onAction="#loadFile1" prefWidth="200"/>-->
+<!--                <Label fx:id="labelFile1" text="未選擇" prefWidth="500" maxWidth="500"/>-->
+            </HBox>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Button fx:id="btnLoadFolder2" text="選擇需要比對的檔案資料夾位置" onAction="#loadFolder2" prefWidth="200" />
+                <Label fx:id="labelFile2" text="未選擇"  prefWidth="500" maxWidth="500" />
+                <!--                以下是選擇文字檔案-->
+<!--                <Button fx:id="btnLoadFile2" text="選擇需要比對的檔案" onAction="#loadFile2" prefWidth="200"/>-->
+<!--                <Label fx:id="labelFile2" text="未選擇" prefWidth="500" maxWidth="500"/>-->
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Button fx:id="btnCompare" text="比對並匯出結果" onAction="#compareFiles" disable="true" />
+                <Button fx:id="btnClear" text="清除畫面" onAction="#clearScreen" />
+            </HBox>
+        </VBox>
+    </top>
+    <left>
+        <VBox>
+            <ScrollPane prefWidth="200" prefHeight="250">
+                <VBox spacing="10">
+
+                    <Label text="勾選主鍵欄位：" style="-fx-font-weight: bold"/>
+                    <VBox fx:id="pkSelectionBox" spacing="5"/>
+                </VBox>
+            </ScrollPane>
+            <ScrollPane prefWidth="200" VBox.vgrow="ALWAYS">
+                <VBox spacing="10">
+                    <Label text="勾選要比對的欄位：" style="-fx-font-weight: bold"/>
+                    <VBox fx:id="fieldSelectionBox" spacing="5"/>
+                </VBox>
+            </ScrollPane>
+
+        </VBox>
+    </left>
+    <center>
+        <SplitPane dividerPositions="0.5">
+            <VBox spacing="5">
+                <Label text="原始檔案的資料內容" style="-fx-font-weight: bold"/>
+                <ScrollPane fx:id="scrollPane1" fitToHeight="true" fitToWidth="false" VBox.vgrow="ALWAYS">
+                    <TextArea fx:id="textArea1" wrapText="false" editable="false" minWidth="390"/>
+                </ScrollPane>
+            </VBox>
+            <VBox spacing="5">
+                <Label text="需比對檔案的資料內容" style="-fx-font-weight: bold"/>
+                <ScrollPane fx:id="scrollPane2" fitToHeight="true" fitToWidth="false" VBox.vgrow="ALWAYS" >
+                    <TextArea fx:id="textArea2" wrapText="false" editable="false" minWidth="390" />
+                </ScrollPane>
+            </VBox>
+
+            <!--            <ScrollPane fx:id="scrollPane2" fitToHeight="true" fitToWidth="false" prefHeight="300" prefWidth="400">-->
+            <!--                <HBox>-->
+            <!--                    <TextArea fx:id="textArea2" wrapText="false" editable="false" prefWidth="1000" />-->
+            <!--                </HBox>-->
+            <!--            </ScrollPane>-->
+        </SplitPane>
+    </center>
+
+
+</BorderPane>

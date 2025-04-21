@@ -61,8 +61,11 @@ public class XmlParser {
 
         // 沒有檔案拋錯誤
         if (!file.exists()) {
-            LogProcess.info("not find file = " + xmlFileName);
+            LogProcess.info("config file is not exist: " + file);
+        } else {
+            LogProcess.info("config file is exist: " + file);
         }
+
         // 驗證讀取的XML檔案是否在指定的路徑上
         if (!file.getCanonicalPath().startsWith(validXmlPath.getCanonicalPath())) {
             throw new SecurityException("Unauthorized path");

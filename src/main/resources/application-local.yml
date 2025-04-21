@@ -12,6 +12,8 @@ spring:
   config:
     import: file:external-parameters.properties
   datasource:
+#    exclude:
+#      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
     url: jdbc:sqlserver://${DB_IP}:${DB_PORT};encrypt=true;trustServerCertificate=true;
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     username: ${DB_USERNAME}
@@ -55,10 +57,14 @@ localFile:
       output:
         directory: "${xmlPath}output/"
         bot_directory: "${xmlPath}bot_output/"
+        def: "${xmlPath}bot_output/DailyBatchFileDefinition.xml"
       mask:
         directory: "${xmlPath}mask/"
         convert: "${xmlPath}mask/convert/"
-
+    compare_result: "ComparisonResult/"
+    json:
+      field_setting:
+        directory: "external-config/json/FieldSetting.json"
 externalSort:
   blockSize: 100000
 

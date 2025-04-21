@@ -2,13 +2,19 @@ package com.bot.compare;
 
 
 import com.bot.log.LogProcess;
+import com.bot.mask.config.SortFieldConfig;
 import com.bot.util.comparator.DataComparator;
+import com.bot.util.comparator.ComparatorUtil;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 public class CompareDataServiceImpl implements CompareDataService {
@@ -26,15 +32,21 @@ public class CompareDataServiceImpl implements CompareDataService {
     public Map<String, Map<String, String>> extraMap = new LinkedHashMap<>();
 
     List<Map<String, String>> result = new ArrayList<>();
+    List<Map<String, String>> oldDataResult = new ArrayList<>();
+    List<Map<String, String>> newDataResult = new ArrayList<>();
+
+    private final String customPrimaryKey = "row";
+    private String groupKey = "";
 
     @Override
-    public void parseData(List<Map<String, String>> aData, List<Map<String, String>> bData, List<String> dynamicKeys, List<String> filterColList) {
+    public void parseData(List<Map<String, String>> aData, List<Map<String, String>> bData, List<String> dataKey, List<String> filterColList, List<SortFieldConfig> sortFieldConfig) {
         //最後輸出結果
         result = new ArrayList<>();
         Map<String, String> map = new LinkedHashMap<>();
         map.put("desc", "資料結果，第幾筆看「MisData」");
-        map.put("pk", "PrimaryKey");
-        map.put("col", "欄位");
+        map.put("pkGrp", "PrimaryKey欄位");
+        map.put("pk", "PrimaryKey值");
+        map.put("col", "錯誤欄位");
         map.put("oldData", "原始檔案的值");
         map.put("newData", "新產出檔案的值");
         result.add(map);
@@ -46,25 +58,58 @@ public class CompareDataServiceImpl implements CompareDataService {
         extraMap = new LinkedHashMap<>();
         //欄位
         columns = new ArrayList<>();
+
+        LogProcess.info("dataKey = " + dataKey);
+        LogProcess.info("filterColList = " + filterColList);
         LogProcess.info("aData bef = " + aData);
         LogProcess.info("bData bef= " + bData);
 
-        aData = aData.stream()
-                .map(row -> filterFieldsBySelection(row, filterColList))
+
+        //將資料挑選欄位
+//        aData = aData.stream()
+//                .map(row -> filterFieldsBySelection(row, filterColList, dataKey))
+//                .collect(Collectors.toList());
+        List<Map<String, String>> aDataTmp = aData;
+        List<Map<String, String>> aDataResult = IntStream.range(0, aDataTmp.size())
+                .mapToObj(i -> {
+                    Map<String, String> row = aDataTmp.get(i);
+                    return filterFieldsBySelection(row, filterColList, dataKey, i); // 流水號從 0 開始
+                })
                 .collect(Collectors.toList());
 
-        bData = bData.stream()
-                .map(row -> filterFieldsBySelection(row, filterColList))
+
+        List<Map<String, String>> bDataTmp = bData;
+        List<Map<String, String>> bDataResult = IntStream.range(0, bDataTmp.size())
+                .mapToObj(i -> {
+                    Map<String, String> row = bDataTmp.get(i);
+                    return filterFieldsBySelection(row, filterColList, dataKey, i);
+                })
                 .collect(Collectors.toList());
         LogProcess.info("aData = " + aData);
         LogProcess.info("bData = " + bData);
 
-        Map<String, Map<String, String>> aDataMap = buildIndex(aData, dynamicKeys);
+        //將資料做排序
+        aDataResult = ComparatorUtil.sortByFields(aDataResult, sortFieldConfig);
 
-        Map<String, Map<String, String>> bDataMap = buildIndex(bData, dynamicKeys);
+        bDataResult = ComparatorUtil.sortByFields(bDataResult, sortFieldConfig);
+
+        LogProcess.info("aData sort = " + aDataResult);
+        LogProcess.info("bData sort= " + bDataResult);
+
+        //原始檔案
+        oldDataResult = new ArrayList<>();
+        oldDataResult.addAll(aDataResult);
+        //比對的檔案
+        newDataResult = new ArrayList<>();
+        newDataResult.addAll(bDataResult);
+
+        //將資料賦予Key，用來比對
+        Map<String, Map<String, String>> aDataMap = buildIndex(aDataResult, dataKey);
+        Map<String, Map<String, String>> bDataMap = buildIndex(bDataResult, dataKey);
 
         LogProcess.info("aMapIndex = " + aDataMap);
         LogProcess.info("bMapIndex = " + bDataMap);
+
 
         //扣掉表頭
         int index = -1;
@@ -74,18 +119,21 @@ public class CompareDataServiceImpl implements CompareDataService {
             String key = entry.getKey();
             //第0筆為表頭
             if (index == 0) {
+                groupKey = key;
+
                 for (Map.Entry<String, String> col : entry.getValue().entrySet()) {
                     columns.add(col.getValue());
                 }
 
             }
             if (bDataMap.containsKey(key)) {
+
                 processData(index, entry.getKey(), entry.getValue(), bDataMap.get(key));
                 // A 和 B 都有
-                matchMap.put(index + "#" + key, entry.getValue());
+                matchMap.put(index + "#" + groupKey + "#" + entry.getKey(), entry.getValue());
             } else {
                 // B 缺少 A 的資料
-                missingMap.put(index + "#" + key, entry.getValue());
+                missingMap.put(index + "#" + groupKey + "#" + entry.getKey(), entry.getValue());
             }
         }
 
@@ -96,7 +144,7 @@ public class CompareDataServiceImpl implements CompareDataService {
             String key = entry.getKey();
             if (!aDataMap.containsKey(key)) {
                 // B 多出來
-                extraMap.put(index + "#" + key, entry.getValue());
+                extraMap.put(index + "#" + groupKey + "#" +  entry.getKey(), entry.getValue());
             }
         }
 
@@ -123,8 +171,18 @@ public class CompareDataServiceImpl implements CompareDataService {
     }
 
     @Override
-    public List<Map<String, String>> getResult() {
+    public List<Map<String, String>> getComparisonResult() {
         return result;
+    }
+
+    @Override
+    public List<Map<String, String>> getNewDataResult() {
+        return newDataResult;
+    }
+
+    @Override
+    public List<Map<String, String>> getOldDataResult() {
+        return oldDataResult;
     }
 
     /***
@@ -134,7 +192,6 @@ public class CompareDataServiceImpl implements CompareDataService {
 
         Map<String, String> map = new LinkedHashMap<>();
 
-        String key_row = "row";
 
         //已知的檔案欄位
         for (String c : columns) {
@@ -142,14 +199,20 @@ public class CompareDataServiceImpl implements CompareDataService {
 
             if (!Objects.equals(aRow.get(c), bRow.get(c))) {
                 map = new LinkedHashMap<>();
+                String desc = "";
+                if (!Objects.equals(bRow.get(customPrimaryKey), "")) {
+                    desc = "第" + index + "筆";
+                } else {
+                    desc = "第" + bRow.get(customPrimaryKey) + "筆";
+                }
 
-                String desc = "第" + bRow.get(key_row) + "筆";
                 String oldData = aRow.get(c);
                 String newData = bRow.get(c);
 
                 LogProcess.info("desc = " + desc);
 
                 map.put("desc", desc);
+                map.put("pkGrp", groupKey);
                 map.put("pk", key);
                 map.put("col", c);
                 map.put("oldData", oldData);
@@ -164,20 +227,30 @@ public class CompareDataServiceImpl implements CompareDataService {
     /**
      * @param dataList         檔案資料 List<Map<String, String>>
      * @param primaryKeyFields 主鍵 List<String>
-     * @return ap<String, Map < String, String>> 每筆資料與primarykey匹配
+     * @return Map<String, Map < String, String>> 每筆資料與primarykey匹配
      */
     private Map<String, Map<String, String>> buildIndex(
             List<Map<String, String>> dataList,
             List<String> primaryKeyFields
     ) {
+
         return dataList.stream().collect(
                 Collectors.toMap(
-                        row -> makeCompositeKey(row, primaryKeyFields),
+                        row -> {
+                            // 如果沒指定主鍵欄位，就給流水號
+                            if (primaryKeyFields == null || primaryKeyFields.isEmpty()) {
+                                return row.get(customPrimaryKey);
+                            } else {
+                                return makeCompositeKey(row, primaryKeyFields);
+                            }
+                        },
                         row -> row,
                         (existing, replacement) -> existing,
                         LinkedHashMap::new
                 )
         );
+
+
     }
 
     /**
@@ -191,11 +264,11 @@ public class CompareDataServiceImpl implements CompareDataService {
      * <p>
      * 範例
      * Set<String> keysA = aData.stream()
-     * .map(row -> makeCompositeKey(row, dynamicKeys))
+     * .map(row -> makeCompositeKey(row, dataKey))
      * .collect(Collectors.toSet());
      * <p>
      * Set<String> keysB = bData.stream()
-     * .map(row -> makeCompositeKey(row, dynamicKeys))
+     * .map(row -> makeCompositeKey(row, dataKey))
      * .collect(Collectors.toSet());
      * <p>
      * // A與B都有的
@@ -211,11 +284,25 @@ public class CompareDataServiceImpl implements CompareDataService {
     private String makeCompositeKey(Map<String, String> row, List<String> primaryKeyFields) {
         return primaryKeyFields.stream()
                 .map(row::get)
-                .collect(Collectors.joining("#"));
+                .collect(Collectors.joining(","));
     }
 
-    //過濾欄位
-    public Map<String, String> filterFieldsBySelection(Map<String, String> original, List<String> selectedFields) {
+    /**
+     * 篩選欄位
+     *
+     * @param original       資料來源 Map<String, String>
+     * @param selectedFields 需要的欄位 List<String>
+     * @param dataKey        主鍵清單 List<String>
+     * @return 篩選過後的資料 Map<String, String>
+     */
+    public Map<String, String> filterFieldsBySelection(Map<String, String> original, List<String> selectedFields, List<String> dataKey, int rowNum) {
+
+
+        //若沒有選擇 哪個欄位要比對的話則跳過(UI上暫時拿掉這功能)
+//        if (selectedFields == null || selectedFields.isEmpty()) {
+//            return filtered;
+//        }
+
         Map<String, String> filtered = original.entrySet().stream()
                 .filter(entry -> selectedFields.contains(entry.getKey()))
                 .collect(Collectors.toMap(
@@ -225,12 +312,13 @@ public class CompareDataServiceImpl implements CompareDataService {
                         LinkedHashMap::new
                 ));
 
-        // 加回 "row" 欄位（前提是原始就有）
-        //這是筆數
-        if (original.containsKey("row")) {
-            filtered.put("row", original.get("row"));
+        //若沒有key則自動補上 自訂的key
+        if (dataKey == null || dataKey.isEmpty()) {
+            //rowNum=0 表示表頭
+            filtered.put(customPrimaryKey, rowNum == 0 ? customPrimaryKey : String.valueOf(rowNum));
         }
-
         return filtered;
     }
+
+
 }

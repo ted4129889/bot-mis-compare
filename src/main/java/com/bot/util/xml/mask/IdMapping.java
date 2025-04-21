@@ -42,17 +42,17 @@ public class IdMapping {
         File randomMaskFile = new File(randomMask);
         if (!randomMaskFile.exists()) {
             generateRandomXml(randomMask);
-            LogProcess.info("config file is not exist,gen: " + randomMask);
+            LogProcess.info("config file is not exist,gen: " + randomMaskFile);
         } else {
-            LogProcess.info("config file is exist: " + randomMask);
+            LogProcess.info("config file is exist: " + randomMaskFile);
         }
 
         File unifiedMaskFile = new File(unifiedMask);
         if (!unifiedMaskFile.exists()) {
             generateUnifiedXml(unifiedMask);
-            LogProcess.info("config file is not exist,gen: " + unifiedMask);
+            LogProcess.info("config file is not exist,gen: " + unifiedMaskFile);
         } else {
-            LogProcess.info("config file is exist: " + unifiedMask);
+            LogProcess.info("config file is exist: " + unifiedMaskFile);
         }
 
         XmlParser xmlParser = new XmlParser();

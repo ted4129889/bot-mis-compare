@@ -28,8 +28,8 @@ spring:
       root: info           # 設定全域日誌等級
       org.hibernate.SQL: DEBUG
       org.hibernate.type.descriptor.sql: TRACE  # 顯示參數值
-server:
-  port: 50081
+#server:
+#  port: 50081
 
 
 xmlPath: "external-config/xml/"

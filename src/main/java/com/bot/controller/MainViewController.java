@@ -1,4 +1,4 @@
-package com.bot.ui.controller;
+package com.bot.controller;
 
 import javafx.fxml.FXML;
 import org.springframework.stereotype.Component;

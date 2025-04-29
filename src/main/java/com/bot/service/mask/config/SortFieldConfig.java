@@ -1,9 +1,7 @@
-package com.bot.mask.config;
+package com.bot.service.mask.config;
 
 
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
 
 public class SortFieldConfig {

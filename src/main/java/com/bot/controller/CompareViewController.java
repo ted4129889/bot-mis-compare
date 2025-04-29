@@ -1,11 +1,12 @@
-package com.bot.ui.controller;
+package com.bot.controller;
 
-import com.bot.log.LogProcess;
-import com.bot.mask.DataFileProcessingService;
-import com.bot.mask.config.FileConfig;
-import com.bot.mask.config.FileConfigManager;
-import com.bot.mask.config.SortFieldConfig;
-import com.bot.output.CompareFileExportImpl;
+import com.bot.dto.CompareSetting;
+import com.bot.util.log.LogProcess;
+import com.bot.service.mask.DataFileProcessingService;
+import com.bot.service.mask.config.FileConfig;
+import com.bot.service.mask.config.FileConfigManager;
+import com.bot.service.mask.config.SortFieldConfig;
+import com.bot.service.output.CompareFileExportImpl;
 import com.bot.util.files.TextFileUtil;
 import javafx.animation.PauseTransition;
 import javafx.collections.ObservableList;
@@ -62,6 +63,8 @@ public class CompareViewController {
     private Label labelFile1;
     @FXML
     private Label labelFile2;
+    @FXML
+    private CheckBox checkBoxOnlyError;
     @FXML
     private VBox fieldSelectionBox;
     @FXML
@@ -542,7 +545,7 @@ public class CompareViewController {
                             (existing, replacement) -> existing, // 如有重複檔名保留第一個
                             LinkedHashMap::new        // 保持順序
                     ));
-            LogProcess.info("oldFileNameMap = " + oldFileNameMap);
+//            LogProcess.info("oldFileNameMap = " + oldFileNameMap);
 
             List<String> fileNameList = Arrays.stream(selectedDir.listFiles())
                     .filter(file -> file.isFile() && file.getName().toLowerCase().endsWith(".txt"))
@@ -588,7 +591,7 @@ public class CompareViewController {
                             LinkedHashMap::new        // 保持順序
                     ));
 
-            LogProcess.info("newFileNameMap = " + newFileNameMap);
+//            LogProcess.info("newFileNameMap = " + newFileNameMap);
 
             List<String> fileNameList = Arrays.stream(selectedDir.listFiles())
                     .filter(file -> file.isFile() && file.getName().toLowerCase().endsWith(".txt"))
@@ -608,6 +611,7 @@ public class CompareViewController {
     @FXML
     public void compareFiles() {
 
+
         if (radioCsv.isSelected() && radioExcel.isSelected()) {
             compareFileExportImpl.chooseExportFileType = "Both";
         } else if (radioExcel.isSelected()) {
@@ -621,8 +625,16 @@ public class CompareViewController {
             if (!showAlert("請選擇比對輸出的檔案類型")) return;
         }
 
-        // 輸出 Excel
-        maskDataFileService.exec("", "", oldFileNameMap, newFileNameMap, saveFileCongigMap);
+
+        boolean outPutOnlyErrorData = checkBoxOnlyError.isSelected();
+        //每次比對時，要刪除清單
+        textFileUtil.deleteFile(resultTxt);
+
+        CompareSetting setting = CompareSetting.builder()
+                .exportOnlyErrorFile(outPutOnlyErrorData).build();
+
+        // 比對後並輸出
+        maskDataFileService.exec("", "", oldFileNameMap, newFileNameMap, saveFileCongigMap,setting);
 
         if (!showAlert("比對完成!")) return;
 
@@ -672,49 +684,49 @@ public class CompareViewController {
 
     }
 
-    /**
-     * 確認兩個區域的檔案是否一樣
-     */
-    private void columnsCheckBoxList() {
-
-        if (file2 != null && file1 != null) {
-            fieldSelectionBox.getChildren().clear();
-            pkSelectionBox.getChildren().clear();
-
-            List<String> columns = maskDataFileService.getColumnList();
-
-            if (!columns.isEmpty()) {
-                for (String field : columns
-                ) {
-                    CheckBox checkBox = new CheckBox(field);
-                    checkBox.setSelected(true);
-                    fieldSelectionBox.getChildren().add(checkBox);
-                }
-
-                //確認欄位的CheckBox清單可以顯示後，再去拉PK的CheckBox清單
-                pkCheckBoxList(columns);
-
-                btnCompare.setDisable(false);
-            } else {
-                btnCompare.setDisable(true);
-                if (!showAlert("兩邊檔案格式不同，請確認檔案內容")) return;
-            }
-        }
-    }
-
-    private void pkCheckBoxList(List<String> columns) {
-        for (String field : columns
-        ) {
-            CheckBox checkBox = new CheckBox(field);
-            if (maskDataFileService.getDataKey().contains(field)) {
-                checkBox.setSelected(true);
-            } else {
-                checkBox.setSelected(false);
-            }
-            pkSelectionBox.getChildren().add(checkBox);
-        }
-
-    }
+//    /**
+//     * 確認兩個區域的檔案是否一樣
+//     */
+//    private void columnsCheckBoxList() {
+//
+//        if (file2 != null && file1 != null) {
+//            fieldSelectionBox.getChildren().clear();
+//            pkSelectionBox.getChildren().clear();
+//
+//            List<String> columns = maskDataFileService.getColumnList();
+//
+//            if (!columns.isEmpty()) {
+//                for (String field : columns
+//                ) {
+//                    CheckBox checkBox = new CheckBox(field);
+//                    checkBox.setSelected(true);
+//                    fieldSelectionBox.getChildren().add(checkBox);
+//                }
+//
+//                //確認欄位的CheckBox清單可以顯示後，再去拉PK的CheckBox清單
+//                pkCheckBoxList(columns);
+//
+//                btnCompare.setDisable(false);
+//            } else {
+//                btnCompare.setDisable(true);
+//                if (!showAlert("兩邊檔案格式不同，請確認檔案內容")) return;
+//            }
+//        }
+//    }
+//
+//    private void pkCheckBoxList(List<String> columns) {
+//        for (String field : columns
+//        ) {
+//            CheckBox checkBox = new CheckBox(field);
+//            if (maskDataFileService.getDataKey().contains(field)) {
+//                checkBox.setSelected(true);
+//            } else {
+//                checkBox.setSelected(false);
+//            }
+//            pkSelectionBox.getChildren().add(checkBox);
+//        }
+//
+//    }
 
 
     @FXML
@@ -902,7 +914,7 @@ public class CompareViewController {
     private void clearScreen() {
         //刪除清單
         textFileUtil.deleteFile(resultTxt);
-
+        checkBoxOnlyError.setSelected(false);
         listView1.getItems().clear();
         listView2.getItems().clear();
         oldFileNameMap = new HashMap<>();

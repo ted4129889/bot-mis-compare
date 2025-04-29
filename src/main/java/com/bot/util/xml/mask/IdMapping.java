@@ -1,7 +1,7 @@
 /* (C) 2024 */
 package com.bot.util.xml.mask;
 
-import com.bot.log.LogProcess;
+import com.bot.util.log.LogProcess;
 import com.bot.util.files.TextFileUtil;
 import com.bot.util.xml.mask.xmltag.Mapping;
 import com.bot.util.xml.vo.XmlData;

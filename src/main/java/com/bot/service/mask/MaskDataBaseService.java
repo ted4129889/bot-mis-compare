@@ -1,23 +1,18 @@
-package com.bot.mask;
+package com.bot.service.mask;
 
 
-import com.bot.filter.CheakSafePathUtil;
-import com.bot.log.LogProcess;
+import com.bot.util.log.LogProcess;
 import com.bot.util.files.TextFileUtil;
 import com.bot.util.xml.mask.DataMasker;
 import com.bot.util.xml.mask.XmlParser;
 import com.bot.util.xml.mask.allowedTable.AllowedDevTableName;
 import com.bot.util.xml.mask.allowedTable.AllowedLocalTableName;
 import com.bot.util.xml.mask.allowedTable.AllowedProdTableName;
-import com.bot.util.xml.mask.xmltag.Field;
-import com.bot.util.xml.vo.XmlData;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
-import java.io.File;
 import java.sql.*;
 import java.util.*;
 import java.util.concurrent.ExecutorService;

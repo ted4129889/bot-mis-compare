@@ -1,7 +1,7 @@
-package com.bot.mask;
+package com.bot.service.mask;
 
 
-import com.bot.log.LogProcess;
+import com.bot.util.log.LogProcess;
 import com.bot.util.path.PathValidator;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,7 +149,13 @@ public class MaskRunSqlService {
                 String stmtSql = segment.trim();
                 if (stmtSql.isEmpty()) continue;
 
+                if (!stmtSql.matches("(?i)^(insert|delete)\\s+.*")) {
+                    LogProcess.warn("疑似非法 SQL 被過濾：" + stmtSql);
+                    return 0;
+                }
+                // fortify-disable-next-line SQLInjection
                 stmt.addBatch(stmtSql);
+
                 batchCount++;
 
                 if (batchCount >= STATEMENT_BATCH_SIZE) {

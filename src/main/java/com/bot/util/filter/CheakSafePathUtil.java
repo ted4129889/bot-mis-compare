@@ -1,4 +1,4 @@
-package com.bot.filter;
+package com.bot.util.filter;
 
 
 import org.apache.commons.io.FilenameUtils;

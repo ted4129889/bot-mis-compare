@@ -2,8 +2,8 @@
 package com.bot.util.comparator;
 
 
-import com.bot.log.LogProcess;
-import com.bot.mask.config.SortFieldConfig;
+import com.bot.util.log.LogProcess;
+import com.bot.service.mask.config.SortFieldConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

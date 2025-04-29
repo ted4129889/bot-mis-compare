@@ -1,18 +1,14 @@
-package com.bot.compare;
+package com.bot.service.compare;
 
 
-import com.bot.log.LogProcess;
-import com.bot.mask.config.SortFieldConfig;
-import com.bot.util.comparator.DataComparator;
+import com.bot.service.mask.config.SortFieldConfig;
 import com.bot.util.comparator.ComparatorUtil;
-import lombok.extern.java.Log;
+import com.bot.util.mask.MaskUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -35,21 +31,16 @@ public class CompareDataServiceImpl implements CompareDataService {
     List<Map<String, String>> oldDataResult = new ArrayList<>();
     List<Map<String, String>> newDataResult = new ArrayList<>();
 
+    @Autowired
+    MaskUtil maskUtil;
+
     private final String customPrimaryKey = "row";
     private String groupKey = "";
 
     @Override
-    public void parseData(List<Map<String, String>> aData, List<Map<String, String>> bData, List<String> dataKey, List<String> filterColList, List<SortFieldConfig> sortFieldConfig,List<String> maskFieldList) {
+    public void parseData(List<Map<String, String>> aData, List<Map<String, String>> bData, List<String> dataKey, List<String> filterColList, List<SortFieldConfig> sortFieldConfig, List<String> maskFieldList) {
         //最後輸出結果
         result = new ArrayList<>();
-        Map<String, String> map = new LinkedHashMap<>();
-        map.put("desc", "資料結果，第幾筆看「MisData」");
-        map.put("pkGrp", "PrimaryKey欄位");
-        map.put("pk", "PrimaryKey值");
-        map.put("col", "錯誤欄位");
-        map.put("oldData", "原始檔案的值");
-        map.put("newData", "新產出檔案的值");
-        result.add(map);
         //符合的資料
         matchMap = new LinkedHashMap<>();
         //不符合的資料(缺少)
@@ -98,17 +89,17 @@ public class CompareDataServiceImpl implements CompareDataService {
 
         //原始檔案
         oldDataResult = new ArrayList<>();
-        oldDataResult.addAll(aDataResult);
+        oldDataResult.addAll(maskUtil.maskKeysMultipleData(aDataResult, maskFieldList));
         //比對的檔案
         newDataResult = new ArrayList<>();
-        newDataResult.addAll(bDataResult);
+        newDataResult.addAll(maskUtil.maskKeysMultipleData(bDataResult, maskFieldList));
 
         //將資料賦予Key，用來比對
         Map<String, Map<String, String>> aDataMap = buildIndex(aDataResult, dataKey);
         Map<String, Map<String, String>> bDataMap = buildIndex(bDataResult, dataKey);
 
-        LogProcess.info("aMapIndex = " + aDataMap);
-        LogProcess.info("bMapIndex = " + bDataMap);
+//        LogProcess.info("aMapIndex = " + aDataMap);
+//        LogProcess.info("bMapIndex = " + bDataMap);
 
 
         //扣掉表頭
@@ -128,13 +119,13 @@ public class CompareDataServiceImpl implements CompareDataService {
             }
             if (bDataMap.containsKey(key)) {
 
-                processData(index, entry.getKey(), entry.getValue(), bDataMap.get(key),maskFieldList);
+                processData(index, entry.getKey(), entry.getValue(), bDataMap.get(key), maskFieldList);
                 // A 和 B 都有
 
-                matchMap.put(index + "#" + groupKey + "#" + entry.getKey(), entry.getValue());
+                matchMap.put(index + "#" + groupKey + "#" + entry.getKey(), maskUtil.maskKeysSingleData(entry.getValue(), maskFieldList,1));
             } else {
                 // B 缺少 A 的資料
-                missingMap.put(index + "#" + groupKey + "#" + entry.getKey(), entry.getValue());
+                missingMap.put(index + "#" + groupKey + "#" + entry.getKey(), maskUtil.maskKeysSingleData(entry.getValue(), maskFieldList,1));
             }
         }
 
@@ -145,7 +136,7 @@ public class CompareDataServiceImpl implements CompareDataService {
             String key = entry.getKey();
             if (!aDataMap.containsKey(key)) {
                 // B 多出來
-                extraMap.put(index + "#" + groupKey + "#" +  entry.getKey(), entry.getValue());
+                extraMap.put(index + "#" + groupKey + "#" + entry.getKey(), entry.getValue());
             }
         }
 
@@ -189,7 +180,7 @@ public class CompareDataServiceImpl implements CompareDataService {
     /***
      * 將匹配到的資料串，根據欄位一一比對處理
      * */
-    private void processData(int index, String key, Map<String, String> aRow, Map<String, String> bRow,List<String> maskFieldList) {
+    private void processData(int index, String key, Map<String, String> aRow, Map<String, String> bRow, List<String> maskFieldList) {
 
         Map<String, String> map = new LinkedHashMap<>();
 
@@ -211,10 +202,10 @@ public class CompareDataServiceImpl implements CompareDataService {
 
                 String oldData = aRow.get(c);
                 String newData = bRow.get(c);
-                if(maskFieldList.contains(c)){
-                    oldData = "○○○";
-                    newData = "○○○";
-                }
+//                if (maskFieldList.contains(c)) {
+//                    oldData = "ooo";
+//                    newData = "ooo";
+//                }
 
                 map.put("desc", desc);
                 map.put("pkGrp", groupKey);

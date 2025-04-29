@@ -1,7 +1,7 @@
 /* (C) 2025 */
 package com.bot.util.comparator.common;
 
-import com.bot.log.LogProcess;
+import com.bot.util.log.LogProcess;
 import com.bot.util.xml.mask.DataMasker;
 import com.bot.util.xml.mask.xmltag.Field;
 import com.bot.util.xml.vo.XmlBody;

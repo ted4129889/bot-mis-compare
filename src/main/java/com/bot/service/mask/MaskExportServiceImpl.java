@@ -1,20 +1,19 @@
-package com.bot.mask;
+package com.bot.service.mask;
 
 
-import com.bot.log.LogProcess;
+import com.bot.util.log.LogProcess;
 import com.bot.util.files.TextFileUtil;
 import com.bot.util.path.PathValidator;
 import com.bot.util.xml.mask.DataMasker;
 import com.bot.util.xml.mask.XmlParser;
 import com.bot.util.xml.mask.xmltag.Field;
 import com.bot.util.xml.vo.XmlData;
+import com.bot.util.xml.vo.XmlField;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.*;
 import java.util.*;
@@ -97,7 +96,7 @@ public class MaskExportServiceImpl implements MaskExportService {
 //                    LogProcess.info("The data exists for table: " + allowedTable);
                 }
 
-                List<Field> fields = xmlData.getFieldList();
+                List<XmlField> fields = xmlData.getXmlFieldList();
                 while (rs.next()) {
                     // 每筆 new 一個 Map，避免重用同一物件
                     Map<String, Object> rowMap = new HashMap<>(colCount);
@@ -167,7 +166,7 @@ public class MaskExportServiceImpl implements MaskExportService {
     private void writeBatchFiles(
             List<Map<String, Object>> rows,
             String tableName,
-            List<Field> fields,
+            List<XmlField> fields,
             boolean deleteFlag
     ) throws IOException {
         // 原始資料

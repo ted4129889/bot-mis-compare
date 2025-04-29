@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.bot.ui.controller.CompareViewController"
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.bot.controller.CompareViewController"
             stylesheets="@fxmlStyle.css">
     <top >
         <VBox spacing="10"  alignment="CENTER_LEFT">
@@ -27,6 +27,7 @@
                     <Label text="匯出格式：" styleClass="label bold"/>
                     <RadioButton fx:id="radioExcel" text="excel" selected="true"/>
                     <RadioButton fx:id="radioCsv" text="csv"  selected="true"/>
+                    <CheckBox fx:id="checkBoxOnlyError" text="是否只產出比對錯誤的檔案"/>
                 </HBox>
                 <Button fx:id="btnCompare" text="比對並匯出結果" onAction="#compareFiles" disable="true"
                         styleClass="label bold"/>

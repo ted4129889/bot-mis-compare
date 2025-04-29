@@ -1,13 +1,5 @@
-package com.bot.log;
+package com.bot.util.log;
 
-
-import org.springframework.stereotype.Component;
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

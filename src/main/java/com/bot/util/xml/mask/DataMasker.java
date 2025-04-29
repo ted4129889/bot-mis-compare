@@ -6,10 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.bot.log.LogProcess;
-import com.bot.util.format.FormatUtil;
 import com.bot.util.text.FormatData;
 import com.bot.util.xml.mask.xmltag.Field;
+import com.bot.util.xml.vo.XmlField;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -61,9 +60,9 @@ public class DataMasker {
      * @param sqlData   the list of SQL data rows to be masked
      * @param fieldList the list of fields that define the masking rules
      */
-    public void maskData(List<Map<String, Object>> sqlData, List<Field> fieldList, boolean isNotMask) throws IOException {
+    public void maskData(List<Map<String, Object>> sqlData, List<XmlField> fieldList, boolean isNotMask) throws IOException {
         Map<String, String> maskingFields = new HashMap<>();
-        for (Field field : fieldList) {
+        for (XmlField field : fieldList) {
             maskingFields.put(field.getFieldName(), field.getMaskType());
         }
 //        long start = System.nanoTime();

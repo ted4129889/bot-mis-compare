@@ -3,7 +3,7 @@
     <data fileName="ALMINFACCT">
         <header>
             <field>
-                <fieldName></fieldName>
+                <fieldName>filler</fieldName>
                 <fieldType>string</fieldType>
                 <length>92</length>
             </field>
@@ -40,7 +40,7 @@
                 <length>19</length>
             </field>
             <field>
-                <fieldName></fieldName>
+                <fieldName>filler</fieldName>
                 <fieldType>string</fieldType>
                 <length>66</length>
             </field>
@@ -5424,7 +5424,6 @@
                 <fieldType>string</fieldType>
                 <length>12</length>
                 <maskType>2</maskType>
-<!--                <primaryKey>true</primaryKey>-->
             </field>
             <field>
                 <fieldName>separator</fieldName>
@@ -5537,7 +5536,6 @@
                 <fieldName>combined_field</fieldName>
                 <fieldType>string</fieldType>
                 <length>12</length>
-                <maskType>2</maskType>
             </field>
             <field>
                 <fieldName>separator</fieldName>
@@ -16822,7 +16820,7 @@
                 <length>8</length>
             </field>
             <field>
-                <fieldName></fieldName>
+                <fieldName>filler</fieldName>
                 <fieldType>string</fieldType>
                 <length>39</length>
             </field>
@@ -16836,7 +16834,7 @@
                 <length>8</length>
             </field>
             <field>
-                <fieldName></fieldName>
+                <fieldName>filler</fieldName>
                 <fieldType>string</fieldType>
                 <length>52</length>
             </field>
@@ -16883,7 +16881,7 @@
                 <length>1</length>
             </field>
             <field>
-                <fieldName></fieldName>
+                <fieldName>filler</fieldName>
                 <fieldType>string</fieldType>
                 <length>8</length>
             </field>
@@ -16892,7 +16890,7 @@
     <data fileName="ALMINFFMT">
         <header>
             <field>
-                <fieldName></fieldName>
+                <fieldName>filler</fieldName>
                 <fieldType>string</fieldType>
                 <length>92</length>
             </field>
@@ -17014,7 +17012,7 @@
                 <length>8</length>
             </field>
             <field>
-                <fieldName></fieldName>
+                <fieldName>filler</fieldName>
                 <fieldType>string</fieldType>
                 <length>2</length>
             </field>
@@ -17104,7 +17102,7 @@
                 <length>8</length>
             </field>
             <field>
-                <fieldName></fieldName>
+                <fieldName>filler</fieldName>
                 <fieldType>string</fieldType>
                 <length>28</length>
             </field>

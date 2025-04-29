@@ -1,18 +1,14 @@
-package com.bot.mask.config;
+package com.bot.service.mask.config;
 
 
-import com.bot.log.LogProcess;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.bot.util.log.LogProcess;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
-import java.text.Normalizer;
 import java.util.*;
 
 @Component

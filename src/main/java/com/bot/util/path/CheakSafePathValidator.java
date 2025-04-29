@@ -1,7 +1,7 @@
 package com.bot.util.path;
 
 
-import com.bot.filter.CheakSafePathUtil;
+import com.bot.util.filter.CheakSafePathUtil;
 import org.springframework.stereotype.Component;
 
 @Component

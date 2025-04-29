@@ -1,6 +1,6 @@
 package com.bot.util.excel;
 
-import com.bot.log.LogProcess;
+import com.bot.util.log.LogProcess;
 import org.apache.poi.common.usermodel.HyperlinkType;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -84,6 +83,10 @@ public class MakeExcel {
      */
     private void openExcel(String fileName, Object sheetName) {
         checkOpenFiles();
+        LogProcess.info("Excel open");
+
+        LogProcess.info("export file name : " + fileName);
+
         File file = new File(fileName);
 
         // 檢查並建立資料夾
@@ -303,7 +306,7 @@ public class MakeExcel {
             }
 
         } catch (IOException e) {
-            LogProcess.warn("",e);
+            LogProcess.warn("", e);
         }
 
 
@@ -332,7 +335,8 @@ public class MakeExcel {
      * @param sheetName 新增sheet名稱
      */
     public void newSheet(String sheetName) {
-        openedSheet = openedWorkbook.createSheet(sheetName);
+
+            openedSheet = openedWorkbook.createSheet(sheetName);
 
     }
 

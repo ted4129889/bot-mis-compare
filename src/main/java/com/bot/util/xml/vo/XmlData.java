@@ -31,9 +31,14 @@ public class XmlData {
     @JacksonXmlProperty(localName = "table")
     private Table table;
 
+//    @JacksonXmlElementWrapper(useWrapping = false)
+//    @JacksonXmlProperty(localName = "field")
+//    private List<Field> fieldList = new ArrayList<>();
+
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "field")
-    private List<Field> fieldList = new ArrayList<>();
+    private List<XmlField> xmlFieldList = new ArrayList<>();
+
 
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "mapping")

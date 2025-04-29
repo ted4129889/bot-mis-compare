@@ -1,9 +1,8 @@
-package com.bot.ui.controller;
+package com.bot.controller;
 
-import com.bot.log.LogProcess;
-import com.bot.mask.MaskDataBaseService;
-import com.bot.mask.MaskRunSqlService;
-import javafx.event.ActionEvent;
+import com.bot.util.log.LogProcess;
+import com.bot.service.mask.MaskDataBaseService;
+import com.bot.service.mask.MaskRunSqlService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;

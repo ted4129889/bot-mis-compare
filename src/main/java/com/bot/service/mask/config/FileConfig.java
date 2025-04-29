@@ -1,12 +1,8 @@
-package com.bot.mask.config;
+package com.bot.service.mask.config;
 
-
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class FileConfig {

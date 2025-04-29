@@ -1,7 +1,7 @@
 /* (C) 2023 */
 package com.bot.util.files;
 
-import com.bot.log.LogProcess;
+import com.bot.util.log.LogProcess;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +16,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 

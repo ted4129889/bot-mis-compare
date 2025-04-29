@@ -1,7 +1,7 @@
-package com.bot.ui.controller;
+package com.bot.controller;
 
-import com.bot.mask.DataFileProcessingService;
-import com.bot.output.CompareFileExportImpl;
+import com.bot.service.mask.DataFileProcessingService;
+import com.bot.service.output.CompareFileExportImpl;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -172,7 +172,7 @@ public class CompareSingleFileViewController {
         String text2 = textArea2.getText();
 
         if (text1 != null && !text1.isBlank() && text2 != null && !text2.isBlank()) {
-            maskDataFileService.exec("", "", oldFileNameMap, newFileNameMap,null);
+//            maskDataFileService.exec("", "", oldFileNameMap, newFileNameMap,null);
         }
     }
 

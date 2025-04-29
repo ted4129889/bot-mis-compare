@@ -1,6 +1,6 @@
 package com.bot.util.excel;
 
-import com.bot.log.LogProcess;
+import com.bot.util.log.LogProcess;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -69,7 +69,7 @@ public class MakeCsv {
             }
         }
 
-        System.out.println("CSV 寫入完成（Big5）： " + filePath);
+        LogProcess.info("export CSV（Big5） file name ： " + filePath);
     }
 
     // 處理 CSV 特殊字元

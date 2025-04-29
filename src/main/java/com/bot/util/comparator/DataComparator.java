@@ -11,6 +11,7 @@ import com.bot.util.xml.mask.XmlParser;
 import com.bot.util.xml.mask.xmltag.Field;
 import com.bot.util.xml.vo.XmlBody;
 import com.bot.util.xml.vo.XmlData;
+import com.bot.util.xml.vo.XmlField;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
@@ -272,9 +273,9 @@ public class DataComparator {
         return xmlData.getBody();
     }
 
-    private List<Map<String, List<Field>>> getMaskXmlTableNameAndFieldList(String maskXmlPath)
+    private List<Map<String, List<XmlField>>> getMaskXmlTableNameAndFieldList(String maskXmlPath)
             throws IOException {
-        List<Map<String, List<Field>>> maskXmlList = new ArrayList<>();
+        List<Map<String, List<XmlField>>> maskXmlList = new ArrayList<>();
         XmlParser xmlParser = new XmlParser();
 
         for (String maskXmlName : FileUtil.getListFiles(maskXmlPath)) {
@@ -283,8 +284,8 @@ public class DataComparator {
                             ? maskXmlPath + maskXmlName
                             : maskXmlPath + maskXmlName + ".xml";
             XmlData maskXmlData = xmlParser.parseXmlFile(xmlFilePath);
-            Map<String, List<Field>> maskDataMap =
-                    Collections.singletonMap(maskXmlName, maskXmlData.getFieldList());
+            Map<String, List<XmlField>> maskDataMap =
+                    Collections.singletonMap(maskXmlName, maskXmlData.getXmlFieldList());
             maskXmlList.add(maskDataMap);
         }
 

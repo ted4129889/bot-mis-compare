@@ -1,11 +1,8 @@
-package com.bot.compare;
+package com.bot.service.compare;
 
 
-import com.bot.mask.config.SortFieldConfig;
-import org.springframework.stereotype.Component;
+import com.bot.service.mask.config.SortFieldConfig;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 

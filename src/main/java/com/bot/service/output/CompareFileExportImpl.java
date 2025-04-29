@@ -1,19 +1,19 @@
-package com.bot.output;
+package com.bot.service.output;
 
 
-import com.bot.compare.CompareDataService;
-import com.bot.log.LogProcess;
-import com.bot.mask.config.SortFieldConfig;
+import com.bot.dto.CompareSetting;
+import com.bot.util.log.LogProcess;
+import com.bot.service.compare.CompareDataService;
+import com.bot.service.mask.config.SortFieldConfig;
 import com.bot.util.excel.MakeCsv;
 import com.bot.util.excel.MakeExcel;
 import com.bot.util.files.TextFileUtil;
-import lombok.extern.java.Log;
+import com.bot.util.mask.MaskUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -36,7 +36,8 @@ public class CompareFileExportImpl {
     private CompareDataService compareDataService;
     @Autowired
     private TextFileUtil textFileUtil;
-
+    @Autowired
+    private MaskUtil maskUtil;
     private static final String CHARSET_BIG5 = "Big5";
     private static final String CHARSET_UTF8 = "UTF-8";
     private final String BOT_DATA = "BotData";
@@ -57,21 +58,45 @@ public class CompareFileExportImpl {
     private Map<String, Map<String, String>> missingResult = new LinkedHashMap<>();
     private Map<String, Map<String, String>> extraResult = new LinkedHashMap<>();
 
-
-    public void run(String fileName, List<Map<String, String>> aData, List<Map<String, String>> bData, List<String> dataKey, List<String> filterColList, List<SortFieldConfig> sortFieldConfig,List<String> maskFieldList) {
-
-
-        //處理比對資料(篩選部分)
-        compareDataService.parseData(aData, bData, dataKey, filterColList, sortFieldConfig,maskFieldList);
-
-        oldDataResult = compareDataService.getOldDataResult();
-        newDataResult = compareDataService.getNewDataResult();
-        comparisonResult = compareDataService.getComparisonResult();
-        missingResult = compareDataService.getMissingData();
-        extraResult = compareDataService.getExtraData();
+    boolean isShowComparisonData = true;
+    boolean isShowOldData = true;
+    boolean isShowNewData = true;
+    boolean isShowMissingData = true;
+    boolean isShowExtraData = true;
 
 
-        LogProcess.info("chooseExportFileType =" + chooseExportFileType);
+    public void run(String fileName, List<Map<String, String>> getOldDataResult, List<Map<String, String>> getNewDataResult, List<Map<String, String>> getComparisonResult, Map<String, Map<String, String>> getMissingData, Map<String, Map<String, String>> getExtraData, CompareSetting setting) {
+
+        oldDataResult = getOldDataResult;
+        newDataResult = getNewDataResult;
+        comparisonResult = getComparisonResult;
+        missingResult = getMissingData;
+        extraResult = getExtraData;
+
+        isShowComparisonData = true;
+        isShowOldData = true;
+        isShowNewData = true;
+        isShowMissingData = true;
+        isShowExtraData = true;
+
+        //正常是全產，遇到勾選的時候才會選擇要旨產錯誤的
+        boolean isExportOnlyErrorFile = setting.isExportOnlyErrorFile();
+        if (isExportOnlyErrorFile) {
+            //判斷比對結果、少資料的結果、多資料的結果 如果為空 表示資料是對的，則不出表
+
+
+            if ( comparisonResult.isEmpty() && missingResult.isEmpty()  && extraResult.isEmpty()) {
+
+//                isShowOldData = false;
+//                isShowNewData = false;
+                isShowComparisonData = false;
+                isShowMissingData = false;
+                isShowExtraData = false;
+            }
+
+        }
+
+
         //輸出檔案選項
 
         switch (chooseExportFileType) {
@@ -109,7 +134,7 @@ public class CompareFileExportImpl {
             //刪除檔案
             textFileUtil.deleteFile(outPutFile);
 
-            if (oldDataResult != null && !oldDataResult.isEmpty()) {
+            if (isShowOldData) {
                 makeCsv.writeToCsvBig5(oldDataResult, outPutFile);
             }
 
@@ -120,7 +145,7 @@ public class CompareFileExportImpl {
             textFileUtil.deleteFile(outPutFile);
 
 
-            if (newDataResult != null && !newDataResult.isEmpty()) {
+            if (isShowNewData) {
                 makeCsv.writeToCsvBig5(newDataResult, outPutFile);
             }
             //比對結果
@@ -129,8 +154,8 @@ public class CompareFileExportImpl {
             textFileUtil.deleteFile(outPutFile);
 
 
-            if (comparisonResult != null && !comparisonResult.isEmpty()) {
-                makeCsv.writeToCsvBig5(comparisonResult, outPutFile);
+            if (isShowComparisonData) {
+                makeCsv.writeToCsvBig5(mapConvert(comparisonResult), outPutFile);
             }
 
             //缺少的資料
@@ -138,7 +163,7 @@ public class CompareFileExportImpl {
             //刪除檔案
             textFileUtil.deleteFile(outPutFile);
 
-            if (missingResult != null && !missingResult.isEmpty()) {
+            if (isShowMissingData) {
                 makeCsv.writeToCsvBig5(mapConvert(missingResult, MISSING_DATA), outPutFile);
             }
             //多於的資料
@@ -147,46 +172,35 @@ public class CompareFileExportImpl {
             textFileUtil.deleteFile(outPutFile);
 
 
-            if (extraResult != null && !extraResult.isEmpty()) {
+            if (isShowExtraData) {
                 makeCsv.writeToCsvBig5(mapConvert(extraResult, EXTRA_DATA), outPutFile);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            LogProcess.error("csv output error", e);
+//            throw new RuntimeException(e);
         }
     }
 
-    private List<Map<String, String>> mapConvert(Map<String, Map<String, String>> map) {
+    private List<Map<String, String>> mapConvert(List<Map<String, String>> list) {
         List<Map<String, String>> tmpList = new ArrayList<>();
 
         Map<String, String> tmpMap = new LinkedHashMap<>();
-
-        tmpMap.put("desc", "以下為產出檔案缺少的資料，第幾筆看「BotData」");
-        tmpMap.put("pkCol", "PrimaryKey欄位");
+        tmpMap.put("desc", "資料結果，第幾筆看「MisData」");
+        tmpMap.put("pkGrp", "PrimaryKey欄位");
         tmpMap.put("pk", "PrimaryKey值");
+        tmpMap.put("col", "錯誤欄位");
+        tmpMap.put("oldData", "原始檔案的值");
+        tmpMap.put("newData", "新產出檔案的值");
 
         tmpList.add(tmpMap);
 
-
-        for (Map.Entry<String, Map<String, String>> r : map.entrySet()) {
-            tmpMap = new LinkedHashMap<>();
-
-            String[] col_1 = r.getKey().split("#");
-            String num = col_1[0];
-            String keyCol = col_1[1].replace(",", "+");
-            String key = col_1[2].replace(",", "+");
-
-            tmpMap.put("desc", "第" + num + "筆");
-            tmpMap.put("pkCol", keyCol);
-            tmpMap.put("pk", key);
-
-            tmpList.add(tmpMap);
-        }
+        tmpList.addAll(list);
 
         return tmpList;
 
     }
 
-    private Map<String, String> MissingHeader() {
+    private Map<String, String> missingHeader() {
         Map<String, String> tmpMap = new LinkedHashMap<>();
 
         tmpMap.put("desc", "以下為產出檔案缺少的資料，第幾筆看「BotData」");
@@ -196,7 +210,7 @@ public class CompareFileExportImpl {
         return tmpMap;
     }
 
-    private Map<String, String> ExtraHeader() {
+    private Map<String, String> extraHeader() {
         Map<String, String> tmpMap = new LinkedHashMap<>();
 
         tmpMap.put("desc", "以下為產出檔案多出來的資料，第幾筆看「MisData」");
@@ -206,15 +220,27 @@ public class CompareFileExportImpl {
         return tmpMap;
     }
 
+    private Map<String, String> comparisonHeader() {
+        Map<String, String> tmpMap = new LinkedHashMap<>();
+        tmpMap.put("desc", "資料結果，第幾筆看「MisData」");
+        tmpMap.put("pkGrp", "PrimaryKey欄位");
+        tmpMap.put("pk", "PrimaryKey值");
+        tmpMap.put("col", "錯誤欄位");
+        tmpMap.put("oldData", "原始檔案的值");
+        tmpMap.put("newData", "新產出檔案的值");
+
+        return tmpMap;
+    }
+
 
     private List<Map<String, String>> mapConvert(Map<String, Map<String, String>> map, String headerType) {
         List<Map<String, String>> tmpList = new ArrayList<>();
 
         if (EXTRA_DATA.equals(headerType)) {
-            tmpList.add(MissingHeader());
+            tmpList.add(missingHeader());
         }
         if (MISSING_DATA.equals(headerType)) {
-            tmpList.add(ExtraHeader());
+            tmpList.add(extraHeader());
         }
 
         Map<String, String> tmpMap = new LinkedHashMap<>();
@@ -242,7 +268,7 @@ public class CompareFileExportImpl {
 
         String outPutFile = resultExcelFolder + fileName + "_ComparisonResults_" + today + ".xlsx";
 
-        LogProcess.info("outPutFile = " + outPutFile);
+//        LogProcess.info("outPutFile = " + outPutFile);
 
         //刪除檔案
         textFileUtil.deleteFile(outPutFile);
@@ -250,21 +276,27 @@ public class CompareFileExportImpl {
         //開起檔案
         makeExcel.open(outPutFile, BOT_DATA);
 
+        if (isShowOldData) {
+            //台銀檔案資料
+            botFilePage();
+        }
 
-        //台銀檔案資料
-        botFilePage();
-
-        //MIS檔案資料
-        misFilePage();
-
-        //比對結果
-        comparePage();
-
-        //缺少的資料
-        missPage();
-
-        //多於的資料
-        extraPage();
+        if (isShowNewData) {
+            //MIS檔案資料
+            misFilePage();
+        }
+        if (isShowComparisonData) {
+            //比對結果
+            comparePage();
+        }
+        if (isShowMissingData) {
+            //缺少的資料
+            missPage();
+        }
+        if (isShowExtraData) {
+            //多於的資料
+            extraPage();
+        }
 
         makeExcel.close();
     }
@@ -317,16 +349,25 @@ public class CompareFileExportImpl {
         //比對結果的層級
         //先抓主key 以舊的為準 把新的抓來比
 
-        int col = 0;
-        int row = 0;
-        LogProcess.info("comparisonResult = " + comparisonResult);
+        int col = 1;
+        int row = 1;
+//        LogProcess.info("comparisonResult = " + comparisonResult);
+
+
+        makeExcel.setValue(row, col, "資料結果，第幾筆看「MisData」");
+        makeExcel.setValue(row, col + 1, "PrimaryKey欄位");
+        makeExcel.setValue(row, col + 2, "PrimaryKey值");
+        makeExcel.setValue(row, col + 3, "錯誤欄位");
+        makeExcel.setValue(row, col + 4, "原始檔案的值");
+        makeExcel.setValue(row, col + 5, "新產出檔案的值");
+
         for (Map<String, String> r : comparisonResult) {
             col = 1;
             row++;
             for (Map.Entry<String, String> e : r.entrySet()) {
                 String value = e.getValue();
 
-                LogProcess.info("value = " + value);
+//                LogProcess.info("value = " + value);
                 //第一筆給予鏈結
                 if (col == 1 && row != 1) {
 //                    LogProcess.info("value = " + value);
@@ -339,6 +380,9 @@ public class CompareFileExportImpl {
         }
         makeExcel.autoSizeColumn();
 
+        if (comparisonResult.isEmpty()) {
+            makeExcel.setValue(row + 1, col, "資料無誤");
+        }
 
     }
 
@@ -375,6 +419,10 @@ public class CompareFileExportImpl {
 
         makeExcel.autoSizeColumn();
 
+        if (missingResult.isEmpty()) {
+            makeExcel.setValue(row + 1, col, "資料無誤");
+        }
+
     }
 
     private void extraPage() {
@@ -408,23 +456,30 @@ public class CompareFileExportImpl {
         }
         makeExcel.autoSizeColumn();
 
+        if (extraResult.isEmpty()) {
+            makeExcel.setValue(row + 1, col, "資料無誤");
+        }
 
     }
 
 
     private void exportTextFile(String fileName) {
-        LogProcess.info("resultTxt = " + resultTxt);
+//        LogProcess.info("resultTxt = " + resultTxt);
         List<String> txt = new ArrayList<>();
 
         StringBuilder s = new StringBuilder();
-        LogProcess.info("missingResult =" + missingResult.size());
-        LogProcess.info("extraResult =" + extraResult.size());
-        LogProcess.info("comparisonResult =" + comparisonResult.size());
+//        LogProcess.info("missingResult =" + missingResult.size());
+//        LogProcess.info("extraResult =" + extraResult.size());
+//        LogProcess.info("comparisonResult =" + comparisonResult.size());
         //多的1個是標題
-        if (missingResult.isEmpty() && extraResult.isEmpty() && comparisonResult.size() == 1) {
+        if (missingResult.isEmpty() && extraResult.isEmpty() && comparisonResult.isEmpty()) {
             s.append("V").append(",").append(fileName);
         } else {
             s.append("X").append(",").append(fileName);
+        }
+        String message = maskUtil.getLatestMessage();
+        if (!Objects.equals(message, "")) {
+            s.append(",").append(maskUtil.getLatestMessage());
         }
 
         txt.add(s.toString());

@@ -26,7 +26,8 @@ public interface MaskExportService {
      * @param xmlFileName XML 檔名
      * @param tableName 資料表名稱
      * @param env 資料環境
+     * @paran paran 放入參數(目前皆為日期)
      * @return 是否匯出成功
      */
-    boolean exportMaskedFile(Connection conn, String xmlFileName, String tableName,String env);
+    boolean exportMaskedFile(Connection conn, String xmlFileName, String tableName,String env,String param);
 }

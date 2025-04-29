@@ -54,7 +54,7 @@ public class FileConfigManager {
                 LogProcess.info("configMap is empty. Skipping save.");
                 return;
             }
-            LogProcess.info("正在寫入 configMap = " + mapper.writeValueAsString(configMap));
+//            LogProcess.info("正在寫入 configMap = " + mapper.writeValueAsString(configMap));
 
             mapper.writerWithDefaultPrettyPrinter().writeValue(CONFIG_FILE, configMap);
         } catch (IOException e) {
@@ -67,7 +67,7 @@ public class FileConfigManager {
 
 
         Map<String, FileConfig> configMap = load();
-        LogProcess.info("configMap =" + configMap);
+//        LogProcess.info("configMap =" + configMap);
 
         // 檢查每個檔案名稱
         for (String fileName : allFileNames) {

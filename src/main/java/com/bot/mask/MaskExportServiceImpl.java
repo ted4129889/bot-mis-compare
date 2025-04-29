@@ -9,6 +9,7 @@ import com.bot.util.xml.mask.XmlParser;
 import com.bot.util.xml.mask.xmltag.Field;
 import com.bot.util.xml.vo.XmlData;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -26,9 +27,9 @@ public class MaskExportServiceImpl implements MaskExportService {
     private String maskXmlFilePath;
     @Value("${localFile.mis.batch.output}")
     private String outputFilePath;
-
     @Value("${localFile.mis.batch.output_original_data}")
     private String outputFileOriginalPath;
+
     @Autowired
     private PathValidator pathValidator;
     @Autowired
@@ -39,249 +40,232 @@ public class MaskExportServiceImpl implements MaskExportService {
     private TextFileUtil textFileUtil;
 
     private static final String CHARSET = "BIG5";
-    private static final int BUFFER_CAPACITY = 5000;
+    private static final int BUFFER_CAPACITY = 1024;
+    private static final String SQL_EXTENSION = ".sql";
+    private static final String SQL_DELETE_PREFIX = "DELETE FROM ";
+    private static final String SQL_INSERT_TEMPLATE = "INSERT INTO %s (%s) VALUES (%s);";
     private static final String PARAM_VALUE = "value";
     private static final String PARAM_TYPE = "type";
     private static final String PARAM_LENGTH = "length";
-    private final String SQL_EXTENSION = ".sql";
-    private final String STR_SEMICOLON = ";";
-    private final String STR_DOT = " ,";
-
-    // fix SQL Injection
-    private final String SQL_SELECT_TABLE = "select * from ";
-    private final String SQL_DELETE_TABLE = "DELETE FROM ";
-    private final String STR_POINT = ".";
-    private final String STR_DBO = "dbo";
-    private final String XML_EXTENSION = ".xml";
-
-    private XmlData xmlData = null;
 
     @Override
-    public boolean exportMaskedFile(Connection conn, String xmlFileName, String tableName, String env) {
+    public boolean exportMaskedFile(Connection conn, String xmlFileName, String tableName, String env, String param) {
+        // 驗證並取得允許的表名
+        String allowedTable = validXmlFile(xmlFileName, tableName, env);
+        if (allowedTable == null) return false;
+        // 刪除舊檔
+        textFileUtil.deleteFile(outputFileOriginalPath + allowedTable + SQL_EXTENSION);
+        textFileUtil.deleteFile(outputFilePath + allowedTable + SQL_EXTENSION);
 
-        // 驗證 XML 路徑 並 開始解析
-        String allowedTableName = validXmlFile(xmlFileName, tableName, env);
+        final int batchSize = 1000;
+        boolean hasDeleted = false;
 
-        // 查詢 DB
-        List<Map<String, Object>> sqlData = new ArrayList<>();
-        if (allowedTableName == null) {
-            return false;
-        } else {
-            sqlData = getSqlData(conn, SQL_SELECT_TABLE + allowedTableName);
+        long start = System.nanoTime();
+        long duration = 0L;
+
+        XmlData xmlData = null;
+        try {
+            xmlData = xmlParser.parseXmlFile(
+                    FilenameUtils.normalize(maskXmlFilePath + xmlFileName + ".xml"));
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
-        //  套用遮蔽 並 輸出檔案(輸出原始檔案以及遮蔽檔案)
-        if (Objects.isNull(sqlData) || sqlData.size() == 0) {
-            LogProcess.info("tableName=" + allowedTableName + ",資料庫無資料，不產生SQL檔案");
-            return false;
-        } else {
-            dataMask(sqlData, allowedTableName);
+        if ("prod".equals(env)) {
+            allowedTable = xmlData.getTable().getTableName();
         }
 
+        String sql = getSql(param, allowedTable, xmlData);
 
+        List<Map<String, Object>> batchList = new ArrayList<>(batchSize);
+        try (PreparedStatement pstmt = conn.prepareStatement(
+                sql, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY)) {
+            pstmt.setFetchSize(batchSize);
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                // 解析欄位定義
+                ResultSetMetaData meta = rs.getMetaData();
+                int colCount = meta.getColumnCount();
+
+                // 無資料則跳過
+                if (!rs.isBeforeFirst()) {
+                    LogProcess.info("No data found for table: " + allowedTable);
+                    return false;
+                } else {
+//                    LogProcess.info("The data exists for table: " + allowedTable);
+                }
+
+                List<Field> fields = xmlData.getFieldList();
+                while (rs.next()) {
+                    // 每筆 new 一個 Map，避免重用同一物件
+                    Map<String, Object> rowMap = new HashMap<>(colCount);
+                    for (int i = 1; i <= colCount; i++) {
+                        String columnName = meta.getColumnName(i);
+                        Object value = rs.getObject(i);
+                        String columnType = meta.getColumnTypeName(i);
+
+                        int columnLength = meta.getColumnDisplaySize(i);
+
+                        Map<String, Object> colInfo = new HashMap<>(3);
+                        colInfo.put(PARAM_VALUE, value);
+                        colInfo.put(PARAM_TYPE, columnType);
+                        colInfo.put(PARAM_LENGTH, columnLength);
+                        rowMap.put(columnName, colInfo);
+
+
+                    }
+
+                    batchList.add(rowMap);
+
+                    if (batchList.size() >= batchSize) {
+                        writeBatchFiles(batchList, allowedTable, fields, hasDeleted);
+                        hasDeleted = true;
+                        batchList.clear();
+                    }
+                }
+                // 處理剩餘不足 batchSize 的資料
+                if (!batchList.isEmpty()) {
+                    writeBatchFiles(batchList, allowedTable, fields, hasDeleted);
+                }
+
+                //統計耗時
+                duration = duration + (System.nanoTime() - start);
+
+                LogProcess.info("產生SQL檔案 = " + outputFilePath + allowedTable + SQL_EXTENSION + ",耗時: " + duration + "ns");
+
+
+            }
+        } catch (SQLException | IOException e) {
+
+            LogProcess.warn("Invalid object name '" + allowedTable + "'");
+//            LogProcess.warn("Error executing exportMaskedFile", e);
+            return false;
+        }
         return true;
     }
 
+    private static String getSql(String param, String allowedTable, XmlData xmlData) {
+        String sql = "SELECT * FROM " + allowedTable;
 
-    private String validXmlFile(String xmlTableName, String tableName, String env) {
-
-        String allowedTableName = tableName;
-
-        String allowedPath = FilenameUtils.normalize(maskXmlFilePath);
-        // 組合後的檔案名稱
-        String xml = FilenameUtils.normalize(maskXmlFilePath + xmlTableName + XML_EXTENSION);
-
-        if (pathValidator.isSafe(allowedPath, xml)) {
-            // 沒有檔案時略過
-            // parse Xml
-            try {
-                xmlData = xmlParser.parseXmlFile(xml);
-
-                if (xmlData == null) {
-                    return null;
-                }
-
-                if ("prod".equals(env)) {
-                    allowedTableName = xmlData.getTable().getTableName();
-                }
-                LogProcess.warn("allowedTableName =" + allowedTableName);
-
-                // get SQL data
-                return allowedTableName;
-
-            } catch (Exception e) {
-                LogProcess.warn("xml file fail", e);
-                return null;
-            }
-
-        } else {
-            LogProcess.info("檔案路徑不安全，無法允許");
-            return null;
+        String paramCol = "";
+        if (xmlData.getParamDate() != null) {
+            paramCol = xmlData.getParamDate();
+            sql = "SELECT * FROM " + allowedTable + " WHERE (" +
+                    "    CASE " +
+                    "        WHEN LEN(CAST(" + paramCol + " AS VARCHAR)) = 7 THEN " +
+                    " CAST(CAST(LEFT(CAST(" + paramCol + "  AS VARCHAR), 3) AS INT) + 1911 AS VARCHAR(4)) + RIGHT(CAST(" + paramCol + "  AS VARCHAR), 4)" +
+                    "        ELSE " + paramCol + " END ) = CAST(" + param + " AS VARCHAR)";
         }
-
-    }
-
-
-    private void dataMask(List<Map<String, Object>> sqlData, String tableName) {
-
-        try {
-
-            // <field>
-            List<Field> fields = xmlData.getFieldList();
-
-            //產出未遮蔽資料
-            dataMasker.maskData(sqlData, fields, false);
-            writeFile(generateSQL(tableName, sqlData), outputFileOriginalPath + tableName + SQL_EXTENSION);
-
-            //產出遮蔽資料
-            dataMasker.maskData(sqlData, fields, true);
-            writeFile(generateSQL(tableName, sqlData), outputFilePath + tableName + SQL_EXTENSION);
-
-            LogProcess.info("tableName=" + tableName + ",產生SQL檔案");
-
-        } catch (Exception e) {
-            LogProcess.info("XmlToInsertGenerator.sqlConvInsertTxt error");
-        }
-
-    }
-
-    private List<String> generateSQL(String tableName, List<Map<String, Object>> maskedSqlData) {
-
-        StringBuilder result;
-        List<String> fileContents = new ArrayList<>();
-
-        if (maskedSqlData.size() == 0) {
-            return new ArrayList<>();
-        }
-
-        String delContent = SQL_DELETE_TABLE + tableName + STR_SEMICOLON;
-
-        fileContents.add(delContent);
-
-        for (Map<String, Object> mask : maskedSqlData) {
-            StringBuilder columns = new StringBuilder();
-            StringBuilder values = new StringBuilder();
-            Object objValues;
-            result = new StringBuilder(BUFFER_CAPACITY);
-            for (Map.Entry<String, Object> entry : mask.entrySet()) {
-
-                columns.append(entry.getKey()).append(STR_DOT);
-                objValues = entry.getValue();
-                if (objValues instanceof Map) {
-                    Map<String, Object> valuesMap = (Map<String, Object>) objValues;
-                    values.append(formatValue(valuesMap.get(PARAM_VALUE))).append(" ,");
-                }
-            }
-            String tmp =
-                    String.format(
-                            "INSERT INTO %s (%s) VALUES (%s);",
-                            tableName,
-                            columns.substring(0, columns.length() - 1),
-                            values.substring(0, values.length() - 1));
-
-            result.append(tmp);
-            fileContents.add(result.toString());
-        }
-        return fileContents;
-    }
-
-    private String formatValue(Object val) {
-
-        if (val == null) {
-            return "NULL";
-        }
-        return val instanceof String ? "'" + val + "'" : val.toString();
+        return sql;
     }
 
     /**
-     * 輸出檔案
-     *
-     * @param fileContents 資料串
-     * @param outFileName  輸出檔案名
+     * 根據給定 rows 列表，先輸出原始，再輸出遮蔽後的 SQL 檔案
      */
-    private void writeFile(List<String> fileContents, String outFileName) {
+    private void writeBatchFiles(
+            List<Map<String, Object>> rows,
+            String tableName,
+            List<Field> fields,
+            boolean deleteFlag
+    ) throws IOException {
+        // 原始資料
+        List<String> originalSql = generateSqlLines(rows, tableName, deleteFlag);
+        textFileUtil.writeFileContent(
+                outputFileOriginalPath + tableName + SQL_EXTENSION,
+                originalSql, CHARSET);
+        // 2. 遮蔽後資料
+        List<Map<String, Object>> maskedRows = deepCopyRows(rows);
+        dataMasker.maskData(maskedRows, fields, true);
+        List<String> maskedSql = generateSqlLines(maskedRows, tableName, deleteFlag);
 
-        if (fileContents != null) {
-            textFileUtil.deleteFile(outFileName);
-
-            try {
-                textFileUtil.writeFileContent(outFileName, fileContents, CHARSET);
-            } catch (Exception e) {
-                LogProcess.info("Error Message : Problem writing to file ");
-            }
-        } else {
-            LogProcess.info("檔案：" + outFileName + " 無資料，未產出。");
-        }
+        textFileUtil.writeFileContent(
+                outputFilePath + tableName + SQL_EXTENSION,
+                maskedSql, CHARSET);
     }
 
-    private List<Map<String, Object>> getSqlData(Connection connection, String sql) {
+    //避免遮蔽時改到原始資料，省掉原來不必要的
+    private List<Map<String, Object>> deepCopyRows(List<Map<String, Object>> original) {
+        List<Map<String, Object>> copy = new ArrayList<>(original.size());
+        for (Map<String, Object> row : original) {
+            Map<String, Object> newRow = new HashMap<>(row.size());
+            for (Map.Entry<String, Object> entry : row.entrySet()) {
+                // 內層 value 也是 Map
+                Map<String, Object> valueMap = (Map<String, Object>) entry.getValue();
+                newRow.put(entry.getKey(), new HashMap<>(valueMap));
+            }
+            copy.add(newRow);
+        }
+        return copy;
+    }
 
-        List<Map<String, Object>> result = new ArrayList<>();
 
-        //允許的SQL語法
-        if (allowedSqlFlag(sql)) {
+    /**
+     * 根據 rows 和 deleteFlag 產生 SQL 語句列表
+     */
+    private List<String> generateSqlLines(
+            List<Map<String, Object>> rows,
+            String tableName,
+            boolean deleteFlag
+    ) {
+        List<String> lines = new ArrayList<>(rows.size() + 1);
+        if (!deleteFlag) {
+            lines.add(SQL_DELETE_PREFIX + tableName + ";");
+        }
 
-            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+        for (Map<String, Object> row : rows) {
+            StringBuilder colSb = new StringBuilder(BUFFER_CAPACITY);
+            StringBuilder valSb = new StringBuilder(BUFFER_CAPACITY);
 
-                ResultSet rs = pstmt.executeQuery();
-                ResultSetMetaData metaData = rs.getMetaData();
-                int columnCount = metaData.getColumnCount();
+            for (Map.Entry<String, Object> entry : row.entrySet()) {
+                String column = entry.getKey();
+                Object raw = entry.getValue();
 
-                while (rs.next()) {
-                    Map<String, Object> row = new HashMap<>();
-                    for (int i = 1; i <= columnCount; i++) {
-                        String columnName = metaData.getColumnName(i);
-                        Object value = rs.getObject(i);
-                        String columnType = metaData.getColumnTypeName(i);
-                        int columnLength = metaData.getColumnDisplaySize(i);
-
-                        Map<String, Object> columnInfo = new HashMap<>();
-                        columnInfo.put(PARAM_VALUE, value);
-                        columnInfo.put(PARAM_TYPE, columnType);
-                        columnInfo.put(PARAM_LENGTH, columnLength);
-
-                        row.put(columnName, columnInfo);
-                    }
-                    result.add(row);
+                colSb.append(column).append(",");
+                if (raw instanceof Map) {
+                    Map<String, Object> valuesMap = (Map<String, Object>) raw;
+                    Object value = valuesMap.get("value");
+                    valSb.append(formatValue(value)).append(",");
                 }
-
-            } catch (SQLException e) {
-                LogProcess.warn("Error executing SQL");
-
             }
-        } else {
-            LogProcess.info("not allowed SQL ");
+            colSb.setLength(colSb.length() - 1);
+            valSb.setLength(valSb.length() - 1);
+            lines.add(String.format(SQL_INSERT_TEMPLATE, tableName, colSb.toString(), valSb.toString()));
         }
-
-        return result;
-
+        return lines;
     }
 
-    private boolean allowedSqlFlag(String sql) {
-
-        List<String> whiteList = Arrays.asList("select", "insert", "delete");
-        List<String> blackList = Arrays.asList("drop", "update", "truncate", "--");
-
-        boolean flag = false;
-
-        sql = sql.toLowerCase();
-
-        //黑名單
-        for (String keyword : blackList) {
-            if (sql.contains(keyword)) {
-                LogProcess.info("SQL 語法含有禁止的關鍵字: " + keyword);
-                throw new SecurityException("SQL 語法含有禁止的關鍵字: " + keyword);
-            }
+    private String validXmlFile(String xmlTableName, String tableName, String env) {
+        String xmlFullPath = FilenameUtils.normalize(maskXmlFilePath + xmlTableName + ".xml");
+        if (!pathValidator.isSafe(FilenameUtils.normalize(maskXmlFilePath), xmlFullPath)) {
+            LogProcess.info("檔案路徑不安全，無法允許");
+            return null;
         }
-        //白名單
-        for (String keyword : whiteList) {
-            if (sql.contains(keyword)) {
-                flag = true;
+        try {
+            XmlData xmlData = xmlParser.parseXmlFile(xmlFullPath);
+            if (xmlData == null) {
+                return null;
             }
+            String allowed = tableName;
+            if ("prod".equals(env)) {
+                allowed = xmlData.getTable().getTableName();
+            }
+            return allowed;
+        } catch (Exception e) {
+            LogProcess.warn("xml file parsing fail", e);
+            return null;
         }
-
-        return flag;
     }
 
+    private String formatValue(Object val) {
+        if (val == null) {
+            return "NULL";
+        }
+        if (val instanceof String) {
+            return "N'" + val + "'";
+        }
+        return val.toString();
+    }
 
 }

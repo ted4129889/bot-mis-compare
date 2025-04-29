@@ -1,5 +1,6 @@
 package com.bot.util.excel;
 
+import com.bot.log.LogProcess;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -123,5 +124,22 @@ public class MakeCsv {
         }
 
         System.out.println("CSV 檔案已建立：" + filePath);
+    }
+
+
+    private void checkFolder(String fileName){
+        // 檢查並建立資料夾
+        File file = new File(fileName);
+
+        File parentDir = file.getParentFile();
+        if (parentDir != null && !parentDir.exists()) {
+            boolean created = parentDir.mkdirs();
+            if (created) {
+                LogProcess.info("已建立資料夾：" + parentDir.getAbsolutePath());
+            } else {
+                LogProcess.warn("資料夾建立失敗：" + parentDir.getAbsolutePath());
+            }
+        }
+
     }
 }

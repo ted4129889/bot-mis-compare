@@ -85,6 +85,18 @@ public class MakeExcel {
     private void openExcel(String fileName, Object sheetName) {
         checkOpenFiles();
         File file = new File(fileName);
+
+        // 檢查並建立資料夾
+        File parentDir = file.getParentFile();
+        if (parentDir != null && !parentDir.exists()) {
+            boolean created = parentDir.mkdirs();
+            if (created) {
+                LogProcess.info("已建立資料夾：" + parentDir.getAbsolutePath());
+            } else {
+                LogProcess.warn("資料夾建立失敗：" + parentDir.getAbsolutePath());
+            }
+        }
+
         // 若檔案不存在則建立新檔案
         if (!file.exists()) {
             //判斷xlsx or xls
@@ -291,7 +303,7 @@ public class MakeExcel {
             }
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            LogProcess.warn("",e);
         }
 
 

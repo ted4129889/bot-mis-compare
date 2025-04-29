@@ -26,7 +26,7 @@
                 <HBox spacing="10" alignment="CENTER_LEFT">
                     <Label text="匯出格式：" styleClass="label bold"/>
                     <RadioButton fx:id="radioExcel" text="excel" selected="true"/>
-                    <RadioButton fx:id="radioCsv" text="csv"/>
+                    <RadioButton fx:id="radioCsv" text="csv"  selected="true"/>
                 </HBox>
                 <Button fx:id="btnCompare" text="比對並匯出結果" onAction="#compareFiles" disable="true"
                         styleClass="label bold"/>

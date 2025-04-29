@@ -1,12 +1,11 @@
 package com.bot.ui.controller;
 
-import com.bot.mask.MaskDataFileService;
+import com.bot.mask.DataFileProcessingService;
 import com.bot.output.CompareFileExportImpl;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
@@ -31,7 +30,7 @@ public class CompareSingleFileViewController {
     private String STR_BIG5 = "Big5";
     private String STR_UTF8 = "UTF-8";
     @Autowired
-    MaskDataFileService maskDataFileService;
+    DataFileProcessingService maskDataFileService;
     @Autowired
     CompareFileExportImpl compareFileExportImpl;
 

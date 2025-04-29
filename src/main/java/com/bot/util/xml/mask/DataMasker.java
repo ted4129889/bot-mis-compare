@@ -62,31 +62,32 @@ public class DataMasker {
      * @param fieldList the list of fields that define the masking rules
      */
     public void maskData(List<Map<String, Object>> sqlData, List<Field> fieldList, boolean isNotMask) throws IOException {
-
+        Map<String, String> maskingFields = new HashMap<>();
+        for (Field field : fieldList) {
+            maskingFields.put(field.getFieldName(), field.getMaskType());
+        }
+//        long start = System.nanoTime();
         for (Map<String, Object> row : sqlData) {
-            for (Field field : fieldList) {
-                String fieldName = field.getFieldName();
-                String maskType = field.getMaskType();
-                if (isNotMask) {
-                    if (row.containsKey(fieldName)) {
-                        Map<String, Object> columnInfo = (Map<String, Object>) row.get(fieldName);
-                        Object value = columnInfo.get("value");
-                        columnInfo.put(
-                                "value", applyMask(value != null ? value.toString() : null, maskType));
-                    }
-                } else {
-                    if (row.containsKey(fieldName)) {
-                        Map<String, Object> columnInfo = (Map<String, Object>) row.get(fieldName);
-                        Object value = columnInfo.get("value");
-                        columnInfo.put(
-                                "value", value.toString());
+            for (Map.Entry<String, String> entry : maskingFields.entrySet()) {
+                String fieldName = entry.getKey();
+                String maskType = entry.getValue();
+
+                Map<String, Object> columnInfo = (Map<String, Object>) row.get(fieldName);
+                if (columnInfo != null) {
+                    Object value = columnInfo.get("value");
+                    if (isNotMask) {
+                        columnInfo.put("value", applyMask(value != null ? value.toString() : null, maskType));
+                    } else {
+                        columnInfo.put("value", value != null ? value.toString() : null);
                     }
                 }
-
-
             }
         }
+//        long duration = 0L;
 
+//        duration  = duration + (System.nanoTime() - start);
+
+//        LogProcess.info("耗時: " + duration + "ns");
     }
 
     /**
@@ -99,8 +100,8 @@ public class DataMasker {
     public String applyMask(String value, String maskType) throws IOException {
         // 如果value為空則直接return
         if (value == null || value.isEmpty() || value.isBlank()) return value;
-
-        return switch (maskType) {
+//        long start = System.nanoTime();
+        String result = switch (maskType) {
             case ID_NUMBER -> maskId(value);
             case CREDIT_CARD_NUMBER -> maskCreditCardNumber(value);
             case NAME,
@@ -119,6 +120,10 @@ public class DataMasker {
             case PASSPORT_NUMBER -> maskPassportNumber(value);
             default -> value;
         };
+//        long duration = System.nanoTime() - start;
+//        LogProcess.info("遮蔽類型: " + maskType + ", 耗時: " + duration + "ns");
+        return result;
+
     }
 
     private static String determineIdType(String value) {
@@ -149,21 +154,18 @@ public class DataMasker {
         };
     }
 
+    // 可以在 class 層做 cache
+    private final Map<String, HashMap<Integer, String>> cacheMapping = new HashMap<>();
+
+    private HashMap<Integer, String> getCachedMapping(String idType) throws IOException {
+        return cacheMapping.computeIfAbsent(idType, key -> idMapping.getMapping(key));
+    }
+
     private String generateRandomString(String value, String idType) throws IOException {
-
-
         StringBuilder maskedString = new StringBuilder(value.length());
-        HashMap<Integer, String> mapping = idMapping.getMapping(idType);
+        HashMap<Integer, String> mapping = getCachedMapping(idType);
 
-        boolean isConvert = false;
-        //非統編 判斷有無轉過遮蔽
-        if (!UNIFIED_NUMBER.equals(idType)) {
-            for (char c : value.toCharArray()) {
-                if (!Character.isDigit(c)) {
-                    isConvert = true;
-                }
-            }
-        }
+        boolean isConvert = !UNIFIED_NUMBER.equals(idType) && value.chars().anyMatch(c -> !Character.isDigit(c));
 
         for (char c : value.toCharArray()) {
             if (isConvert) {
@@ -175,6 +177,32 @@ public class DataMasker {
         }
         return maskedString.toString();
     }
+//    private String generateRandomString(String value, String idType) throws IOException {
+//
+//
+//        StringBuilder maskedString = new StringBuilder(value.length());
+//        HashMap<Integer, String> mapping = idMapping.getMapping(idType);
+//
+//        boolean isConvert = false;
+//        //非統編 判斷有無轉過遮蔽
+//        if (!UNIFIED_NUMBER.equals(idType)) {
+//            for (char c : value.toCharArray()) {
+//                if (!Character.isDigit(c)) {
+//                    isConvert = true;
+//                }
+//            }
+//        }
+//
+//        for (char c : value.toCharArray()) {
+//            if (isConvert) {
+//                maskedString.append(c);
+//            } else {
+//                int digit = Character.getNumericValue(c);
+//                maskedString.append(mapping.get(digit));
+//            }
+//        }
+//        return maskedString.toString();
+//    }
 
     /**
      * Masks the given credit card number.
@@ -285,8 +313,16 @@ public class DataMasker {
     }
 
     private boolean isAllDigitsOrDecimal(String str) {
-        // 正則表達式: 僅允許數字和最多一個小數點
-        return str.matches("^\\d+(\\.\\d+)?$");
+        boolean hasDot = false;
+        for (char c : str.toCharArray()) {
+            if (c == '.') {
+                if (hasDot) return false;  // 只允許一個小數點
+                hasDot = true;
+            } else if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
 

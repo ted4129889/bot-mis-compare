@@ -41,7 +41,8 @@ public class XmlData {
 
     @JacksonXmlProperty(isAttribute = true, localName = "fileName")
     public String fileName;
-
+    @JacksonXmlProperty(localName = "paramDate")
+    private String  paramDate;
 
     // Getters and Setters
 }

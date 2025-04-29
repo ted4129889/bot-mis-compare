@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -20,8 +21,13 @@ import java.util.*;
 @Component
 public class CompareFileExportImpl {
 
-    @Value("${localFile.mis.compare_result}")
-    private String resultFolder;
+    @Value("${localFile.mis.compare_result.csv}")
+    private String resultCsvFolder;
+
+    @Value("${localFile.mis.compare_result.excel}")
+    private String resultExcelFolder;
+    @Value("${localFile.mis.compare_result.txt}")
+    private String resultTxt;
     @Autowired
     private MakeExcel makeExcel;
     @Autowired
@@ -31,6 +37,8 @@ public class CompareFileExportImpl {
     @Autowired
     private TextFileUtil textFileUtil;
 
+    private static final String CHARSET_BIG5 = "Big5";
+    private static final String CHARSET_UTF8 = "UTF-8";
     private final String BOT_DATA = "BotData";
     private final String MIS_DATA = "MisData";
 
@@ -43,23 +51,42 @@ public class CompareFileExportImpl {
 
     public String chooseExportFileType = "";
 
+    private List<Map<String, String>> comparisonResult = new ArrayList<>();
+    private List<Map<String, String>> oldDataResult = new ArrayList<>();
+    private List<Map<String, String>> newDataResult = new ArrayList<>();
+    private Map<String, Map<String, String>> missingResult = new LinkedHashMap<>();
+    private Map<String, Map<String, String>> extraResult = new LinkedHashMap<>();
 
-    public void run(String fileName, List<Map<String, String>> aData, List<Map<String, String>> bData, List<String> dataKey, List<String> filterColList, List<SortFieldConfig> sortFieldConfig) {
+
+    public void run(String fileName, List<Map<String, String>> aData, List<Map<String, String>> bData, List<String> dataKey, List<String> filterColList, List<SortFieldConfig> sortFieldConfig,List<String> maskFieldList) {
 
 
         //處理比對資料(篩選部分)
-        compareDataService.parseData(aData, bData, dataKey, filterColList, sortFieldConfig);
+        compareDataService.parseData(aData, bData, dataKey, filterColList, sortFieldConfig,maskFieldList);
+
+        oldDataResult = compareDataService.getOldDataResult();
+        newDataResult = compareDataService.getNewDataResult();
+        comparisonResult = compareDataService.getComparisonResult();
+        missingResult = compareDataService.getMissingData();
+        extraResult = compareDataService.getExtraData();
+
 
         LogProcess.info("chooseExportFileType =" + chooseExportFileType);
         //輸出檔案選項
 
         switch (chooseExportFileType) {
             case "excel":
-
                 exportExcel(fileName);
+                exportTextFile(fileName);
                 break;
             case "csv":
                 exportCsv(fileName);
+                exportTextFile(fileName);
+                break;
+            case "Both":
+                exportCsv(fileName);
+                exportExcel(fileName);
+                exportTextFile(fileName);
                 break;
             default:
                 LogProcess.info("chooseExportFileType is null");
@@ -73,7 +100,7 @@ public class CompareFileExportImpl {
 
         String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
-        String outPutPath = resultFolder + fileName + "_" + today + "/" + fileName + "_";
+        String outPutPath = resultCsvFolder + fileName + "_" + today + "/" + fileName + "_";
 
 
         try {
@@ -81,7 +108,6 @@ public class CompareFileExportImpl {
             String outPutFile = outPutPath + BOT_DATA + ".csv";
             //刪除檔案
             textFileUtil.deleteFile(outPutFile);
-            List<Map<String, String>> oldDataResult = compareDataService.getOldDataResult();
 
             if (oldDataResult != null && !oldDataResult.isEmpty()) {
                 makeCsv.writeToCsvBig5(oldDataResult, outPutFile);
@@ -93,7 +119,6 @@ public class CompareFileExportImpl {
             //刪除檔案
             textFileUtil.deleteFile(outPutFile);
 
-            List<Map<String, String>> newDataResult = compareDataService.getNewDataResult();
 
             if (newDataResult != null && !newDataResult.isEmpty()) {
                 makeCsv.writeToCsvBig5(newDataResult, outPutFile);
@@ -103,7 +128,6 @@ public class CompareFileExportImpl {
             //刪除檔案
             textFileUtil.deleteFile(outPutFile);
 
-            List<Map<String, String>> comparisonResult = compareDataService.getComparisonResult();
 
             if (comparisonResult != null && !comparisonResult.isEmpty()) {
                 makeCsv.writeToCsvBig5(comparisonResult, outPutFile);
@@ -114,20 +138,17 @@ public class CompareFileExportImpl {
             //刪除檔案
             textFileUtil.deleteFile(outPutFile);
 
-            Map<String, Map<String, String>> missingData = compareDataService.getMissingData();
-
-            if (missingData != null && !missingData.isEmpty()) {
-                makeCsv.writeToCsvBig5(mapConvert(missingData, MISSING_DATA), outPutFile);
+            if (missingResult != null && !missingResult.isEmpty()) {
+                makeCsv.writeToCsvBig5(mapConvert(missingResult, MISSING_DATA), outPutFile);
             }
             //多於的資料
             outPutFile = outPutPath + EXTRA_DATA + ".csv";
             //刪除檔案
             textFileUtil.deleteFile(outPutFile);
 
-            Map<String, Map<String, String>> extraData = compareDataService.getExtraData();
 
-            if (extraData != null && !extraData.isEmpty()) {
-                makeCsv.writeToCsvBig5(mapConvert(extraData, EXTRA_DATA), outPutFile);
+            if (extraResult != null && !extraResult.isEmpty()) {
+                makeCsv.writeToCsvBig5(mapConvert(extraResult, EXTRA_DATA), outPutFile);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -219,7 +240,7 @@ public class CompareFileExportImpl {
     private void exportExcel(String fileName) {
         String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
-        String outPutFile = resultFolder + fileName + "_ComparisonResults_" + today + ".xlsx";
+        String outPutFile = resultExcelFolder + fileName + "_ComparisonResults_" + today + ".xlsx";
 
         LogProcess.info("outPutFile = " + outPutFile);
 
@@ -257,7 +278,7 @@ public class CompareFileExportImpl {
         int col = 0;
         int row = 0;
 
-        for (Map<String, String> r : compareDataService.getOldDataResult()) {
+        for (Map<String, String> r : oldDataResult) {
             col = 1;
             row++;
             for (Map.Entry<String, String> e : r.entrySet()) {
@@ -276,7 +297,7 @@ public class CompareFileExportImpl {
         int col = 0;
         int row = 0;
 
-        for (Map<String, String> r : compareDataService.getNewDataResult()) {
+        for (Map<String, String> r : newDataResult) {
             col = 1;
             row++;
             for (Map.Entry<String, String> e : r.entrySet()) {
@@ -298,15 +319,17 @@ public class CompareFileExportImpl {
 
         int col = 0;
         int row = 0;
-
-        for (Map<String, String> r : compareDataService.getComparisonResult()) {
+        LogProcess.info("comparisonResult = " + comparisonResult);
+        for (Map<String, String> r : comparisonResult) {
             col = 1;
             row++;
             for (Map.Entry<String, String> e : r.entrySet()) {
                 String value = e.getValue();
+
+                LogProcess.info("value = " + value);
                 //第一筆給予鏈結
                 if (col == 1 && row != 1) {
-                    LogProcess.info("value = " + value);
+//                    LogProcess.info("value = " + value);
                     String number = value.replaceAll("[^0-9]", ""); // 移除所有非數字
                     makeExcel.setLinkToSheetRow(MIS_DATA, Integer.parseInt(number) + 1);
                 }
@@ -333,7 +356,7 @@ public class CompareFileExportImpl {
         makeExcel.setValue(row, col + 1, "PrimaryKey欄位");
         makeExcel.setValue(row, col + 2, "PrimaryKey值");
 
-        for (Map.Entry<String, Map<String, String>> r : compareDataService.getMissingData().entrySet()) {
+        for (Map.Entry<String, Map<String, String>> r : missingResult.entrySet()) {
             col = 1;
             row++;
             String[] col_1 = r.getKey().split("#");
@@ -368,7 +391,7 @@ public class CompareFileExportImpl {
         makeExcel.setValue(row, col + 1, "PrimaryKey欄位");
         makeExcel.setValue(row, col + 2, "PrimaryKey值");
 
-        for (Map.Entry<String, Map<String, String>> r : compareDataService.getExtraData().entrySet()) {
+        for (Map.Entry<String, Map<String, String>> r : extraResult.entrySet()) {
             col = 1;
             row++;
             String[] col_1 = r.getKey().split("#");
@@ -387,5 +410,28 @@ public class CompareFileExportImpl {
 
 
     }
+
+
+    private void exportTextFile(String fileName) {
+        LogProcess.info("resultTxt = " + resultTxt);
+        List<String> txt = new ArrayList<>();
+
+        StringBuilder s = new StringBuilder();
+        LogProcess.info("missingResult =" + missingResult.size());
+        LogProcess.info("extraResult =" + extraResult.size());
+        LogProcess.info("comparisonResult =" + comparisonResult.size());
+        //多的1個是標題
+        if (missingResult.isEmpty() && extraResult.isEmpty() && comparisonResult.size() == 1) {
+            s.append("V").append(",").append(fileName);
+        } else {
+            s.append("X").append(",").append(fileName);
+        }
+
+        txt.add(s.toString());
+
+        textFileUtil.writeFileContent(resultTxt, txt, CHARSET_BIG5);
+
+    }
+
 
 }

@@ -1,17 +1,15 @@
 package com.bot.ui.controller;
 
-import com.bot.compare.CompareDataService;
-import com.bot.compare.CompareDataServiceImpl;
 import com.bot.log.LogProcess;
-import com.bot.mask.MaskDataFileService;
+import com.bot.mask.DataFileProcessingService;
 import com.bot.mask.config.FileConfig;
 import com.bot.mask.config.FileConfigManager;
 import com.bot.mask.config.SortFieldConfig;
 import com.bot.output.CompareFileExportImpl;
+import com.bot.util.files.TextFileUtil;
 import javafx.animation.PauseTransition;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.AccessibleAttribute;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.Dragboard;
@@ -27,22 +25,23 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
 public class CompareViewController {
-//    @Value("${localFile.mis.batch.compare.new.directory}")
+    //    @Value("${localFile.mis.batch.compare.new.directory}")
 //    private String newFilePath;
 //    @Value("${localFile.mis.batch.compare.old.directory}")
 //    private String oldFilePath;
-
+    @Value("${localFile.mis.compare_result.txt}")
+    private String resultTxt;
     private String STR_BIG5 = "Big5";
     private String STR_UTF8 = "UTF-8";
     @Autowired
-    MaskDataFileService maskDataFileService;
+    TextFileUtil textFileUtil;
+    @Autowired
+    DataFileProcessingService maskDataFileService;
     @Autowired
     CompareFileExportImpl compareFileExportImpl;
     ToggleGroup toggleGroup = new ToggleGroup();
@@ -101,6 +100,9 @@ public class CompareViewController {
 
         chooseFileType();
 
+        //刪除清單
+        textFileUtil.deleteFile(resultTxt);
+
         // 設定多選模式(FXML上也要多)
 //        listView1.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE)。;
 //        listView2.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -148,13 +150,14 @@ public class CompareViewController {
     }
 
 
-    private void chooseFileType(){
-        ToggleGroup exportGroup = new ToggleGroup();
-        radioExcel.setToggleGroup(exportGroup);
-        radioCsv.setToggleGroup(exportGroup);
+    private void chooseFileType() {
+//        ToggleGroup exportGroup = new ToggleGroup();
+//        radioExcel.setToggleGroup(exportGroup);
+//        radioCsv.setToggleGroup(exportGroup);
         radioExcel.setDisable(true);
         radioCsv.setDisable(true);
     }
+
     /**
      * 將資料夾拖曳到ListView
      */
@@ -605,18 +608,23 @@ public class CompareViewController {
     @FXML
     public void compareFiles() {
 
-        if (radioExcel.isSelected()) {
+        if (radioCsv.isSelected() && radioExcel.isSelected()) {
+            compareFileExportImpl.chooseExportFileType = "Both";
+        } else if (radioExcel.isSelected()) {
             // 輸出 EXCEL
             compareFileExportImpl.chooseExportFileType = radioExcel.getText();
         } else if (radioCsv.isSelected()) {
             // 輸出 CSV
             compareFileExportImpl.chooseExportFileType = radioCsv.getText();
+        } else {
+            compareFileExportImpl.chooseExportFileType = "";
+            if (!showAlert("請選擇比對輸出的檔案類型")) return;
         }
 
         // 輸出 Excel
-            maskDataFileService.exec("", "", oldFileNameMap, newFileNameMap, saveFileCongigMap);
+        maskDataFileService.exec("", "", oldFileNameMap, newFileNameMap, saveFileCongigMap);
 
-        showAlert("比對完成!");
+        if (!showAlert("比對完成!")) return;
 
     }
 
@@ -892,6 +900,9 @@ public class CompareViewController {
 
     @FXML
     private void clearScreen() {
+        //刪除清單
+        textFileUtil.deleteFile(resultTxt);
+
         listView1.getItems().clear();
         listView2.getItems().clear();
         oldFileNameMap = new HashMap<>();

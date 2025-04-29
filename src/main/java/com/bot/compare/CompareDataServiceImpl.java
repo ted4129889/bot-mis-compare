@@ -39,7 +39,7 @@ public class CompareDataServiceImpl implements CompareDataService {
     private String groupKey = "";
 
     @Override
-    public void parseData(List<Map<String, String>> aData, List<Map<String, String>> bData, List<String> dataKey, List<String> filterColList, List<SortFieldConfig> sortFieldConfig) {
+    public void parseData(List<Map<String, String>> aData, List<Map<String, String>> bData, List<String> dataKey, List<String> filterColList, List<SortFieldConfig> sortFieldConfig,List<String> maskFieldList) {
         //最後輸出結果
         result = new ArrayList<>();
         Map<String, String> map = new LinkedHashMap<>();
@@ -59,10 +59,10 @@ public class CompareDataServiceImpl implements CompareDataService {
         //欄位
         columns = new ArrayList<>();
 
-        LogProcess.info("dataKey = " + dataKey);
-        LogProcess.info("filterColList = " + filterColList);
-        LogProcess.info("aData bef = " + aData);
-        LogProcess.info("bData bef= " + bData);
+//        LogProcess.info("dataKey = " + dataKey);
+//        LogProcess.info("filterColList = " + filterColList);
+//        LogProcess.info("aData bef = " + aData);
+//        LogProcess.info("bData bef= " + bData);
 
 
         //將資料挑選欄位
@@ -85,16 +85,16 @@ public class CompareDataServiceImpl implements CompareDataService {
                     return filterFieldsBySelection(row, filterColList, dataKey, i);
                 })
                 .collect(Collectors.toList());
-        LogProcess.info("aData = " + aData);
-        LogProcess.info("bData = " + bData);
+//        LogProcess.info("aData = " + aData);
+//        LogProcess.info("bData = " + bData);
 
         //將資料做排序
         aDataResult = ComparatorUtil.sortByFields(aDataResult, sortFieldConfig);
 
         bDataResult = ComparatorUtil.sortByFields(bDataResult, sortFieldConfig);
 
-        LogProcess.info("aData sort = " + aDataResult);
-        LogProcess.info("bData sort= " + bDataResult);
+//        LogProcess.info("aData sort = " + aDataResult);
+//        LogProcess.info("bData sort= " + bDataResult);
 
         //原始檔案
         oldDataResult = new ArrayList<>();
@@ -128,8 +128,9 @@ public class CompareDataServiceImpl implements CompareDataService {
             }
             if (bDataMap.containsKey(key)) {
 
-                processData(index, entry.getKey(), entry.getValue(), bDataMap.get(key));
+                processData(index, entry.getKey(), entry.getValue(), bDataMap.get(key),maskFieldList);
                 // A 和 B 都有
+
                 matchMap.put(index + "#" + groupKey + "#" + entry.getKey(), entry.getValue());
             } else {
                 // B 缺少 A 的資料
@@ -188,14 +189,16 @@ public class CompareDataServiceImpl implements CompareDataService {
     /***
      * 將匹配到的資料串，根據欄位一一比對處理
      * */
-    private void processData(int index, String key, Map<String, String> aRow, Map<String, String> bRow) {
+    private void processData(int index, String key, Map<String, String> aRow, Map<String, String> bRow,List<String> maskFieldList) {
 
         Map<String, String> map = new LinkedHashMap<>();
 
 
         //已知的檔案欄位
         for (String c : columns) {
+
             //用欄位對 A B資料 取得同一個欄位值
+
 
             if (!Objects.equals(aRow.get(c), bRow.get(c))) {
                 map = new LinkedHashMap<>();
@@ -208,8 +211,10 @@ public class CompareDataServiceImpl implements CompareDataService {
 
                 String oldData = aRow.get(c);
                 String newData = bRow.get(c);
-
-//                LogProcess.info("desc = " + desc);
+                if(maskFieldList.contains(c)){
+                    oldData = "○○○";
+                    newData = "○○○";
+                }
 
                 map.put("desc", desc);
                 map.put("pkGrp", groupKey);

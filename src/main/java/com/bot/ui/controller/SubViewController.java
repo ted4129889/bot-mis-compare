@@ -1,23 +1,39 @@
 package com.bot.ui.controller;
 
+import com.bot.log.LogProcess;
 import com.bot.mask.MaskDataBaseService;
-import com.bot.mask.MaskDataFileService;
 import com.bot.mask.MaskRunSqlService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Component
 public class SubViewController {
 
     @FXML
     private ComboBox<String> envComboBox;
+    @FXML
+    private DatePicker datePicker;
+
+
     public Button btnMaskData = new Button();
     public Button btnMaskRunSql = new Button();
+
+    public String dateParam = "";
     //    public Button btnMaskDataFile = new Button();
+
+    @Value("${localFile.mis.batch.output}")
+    private String allowedPath;
+
     @Autowired
     private MaskDataBaseService maskDataBaseService;
 
@@ -25,11 +41,14 @@ public class SubViewController {
     private MaskRunSqlService maskRunSqlService;
 
     @Autowired
-    private MaskDataFileService maskDataFileService;
+//    private MaskDataFileService maskDataFileService;
 
     @FXML
     public void initialize() {
-        envComboBox.getItems().addAll("prod", "dev", "local", "MaskFileData");
+//        int cores = Runtime.getRuntime().availableProcessors();
+//       LogProcess.info("Core Count: " + cores);
+        envComboBox.getItems().addAll("prod", "dev", "local");
+//        , "MaskFileData"
         envComboBox.setValue("prod");
 
         // 一開始根據預設值設定按鈕狀態
@@ -42,6 +61,10 @@ public class SubViewController {
     }
 
     private void updateButtonVisibility(String env) {
+        //切換環境
+        LogProcess.info("目前環境:" +env);
+
+
         switch (env) {
             case "prod":
                 btnMaskData.setText("執行產生遮蔽SQL檔");
@@ -50,9 +73,16 @@ public class SubViewController {
                 break;
             case "dev":
             case "local":
+                List<String> sqlPaths = maskRunSqlService.getSafeSQLFilePaths(allowedPath);
                 btnMaskData.setText("執行產生遮蔽SQL檔");
                 btnMaskData.setVisible(true);
                 btnMaskRunSql.setVisible(true);
+                if(sqlPaths.isEmpty()){
+                    btnMaskRunSql.setDisable(true);
+                }else{
+                    btnMaskRunSql.setDisable(false);
+                }
+
                 break;
             case "MaskFileData":
                 btnMaskData.setText("執行資料檔案遮蔽");
@@ -65,18 +95,28 @@ public class SubViewController {
 
     @FXML
     private void btnMaskData() {
-        String env = envComboBox.getValue();
-        boolean flag = false;
-        switch (env) {
-            case "MaskFileData":
-                flag = maskDataFileService.exec();
-                break;
-            default:
-                flag = maskDataBaseService.exec(env);
-                break;
-        }
-        runWithAlert(flag, env);
+        LocalDate selectedDate = datePicker.getValue();
+        if (selectedDate != null) {
+            String date = selectedDate.toString().replace("-","");
+//            showAlert("選擇的日期: ",date);
+            String env = envComboBox.getValue();
+            boolean flag = false;
+            switch (env) {
+                case "MaskFileData":
+//                    flag = maskDataFileService.exec();
+                    break;
+                default:
+                    flag = maskDataBaseService.exec(env,date);
+                    break;
+            }
+            runWithAlert(flag, env);
 
+            btnMaskRunSql.setDisable(false);
+
+
+        } else {
+            showAlert("", "請先選擇資料日期");
+        }
     }
 
     @FXML
@@ -102,7 +142,9 @@ public class SubViewController {
         }
 
         showAlert("信息", flag ? successMsg : failMsg);
+
     }
+
 
     /**
      * 顯示彈出提示框
@@ -115,7 +157,6 @@ public class SubViewController {
         alert.getDialogPane().setPrefSize(100, 40);
         alert.showAndWait();
     }
-
 
 
 }

@@ -21,8 +21,9 @@ public interface CompareDataService {
      * @param dataKey 資料主鍵
      * @param filterColList 需要比對的欄位(預設全欄位比)
      * @param sortFieldConfig 需要排序的欄位
+     * @param maskFieldList 遮蔽的欄位清單
      * */
-    void parseData(List<Map<String, String>> aData, List<Map<String, String>> bData, List<String> dataKey,List<String> filterColList,List<SortFieldConfig> sortFieldConfig);
+    void parseData(List<Map<String, String>> aData, List<Map<String, String>> bData, List<String> dataKey,List<String> filterColList,List<SortFieldConfig> sortFieldConfig, List<String> maskFieldList);
 
 
     Map<String, Map<String, String>> getMatchData();

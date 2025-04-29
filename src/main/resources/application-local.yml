@@ -59,7 +59,11 @@ localFile:
       mask:
         directory: "${xmlPath}mask/"
         convert: "${xmlPath}mask/convert/"
-    compare_result: "ComparisonResult/"
+    compare_result:
+      excel: "ComparisonResult/excel/"
+      csv: "ComparisonResult/csv/"
+      txt: "ComparisonResult/CheckResultList.txt"
+
     json:
       field_setting:
         directory: "external-config/json/FieldSetting.json"

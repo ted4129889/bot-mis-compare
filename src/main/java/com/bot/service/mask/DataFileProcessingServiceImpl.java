@@ -87,12 +87,14 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
     List<String> columnAList = new ArrayList<>();
     List<String> columnBList = new ArrayList<>();
     List<String> columnList = new ArrayList<>();
+    List<String> columnAllist = new ArrayList<>();
     List<XmlField> tmpXmlFieldList = new ArrayList<>();
     XmlData tmpXmlData = new XmlData();
     boolean existflag = false;
     String outPutFile = "";
 
-
+    List<XmlField> xmlFieldList_H = new ArrayList<>();
+    List<XmlField> xmlFieldList_B  = new ArrayList<>();
     private List<Map<String, String>> comparisonResult = new ArrayList<>();
     private Map<String, Map<String, String>> missingResult = new LinkedHashMap<>();
     private Map<String, Map<String, String>> extraResult = new LinkedHashMap<>();
@@ -290,9 +292,6 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                         bFileData.addAll(cList);
 
 
-//                        dataMasker.maskData(bFileData, columnBList, true);
-
-
                     } else if (TEXTAREA_1.equals(uiTextArea)) {
 
                         aFileData = new ArrayList<>();
@@ -350,9 +349,11 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                         pairingProfile2(oFilePath, TEXTAREA_1);
                         //比對檔案
                         pairingProfile2(nFilePath, TEXTAREA_2);
-
+//                        LogProcess.info("aFileData name = " + aFileData);
+//                        LogProcess.info("bFileData name = " + bFileData);
+                        LogProcess.info("columnList name = " + columnAllist);
                         //開始比對
-                        compareDataService.parseData(aFileData, bFileData, dataKeyList, columnList, thisSortFieldConfig, maskUtil.removePrimaryKeysFromMaskKeys(maskFieldList, dataKeyList));
+                        compareDataService.parseData(aFileData, bFileData, dataKeyList, columnAllist, thisSortFieldConfig, maskUtil.removePrimaryKeysFromMaskKeys(maskFieldList, dataKeyList),headerBodyMode);
 
                         //執行結果
                         compareFileExportImpl.run(fileName, compareDataService.getOldDataResult(), compareDataService.getNewDataResult(), compareDataService.getComparisonResult(), compareDataService.getMissingData(), compareDataService.getExtraData(), setting);
@@ -423,8 +424,11 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 
         try {
             // 解析 XML 檔案格式
-            List<XmlField> xmlFieldList_H = xmlData.getHeader().getFieldList();
-            List<XmlField> xmlFieldList_B = xmlData.getBody().getFieldList();
+            xmlFieldList_H = xmlData.getHeader().getFieldList();
+            xmlFieldList_B = xmlData.getBody().getFieldList();
+
+            //為蒐集表頭及內容欄位
+            columnAllist = new ArrayList<>();
 
             headerMode = false;
             bodyMode = false;
@@ -479,8 +483,8 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
         List<String> tmpList = new ArrayList<>();
         maskFieldList = new ArrayList<>();
 
-        tmpXmlFieldList = new ArrayList<>();
-        tmpXmlFieldList.addAll(xmlFieldList);
+//        tmpXmlFieldList = new ArrayList<>();
+//        tmpXmlFieldList.addAll(xmlFieldList);
 
         for (XmlField xmlField : xmlFieldList) {
             String fieldName = xmlField.getFieldName();
@@ -495,6 +499,9 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
             if (xmlField.getMaskType() != null) {
                 maskFieldList.add(fieldName);
             }
+
+            //蒐集表頭及內容的欄位
+            columnAllist.add(fieldName);;
 
         }
         //
@@ -578,14 +585,13 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                 s.append(value);
                 continue;
             }
-//            LogProcess.info(" fieledName = " + fieledName );
-//            LogProcess.info(" value = " + value );
+            LogProcess.info(" fieledName = " + fieledName );
+            LogProcess.info(" value = " + value );
             //判斷有無遮蔽欄位
             if (!Objects.isNull(maskType)) {
                 try {
                     //進行遮蔽處理
                     String valueMask = dataMasker.applyMask(value, maskType);
-//                    LogProcess.info("maskType =" + maskType + ",value = \"" + value + "\" masked result => \"" + valueMask + "\"");
                     s.append(valueMask);
                     map.put(fieledName, valueMask);
                 } catch (IOException ex) {
@@ -628,25 +634,21 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 
             index++;
             if (headerBodyMode) {
-                h++;
                 b++;
-                LogProcess.info("h =" + h);
-                LogProcess.info("b =" + b);
+
                 if (headerMode) {
-                    if (h == 1) {
-                        LogProcess.info("s1 =" + s);
-                        LogProcess.info("xmlFieldList = " +xmlFieldList);
-                        outputData.add(processField(xmlFieldList, s, index));
+                    //表頭正常只會有一筆
+//                        LogProcess.info("s1 =" + s);
+//                        LogProcess.info("xmlFieldList = " +xmlFieldList);
+                        outputData.add(processField(xmlFieldList_H, s, index));
                         headerMode = false;
-                        continue;
-                    }
+                        break;
                 }
                 if (bodyMode) {
                     if (b > 1) {
-                        LogProcess.info("s2 =" + s);
-                        LogProcess.info("xmlFieldList = " +xmlFieldList);
-
-                        outputData.add(processField(xmlFieldList, s, index));
+//                        LogProcess.info("s2 =" + s);
+//                        LogProcess.info("xmlFieldList = " +xmlFieldList);
+                        outputData.add(processField(xmlFieldList_B, s, index));
                     }
                 }
             } else {

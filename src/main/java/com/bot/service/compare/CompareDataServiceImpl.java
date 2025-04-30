@@ -3,6 +3,7 @@ package com.bot.service.compare;
 
 import com.bot.service.mask.config.SortFieldConfig;
 import com.bot.util.comparator.ComparatorUtil;
+import com.bot.util.log.LogProcess;
 import com.bot.util.mask.MaskUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,7 +39,7 @@ public class CompareDataServiceImpl implements CompareDataService {
     private String groupKey = "";
 
     @Override
-    public void parseData(List<Map<String, String>> aData, List<Map<String, String>> bData, List<String> dataKey, List<String> filterColList, List<SortFieldConfig> sortFieldConfig, List<String> maskFieldList) {
+    public void parseData(List<Map<String, String>> aData, List<Map<String, String>> bData, List<String> dataKey, List<String> filterColList, List<SortFieldConfig> sortFieldConfig, List<String> maskFieldList, boolean headerBodyMode) {
         //最後輸出結果
         result = new ArrayList<>();
         //符合的資料
@@ -50,8 +51,8 @@ public class CompareDataServiceImpl implements CompareDataService {
         //欄位
         columns = new ArrayList<>();
 
-//        LogProcess.info("dataKey = " + dataKey);
-//        LogProcess.info("filterColList = " + filterColList);
+        LogProcess.info("dataKey = " + dataKey);
+        LogProcess.info("filterColList = " + filterColList);
 //        LogProcess.info("aData bef = " + aData);
 //        LogProcess.info("bData bef= " + bData);
 
@@ -98,8 +99,8 @@ public class CompareDataServiceImpl implements CompareDataService {
         Map<String, Map<String, String>> aDataMap = buildIndex(aDataResult, dataKey);
         Map<String, Map<String, String>> bDataMap = buildIndex(bDataResult, dataKey);
 
-//        LogProcess.info("aMapIndex = " + aDataMap);
-//        LogProcess.info("bMapIndex = " + bDataMap);
+        LogProcess.info("aMapIndex = " + aDataMap);
+        LogProcess.info("bMapIndex = " + bDataMap);
 
 
         //扣掉表頭
@@ -108,24 +109,34 @@ public class CompareDataServiceImpl implements CompareDataService {
         for (Map.Entry<String, Map<String, String>> entry : aDataMap.entrySet()) {
             index++;
             String key = entry.getKey();
-            //第0筆為表頭
-            if (index == 0) {
-                groupKey = key;
 
-                for (Map.Entry<String, String> col : entry.getValue().entrySet()) {
-                    columns.add(col.getValue());
+            if (headerBodyMode) {
+                //第1筆為表頭的欄位名稱，第3筆為內容的欄位名稱
+                if (index == 0 || index == 2) {
+                    groupKey = key;
+                    for (Map.Entry<String, String> col : entry.getValue().entrySet()) {
+                        columns.add(col.getValue());
+                    }
                 }
-
+            } else {
+                //第1筆為表頭的欄位名稱，
+                if (index == 0) {
+                    groupKey = key;
+                    for (Map.Entry<String, String> col : entry.getValue().entrySet()) {
+                        columns.add(col.getValue());
+                    }
+                }
             }
+
             if (bDataMap.containsKey(key)) {
 
                 processData(index, entry.getKey(), entry.getValue(), bDataMap.get(key), maskFieldList);
                 // A 和 B 都有
 
-                matchMap.put(index + "#" + groupKey + "#" + entry.getKey(), maskUtil.maskKeysSingleData(entry.getValue(), maskFieldList,1));
+                matchMap.put(index + "#" + groupKey + "#" + entry.getKey(), entry.getValue());
             } else {
                 // B 缺少 A 的資料
-                missingMap.put(index + "#" + groupKey + "#" + entry.getKey(), maskUtil.maskKeysSingleData(entry.getValue(), maskFieldList,1));
+                missingMap.put(index + "#" + groupKey + "#" + entry.getKey(), entry.getValue());
             }
         }
 
@@ -298,21 +309,34 @@ public class CompareDataServiceImpl implements CompareDataService {
 //        if (selectedFields == null || selectedFields.isEmpty()) {
 //            return filtered;
 //        }
+        Map<String, String> filtered = new LinkedHashMap<>();
 
-        Map<String, String> filtered = original.entrySet().stream()
-                .filter(entry -> selectedFields.contains(entry.getKey()))
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        Map.Entry::getValue,
-                        (a, b) -> a,
-                        LinkedHashMap::new
-                ));
-
-        //若沒有key則自動補上 自訂的key
+        // 先放自訂主鍵在最前面（如果需要補）
         if (dataKey == null || dataKey.isEmpty()) {
-            //rowNum=0 表示表頭
+            // rowNum=0 表示表頭
             filtered.put(customPrimaryKey, rowNum == 0 ? customPrimaryKey : String.valueOf(rowNum));
         }
+
+        // 再放選取欄位（保持順序）
+        original.entrySet().stream()
+                .filter(entry -> selectedFields.contains(entry.getKey()))
+                .forEach(entry -> filtered.put(entry.getKey(), entry.getValue()));
+//        filtered = original.entrySet().stream()
+//                .filter(entry -> selectedFields.contains(entry.getKey()))
+//                .collect(Collectors.toMap(
+//                        Map.Entry::getKey,
+//                        Map.Entry::getValue,
+//                        (a, b) -> a,
+//                        LinkedHashMap::new
+//                ));
+
+//        //若沒有key則自動補上 自訂的key
+//        if (dataKey == null || dataKey.isEmpty()) {
+//            //rowNum=0 表示表頭
+//            filtered.put(customPrimaryKey, rowNum == 0 ? customPrimaryKey : String.valueOf(rowNum));
+//        }
+
+        LogProcess.info("filtered = " + filtered);
         return filtered;
     }
 

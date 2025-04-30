@@ -10,6 +10,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * ----------------------- MakeCsv 檔案工具 ------------------*
@@ -59,11 +60,9 @@ public class MakeCsv {
 
             // 寫入每筆資料
             for (Map<String, String> row : dataList) {
-                List<String> values = new ArrayList<>();
-                for (String header : headers) {
-                    String value = row.getOrDefault(header, "");
-                    values.add(escapeCsv(value));
-                }
+                List<String> values = row.entrySet().stream()
+                        .map(entry -> escapeCsv(entry.getValue()))
+                        .collect(Collectors.toList());
                 writer.write(String.join(",", values));
                 writer.newLine();
             }

@@ -110,7 +110,9 @@ public class TextFileUtil {
     public void writeFileContent(String filePath, List<String> lines, String charsetName) {
         maxLines = 1000;
         timeout = 5000;
-        Path path = Paths.get(filePath);
+        String allowedPath = FilenameUtils.normalize(filePath);
+
+        Path path = Paths.get(allowedPath);
         Charset charset = null;
         CharsetEncoder encoder;
 
@@ -129,7 +131,7 @@ public class TextFileUtil {
 //
             if (!Files.exists(path)) Files.createFile(path);
 
-            try (FileOutputStream fos = new FileOutputStream(filePath, true);
+            try (FileOutputStream fos = new FileOutputStream(allowedPath, true);
                  OutputStreamWriter osw = new OutputStreamWriter(fos, encoder);
                  BufferedWriter writer = new BufferedWriter(osw)) {
 

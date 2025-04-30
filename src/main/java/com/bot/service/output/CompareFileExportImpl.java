@@ -79,6 +79,10 @@ public class CompareFileExportImpl {
         isShowMissingData = true;
         isShowExtraData = true;
 
+        LogProcess.info("oldDataResult =" + oldDataResult);
+        LogProcess.info("newDataResult =" + newDataResult);
+        LogProcess.info("comparisonResult =" + comparisonResult);
+
         //正常是全產，遇到勾選的時候才會選擇要旨產錯誤的
         boolean isExportOnlyErrorFile = setting.isExportOnlyErrorFile();
         if (isExportOnlyErrorFile) {

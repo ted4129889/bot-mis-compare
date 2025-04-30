@@ -24,8 +24,6 @@ public class MaskUtil {
             return dataList;
         }
 
-//        LogProcess.info("maskKeyList =" + maskKeyList);
-
         List<Map<String, String>> maskedList = new ArrayList<>();
 
         for (int i = 0; i < dataList.size(); i++) {
@@ -40,11 +38,6 @@ public class MaskUtil {
                 for (Map.Entry<String, String> entry : row.entrySet()) {
                     String key = entry.getKey();
                     String value = entry.getValue();
-//                    if (maskKeyList.contains(key)) {
-//                        newRow.put(key, "ooo");
-//                    } else {
-//                        newRow.put(key, value);
-//                    }
                     newRow.put(key, value);
                 }
             }
@@ -62,7 +55,7 @@ public class MaskUtil {
      * @param maskKeyList 要遮蔽的 key 名稱列表
      * @return 遮蔽過的新 Map
      */
-    public  Map<String, String> maskKeysSingleData(Map<String, String> dataMap, List<String> maskKeyList,int startRow ) {
+    public  Map<String, String> maskKeysSingleData(Map<String, String> dataMap, List<String> maskKeyList ) {
         if (dataMap == null || maskKeyList == null || maskKeyList.isEmpty()) {
             return dataMap;  // 如果是空的，直接回傳原本
         }
@@ -73,11 +66,6 @@ public class MaskUtil {
 
             String key = entry.getKey();
             String value = entry.getValue();
-//            if (maskKeyList.contains(key)) {
-//                maskedMap.put(key, "ooo");  // 符合的 key 置換成三個 ○
-//            } else {
-//                maskedMap.put(key, value);
-//            }
             maskedMap.put(key, value);
         }
         return maskedMap;

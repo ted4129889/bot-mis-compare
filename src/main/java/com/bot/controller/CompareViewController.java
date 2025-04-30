@@ -26,11 +26,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
 public class CompareViewController {
+
+
     //    @Value("${localFile.mis.batch.compare.new.directory}")
 //    private String newFilePath;
 //    @Value("${localFile.mis.batch.compare.old.directory}")
@@ -45,8 +48,9 @@ public class CompareViewController {
     DataFileProcessingService maskDataFileService;
     @Autowired
     CompareFileExportImpl compareFileExportImpl;
-    ToggleGroup toggleGroup = new ToggleGroup();
-
+    private Path lastDirectoryPath; // 紀錄上一次選擇的資料夾
+    @FXML
+    public Button btnClear;
     @FXML
     private Button btnLoadFile1;
     @FXML
@@ -63,6 +67,14 @@ public class CompareViewController {
     private Label labelFile1;
     @FXML
     private Label labelFile2;
+    @FXML
+    private Label hintLabel1;
+    @FXML
+    private Label hintLabel2;
+    @FXML
+    public Label listViewlabel1;
+    @FXML
+    public Label listViewlabel2;
     @FXML
     private CheckBox checkBoxOnlyError;
     @FXML
@@ -97,14 +109,7 @@ public class CompareViewController {
      */
     @FXML
     public void initialize() {
-        //預設按鈕為不啟用
-        btnCompare.setDisable(true);
-        btnFieldSetting.setDisable(true);
-
-        chooseFileType();
-
-        //刪除清單
-        textFileUtil.deleteFile(resultTxt);
+        init();
 
         // 設定多選模式(FXML上也要多)
 //        listView1.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE)。;
@@ -128,20 +133,6 @@ public class CompareViewController {
             }
         });
 
-//        itemRemove.setOnAction(e -> {
-//            List<String> selectedItems1 = new ArrayList<>(listView1.getSelectionModel().getSelectedItems());
-//            if(selectedItems1 != null){
-//                listView1.getItems().removeAll(selectedItems1);
-//            }
-//
-//            List<String> selectedItems2 = new ArrayList<>(listView2.getSelectionModel().getSelectedItems());
-//            if(selectedItems2 != null){
-//                listView2.getItems().removeAll(selectedItems2);
-//            }
-//
-//        });
-
-//        contextMenu.getItems().addAll(itemOpen, itemRemove);
         contextMenu.getItems().addAll(itemOpen);
         listView1.setContextMenu(contextMenu);
         listView2.setContextMenu(contextMenu);
@@ -152,19 +143,46 @@ public class CompareViewController {
 
     }
 
+    /**
+     * 相關元件初始化
+     */
+    private void init() {
+        //預設按鈕為不啟用
+        btnCompare.setDisable(true);
+        btnFieldSetting.setDisable(true);
+        btnClear.setDisable(true);
+        checkBoxOnlyError.setDisable(true);
+        checkBoxOnlyError.setSelected(false);
 
-    private void chooseFileType() {
-//        ToggleGroup exportGroup = new ToggleGroup();
+
+        //左側提示標籤 不啟用
+        hintLabel1.setVisible(false);
+        hintLabel2.setVisible(false);
+
+        //清單提示標籤 啟用
+        listViewlabel1.setVisible(true);
+        listViewlabel2.setVisible(true);
+
+
+        //匯出檔案類型不能點選
+        //        ToggleGroup exportGroup = new ToggleGroup();
 //        radioExcel.setToggleGroup(exportGroup);
 //        radioCsv.setToggleGroup(exportGroup);
         radioExcel.setDisable(true);
         radioCsv.setDisable(true);
+
+
+        //刪除清單
+        textFileUtil.deleteFile(resultTxt);
+
+
     }
 
     /**
-     * 將資料夾拖曳到ListView
+     * 將資料夾拖曳到 ListView 功能
      */
     private void dragDolder() {
+
         listView1.setOnDragOver(event -> {
             if (event.getGestureSource() != listView1 &&
                     event.getDragboard().hasFiles() &&
@@ -244,11 +262,8 @@ public class CompareViewController {
 
                     newFileNameMap = fileMap;
 
-
                     checkFolderExists();
 
-
-                    // 若你還想保留 Map，建議存進 class 成員變數中
                     // this.fileMap1 = fileMap;
 
 
@@ -267,13 +282,10 @@ public class CompareViewController {
      */
     private void checkListViewItem(String fileName, boolean bothExist) {
 
-
-//        fieldSelectionBox.getChildren().clear();
         pkSelectionBox.getChildren().clear();
         sortSelectionBox.getChildren().clear();
 
         maskDataFileService.processPairingColumn(fileName);
-//        maskDataFileService.getFieldSetting(fileName);
         List<String> columns = maskDataFileService.getColumnList();
 
 
@@ -290,7 +302,6 @@ public class CompareViewController {
 
         //先確認兩個檔案名稱是否都有
         if (!bothExist) {
-
             if (!showAlert("新舊檔案有缺少檔案")) {
                 btnFieldSetting.setDisable(true);
                 btnCompare.setDisable(true);
@@ -300,11 +311,9 @@ public class CompareViewController {
             }
         }
 
-
         if (!columns.isEmpty()) {
             //每選擇檔案名稱都要先記錄存檔的
             saveFileName = fileName;
-            LogProcess.info("fileName===" + fileName);
 
             FileConfig thisFileConfig = saveFileCongigMap.get(fileName);
 
@@ -314,8 +323,6 @@ public class CompareViewController {
             //順序預設值 1
             currentOrderIndex = 1;
             for (String field : columns) {
-
-//                genFieldCheckBoxList(field);
 
                 genPkColumnCheckBoxList(field, pkFieldConfigs);
 
@@ -336,18 +343,6 @@ public class CompareViewController {
         }
 
 
-    }
-
-
-    /**
-     * 產生欄位 CheckBox
-     */
-    private void genFieldCheckBoxList(String field) {
-        //欄位的CheckBox清單
-        CheckBox checkBoxCol = new CheckBox(field);
-        checkBoxCol.setSelected(true);//預設勾選
-        checkBoxCol.setDisable(true);//預設不可使用(反白)
-        fieldSelectionBox.getChildren().add(checkBoxCol);
     }
 
     /**
@@ -397,7 +392,7 @@ public class CompareViewController {
 
         if (optionalConfig.isPresent()) {
             SortFieldConfig sf = optionalConfig.get();
-            orderLabel.setText(String.valueOf(sf.getOrderIndex())); // 顯示從 1 起
+            orderLabel.setText(String.valueOf(sf.getOrderIndex()));
             //如果順序大於預設值1 那就覆蓋預設值
             if (sf.getOrderIndex() >= currentOrderIndex) {
                 currentOrderIndex = sf.getOrderIndex() + 1;
@@ -459,7 +454,9 @@ public class CompareViewController {
         sortSelectionBox.getChildren().add(row);
     }
 
-
+    /**
+     * 欄位排序順序計算功能
+     * */
     private void adjustOrderAfterRemove(int removedOrder) {
         ObservableList<Node> rows = sortSelectionBox.getChildren();
         for (Node rowNode : rows) {
@@ -480,14 +477,21 @@ public class CompareViewController {
     }
 
     /**
-     * 檢查資料夾都有存在，才會執行
+     * 檢查 兩邊的清單 是否存在，決定元件是否啟用
      */
     private void checkFolderExists() {
-
+        //確認 清單 皆有匯入
         if (!oldFileNameMap.isEmpty() && !newFileNameMap.isEmpty()) {
+            //啟用按鈕
             btnCompare.setDisable(false);
+            btnClear.setDisable(false);
             radioExcel.setDisable(false);
             radioCsv.setDisable(false);
+
+            //顯示提示
+            hintLabel1.setVisible(true);
+            hintLabel2.setVisible(true);
+
             //都有在才會執行讀取設定檔案
             loadFieldSetting();
         }
@@ -507,107 +511,75 @@ public class CompareViewController {
 
     }
 
-
-    private void checkFileExists() {
-        if (!maskDataFileService.fileExists()) {
-            if (!showAlert("檔案名稱不存在定義檔")) return;
-        }
-    }
-
+    /**
+     * 原始檔案資料夾位置(按鈕功能)
+     */
     @FXML
     private void loadFolder1() {
-
-        DirectoryChooser chooser = new DirectoryChooser();
-        chooser.setTitle("選擇資料夾 1");
-        File selectedDir = chooser.showDialog(null);
-
-        // 如果有上次的資料夾，就設定為起始目錄
-        if (lastDirectory != null && lastDirectory.exists()) {
-            chooser.setInitialDirectory(lastDirectory);
-        }
-        loading1(selectedDir);
+        loadFolder("選擇資料夾 1", labelFile1, listView1, true);
     }
 
-    private void loading1(File selectedDir) {
-
-        if (selectedDir != null) {
-            // 更新上次的資料夾路徑（取得檔案所在資料夾）
-            lastDirectory = selectedDir;
-
-            labelFile1.setText(selectedDir.getAbsolutePath());
-
-
-            oldFileNameMap = Arrays.stream(selectedDir.listFiles())
-                    .filter(file -> file.isFile() && file.getName().toLowerCase().endsWith(".txt"))
-                    .collect(Collectors.toMap(
-                            File::getName,            // key: 檔案名稱
-                            File::getAbsolutePath,    // value: 絕對路徑
-                            (existing, replacement) -> existing, // 如有重複檔名保留第一個
-                            LinkedHashMap::new        // 保持順序
-                    ));
-//            LogProcess.info("oldFileNameMap = " + oldFileNameMap);
-
-            List<String> fileNameList = Arrays.stream(selectedDir.listFiles())
-                    .filter(file -> file.isFile() && file.getName().toLowerCase().endsWith(".txt"))
-//                    .filter(File::isFile)
-                    .map(File::getName)
-                    .collect(Collectors.toList());
-
-            listView1.getItems().setAll(fileNameList);
-
-            checkFolderExists();
-        }
-    }
-
+    /**
+     * 需比對檔案資料夾位置(按鈕功能)
+     */
     @FXML
     private void loadFolder2() {
+        loadFolder("選擇資料夾 2", labelFile2, listView2, false);
+    }
+
+    /**
+     * 選擇 檔案資料夾位置 共用功能
+     */
+    private void loadFolder(String title, Label label, ListView<String> listView, boolean isOld) {
         DirectoryChooser chooser = new DirectoryChooser();
+        chooser.setTitle(title);
 
-        chooser.setTitle("選擇資料夾 2");
+        // 設定初始資料夾（如果有）
+        if (lastDirectoryPath != null) {
+            File initialDir = lastDirectoryPath.toFile();
+            if (initialDir.exists() && initialDir.isDirectory()) {
+                chooser.setInitialDirectory(initialDir);
+            }
+        }
+
         File selectedDir = chooser.showDialog(null);
+        if (selectedDir == null) return;
 
-        // 如果有上次的資料夾，就設定為起始目錄
-        if (lastDirectory != null && lastDirectory.exists()) {
-            chooser.setInitialDirectory(lastDirectory);
+        // 記錄最後的路徑
+        lastDirectoryPath = selectedDir.toPath();
+
+        // 顯示於 Label
+        label.setText(selectedDir.getAbsolutePath());
+
+        File[] txtFiles = selectedDir.listFiles(file -> file.isFile() && file.getName().toLowerCase().endsWith(".txt"));
+        if (txtFiles == null) return;
+
+        Map<String, String> fileMap = Arrays.stream(txtFiles)
+                .collect(Collectors.toMap(
+                        File::getName,
+                        File::getAbsolutePath,
+                        (existing, replacement) -> existing,
+                        LinkedHashMap::new
+                ));
+
+        List<String> fileNames = Arrays.stream(txtFiles)
+                .map(File::getName)
+                .collect(Collectors.toList());
+
+        listView.getItems().setAll(fileNames);
+
+        if (isOld) {
+            oldFileNameMap = fileMap;
+        } else {
+            newFileNameMap = fileMap;
         }
 
-        loading2(selectedDir);
+        checkFolderExists();
     }
 
-    private void loading2(File selectedDir) {
-
-        if (selectedDir != null) {
-            // 更新上次的資料夾路徑（取得檔案所在資料夾）
-            lastDirectory = selectedDir;
-
-            labelFile2.setText(selectedDir.getAbsolutePath());
-
-            newFileNameMap = Arrays.stream(selectedDir.listFiles())
-                    .filter(file -> file.isFile() && file.getName().toLowerCase().endsWith(".txt"))
-                    .collect(Collectors.toMap(
-                            File::getName,            // key: 檔案名稱
-                            File::getAbsolutePath,    // value: 絕對路徑
-                            (existing, replacement) -> existing, // 如有重複檔名保留第一個
-                            LinkedHashMap::new        // 保持順序
-                    ));
-
-//            LogProcess.info("newFileNameMap = " + newFileNameMap);
-
-            List<String> fileNameList = Arrays.stream(selectedDir.listFiles())
-                    .filter(file -> file.isFile() && file.getName().toLowerCase().endsWith(".txt"))
-//                    .filter(File::isFile)
-                    .map(File::getName)
-                    .collect(Collectors.toList());
-
-            listView2.getItems().setAll(fileNameList);
-
-            checkFolderExists();
-
-
-        }
-    }
-
-
+    /**
+     * 比對按鈕
+     * */
     @FXML
     public void compareFiles() {
 
@@ -634,34 +606,16 @@ public class CompareViewController {
                 .exportOnlyErrorFile(outPutOnlyErrorData).build();
 
         // 比對後並輸出
-        maskDataFileService.exec("", "", oldFileNameMap, newFileNameMap, saveFileCongigMap,setting);
+        maskDataFileService.exec("", "", oldFileNameMap, newFileNameMap, saveFileCongigMap, setting);
 
         if (!showAlert("比對完成!")) return;
 
     }
 
-    private File chooseFile() {
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("選擇文字檔案");
-        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
 
-
-        // 如果有上次的資料夾，就設定為起始目錄
-        if (lastDirectory != null && lastDirectory.exists()) {
-            chooser.setInitialDirectory(lastDirectory);
-        }
-
-        File selectedFile = chooser.showOpenDialog(null);
-        if (selectedFile != null) {
-            // 更新上次的資料夾路徑（取得檔案所在資料夾）
-            lastDirectory = selectedFile.getParentFile();
-        }
-
-
-        return selectedFile;
-    }
-
-
+    /**
+     * 顯示提示訊息
+     * */
     private boolean showAlert(String message) {
 
 //        Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -684,99 +638,54 @@ public class CompareViewController {
 
     }
 
-//    /**
-//     * 確認兩個區域的檔案是否一樣
-//     */
-//    private void columnsCheckBoxList() {
-//
-//        if (file2 != null && file1 != null) {
-//            fieldSelectionBox.getChildren().clear();
-//            pkSelectionBox.getChildren().clear();
-//
-//            List<String> columns = maskDataFileService.getColumnList();
-//
-//            if (!columns.isEmpty()) {
-//                for (String field : columns
-//                ) {
-//                    CheckBox checkBox = new CheckBox(field);
-//                    checkBox.setSelected(true);
-//                    fieldSelectionBox.getChildren().add(checkBox);
-//                }
-//
-//                //確認欄位的CheckBox清單可以顯示後，再去拉PK的CheckBox清單
-//                pkCheckBoxList(columns);
-//
-//                btnCompare.setDisable(false);
-//            } else {
-//                btnCompare.setDisable(true);
-//                if (!showAlert("兩邊檔案格式不同，請確認檔案內容")) return;
-//            }
-//        }
-//    }
-//
-//    private void pkCheckBoxList(List<String> columns) {
-//        for (String field : columns
-//        ) {
-//            CheckBox checkBox = new CheckBox(field);
-//            if (maskDataFileService.getDataKey().contains(field)) {
-//                checkBox.setSelected(true);
-//            } else {
-//                checkBox.setSelected(false);
-//            }
-//            pkSelectionBox.getChildren().add(checkBox);
-//        }
-//
-//    }
-
-
+    /**
+     * 原始檔案清單
+     */
     @FXML
     private void onListView1Click1(MouseEvent event) {
-        selectedFileName = listView1.getSelectionModel().getSelectedItem();
-        if (selectedFileName != null) {
-
-            ObservableList<String> items = listView2.getItems();
-            int index = items.indexOf(selectedFileName);
-            if (index != -1) {
-                listView2.getSelectionModel().clearAndSelect(index);
-                // 若內容多可自動捲動過去
-                listView2.scrollTo(index);
-                LogProcess.info("selectedItem =" + selectedFileName);
-                checkListViewItem(selectedFileName, true);
-            } else {
-                listView2.getSelectionModel().clearSelection();
-                LogProcess.info("222222");
-                LogProcess.info("selectedItem =" + selectedFileName);
-                checkListViewItem(selectedFileName, false);
-
-            }
-
-        }
+        syncSelection(listView1, listView2, true);
     }
 
+    /**
+     * 比對檔案清單
+     */
     @FXML
     private void onListView1Click2(MouseEvent event) {
-        selectedFileName = listView2.getSelectionModel().getSelectedItem();
-        if (selectedFileName != null) {
-            ObservableList<String> items = listView1.getItems();
-            int index = items.indexOf(selectedFileName);
-            if (index != -1) {
-                listView1.getSelectionModel().clearAndSelect(index);
-                listView1.scrollTo(index);
-                LogProcess.info("selectedItem =" + selectedFileName);
-                checkListViewItem(selectedFileName, true);
-            } else {
-                listView1.getSelectionModel().clearSelection();
-                LogProcess.info("selectedItem =" + selectedFileName);
-                checkListViewItem(selectedFileName, false);
-            }
-
-
-        }
+        syncSelection(listView2, listView1, false);
     }
 
+    /**
+     * 清單共用功能
+     */
+    private void syncSelection(ListView<String> sourceListView,
+                               ListView<String> targetListView,
+                               boolean isSourceOldToNew) {
+        if (oldFileNameMap.isEmpty() || newFileNameMap.isEmpty()) return;
+
+        String selected = sourceListView.getSelectionModel().getSelectedItem();
+        if (selected == null) return;
+
+        ObservableList<String> targetItems = targetListView.getItems();
+        int index = targetItems.indexOf(selected);
+
+        if (index != -1) {
+            targetListView.getSelectionModel().clearAndSelect(index);
+            targetListView.scrollTo(index);
+            checkListViewItem(selected, true);
+        } else {
+            targetListView.getSelectionModel().clearSelection();
+            checkListViewItem(selected, false);
+        }
+
+        selectedFileName = selected; // 如果你仍需要這個變數
+    }
+
+
+    /**
+     * 儲存UI設定(按鈕)
+     */
     @FXML
     private void saveFields() {
-
         //暫存設定
         saveConfigFromUI(saveFileName);
 
@@ -787,12 +696,26 @@ public class CompareViewController {
 
     }
 
+    /**
+     * 儲存 UI設定
+     */
     private void saveConfigFromUI(String fileName) {
 
         FileConfig fileConfig = new FileConfig();
 
+        fileConfig.setPrimaryKeys(pkFieldSetting());
+        fileConfig.setSortFields(sortFieldSetting());
+
+//        LogProcess.info("fileName.. =" + fileName);
+        saveFileCongigMap.put(fileName, fileConfig);
+    }
+
+    /**
+     * 主鍵欄位設定
+     */
+    private List<String> pkFieldSetting() {
+
         List<String> selectedPKs = new ArrayList<>();
-        List<SortFieldConfig> sortOrderList = new ArrayList<>();
 
         //pk欄位
         for (Node node : pkSelectionBox.getChildren()) {
@@ -807,7 +730,15 @@ public class CompareViewController {
 
             }
         }
+        return selectedPKs;
+    }
 
+    /**
+     * 欄位排序設定
+     */
+    private List<SortFieldConfig> sortFieldSetting() {
+
+        List<SortFieldConfig> sortOrderList = new ArrayList<>();
         //sort欄位
         for (Node node : sortSelectionBox.getChildren()) {
             if (node instanceof HBox hBox) {
@@ -838,16 +769,8 @@ public class CompareViewController {
                 }
             }
         }
-
-        fileConfig.setPrimaryKeys(selectedPKs);
-        fileConfig.setSortFields(sortOrderList);
-
-        LogProcess.info("fileName.. =" + fileName);
-        saveFileCongigMap.put(fileName, fileConfig);
-
-
+        return sortOrderList;
     }
-
 
     /**
      * 取得CheckBox 清單名稱(欄位名稱)
@@ -912,22 +835,26 @@ public class CompareViewController {
 
     @FXML
     private void clearScreen() {
-        //刪除清單
-        textFileUtil.deleteFile(resultTxt);
-        checkBoxOnlyError.setSelected(false);
-        listView1.getItems().clear();
-        listView2.getItems().clear();
+
+        init();
+
+        //左側欄位列表清除
+        pkSelectionBox.getChildren().clear();
+        sortSelectionBox.getChildren().clear();
+
+        //路徑標籤還原
         oldFileNameMap = new HashMap<>();
         newFileNameMap = new HashMap<>();
         labelFile1.setText("未選擇");
         labelFile2.setText("未選擇");
-//        fieldSelectionBox.getChildren().clear();
-        pkSelectionBox.getChildren().clear();
-        sortSelectionBox.getChildren().clear();
-        btnFieldSetting.setDisable(true);
-        btnCompare.setDisable(true);
-        radioExcel.setDisable(true);
-        radioCsv.setDisable(true);
+
+        //清單內容清空
+        listView1.getItems().clear();
+        listView1.setVisible(true);
+        listView2.getItems().clear();
+        listView2.setVisible(true);
+
+
     }
 
 }

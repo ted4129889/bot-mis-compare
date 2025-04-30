@@ -98,7 +98,9 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
     private List<Map<String, String>> comparisonResult = new ArrayList<>();
     private Map<String, Map<String, String>> missingResult = new LinkedHashMap<>();
     private Map<String, Map<String, String>> extraResult = new LinkedHashMap<>();
-
+    private boolean headerMode = false;
+    private boolean bodyMode = false;
+    private boolean headerBodyMode = false;
 
     @Override
     public boolean exec() {
@@ -117,11 +119,10 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
         String tbotOutputPath = FilenameUtils.normalize(botOutputPath);
 
         LogProcess.info("讀取 external-config/xml/bot_output 資料夾下的 DailyBatchFileDefinition.xml 定義檔內有" + xmlDataList.size() + "組 <data> 格式");
-        //C = compare,M = mask  => both of DATA PROCESS
+
         if (oldFileNameMap != null && newFileNameMap != null) {
             pairingProfile3(oldFileNameMap, newFileNameMap, fieldSettingList, setting);
-//        } else if (!Objects.equals(uiTextArea, "")) {
-//            pairingProfile2(cFilePath, uiTextArea);
+
         } else {
             pairingProfile(tbotOutputPath);
         }
@@ -181,26 +182,11 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 
     }
 
-    @Override
-    public List<Map<String, String>> getFileData_A() {
-        return aFileData;
-    }
-
-    @Override
-    public List<Map<String, String>> getFileData_B() {
-        return bFileData;
-    }
-
-    @Override
-    public List<String> getDataKey() {
-//        LogProcess.info("dataKey =" + dataKey);
-        return dataKey;
-    }
 
     @Override
     public List<String> getColumnList() {
-        LogProcess.info("columnList =" + columnList);
-        return columnList;
+        LogProcess.info("columnList =" + columnAllist);
+        return columnAllist;
     }
 
     @Override
@@ -208,22 +194,9 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
         return tmpXmlFileName;
     }
 
-
-    @Override
-    public boolean fileExists() {
-        return existflag;
-    }
-
-    @Override
-    public String getFileName() {
-        return outPutFile;
-    }
-
-    @Override
-    public Map<String, FileConfig> getFieldSetting() {
-        return jsonFile;
-    }
-
+    /**
+     *
+     * */
     private void pairingProfile(String tbotOutputPath) {
         int calcuTotal = 0;
         //台銀原檔案路徑
@@ -234,12 +207,8 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
             //允許路徑
             requestedFilePath = FilenameUtils.normalize(requestedFilePath);
             try {
-
-
                 for (XmlData data : xmlDataList) {
                     if (requestedFilePath.contains(data.getFileName())) {
-
-//                        LogProcess.info("bot_output file name = " + requestedFilePath);
 
                         List<String> outputData = performMasking(requestedFilePath, data, "");
 
@@ -269,6 +238,8 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 
     /**
      * 單支檔案處理(配合UI畫面)
+     * @param cFile 檔案名稱(含路徑)
+     * @param uiTextArea 清單類型(原始檔案清單、比對檔案清單)
      */
     public void pairingProfile2(String cFile, String uiTextArea) {
 
@@ -303,7 +274,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
             }
 
         } catch (Exception e) {
-            LogProcess.warn("pairingProfile2 error", e);
+            LogProcess.warn("pairingProfile2 error");
         }
 
     }
@@ -414,9 +385,6 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
      * @param xmlData  定義檔內容
      * @return List<String> 輸出內容
      */
-    private boolean headerMode = false;
-    private boolean bodyMode = false;
-    private boolean headerBodyMode = false;
 
     public List<String> performMasking(String fileName, XmlData xmlData, String textArea) {
 
@@ -434,7 +402,6 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
             bodyMode = false;
             headerBodyMode = false;
 
-
             // 檢查 header 和 body 是否同時存在且不一樣
             if (!xmlFieldList_H.isEmpty()) {
                 headerMode = true;
@@ -447,9 +414,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
             if (headerMode && bodyMode) {
                 headerBodyMode = true;
             }
-            LogProcess.info("headerMode =" + headerMode);
-            LogProcess.info("bodyMode =" + bodyMode);
-            LogProcess.info("headerBodyMode =" + headerBodyMode);
+
 
             // header處理
             if (!xmlFieldList_H.isEmpty()) {

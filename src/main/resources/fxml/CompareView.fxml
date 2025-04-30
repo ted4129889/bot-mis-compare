@@ -5,28 +5,28 @@
 <?import javafx.geometry.Insets?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.bot.controller.CompareViewController"
             stylesheets="@fxmlStyle.css">
-    <top >
-        <VBox spacing="10"  alignment="CENTER_LEFT">
+    <top>
+        <VBox spacing="10" alignment="CENTER_LEFT">
             <!--  這段是與下方間距拉開-->
             <BorderPane.margin>
-                <Insets bottom="20" />
+                <Insets bottom="20"/>
             </BorderPane.margin>
             <HBox spacing="10" alignment="CENTER_LEFT">
-                <Button fx:id="btnLoadFolder1" text="選擇原始檔案資料夾的位置" onAction="#loadFolder1" prefWidth="200"
+                <Button fx:id="btnLoadFolder1" text="原始檔案資料夾位置" onAction="#loadFolder1" prefWidth="200"
                         styleClass="label bold"/>
-                <Label fx:id="labelFile1" text="未選擇" prefWidth="500" maxWidth="500" styleClass="label bold"/>
+                <Label fx:id="labelFile1" text="未選擇" prefWidth="600" maxWidth="600" styleClass="label bold"/>
             </HBox>
             <HBox spacing="10" alignment="CENTER_LEFT">
-                <Button fx:id="btnLoadFolder2" text="選擇需要比對的檔案資料夾位置" onAction="#loadFolder2"
+                <Button fx:id="btnLoadFolder2" text="需比對檔案資料夾位置" onAction="#loadFolder2"
                         prefWidth="200" styleClass="label bold"/>
-                <Label fx:id="labelFile2" text="未選擇" prefWidth="500" maxWidth="500" styleClass="label bold"/>
+                <Label fx:id="labelFile2" text="未選擇" prefWidth="600" maxWidth="600" styleClass="label bold"/>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
 
                 <HBox spacing="10" alignment="CENTER_LEFT">
                     <Label text="匯出格式：" styleClass="label bold"/>
                     <RadioButton fx:id="radioExcel" text="excel" selected="true"/>
-                    <RadioButton fx:id="radioCsv" text="csv"  selected="true"/>
+                    <RadioButton fx:id="radioCsv" text="csv" selected="true"/>
                     <CheckBox fx:id="checkBoxOnlyError" text="是否只產出比對錯誤的檔案"/>
                 </HBox>
                 <Button fx:id="btnCompare" text="比對並匯出結果" onAction="#compareFiles" disable="true"
@@ -37,11 +37,11 @@
     </top>
 
     <center>
-        <HBox >
+        <HBox>
             <VBox spacing="5" prefWidth="350" maxWidth="350">
                 <HBox>
                     <VBox prefWidth="175" VBox.vgrow="ALWAYS">
-                        <Label text="主鍵欄位：" styleClass="label bold"/>
+                        <Label text="(可勾選)主鍵欄位" styleClass="label bold"/>
                     </VBox>
                     <VBox prefWidth="175" VBox.vgrow="ALWAYS" alignment="CENTER_RIGHT">
                         <Button fx:id="btnFieldSetting" text="儲存檔案欄位設定" onAction="#saveFields"
@@ -50,17 +50,24 @@
                 </HBox>
                 <ScrollPane fitToWidth="true" prefHeight="250">
                     <VBox spacing="10">
-                        <VBox fx:id="pkSelectionBox" spacing="10"/>
+                        <VBox fx:id="pkSelectionBox" spacing="10">
+                            <Label fx:id="hintLabel1" wrapText="true"
+                                   text="可點選「原始檔案清單」及「比對檔案清單」中有相同檔名的檔案，可設定主鍵欄位"
+                                   styleClass="label bold"/>
+                        </VBox>
                     </VBox>
-
                 </ScrollPane>
                 <HBox>
-                    <Label text="欄位排序設定：" styleClass="label bold"/>
+                    <Label text="(可勾選)欄位排序設定" styleClass="label bold"/>
                 </HBox>
                 <ScrollPane fitToWidth="true" prefHeight="250">
                     <VBox spacing="10">
 
                         <VBox fx:id="sortSelectionBox" spacing="10">
+                            <Label fx:id="hintLabel2" wrapText="true"
+                                   text="可點選「原始檔案清單」及「比對檔案清單」中有相同檔名的檔案，可設定欄位排序"
+                                   styleClass="label bold"/>
+
                             <!-- 每個欄位將以 HBox 呈現：欄位名稱 + 主鍵勾選 + 升序 + 降序 -->
                             <!-- 動態產生於 Controller 中 -->
                         </VBox>
@@ -70,15 +77,28 @@
                 </ScrollPane>
             </VBox>
             <SplitPane dividerPositions="0.5" HBox.hgrow="ALWAYS">
-                <VBox spacing="5">
-                    <Label text="原始檔案的資料夾"/>
-                    <ListView fx:id="listView1" onMouseClicked="#onListView1Click1" VBox.vgrow="ALWAYS"/>
-                </VBox>
-                <VBox spacing="5">
-                    <Label text="比對檔案的資料夾"/>
-                    <ListView fx:id="listView2" onMouseClicked="#onListView1Click2" VBox.vgrow="ALWAYS"/>
-                </VBox>
+                <VBox spacing="5" prefWidth="250">
+                    <Label text="原始檔案清單"/>
 
+                    <ListView fx:id="listView1" onMouseClicked="#onListView1Click1" VBox.vgrow="ALWAYS">
+                        <Label fx:id="listViewlabel1"
+                               wrapText="true"
+                               prefWidth="250"
+                               styleClass="label_3"
+                               text="請先點選左上方「原始檔案資料夾位置」按鈕 或是 將資料夾拖曳至此區域，會列出資料夾內所有TXT檔案。"/>
+                    </ListView>
+                </VBox>
+                <VBox spacing="5" prefWidth="250">
+                    <Label text="比對檔案清單"/>
+
+                    <ListView fx:id="listView2" onMouseClicked="#onListView1Click2" VBox.vgrow="ALWAYS">
+                        <Label fx:id="listViewlabel2"
+                               wrapText="true"
+                               prefWidth="250"
+                               styleClass="label_3"
+                               text="請先點選左上方「需比對檔案資料夾位置」按鈕 或是 將資料夾拖曳至此區域，會列出資料夾內所有TXT檔案。"/>
+                    </ListView>
+                </VBox>
             </SplitPane>
         </HBox>
     </center>

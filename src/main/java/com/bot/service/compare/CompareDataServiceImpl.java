@@ -58,9 +58,6 @@ public class CompareDataServiceImpl implements CompareDataService {
 
 
         //將資料挑選欄位
-//        aData = aData.stream()
-//                .map(row -> filterFieldsBySelection(row, filterColList, dataKey))
-//                .collect(Collectors.toList());
         List<Map<String, String>> aDataTmp = aData;
         List<Map<String, String>> aDataResult = IntStream.range(0, aDataTmp.size())
                 .mapToObj(i -> {
@@ -99,8 +96,8 @@ public class CompareDataServiceImpl implements CompareDataService {
         Map<String, Map<String, String>> aDataMap = buildIndex(aDataResult, dataKey);
         Map<String, Map<String, String>> bDataMap = buildIndex(bDataResult, dataKey);
 
-        LogProcess.info("aMapIndex = " + aDataMap);
-        LogProcess.info("bMapIndex = " + bDataMap);
+//        LogProcess.info("aMapIndex = " + aDataMap);
+//        LogProcess.info("bMapIndex = " + bDataMap);
 
 
         //扣掉表頭
@@ -110,6 +107,7 @@ public class CompareDataServiceImpl implements CompareDataService {
             index++;
             String key = entry.getKey();
 
+            //是否表頭資料與內容資料同時存在
             if (headerBodyMode) {
                 //第1筆為表頭的欄位名稱，第3筆為內容的欄位名稱
                 if (index == 0 || index == 2) {

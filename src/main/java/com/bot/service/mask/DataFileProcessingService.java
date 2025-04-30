@@ -24,29 +24,7 @@ public interface DataFileProcessingService {
      */
     boolean exec(String filePath, String area, Map<String, String> oldFileNameList, Map<String, String> newFileNameList, Map<String, FileConfig> fieldSettingList, CompareSetting setting);
 
-    /**
-     * 檔案是否存在
-     */
-    boolean fileExists();
 
-    /**
-     * 取得TextArea1元件中的選擇的檔案內容
-     */
-    List<Map<String, String>> getFileData_A();
-
-    /**
-     * 取得TextArea2元件中的選擇的檔案內容
-     */
-    List<Map<String, String>> getFileData_B();
-
-    /**
-     * 取得檔案的key欄位
-     */
-    List<String> getDataKey();
-    /**
-     * 取得檔案的key欄位
-     * */
-//    void setDataKey(List<String> dataKeyList){};
 
     /**
      * 取得檔案的所有欄位名稱
@@ -59,16 +37,9 @@ public interface DataFileProcessingService {
     List<String> getXmlAllFileName();
 
     /**
-     * 取得檔案名稱
-     */
-    String getFileName();
-
-    /**
      * 處理檔案欄位匹配(UI畫面)
      * */
     void processPairingColumn(String fileName);
-
-    Map<String, FileConfig> getFieldSetting();
 
 
 

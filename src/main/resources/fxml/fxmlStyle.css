@@ -13,3 +13,8 @@
 .label.bold {
     -fx-font-weight: bold;
 }
+
+.label_3 {
+    -fx-text-fill: red;
+    -fx-opacity: 1.0;
+}

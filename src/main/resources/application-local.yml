@@ -55,7 +55,7 @@ localFile:
       output:
         directory: "${xmlPath}output/"
         bot_directory: "${xmlPath}bot_output/"
-        def: "${xmlPath}bot_output/DailyBatchFileDefinition.xml"
+        def: "${xmlPath}file/DailyBatchFileDefinition.xml"
       mask:
         directory: "${xmlPath}mask/"
         convert: "${xmlPath}mask/convert/"

@@ -306,7 +306,7 @@ public class MakeExcel {
             }
 
         } catch (IOException e) {
-            LogProcess.warn("", e);
+            LogProcess.warn("save or close fail");
         }
 
 

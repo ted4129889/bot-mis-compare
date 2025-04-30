@@ -27,7 +27,9 @@ public class FileConfigManager {
         return fieldSettingMap;
     }
 
-    // 載入 JSON 檔案
+    /**
+     * 載入 JSON 檔案
+     */
     public static Map<String, FileConfig> load() {
 
         try {
@@ -42,7 +44,10 @@ public class FileConfigManager {
         }
     }
 
-    // 儲存 JSON 檔案
+    /**
+     * 儲存 JSON 檔案
+     */
+
     public static void save(Map<String, FileConfig> configMap) {
 
         try {
@@ -58,7 +63,9 @@ public class FileConfigManager {
         }
     }
 
-    // 一鍵初始化所有檔案設定 & 寫入 JSON
+    /**
+     *     一鍵初始化所有檔案設定 & 寫入 JSON
+      */
     public static void ensureAllFilesExistAndSave(List<String> allFileNames) {
 
 

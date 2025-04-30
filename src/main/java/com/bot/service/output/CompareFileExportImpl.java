@@ -79,9 +79,9 @@ public class CompareFileExportImpl {
         isShowMissingData = true;
         isShowExtraData = true;
 
-        LogProcess.info("oldDataResult =" + oldDataResult);
-        LogProcess.info("newDataResult =" + newDataResult);
-        LogProcess.info("comparisonResult =" + comparisonResult);
+//        LogProcess.info("oldDataResult =" + oldDataResult);
+//        LogProcess.info("newDataResult =" + newDataResult);
+//        LogProcess.info("comparisonResult =" + comparisonResult);
 
         //正常是全產，遇到勾選的時候才會選擇要旨產錯誤的
         boolean isExportOnlyErrorFile = setting.isExportOnlyErrorFile();
@@ -180,7 +180,7 @@ public class CompareFileExportImpl {
                 makeCsv.writeToCsvBig5(mapConvert(extraResult, EXTRA_DATA), outPutFile);
             }
         } catch (IOException e) {
-            LogProcess.error("csv output error", e);
+            LogProcess.error("csv output error");
 //            throw new RuntimeException(e);
         }
     }

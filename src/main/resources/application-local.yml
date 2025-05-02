@@ -31,7 +31,6 @@ spring:
 server:
   port: 50082
 
-
 xmlPath: "external-config/xml/"
 batchFilePath: "batch-file/"
 

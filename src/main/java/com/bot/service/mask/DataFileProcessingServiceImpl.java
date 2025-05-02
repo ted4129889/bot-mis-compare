@@ -550,8 +550,8 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                 s.append(value);
                 continue;
             }
-            LogProcess.info(" fieledName = " + fieledName );
-            LogProcess.info(" value = " + value );
+//            LogProcess.info(" fieledName = " + fieledName );
+//            LogProcess.info(" value = " + value );
             //判斷有無遮蔽欄位
             if (!Objects.isNull(maskType)) {
                 try {

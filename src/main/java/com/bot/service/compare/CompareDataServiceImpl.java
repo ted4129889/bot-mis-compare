@@ -334,7 +334,7 @@ public class CompareDataServiceImpl implements CompareDataService {
 //            filtered.put(customPrimaryKey, rowNum == 0 ? customPrimaryKey : String.valueOf(rowNum));
 //        }
 
-        LogProcess.info("filtered = " + filtered);
+//        LogProcess.info("filtered = " + filtered);
         return filtered;
     }
 

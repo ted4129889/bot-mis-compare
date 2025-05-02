@@ -139,7 +139,6 @@ public class MaskExportServiceImpl implements MaskExportService {
         } catch (SQLException | IOException e) {
 
             LogProcess.warn("Invalid object name '" + allowedTable + "'");
-//            LogProcess.warn("Error executing exportMaskedFile", e);
             return false;
         }
         return true;
@@ -252,7 +251,7 @@ public class MaskExportServiceImpl implements MaskExportService {
             }
             return allowed;
         } catch (Exception e) {
-            LogProcess.warn("xml file parsing fail", e);
+            LogProcess.warn("xml file parsing fail");
             return null;
         }
     }

@@ -435,7 +435,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                 }
             }
         } catch (Exception e) {
-            LogProcess.error("performMasking error", e);
+            LogProcess.error("performMasking error");
         }
 
         return result;

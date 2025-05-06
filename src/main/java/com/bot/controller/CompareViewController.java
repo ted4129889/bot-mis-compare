@@ -487,6 +487,7 @@ public class CompareViewController {
             btnClear.setDisable(false);
             radioExcel.setDisable(false);
             radioCsv.setDisable(false);
+            checkBoxOnlyError.setDisable(false);
 
             //顯示提示
             hintLabel1.setVisible(true);

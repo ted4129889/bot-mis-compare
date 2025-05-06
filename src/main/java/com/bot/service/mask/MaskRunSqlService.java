@@ -22,16 +22,9 @@ import java.util.stream.Stream;
 
 @Component
 public class MaskRunSqlService {
-    @Value("${spring.datasource.url}")
-    private String jdbcUrl;
-    @Value("${spring.datasource.username}")
-    private String username;
-    @Value("${spring.datasource.password}")
-    private String password;
     @Value("${localFile.mis.batch.output}")
     private String allowedPath;
-    @Autowired
-    private DataSource dataSource;
+
     @Autowired
     private PathValidator pathValidator;
     @Autowired

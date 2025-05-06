@@ -3,6 +3,7 @@ package com.bot.service.mask;
 
 import com.bot.util.log.LogProcess;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +20,6 @@ import java.util.function.Consumer;
 @Service
 public class MaskSqlWorkerService {
 
-    @Autowired
-    private DataSource dataSource;
 
     private static final String CHARSET = "BIG5";
     private static final int STATEMENT_BATCH_SIZE = 1000;
@@ -30,6 +29,7 @@ public class MaskSqlWorkerService {
         long start = System.nanoTime();
         int count = 0;
 
+        DataSource dataSource = new DriverManagerDataSource();
         try (Connection conn = dataSource.getConnection()) {
             conn.setAutoCommit(false);
 

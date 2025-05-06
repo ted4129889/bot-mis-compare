@@ -3,6 +3,7 @@ package com.bot.service.mask;
 
 import com.bot.util.log.LogProcess;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +14,7 @@ import java.util.function.Consumer;
 
 @Service
 public class MaskDataWorkerService {
-    @Autowired
-    private DataSource dataSource;
+
 
     @Autowired
     private MaskExportService maskExportService;
@@ -30,6 +30,9 @@ public class MaskDataWorkerService {
             String dateParam,
             Consumer<Boolean> onFinish
     ) {
+
+        DataSource dataSource = new DriverManagerDataSource();
+
         try (Connection conn = dataSource.getConnection()) {
             boolean success = maskExportService.exportMaskedFile(conn, xmlFileName, tableName, env, dateParam);
             onFinish.accept(success);  // 成功就傳 true

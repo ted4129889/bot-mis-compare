@@ -7,6 +7,7 @@ import com.bot.util.xml.mask.allowedTable.AllowedLocalTableName;
 import com.bot.util.xml.mask.allowedTable.AllowedProdTableName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
@@ -18,8 +19,6 @@ import java.util.function.Function;
 
 @Service
 public class MaskDataBaseService {
-    @Value("${spring.profiles.active}")
-    private String nowEnv;
     @Value("${localFile.mis.xml.mask.directory}")
     private String maskXmlFilePath;
     @Value("${localFile.mis.batch.output}")
@@ -28,10 +27,6 @@ public class MaskDataBaseService {
     @Value("${localFile.mis.batch.output_original_data}")
     private String outputFileOriginalPath;
 
-    @Value("${spring.datasource.hikari.maximum-pool-size}")
-    private int dbMaxPoolSize;
-    @Autowired
-    private DataSource dataSource;
     @Autowired
     private MaskDataWorkerService maskDataWorkerService;
     private static final String CHARSET = "BIG5";
@@ -48,8 +43,7 @@ public class MaskDataBaseService {
 
         totalCnt = 0;
         tableCnt = 0;
-        param = date;
-
+        DataSource dataSource = new DriverManagerDataSource();
         try (Connection connection = dataSource.getConnection()) {
             if (connection == null) {
                 LogProcess.warn("資料庫連線失敗");

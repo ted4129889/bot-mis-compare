@@ -68,6 +68,8 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
     private static final String CHARSET_BIG5 = "Big5";
     private static final String CHARSET_UTF8 = "UTF-8";
 
+    CompareSetting settings;
+
     List<Map<String, String>> cList = new ArrayList<>();
 
     List<Map<String, String>> aFileData = new ArrayList<>();
@@ -94,7 +96,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
     String outPutFile = "";
 
     List<XmlField> xmlFieldList_H = new ArrayList<>();
-    List<XmlField> xmlFieldList_B  = new ArrayList<>();
+    List<XmlField> xmlFieldList_B = new ArrayList<>();
     private List<Map<String, String>> comparisonResult = new ArrayList<>();
     private Map<String, Map<String, String>> missingResult = new LinkedHashMap<>();
     private Map<String, Map<String, String>> extraResult = new LinkedHashMap<>();
@@ -196,7 +198,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 
     /**
      *
-     * */
+     */
     private void pairingProfile(String tbotOutputPath) {
         int calcuTotal = 0;
         //台銀原檔案路徑
@@ -238,7 +240,8 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 
     /**
      * 單支檔案處理(配合UI畫面)
-     * @param cFile 檔案名稱(含路徑)
+     *
+     * @param cFile      檔案名稱(含路徑)
      * @param uiTextArea 清單類型(原始檔案清單、比對檔案清單)
      */
     public void pairingProfile2(String cFile, String uiTextArea) {
@@ -287,6 +290,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 //        LogProcess.info("oldFileNameList = " + oldFileNameMap);
 //        LogProcess.info("newFileNameList = " + newFileNameMap);
 
+        this.settings = setting;
 
         String oFilePath = "";
         String nFilePath = "";
@@ -324,7 +328,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 //                        LogProcess.info("bFileData name = " + bFileData);
                         LogProcess.info("columnList name = " + columnAllist);
                         //開始比對
-                        compareDataService.parseData(aFileData, bFileData, dataKeyList, columnAllist, thisSortFieldConfig, maskUtil.removePrimaryKeysFromMaskKeys(maskFieldList, dataKeyList),headerBodyMode);
+                        compareDataService.parseData(aFileData, bFileData, dataKeyList, columnAllist, thisSortFieldConfig, maskUtil.removePrimaryKeysFromMaskKeys(maskFieldList, dataKeyList), headerBodyMode);
 
                         //執行結果
                         compareFileExportImpl.run(fileName, compareDataService.getOldDataResult(), compareDataService.getNewDataResult(), compareDataService.getComparisonResult(), compareDataService.getMissingData(), compareDataService.getExtraData(), setting);
@@ -466,7 +470,8 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
             }
 
             //蒐集表頭及內容的欄位
-            columnAllist.add(fieldName);;
+            columnAllist.add(fieldName);
+            ;
 
         }
         //
@@ -550,13 +555,18 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                 s.append(value);
                 continue;
             }
-//            LogProcess.info(" fieledName = " + fieledName );
-//            LogProcess.info(" value = " + value );
+
             //判斷有無遮蔽欄位
             if (!Objects.isNull(maskType)) {
                 try {
                     //進行遮蔽處理
-                    String valueMask = dataMasker.applyMask(value, maskType);
+                    String valueMask = "";
+
+                    if (this.settings.isExportUseMask()) {
+                        valueMask = dataMasker.applyMask(value, maskType);
+                    }else{
+                        valueMask = value;
+                    }
                     s.append(valueMask);
                     map.put(fieledName, valueMask);
                 } catch (IOException ex) {
@@ -605,9 +615,9 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                     //表頭正常只會有一筆
 //                        LogProcess.info("s1 =" + s);
 //                        LogProcess.info("xmlFieldList = " +xmlFieldList);
-                        outputData.add(processField(xmlFieldList_H, s, index));
-                        headerMode = false;
-                        break;
+                    outputData.add(processField(xmlFieldList_H, s, index));
+                    headerMode = false;
+                    break;
                 }
                 if (bodyMode) {
                     if (b > 1) {

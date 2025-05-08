@@ -78,6 +78,8 @@ public class CompareViewController {
     @FXML
     private CheckBox checkBoxOnlyError;
     @FXML
+    private CheckBox checkBoxUseMask;
+    @FXML
     private VBox fieldSelectionBox;
     @FXML
     private VBox pkSelectionBox;
@@ -153,6 +155,9 @@ public class CompareViewController {
         btnClear.setDisable(true);
         checkBoxOnlyError.setDisable(true);
         checkBoxOnlyError.setSelected(false);
+
+        checkBoxUseMask.setDisable(true);
+        checkBoxUseMask.setSelected(true);
 
 
         //左側提示標籤 不啟用
@@ -456,7 +461,7 @@ public class CompareViewController {
 
     /**
      * 欄位排序順序計算功能
-     * */
+     */
     private void adjustOrderAfterRemove(int removedOrder) {
         ObservableList<Node> rows = sortSelectionBox.getChildren();
         for (Node rowNode : rows) {
@@ -488,6 +493,7 @@ public class CompareViewController {
             radioExcel.setDisable(false);
             radioCsv.setDisable(false);
             checkBoxOnlyError.setDisable(false);
+            checkBoxUseMask.setDisable(false);
 
             //顯示提示
             hintLabel1.setVisible(true);
@@ -580,7 +586,7 @@ public class CompareViewController {
 
     /**
      * 比對按鈕
-     * */
+     */
     @FXML
     public void compareFiles() {
 
@@ -600,11 +606,13 @@ public class CompareViewController {
 
 
         boolean outPutOnlyErrorData = checkBoxOnlyError.isSelected();
+
+        boolean outPutUseMask = checkBoxUseMask.isSelected();
         //每次比對時，要刪除清單
         textFileUtil.deleteFile(resultTxt);
 
         CompareSetting setting = CompareSetting.builder()
-                .exportOnlyErrorFile(outPutOnlyErrorData).build();
+                .exportOnlyErrorFile(outPutOnlyErrorData).exportUseMask(outPutUseMask).build();
 
         // 比對後並輸出
         maskDataFileService.exec("", "", oldFileNameMap, newFileNameMap, saveFileCongigMap, setting);
@@ -616,7 +624,7 @@ public class CompareViewController {
 
     /**
      * 顯示提示訊息
-     * */
+     */
     private boolean showAlert(String message) {
 
 //        Alert alert = new Alert(Alert.AlertType.INFORMATION);

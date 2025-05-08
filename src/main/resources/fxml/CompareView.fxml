@@ -21,18 +21,33 @@
                         prefWidth="200" styleClass="label bold"/>
                 <Label fx:id="labelFile2" text="未選擇" prefWidth="600" maxWidth="600" styleClass="label bold"/>
             </HBox>
-            <HBox alignment="CENTER_LEFT" spacing="10">
+            <HBox alignment="CENTER_LEFT">
+                <VBox spacing="5" alignment="CENTER_LEFT">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="[匯出格式]：" styleClass="label bold"/>
+                        <RadioButton fx:id="radioExcel" text="excel" selected="true"/>
+                        <RadioButton fx:id="radioCsv" text="csv" selected="true"/>
+                    </HBox>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="[顯示比對錯誤的結果]：" styleClass="label bold"/>
+                        <CheckBox fx:id="checkBoxOnlyError"/>
+                    </HBox>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="[使用資料欄位遮蔽]：" styleClass="label bold"/>
+                        <CheckBox fx:id="checkBoxUseMask"/>
+                    </HBox>
+                </VBox>
 
-                <HBox spacing="10" alignment="CENTER_LEFT">
-                    <Label text="匯出格式：" styleClass="label bold"/>
-                    <RadioButton fx:id="radioExcel" text="excel" selected="true"/>
-                    <RadioButton fx:id="radioCsv" text="csv" selected="true"/>
-                    <CheckBox fx:id="checkBoxOnlyError" text="是否只產出比對錯誤的檔案"/>
-                </HBox>
-                <Button fx:id="btnCompare" text="比對並匯出結果" onAction="#compareFiles" disable="true"
-                        styleClass="label bold"/>
-                <Button fx:id="btnClear" text="清除畫面" onAction="#clearScreen" styleClass="label bold"/>
+                <!-- 加這個空白區塊來撐開 -->
+                <Region HBox.hgrow="ALWAYS"/>
+                <VBox spacing="5" alignment="BOTTOM_RIGHT">
+                    <HBox spacing="10" >
+                        <Button fx:id="btnCompare" text="比對並匯出結果" onAction="#compareFiles" disable="true" styleClass="label bold"/>
+                        <Button fx:id="btnClear" text="清除畫面" onAction="#clearScreen" styleClass="label bold"/>
+                    </HBox>
+                </VBox>
             </HBox>
+
         </VBox>
     </top>
 

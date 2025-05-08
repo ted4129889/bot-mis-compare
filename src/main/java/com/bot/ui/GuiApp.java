@@ -21,12 +21,8 @@ public class GuiApp extends Application {
 
     public void start(Stage primaryStage) throws IOException {
         stageAll = primaryStage;
-        //遮蔽工具畫面
-//        maskToolView();
         //檔案比對工具畫面
         compareToolView();
-
-//        scrollSyncController();
         //關閉介面同時關閉執行序
         close();
     }
@@ -34,20 +30,6 @@ public class GuiApp extends Application {
     /**
      * 遮蔽工具啟動畫面
      */
-    private void maskToolView() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
-        loader.setControllerFactory(springContext::getBean); // 結合 Spring
-
-        //介面大小
-        Scene scene = new Scene(loader.load(), 250, 100);
-
-        stageAll.setScene(scene);
-
-        stageAll.setTitle("遮蔽資料工具");
-
-        stageAll.show();
-
-    }
 
     private void compareToolView() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CompareView.fxml"));

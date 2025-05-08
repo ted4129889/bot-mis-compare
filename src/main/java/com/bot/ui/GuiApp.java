@@ -53,7 +53,7 @@ public class GuiApp extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CompareView.fxml"));
         loader.setControllerFactory(springContext::getBean); // 結合 Spring
 
-        Scene scene = new Scene(loader.load(),900,500);
+        Scene scene = new Scene(loader.load(),900,550);
         stageAll.setTitle("Text File Comparison Tool");
         stageAll.setScene(scene);
         //禁止視窗調整
@@ -61,18 +61,7 @@ public class GuiApp extends Application {
         stageAll.show();
 
     }
-    private void scrollSyncController() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ScrollView.fxml"));
-        loader.setControllerFactory(springContext::getBean); // 結合 Spring
 
-        Scene scene = new Scene(loader.load(),1000,600);
-        stageAll.setTitle("scrollTest");
-        stageAll.setScene(scene);
-        //禁止視窗調整
-        stageAll.setResizable(false);
-        stageAll.show();
-
-    }
 
     private void close() {
         // 設置關閉事件：當視窗關閉時，關閉 Spring Boot 服務

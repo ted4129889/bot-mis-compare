@@ -29,11 +29,11 @@
                         <RadioButton fx:id="radioCsv" text="csv" selected="true"/>
                     </HBox>
                     <HBox spacing="10" alignment="CENTER_LEFT">
-                        <Label text="[顯示比對錯誤的結果]：" styleClass="label bold"/>
+                        <Label text="[只顯示比對錯誤結果]：" styleClass="label bold"/>
                         <CheckBox fx:id="checkBoxOnlyError"/>
                     </HBox>
                     <HBox spacing="10" alignment="CENTER_LEFT">
-                        <Label text="[使用資料欄位遮蔽]：" styleClass="label bold"/>
+                        <Label text="[遮蔽機敏欄位]：" styleClass="label bold"/>
                         <CheckBox fx:id="checkBoxUseMask"/>
                     </HBox>
                 </VBox>

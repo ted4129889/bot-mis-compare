@@ -120,13 +120,11 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
         //允許的路徑
         String tbotOutputPath = FilenameUtils.normalize(botOutputPath);
 
-        LogProcess.info("讀取 external-config/xml/bot_output 資料夾下的 DailyBatchFileDefinition.xml 定義檔內有" + xmlDataList.size() + "組 <data> 格式");
-
         if (oldFileNameMap != null && newFileNameMap != null) {
             pairingProfile3(oldFileNameMap, newFileNameMap, fieldSettingList, setting);
 
         } else {
-            pairingProfile(tbotOutputPath);
+//            pairingProfile(tbotOutputPath);
         }
         return true;
     }
@@ -147,6 +145,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
             xmlFile = xmlParser.parseXmlFile2(dailyBatchFileDefinitionFile);
             xmlDataList = xmlFile.getDataList();
 
+            LogProcess.info("讀取 external-config/xml/bot_output 資料夾下的 DailyBatchFileDefinition.xml 定義檔內有" + xmlDataList.size() + "組 <data> 格式");
 
             for (XmlData data : xmlDataList) {
                 tmpXmlFileName.add(data.getFileName());
@@ -659,6 +658,22 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
             currentBytes += byteLen;
         }
         return str.length(); // 全部都沒超過就整段可以用
+    }
+
+
+    /**
+     * [yyyymmdd]置換 核對是否同一個檔案
+     */
+    public boolean matchesPattern(String pattern, String fileName) {
+        // 轉換 pattern:
+        // 將 [yyyymmdd] → \d{8} 換成8碼(日期)
+        String regex = pattern.replace("[yyyymmdd]", "\\\\d{8}");
+
+        // 處理句點 (因為 . 在正則裡代表「任何字元」)
+        regex = regex.replace(".", "\\\\.");
+
+        // 3完整比對整個檔案名
+        return fileName.matches(regex);
     }
 
 

@@ -35,8 +35,6 @@ batchFilePath: "batch-file/"
 localFile:
   mis:
     batch:
-      bot_input: "${batchFilePath}bot_input/"
-      bot_output: "${batchFilePath}bot_output/"
       input: "${batchFilePath}input/"
       output: "${batchFilePath}output/"
       output_original_data: "${batchFilePath}output_original_data/"

@@ -13,6 +13,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
@@ -25,9 +28,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.awt.*;
 import java.io.File;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
@@ -106,6 +112,10 @@ public class CompareViewController {
     int dataLength = 0;
     int currentOrderIndex = 1;
 
+    private String oldPath = "";
+    private String newPath = "";
+
+
     /**
      * 啟動時 初始化
      */
@@ -124,14 +134,16 @@ public class CompareViewController {
         itemOpen.setOnAction(e -> {
             String selected1 = listView1.getSelectionModel().getSelectedItem();
             if (selected1 != null) {
-                System.out.println("打開: " + selected1);
-                // 這裡可以呼叫方法開啟檔案內容
+                String s1 = oldPath +"\\"+selected1;
+                LogProcess.info("打開: " + s1);
+                openFileSmart(new File(s1));
             }
 
             String selected2 = listView2.getSelectionModel().getSelectedItem();
             if (selected2 != null) {
-                System.out.println("打開: " + selected2);
-                // 這裡可以呼叫方法開啟檔案內容
+                String s2 = newPath +"\\"+selected2;
+                System.out.println("打開: " + s2);
+                openFileSmart(new File(s2));
             }
         });
 
@@ -216,7 +228,8 @@ public class CompareViewController {
                     // 顯示檔名在 ListView
                     listView1.getItems().setAll(fileMap.keySet());
                     //顯示路徑
-                    labelFile1.setText(folder.getAbsolutePath());
+                    oldPath = folder.getAbsolutePath();
+                    labelFile1.setText(oldPath);
 
                     oldFileNameMap = fileMap;
 
@@ -262,8 +275,10 @@ public class CompareViewController {
                     // 顯示檔名在 ListView
                     listView2.getItems().setAll(fileMap.keySet());
 
+                    newPath = folder.getAbsolutePath();
                     //顯示路徑
-                    labelFile2.setText(folder.getAbsolutePath());
+                    labelFile2.setText(newPath);
+                    labelFile2.setText(newPath);
 
                     newFileNameMap = fileMap;
 
@@ -869,4 +884,52 @@ public class CompareViewController {
 
     }
 
+//    private void openFile(File file) {
+////        String currentDir = Paths.get("").toAbsolutePath().toString();
+////        LogProcess.info("目前專案路徑1：" + currentDir);
+////        LogProcess.info("file path：" + file);
+////        String currentDir = System.getProperty("user.dir");
+////
+//        LogProcess.info("file.exists()：" + file.exists());
+//        LogProcess.info("Desktop.isDesktopSupported()：" + Desktop.isDesktopSupported());
+////        File nFile = new File(currentDir);
+//        try {
+//            if (file.exists() && Desktop.isDesktopSupported()) {
+//                Desktop.getDesktop().open(file);
+//            } else {
+//                LogProcess.info("找不到檔案或不支援 Desktop 開啟: " + file.getAbsolutePath());
+//            }
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//    }
+
+    private void openFileSmart(File file) {
+        if (Desktop.isDesktopSupported()) {
+            try {
+                Desktop.getDesktop().open(file);
+                return;
+            } catch (Exception e) {
+                System.out.println("使用 Desktop 開啟失敗，改用命令行開啟");
+            }
+        }
+        openFileCrossPlatform(file);
+    }
+
+    private void openFileCrossPlatform(File file) {
+        try {
+            String os = System.getProperty("os.name").toLowerCase();
+            if (os.contains("win")) {
+                new ProcessBuilder("cmd", "/c", "start", "", file.getAbsolutePath()).start();
+            } else if (os.contains("mac")) {
+                new ProcessBuilder("open", file.getAbsolutePath()).start();
+            } else if (os.contains("nix") || os.contains("nux")) {
+                new ProcessBuilder("xdg-open", file.getAbsolutePath()).start();
+            } else {
+                System.out.println("不支援的作業系統");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -298,12 +298,13 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
         if (!oldFileNameMap.isEmpty() && !newFileNameMap.isEmpty()) {
             //以原始的檔案為主 去匹配 要比對的檔案
             for (Map.Entry<String, String> o : oldFileNameMap.entrySet()) {
+
                 String fileName = o.getKey();
-                String tmpFileName = fileName;
+                String tmpFileName = textFileUtil.replaceDateWithPlaceholder(fileName);
 
 
-                if (newFileNameMap.get(tmpFileName) != null) {
-                    LogProcess.info("file name = " + tmpFileName);
+                if (newFileNameMap.get(fileName) != null) {
+                    LogProcess.info("file name = " + fileName);
 
                     FileConfig thisFileConfig = fieldSettingList.get(tmpFileName);
 

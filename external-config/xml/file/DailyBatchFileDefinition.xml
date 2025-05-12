@@ -3,7 +3,7 @@
     <data fileName="ALMINFACCT">
         <header>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName></fieldName>
                 <fieldType>string</fieldType>
                 <length>92</length>
             </field>
@@ -40,7 +40,7 @@
                 <length>19</length>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName></fieldName>
                 <fieldType>string</fieldType>
                 <length>66</length>
             </field>
@@ -5536,6 +5536,7 @@
                 <fieldName>combined_field</fieldName>
                 <fieldType>string</fieldType>
                 <length>12</length>
+                <maskType>2</maskType>
             </field>
             <field>
                 <fieldName>separator</fieldName>
@@ -5935,7 +5936,7 @@
             </field>
         </body>
     </data>
-    <data fileName="DWMM0010.[yyyymmdd]">
+    <data fileName="DWMM0010_[yyyymmdd]">
         <header></header>
         <body>
             <field>
@@ -6914,8 +6915,7 @@
         </body>
     </data>
     <data fileName="DWMM0010.[yyyymmdd].H">
-        <header></header>
-        <body>
+        <header>
             <field>
                 <fieldName>sday</fieldName>
                 <fieldType>string</fieldType>
@@ -6946,11 +6946,11 @@
                 <fieldType>string</fieldType>
                 <length>10</length>
             </field>
-        </body>
+        </header>
+        <body></body>
     </data>
     <data fileName="DWMM0008.[yyyymmdd].H">
-        <header></header>
-        <body>
+        <header>
             <field>
                 <fieldName>sday</fieldName>
                 <fieldType>string</fieldType>
@@ -6981,16 +6981,15 @@
                 <fieldType>string</fieldType>
                 <length>10</length>
             </field>
-        </body>
+        </header>
+        <body></body>
     </data>
     <data fileName="DWMM0004.[yyyymmdd].H">
-        <header></header>
-        <body>
-            <field>
-                <fieldName>sday</fieldName>
-                <fieldType>string</fieldType>
-                <length>8</length>
-            </field>
+        <header> <field>
+            <fieldName>sday</fieldName>
+            <fieldType>string</fieldType>
+            <length>8</length>
+        </field>
             <field>
                 <fieldName>eday</fieldName>
                 <fieldType>string</fieldType>
@@ -7016,11 +7015,11 @@
                 <fieldType>string</fieldType>
                 <length>10</length>
             </field>
-        </body>
+        </header>
+        <body></body>
     </data>
     <data fileName="DWMM0003.[yyyymmdd].H">
-        <header></header>
-        <body>
+        <header>
             <field>
                 <fieldName>sday</fieldName>
                 <fieldType>string</fieldType>
@@ -7051,11 +7050,11 @@
                 <fieldType>string</fieldType>
                 <length>10</length>
             </field>
-        </body>
+        </header>
+        <body></body>
     </data>
     <data fileName="DWMM0002.[yyyymmdd].H">
-        <header></header>
-        <body>
+        <header>
             <field>
                 <fieldName>sday</fieldName>
                 <fieldType>string</fieldType>
@@ -7086,11 +7085,11 @@
                 <fieldType>string</fieldType>
                 <length>10</length>
             </field>
-        </body>
+        </header>
+        <body></body>
     </data>
     <data fileName="DWMM0001.[yyyymmdd].H">
-        <header></header>
-        <body>
+        <header>
             <field>
                 <fieldName>sday</fieldName>
                 <fieldType>string</fieldType>
@@ -7121,7 +7120,8 @@
                 <fieldType>string</fieldType>
                 <length>10</length>
             </field>
-        </body>
+        </header>
+        <body></body>
     </data>
     <data fileName="DWMM0001.[yyyymmdd].D">
         <header></header>
@@ -8499,8 +8499,6 @@
     </data>
     <data fileName="DUFX0003.[yyyymmdd].H">
         <header>
-        </header>
-        <body>
             <field>
                 <fieldName>sday</fieldName>
                 <fieldType>string</fieldType>
@@ -8531,7 +8529,8 @@
                 <fieldType>string</fieldType>
                 <length>10</length>
             </field>
-        </body>
+        </header>
+        <body></body>
     </data>
     <data fileName="DUOT0100.[yyyymmdd].H">
         <header>
@@ -8674,10 +8673,7 @@
                 <length>10</length>
             </field>
         </header>
-        <body>
-            <useSqlData>false</useSqlData>
-            <separator></separator>
-        </body>
+        <body></body>
     </data>
     <data fileName="DUFX0009.[yyyymmdd].D">
         <header>
@@ -9223,10 +9219,7 @@
                 <length>10</length>
             </field>
         </header>
-        <body>
-            <useSqlData>false</useSqlData>
-            <separator></separator>
-        </body>
+        <body></body>
     </data>
     <data fileName="DUFX0009.[yyyymmdd].H">
         <header>
@@ -10747,10 +10740,7 @@
                 <length>10</length>
             </field>
         </header>
-        <body>
-            <useSqlData>false</useSqlData>
-            <separator></separator>
-        </body>
+        <body></body>
     </data>
     <data fileName="DUFX0007.[yyyymmdd].D">
         <header></header>
@@ -12029,8 +12019,7 @@
         </body>
     </data>
     <data fileName="DUFX0005.[yyyymmdd].H">
-        <header></header>
-        <body>
+        <header>
             <field>
                 <fieldName>txdate</fieldName>
                 <fieldType>string</fieldType>
@@ -12111,7 +12100,8 @@
                 <fieldType>string</fieldType>
                 <length>14</length>
             </field>
-        </body>
+        </header>
+        <body></body>
     </data>
     <data fileName="DUFX0005.[yyyymmdd].H">
         <header>
@@ -12146,10 +12136,7 @@
                 <length>10</length>
             </field>
         </header>
-        <body>
-            <useSqlData>false</useSqlData>
-            <separator></separator>
-        </body>
+        <body></body>
     </data>
     <data fileName="DUFX0006.[yyyymmdd].H">
         <header>
@@ -12184,10 +12171,7 @@
                 <length>10</length>
             </field>
         </header>
-        <body>
-            <useSqlData>false</useSqlData>
-            <separator></separator>
-        </body>
+        <body></body>
     </data>
     <data fileName="DUFX0004.[yyyymmdd].H">
         <header>
@@ -12222,10 +12206,7 @@
                 <length>10</length>
             </field>
         </header>
-        <body>
-            <useSqlData>false</useSqlData>
-            <separator></separator>
-        </body>
+        <body></body>
     </data>
     <data fileName="901232">
         <header>
@@ -16820,7 +16801,7 @@
                 <length>8</length>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName></fieldName>
                 <fieldType>string</fieldType>
                 <length>39</length>
             </field>
@@ -16834,7 +16815,7 @@
                 <length>8</length>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName></fieldName>
                 <fieldType>string</fieldType>
                 <length>52</length>
             </field>
@@ -16881,7 +16862,7 @@
                 <length>1</length>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName></fieldName>
                 <fieldType>string</fieldType>
                 <length>8</length>
             </field>
@@ -16890,7 +16871,7 @@
     <data fileName="ALMINFFMT">
         <header>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName></fieldName>
                 <fieldType>string</fieldType>
                 <length>92</length>
             </field>
@@ -17012,7 +16993,7 @@
                 <length>8</length>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName></fieldName>
                 <fieldType>string</fieldType>
                 <length>2</length>
             </field>
@@ -17102,7 +17083,7 @@
                 <length>8</length>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName></fieldName>
                 <fieldType>string</fieldType>
                 <length>28</length>
             </field>

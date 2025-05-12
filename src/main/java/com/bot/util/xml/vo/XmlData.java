@@ -19,14 +19,13 @@ import lombok.ToString;
 @ToString
 public class XmlData {
 
-    @JacksonXmlProperty(localName = "txt")
-    private XmlBody txt;
+
 
     @JacksonXmlProperty(localName = "header")
-    private XmlHeader header;
+    private XmlHeaderOrBody header;
 
     @JacksonXmlProperty(localName = "body")
-    private XmlBody body;
+    private XmlHeaderOrBody body;
 
     @JacksonXmlProperty(localName = "table")
     private Table table;

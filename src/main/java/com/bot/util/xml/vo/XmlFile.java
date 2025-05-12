@@ -20,10 +20,6 @@ import java.util.List;
 @NoArgsConstructor
 @JacksonXmlRootElement(localName = "file")
 public class XmlFile {
-//    @JacksonXmlProperty(localName = "data")
-//    private XmlData data;
-
-//    public String fileName;
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "data")
     private List<XmlData> dataList = new ArrayList<>();

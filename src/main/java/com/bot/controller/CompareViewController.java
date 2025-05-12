@@ -287,10 +287,13 @@ public class CompareViewController {
      */
     private void checkListViewItem(String fileName, boolean bothExist) {
 
+        fileName = textFileUtil.replaceDateWithPlaceholder(fileName);
+
         pkSelectionBox.getChildren().clear();
         sortSelectionBox.getChildren().clear();
 
         maskDataFileService.processPairingColumn(fileName);
+        LogProcess.info("fileName = " + fileName);
         List<String> columns = maskDataFileService.getColumnList();
 
 

@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class FieldProperties {
+public class FieldProperties{
     String fieldName;
     String fieldType;
     String format;

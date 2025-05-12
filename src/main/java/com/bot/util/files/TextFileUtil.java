@@ -18,6 +18,8 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Slf4j
 @Component
@@ -205,6 +207,22 @@ public class TextFileUtil {
             LogProcess.info("Not Match");
             return false;
         }
+    }
+
+    public String replaceDateWithPlaceholder(String fileName) {
+        // 偵測 8 碼數字（yyyyMMdd 格式）
+        Pattern pattern = Pattern.compile("\\d{8}");
+
+//        fileName = fileName.replace(".txt", "");
+
+        Matcher matcher = pattern.matcher(fileName);
+
+        if (matcher.find()) {
+            // 只替換第一個符合的 8 碼數字為 [yyyymmdd]
+            return matcher.replaceFirst("[yyyymmdd]");
+        }
+
+        return fileName;
     }
 
 }

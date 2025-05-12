@@ -31,13 +31,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
 public class DataFileProcessingServiceImpl implements DataFileProcessingService {
-    @Value("${localFile.mis.batch.bot_output}")
-    private String botOutputPath;
+//    @Value("${localFile.mis.batch.bot_output}")
+//    private String botOutputPath;
 
     @Value("${localFile.mis.batch.output}")
     private String outputPath;
@@ -89,7 +91,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
     List<String> columnAList = new ArrayList<>();
     List<String> columnBList = new ArrayList<>();
     List<String> columnList = new ArrayList<>();
-    List<String> columnAllist = new ArrayList<>();
+    List<String> columnAllList = new ArrayList<>();
     List<XmlField> tmpXmlFieldList = new ArrayList<>();
     XmlData tmpXmlData = new XmlData();
     boolean existflag = false;
@@ -118,7 +120,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
     public boolean exec(String cFilePath, String uiTextArea, Map<String, String> oldFileNameMap, Map<String, String> newFileNameMap, Map<String, FileConfig> fieldSettingList, CompareSetting setting) {
 
         //允許的路徑
-        String tbotOutputPath = FilenameUtils.normalize(botOutputPath);
+//        String tbotOutputPath = FilenameUtils.normalize(botOutputPath);
 
         if (oldFileNameMap != null && newFileNameMap != null) {
             pairingProfile3(oldFileNameMap, newFileNameMap, fieldSettingList, setting);
@@ -186,8 +188,8 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 
     @Override
     public List<String> getColumnList() {
-        LogProcess.info("columnList =" + columnAllist);
-        return columnAllist;
+        LogProcess.info("columnList =" + columnAllList);
+        return columnAllList;
     }
 
     @Override
@@ -297,12 +299,13 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
             //以原始的檔案為主 去匹配 要比對的檔案
             for (Map.Entry<String, String> o : oldFileNameMap.entrySet()) {
                 String fileName = o.getKey();
+                String tmpFileName = fileName;
 
 
-                if (newFileNameMap.get(fileName) != null) {
-                    LogProcess.info("file name = " + fileName);
+                if (newFileNameMap.get(tmpFileName) != null) {
+                    LogProcess.info("file name = " + tmpFileName);
 
-                    FileConfig thisFileConfig = fieldSettingList.get(fileName);
+                    FileConfig thisFileConfig = fieldSettingList.get(tmpFileName);
 
                     List<String> dataKeyList = thisFileConfig.getPrimaryKeys();
                     LogProcess.info("dataKey = " + dataKeyList);
@@ -310,7 +313,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                     List<SortFieldConfig> thisSortFieldConfig = thisFileConfig.getSortFields();
 
 //                    LogProcess.info("sortOrderMap = " + thisSortFieldConfig);
-                    fileName = fileName.replace(".txt", "");
+                    tmpFileName = tmpFileName.replace(".txt", "");
                     oFilePath = FilenameUtils.normalize(o.getValue());
                     nFilePath = FilenameUtils.normalize(newFileNameMap.get(o.getKey()));
 
@@ -318,16 +321,16 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 //                    LogProcess.info("nFilePath = " + nFilePath);
                     //確認檔案名稱 是否存在定義檔
 
-                    if (tmpXmlFileName.contains(fileName)) {
+                    if (tmpXmlFileName.contains(tmpFileName)) {
                         //原始檔案
                         pairingProfile2(oFilePath, TEXTAREA_1);
                         //比對檔案
                         pairingProfile2(nFilePath, TEXTAREA_2);
 //                        LogProcess.info("aFileData name = " + aFileData);
 //                        LogProcess.info("bFileData name = " + bFileData);
-                        LogProcess.info("columnList name = " + columnAllist);
+                        LogProcess.info("columnList name = " + columnAllList);
                         //開始比對
-                        compareDataService.parseData(aFileData, bFileData, dataKeyList, columnAllist, thisSortFieldConfig, maskUtil.removePrimaryKeysFromMaskKeys(maskFieldList, dataKeyList), headerBodyMode);
+                        compareDataService.parseData(aFileData, bFileData, dataKeyList, columnAllList, thisSortFieldConfig, maskUtil.removePrimaryKeysFromMaskKeys(maskFieldList, dataKeyList), headerBodyMode);
 
                         //執行結果
                         compareFileExportImpl.run(fileName, compareDataService.getOldDataResult(), compareDataService.getNewDataResult(), compareDataService.getComparisonResult(), compareDataService.getMissingData(), compareDataService.getExtraData(), setting);
@@ -351,7 +354,8 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
         try {
             existflag = false;
             for (XmlData data : xmlDataList) {
-                if (fileName.equals(data.getFileName())) {
+                //先將檔案名稱中，有日期先轉為yyyymmdd
+                if (textFileUtil.replaceDateWithPlaceholder(fileName).equals(data.getFileName())) {
                     existflag = true;
                     //為了取得 PK 以及 欄位
                     performMasking("", data, "");
@@ -399,7 +403,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
             xmlFieldList_B = xmlData.getBody().getFieldList();
 
             //為蒐集表頭及內容欄位
-            columnAllist = new ArrayList<>();
+            columnAllList = new ArrayList<>();
 
             headerMode = false;
             bodyMode = false;
@@ -420,19 +424,19 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 
 
             // header處理
-            if (!xmlFieldList_H.isEmpty()) {
-                xmlColumnToMap(xmlFieldList_H, textArea);
+            if (headerMode) {
+                //如果表頭有資料，內容沒有，表示以表頭當資料源
+                if (!bodyMode) {
+                    xmlColumnToMap(xmlFieldList_H, textArea);
+                }
                 if (!fileName.isEmpty()) {
                     result.addAll(processFileData(fileName, xmlFieldList_H));
                 }
             }
 
             // body處理
-            if (!xmlFieldList_B.isEmpty()) {
-                // 只有在 header 跟 body 定義不同時才再處理一次 mapping
-                if (!xmlFieldList_H.toString().equals(xmlFieldList_B.toString())) {
-                    xmlColumnToMap(xmlFieldList_B, textArea);
-                }
+            if (bodyMode) {
+                xmlColumnToMap(xmlFieldList_B, textArea);
                 if (!fileName.isEmpty()) {
                     result.addAll(processFileData(fileName, xmlFieldList_B));
                 }
@@ -468,9 +472,11 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                 maskFieldList.add(fieldName);
             }
 
+            if  (fieldName.isEmpty()){
+                fieldName ="filler";
+            }
             //蒐集表頭及內容的欄位
-            columnAllist.add(fieldName);
-            ;
+            columnAllList.add(fieldName);
 
         }
         //
@@ -563,7 +569,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 
                     if (this.settings.isExportUseMask()) {
                         valueMask = dataMasker.applyMask(value, maskType);
-                    }else{
+                    } else {
                         valueMask = value;
                     }
                     s.append(valueMask);
@@ -675,6 +681,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
         // 3完整比對整個檔案名
         return fileName.matches(regex);
     }
+
 
 
 }

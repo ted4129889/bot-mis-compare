@@ -608,7 +608,7 @@ public class CompareViewController {
     @FXML
     public void compareFiles() {
 
-
+        compareFileExportImpl.exportTextHeaderTxt();
         if (radioCsv.isSelected() && radioExcel.isSelected()) {
             compareFileExportImpl.chooseExportFileType = "Both";
         } else if (radioExcel.isSelected()) {

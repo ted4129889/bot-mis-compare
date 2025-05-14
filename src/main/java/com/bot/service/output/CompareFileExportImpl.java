@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -64,8 +65,12 @@ public class CompareFileExportImpl {
     boolean isShowMissingData = true;
     boolean isShowExtraData = true;
 
+    private static final LocalDateTime dateTime = LocalDateTime.now();
+    private String dateTimeStr = "";
 
     public void run(String fileName, List<Map<String, String>> getOldDataResult, List<Map<String, String>> getNewDataResult, List<Map<String, String>> getComparisonResult, Map<String, Map<String, String>> getMissingData, Map<String, Map<String, String>> getExtraData, CompareSetting setting) {
+
+        fileName = fileName.replace(".txt", "");
 
         oldDataResult = getOldDataResult;
         newDataResult = getNewDataResult;
@@ -89,7 +94,7 @@ public class CompareFileExportImpl {
             //判斷比對結果、少資料的結果、多資料的結果 如果為空 表示資料是對的，則不出表
 
 
-            if ( comparisonResult.isEmpty() && missingResult.isEmpty()  && extraResult.isEmpty()) {
+            if (comparisonResult.isEmpty() && missingResult.isEmpty() && extraResult.isEmpty()) {
 
 //                isShowOldData = false;
 //                isShowNewData = false;
@@ -127,58 +132,55 @@ public class CompareFileExportImpl {
 
     private void exportCsv(String fileName) {
 
-        String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-
-        String outPutPath = resultCsvFolder + fileName + "_" + today + "/" + fileName + "_";
+        String outPutPath = resultCsvFolder + fileName + "_" + dateTimeStr + "/" + fileName + "_";
 
 
         try {
             //台銀檔案資料
-            String outPutFile = outPutPath + BOT_DATA + ".csv";
+            String outPutFile = outPutPath + BOT_DATA + "_" + dateTimeStr + ".csv";
             //刪除檔案
             textFileUtil.deleteFile(outPutFile);
 
-            if (isShowOldData) {
-                makeCsv.writeToCsvBig5(oldDataResult, outPutFile);
-            }
+//            if (isShowOldData) {
+            makeCsv.writeToCsvBig5(oldDataResult, outPutFile);
+//            }
 
 
             //MIS檔案資料
-            outPutFile = outPutPath + MIS_DATA + ".csv";
+            outPutFile = outPutPath + MIS_DATA + "_" + dateTimeStr + ".csv";
             //刪除檔案
             textFileUtil.deleteFile(outPutFile);
 
-
-            if (isShowNewData) {
-                makeCsv.writeToCsvBig5(newDataResult, outPutFile);
-            }
+//            if (isShowNewData) {
+            makeCsv.writeToCsvBig5(newDataResult, outPutFile);
+//            }
             //比對結果
-            outPutFile = outPutPath + RESULT_DATA + ".csv";
+            outPutFile = outPutPath + RESULT_DATA + "_" + dateTimeStr + ".csv";
             //刪除檔案
             textFileUtil.deleteFile(outPutFile);
 
 
-            if (isShowComparisonData) {
-                makeCsv.writeToCsvBig5(mapConvert(comparisonResult), outPutFile);
-            }
+//            if (isShowComparisonData) {
+            makeCsv.writeToCsvBig5(mapConvert(comparisonResult), outPutFile);
+//            }
 
             //缺少的資料
-            outPutFile = outPutPath + MISSING_DATA + ".csv";
+            outPutFile = outPutPath + MISSING_DATA + "_" + dateTimeStr + ".csv";
             //刪除檔案
             textFileUtil.deleteFile(outPutFile);
 
-            if (isShowMissingData) {
-                makeCsv.writeToCsvBig5(mapConvert(missingResult, MISSING_DATA), outPutFile);
-            }
+//            if (isShowMissingData) {
+            makeCsv.writeToCsvBig5(mapConvert(missingResult, MISSING_DATA), outPutFile);
+//            }
             //多於的資料
-            outPutFile = outPutPath + EXTRA_DATA + ".csv";
+            outPutFile = outPutPath + EXTRA_DATA + "_" + dateTimeStr + ".csv";
             //刪除檔案
             textFileUtil.deleteFile(outPutFile);
 
 
-            if (isShowExtraData) {
-                makeCsv.writeToCsvBig5(mapConvert(extraResult, EXTRA_DATA), outPutFile);
-            }
+//            if (isShowExtraData) {
+            makeCsv.writeToCsvBig5(mapConvert(extraResult, EXTRA_DATA), outPutFile);
+//            }
         } catch (IOException e) {
             LogProcess.error("csv output error");
 //            throw new RuntimeException(e);
@@ -241,10 +243,10 @@ public class CompareFileExportImpl {
         List<Map<String, String>> tmpList = new ArrayList<>();
 
         if (EXTRA_DATA.equals(headerType)) {
-            tmpList.add(missingHeader());
+            tmpList.add(extraHeader());
         }
         if (MISSING_DATA.equals(headerType)) {
-            tmpList.add(extraHeader());
+            tmpList.add(missingHeader());
         }
 
         Map<String, String> tmpMap = new LinkedHashMap<>();
@@ -268,9 +270,8 @@ public class CompareFileExportImpl {
     }
 
     private void exportExcel(String fileName) {
-        String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
-        String outPutFile = resultExcelFolder + fileName + "_ComparisonResults_" + today + ".xlsx";
+        String outPutFile = resultExcelFolder + fileName + "_ComparisonResults_" + dateTimeStr + ".xlsx";
 
 //        LogProcess.info("outPutFile = " + outPutFile);
 
@@ -280,27 +281,27 @@ public class CompareFileExportImpl {
         //開起檔案
         makeExcel.open(outPutFile, BOT_DATA);
 
-        if (isShowOldData) {
-            //台銀檔案資料
-            botFilePage();
-        }
+//        if (isShowOldData) {
+        //台銀檔案資料
+        botFilePage();
+//        }
 
-        if (isShowNewData) {
-            //MIS檔案資料
-            misFilePage();
-        }
-        if (isShowComparisonData) {
-            //比對結果
-            comparePage();
-        }
-        if (isShowMissingData) {
-            //缺少的資料
-            missPage();
-        }
-        if (isShowExtraData) {
-            //多於的資料
-            extraPage();
-        }
+//        if (isShowNewData) {
+        //MIS檔案資料
+        misFilePage();
+//        }
+//        if (isShowComparisonData) {
+        //比對結果
+        comparePage();
+//        }
+//        if (isShowMissingData) {
+        //缺少的資料
+        missPage();
+//        }
+//        if (isShowExtraData) {
+        //多於的資料
+        extraPage();
+//        }
 
         makeExcel.close();
     }
@@ -469,27 +470,43 @@ public class CompareFileExportImpl {
 
     private void exportTextFile(String fileName) {
 //        LogProcess.info("resultTxt = " + resultTxt);
+
         List<String> txt = new ArrayList<>();
 
         StringBuilder s = new StringBuilder();
-//        LogProcess.info("missingResult =" + missingResult.size());
-//        LogProcess.info("extraResult =" + extraResult.size());
-//        LogProcess.info("comparisonResult =" + comparisonResult.size());
-        //多的1個是標題
-        if (missingResult.isEmpty() && extraResult.isEmpty() && comparisonResult.isEmpty()) {
-            s.append("V").append(",").append(fileName);
-        } else {
-            s.append("X").append(",").append(fileName);
-        }
+
+        s.append(fileName).append(",");
+        s.append(oldDataResult.size()).append(",");
+        s.append(newDataResult.size()).append(",");
+        s.append(comparisonResult.size()).append(",");
+        s.append(missingResult.size()).append(",");
+        s.append(extraResult.size());
+
         String message = maskUtil.getLatestMessage();
         if (!Objects.equals(message, "")) {
             s.append(",").append(maskUtil.getLatestMessage());
         }
 
         txt.add(s.toString());
-
         textFileUtil.writeFileContent(resultTxt, txt, CHARSET_BIG5);
 
+    }
+
+
+    public void exportTextHeaderTxt() {
+        dateTimeStr = dateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmm"));
+        List<String> txt = new ArrayList<>();
+        StringBuilder s = new StringBuilder();
+        s.append("檔案名稱").append(",");
+        s.append("Bot資料總筆數").append(",");
+        s.append("Mis資料總筆數").append(",");
+        s.append("新舊資料比對差異筆數").append(",");
+        s.append("Miss的資料筆數").append(",");
+        s.append("Extra的資料筆數").append(",");
+        s.append("備註");
+        txt.add(s.toString());
+        resultTxt = resultTxt.replace(".txt", "_" + dateTimeStr + ".txt");
+        textFileUtil.writeFileContent(resultTxt, txt, CHARSET_BIG5);
     }
 
 

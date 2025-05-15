@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
     <table>botlddb_sync.dbo.db_ihtx_dds</table>
+    <paramDate>db_ihtx_txday</paramDate>
     <field>
         <fieldName>db_ihtx_actno</fieldName>
         <maskType>2</maskType>
@@ -8,6 +9,5 @@
     <field>
         <fieldName>db_ihtx_trpact</fieldName>
         <maskType>2</maskType>
-    </field>
+    </field>   
 </data>
-

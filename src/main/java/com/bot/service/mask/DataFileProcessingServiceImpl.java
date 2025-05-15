@@ -347,7 +347,8 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
         }
 
         //最後輸出執行結果檔案
-        compareResultRpt.exec(compareFileExportImpl.outputResultRpt,compareFileExportImpl.dateTimeStr,compareFileExportImpl.dateTimeStr2);
+        compareResultRpt.exec(compareFileExportImpl.outputResultRpt, compareFileExportImpl.dateTimeStr, compareFileExportImpl.dateTimeStr2);
+        compareFileExportImpl.init();
 
     }
 
@@ -479,8 +480,8 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                 maskFieldList.add(fieldName);
             }
 
-            if  (fieldName.isEmpty()){
-                fieldName ="filler";
+            if (fieldName.isEmpty()) {
+                fieldName = "filler";
             }
             //蒐集表頭及內容的欄位
             columnAllList.add(fieldName);
@@ -688,7 +689,6 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
         // 3完整比對整個檔案名
         return fileName.matches(regex);
     }
-
 
 
 }

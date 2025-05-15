@@ -32,6 +32,7 @@ import java.awt.*;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -134,14 +135,14 @@ public class CompareViewController {
         itemOpen.setOnAction(e -> {
             String selected1 = listView1.getSelectionModel().getSelectedItem();
             if (selected1 != null) {
-                String s1 = oldPath +"\\"+selected1;
+                String s1 = oldPath + "\\" + selected1;
                 LogProcess.info("打開: " + s1);
                 openFileSmart(new File(s1));
             }
 
             String selected2 = listView2.getSelectionModel().getSelectedItem();
             if (selected2 != null) {
-                String s2 = newPath +"\\"+selected2;
+                String s2 = newPath + "\\" + selected2;
                 System.out.println("打開: " + s2);
                 openFileSmart(new File(s2));
             }
@@ -631,6 +632,8 @@ public class CompareViewController {
         CompareSetting setting = CompareSetting.builder()
                 .exportOnlyErrorFile(outPutOnlyErrorData).exportUseMask(outPutUseMask).build();
 
+        LocalDateTime dateTime = LocalDateTime.now();
+        compareFileExportImpl.dateTime = dateTime;
         // 比對後並輸出
         maskDataFileService.exec("", "", oldFileNameMap, newFileNameMap, saveFileCongigMap, setting);
 

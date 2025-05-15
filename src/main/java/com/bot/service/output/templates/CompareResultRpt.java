@@ -78,7 +78,6 @@ public class CompareResultRpt {
                 if (page == totalPages - 1) {
                     String summary = String.format(
                             "                        總計 %10d %10d %10d %10d %10d",
-//                            "Bot總計：%d  Mis總計：%d  差異總數：%d  Miss總數：%d  Extra總數：%d",
                             totalBot, totalMis, totalDiff, totalMiss, totalExtra);
                     template = template.replace("{{SUMMARY}}", summary)
                             .replace("{{FILETOTAL}}", String.valueOf(records.size()));
@@ -95,7 +94,7 @@ public class CompareResultRpt {
             LogProcess.info("報表產出完成");
 
         } catch (IOException e) {
-            LogProcess.error("read or write template fail", e);
+            LogProcess.error("read or write template fail:" + e.getMessage());
         }
     }
 }

@@ -169,11 +169,7 @@
   },
   "LLMR.txt" : {
     "primaryKeys" : [ ],
-    "sortFields" : [ {
-      "fieldName" : "combined_field",
-      "ascending" : true,
-      "orderIndex" : 1
-    } ]
+    "sortFields" : [ ]
   },
   "LNCIF.txt" : {
     "primaryKeys" : [ ],

@@ -1,6 +1,7 @@
 package com.bot.service.output;
 
 
+import com.bot.controller.CompareViewController;
 import com.bot.dto.CompareSetting;
 import com.bot.service.output.templates.CompareResultBean;
 import com.bot.util.log.LogProcess;
@@ -67,14 +68,14 @@ public class CompareFileExportImpl {
     boolean isShowNewData = true;
     boolean isShowMissingData = true;
     boolean isShowExtraData = true;
-
-    private static final LocalDateTime dateTime = LocalDateTime.now();
     public String dateTimeStr = "";
     public String dateTimeStr2 = "";
-
+    public LocalDateTime dateTime;
     public void run(String fileName, List<Map<String, String>> getOldDataResult, List<Map<String, String>> getNewDataResult, List<Map<String, String>> getComparisonResult, Map<String, Map<String, String>> getMissingData, Map<String, Map<String, String>> getExtraData, CompareSetting setting) {
 
         fileName = fileName.replace(".txt", "");
+        dateTimeStr = dateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmm"));
+        dateTimeStr2 = dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
 
         oldDataResult = getOldDataResult;
         newDataResult = getNewDataResult;
@@ -82,30 +83,36 @@ public class CompareFileExportImpl {
         missingResult = getMissingData;
         extraResult = getExtraData;
 
-        isShowComparisonData = true;
         isShowOldData = true;
         isShowNewData = true;
-        isShowMissingData = true;
-        isShowExtraData = true;
+
+        if (comparisonResult.isEmpty()) {
+            isShowComparisonData = false;
+        } else {
+            isShowComparisonData = true;
+        }
+        if (missingResult.isEmpty()) {
+            isShowMissingData = false;
+        } else {
+            isShowMissingData = true;
+        }
+        if (extraResult.isEmpty()) {
+            isShowExtraData = false;
+        } else {
+            isShowExtraData = true;
+        }
 
 //        LogProcess.info("oldDataResult =" + oldDataResult);
 //        LogProcess.info("newDataResult =" + newDataResult);
 //        LogProcess.info("comparisonResult =" + comparisonResult);
 
-        //正常是全產，遇到勾選的時候才會選擇要旨產錯誤的
+        //正常是全產，遇到勾選的時候才會選擇要只有產錯誤的
         boolean isExportOnlyErrorFile = setting.isExportOnlyErrorFile();
+
         if (isExportOnlyErrorFile) {
-            //判斷比對結果、少資料的結果、多資料的結果 如果為空 表示資料是對的，則不出表
-
-
-            if (comparisonResult.isEmpty() && missingResult.isEmpty() && extraResult.isEmpty()) {
-
-//                isShowOldData = false;
-//                isShowNewData = false;
-                isShowComparisonData = false;
-                isShowMissingData = false;
-                isShowExtraData = false;
-            }
+            //不出 A、B檔案：
+            isShowOldData = false;
+            isShowNewData = false;
 
         }
 
@@ -145,9 +152,9 @@ public class CompareFileExportImpl {
             //刪除檔案
             textFileUtil.deleteFile(outPutFile);
 
-//            if (isShowOldData) {
-            makeCsv.writeToCsvBig5(oldDataResult, outPutFile);
-//            }
+            if (isShowOldData) {
+                makeCsv.writeToCsvBig5(oldDataResult, outPutFile);
+            }
 
 
             //MIS檔案資料
@@ -155,39 +162,39 @@ public class CompareFileExportImpl {
             //刪除檔案
             textFileUtil.deleteFile(outPutFile);
 
-//            if (isShowNewData) {
-            makeCsv.writeToCsvBig5(newDataResult, outPutFile);
-//            }
+            if (isShowNewData) {
+                makeCsv.writeToCsvBig5(newDataResult, outPutFile);
+            }
             //比對結果
             outPutFile = outPutPath + RESULT_DATA + "_" + dateTimeStr + ".csv";
             //刪除檔案
             textFileUtil.deleteFile(outPutFile);
 
 
-//            if (isShowComparisonData) {
-            makeCsv.writeToCsvBig5(mapConvert(comparisonResult), outPutFile);
-//            }
+            if (isShowComparisonData) {
+                makeCsv.writeToCsvBig5(mapConvert(comparisonResult), outPutFile);
+            }
 
             //缺少的資料
             outPutFile = outPutPath + MISSING_DATA + "_" + dateTimeStr + ".csv";
             //刪除檔案
             textFileUtil.deleteFile(outPutFile);
 
-//            if (isShowMissingData) {
-            makeCsv.writeToCsvBig5(mapConvert(missingResult, MISSING_DATA), outPutFile);
-//            }
+            if (isShowMissingData) {
+                makeCsv.writeToCsvBig5(mapConvert(missingResult, MISSING_DATA), outPutFile);
+            }
             //多於的資料
             outPutFile = outPutPath + EXTRA_DATA + "_" + dateTimeStr + ".csv";
             //刪除檔案
             textFileUtil.deleteFile(outPutFile);
 
 
-//            if (isShowExtraData) {
-            makeCsv.writeToCsvBig5(mapConvert(extraResult, EXTRA_DATA), outPutFile);
-//            }
+            if (isShowExtraData) {
+                makeCsv.writeToCsvBig5(mapConvert(extraResult, EXTRA_DATA), outPutFile);
+            }
         } catch (IOException e) {
             LogProcess.error("csv output error");
-//            throw new RuntimeException(e);
+
         }
     }
 
@@ -285,27 +292,27 @@ public class CompareFileExportImpl {
         //開起檔案
         makeExcel.open(outPutFile, BOT_DATA);
 
-//        if (isShowOldData) {
-        //台銀檔案資料
-        botFilePage();
-//        }
+        if (isShowOldData) {
+            //台銀檔案資料
+            botFilePage();
+        }
 
-//        if (isShowNewData) {
-        //MIS檔案資料
-        misFilePage();
-//        }
-//        if (isShowComparisonData) {
-        //比對結果
-        comparePage();
-//        }
-//        if (isShowMissingData) {
-        //缺少的資料
-        missPage();
-//        }
-//        if (isShowExtraData) {
-        //多於的資料
-        extraPage();
-//        }
+        if (isShowNewData) {
+            //MIS檔案資料
+            misFilePage();
+        }
+        if (isShowComparisonData) {
+            //比對結果
+            comparePage();
+        }
+        if (isShowMissingData) {
+            //缺少的資料
+            missPage();
+        }
+        if (isShowExtraData) {
+            //多於的資料
+            extraPage();
+        }
 
         makeExcel.close();
     }
@@ -474,44 +481,26 @@ public class CompareFileExportImpl {
 
     private void exportTextFile(String fileName) {
 
-        dateTimeStr = dateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmm"));
-        dateTimeStr2 = dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
 
-        int botTotal = oldDataResult.size();
-        int misTotal = newDataResult.size();
+        //扣1是因為扣除欄位
+        int botTotal = oldDataResult.size() -1;
+        int misTotal = newDataResult.size() - 1;
         int diffCount = comparisonResult.size();
         int missCount = missingResult.size();
         int extraCount = extraResult.size();
-//        String note = maskUtil.getLatestMessage();
 
-//        outputResultRpt.add(new CompareResultBean("TEST", 123456789, 123456789, 123456789, 123456789, 123456789, ""));
         String note = "";
 
 
         outputResultRpt.add(new CompareResultBean(fileName, botTotal, misTotal, diffCount, missCount, extraCount, note));
 
-//        LogProcess.info("resultTxt = " + resultTxt);
-
-//        List<String> txt = new ArrayList<>();
-//
-//        StringBuilder s = new StringBuilder();
-//
-//        s.append(fileName).append(",");
-//        s.append(oldDataResult.size()).append(",");
-//        s.append(newDataResult.size()).append(",");
-//        s.append(comparisonResult.size()).append(",");
-//        s.append(missingResult.size()).append(",");
-//        s.append(extraResult.size());
-//
-//        String message = maskUtil.getLatestMessage();
-//        if (!Objects.equals(message, "")) {
-//            s.append(",").append(maskUtil.getLatestMessage());
-//        }
-//
-//        txt.add(s.toString());
-//        textFileUtil.writeFileContent(resultTxt, txt, CHARSET_BIG5);
 
     }
 
+    public void init(){
+        outputResultRpt.clear();
+        dateTimeStr = "";
+        dateTimeStr2 = "";
+    }
 
 }

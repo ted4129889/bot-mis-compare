@@ -2,6 +2,7 @@ package com.bot.service.output;
 
 
 import com.bot.dto.CompareSetting;
+import com.bot.service.output.templates.CompareResultBean;
 import com.bot.util.log.LogProcess;
 import com.bot.service.compare.CompareDataService;
 import com.bot.service.mask.config.SortFieldConfig;
@@ -59,6 +60,8 @@ public class CompareFileExportImpl {
     private Map<String, Map<String, String>> missingResult = new LinkedHashMap<>();
     private Map<String, Map<String, String>> extraResult = new LinkedHashMap<>();
 
+    public List<CompareResultBean> outputResultRpt = new ArrayList<>();
+
     boolean isShowComparisonData = true;
     boolean isShowOldData = true;
     boolean isShowNewData = true;
@@ -66,7 +69,8 @@ public class CompareFileExportImpl {
     boolean isShowExtraData = true;
 
     private static final LocalDateTime dateTime = LocalDateTime.now();
-    private String dateTimeStr = "";
+    public String dateTimeStr = "";
+    public String dateTimeStr2 = "";
 
     public void run(String fileName, List<Map<String, String>> getOldDataResult, List<Map<String, String>> getNewDataResult, List<Map<String, String>> getComparisonResult, Map<String, Map<String, String>> getMissingData, Map<String, Map<String, String>> getExtraData, CompareSetting setting) {
 
@@ -469,44 +473,44 @@ public class CompareFileExportImpl {
 
 
     private void exportTextFile(String fileName) {
+
+        dateTimeStr = dateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmm"));
+        dateTimeStr2 = dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+
+        int botTotal = oldDataResult.size();
+        int misTotal = newDataResult.size();
+        int diffCount = comparisonResult.size();
+        int missCount = missingResult.size();
+        int extraCount = extraResult.size();
+//        String note = maskUtil.getLatestMessage();
+
+//        outputResultRpt.add(new CompareResultBean("TEST", 123456789, 123456789, 123456789, 123456789, 123456789, ""));
+        String note = "";
+
+
+        outputResultRpt.add(new CompareResultBean(fileName, botTotal, misTotal, diffCount, missCount, extraCount, note));
+
 //        LogProcess.info("resultTxt = " + resultTxt);
 
-        List<String> txt = new ArrayList<>();
+//        List<String> txt = new ArrayList<>();
+//
+//        StringBuilder s = new StringBuilder();
+//
+//        s.append(fileName).append(",");
+//        s.append(oldDataResult.size()).append(",");
+//        s.append(newDataResult.size()).append(",");
+//        s.append(comparisonResult.size()).append(",");
+//        s.append(missingResult.size()).append(",");
+//        s.append(extraResult.size());
+//
+//        String message = maskUtil.getLatestMessage();
+//        if (!Objects.equals(message, "")) {
+//            s.append(",").append(maskUtil.getLatestMessage());
+//        }
+//
+//        txt.add(s.toString());
+//        textFileUtil.writeFileContent(resultTxt, txt, CHARSET_BIG5);
 
-        StringBuilder s = new StringBuilder();
-
-        s.append(fileName).append(",");
-        s.append(oldDataResult.size()).append(",");
-        s.append(newDataResult.size()).append(",");
-        s.append(comparisonResult.size()).append(",");
-        s.append(missingResult.size()).append(",");
-        s.append(extraResult.size());
-
-        String message = maskUtil.getLatestMessage();
-        if (!Objects.equals(message, "")) {
-            s.append(",").append(maskUtil.getLatestMessage());
-        }
-
-        txt.add(s.toString());
-        textFileUtil.writeFileContent(resultTxt, txt, CHARSET_BIG5);
-
-    }
-
-
-    public void exportTextHeaderTxt() {
-        dateTimeStr = dateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmm"));
-        List<String> txt = new ArrayList<>();
-        StringBuilder s = new StringBuilder();
-        s.append("檔案名稱").append(",");
-        s.append("Bot資料總筆數").append(",");
-        s.append("Mis資料總筆數").append(",");
-        s.append("新舊資料比對差異筆數").append(",");
-        s.append("Miss的資料筆數").append(",");
-        s.append("Extra的資料筆數").append(",");
-        s.append("備註");
-        txt.add(s.toString());
-        resultTxt = resultTxt.replace(".txt", "_" + dateTimeStr + ".txt");
-        textFileUtil.writeFileContent(resultTxt, txt, CHARSET_BIG5);
     }
 
 

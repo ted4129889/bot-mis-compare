@@ -3,6 +3,7 @@ package com.bot.service.mask;
 
 import com.bot.dto.CompareSetting;
 import com.bot.service.compare.CompareDataService;
+import com.bot.service.output.templates.CompareResultRpt;
 import com.bot.util.log.LogProcess;
 import com.bot.service.mask.config.FileConfig;
 import com.bot.service.mask.config.SortFieldConfig;
@@ -61,6 +62,8 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
     private DataMasker dataMasker;
     @Autowired
     private CompareFileExportImpl compareFileExportImpl;
+    @Autowired
+    private CompareResultRpt compareResultRpt;
     @Autowired
     private CompareDataService compareDataService;
     //畫面區域1
@@ -341,8 +344,11 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 
 
             }
-
         }
+
+        //最後輸出執行結果檔案
+        compareResultRpt.exec(compareFileExportImpl.outputResultRpt,compareFileExportImpl.dateTimeStr,compareFileExportImpl.dateTimeStr2);
+
     }
 
     @Override

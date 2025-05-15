@@ -10,8 +10,40 @@
 }
 
 
-.label.bold {
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 13px;
+}
+
+.button {
+    -fx-background-color: #c7c9c9;
+    -fx-text-fill: black;
+    -fx-background-radius: 6;
+    -fx-padding: 6 12;
+}
+
+.button:hover {
+    -fx-background-color: #9cadad;
+}
+
+.label {
+    -fx-text-fill: #333;
+}
+
+.label-bold {
     -fx-font-weight: bold;
+}
+
+.hint-label {
+    -fx-text-fill: #888;
+    -fx-padding: 4 0 4 8;
+}
+
+.drop-zone {
+    -fx-border-color: #ccc;
+    -fx-border-style: dashed;
+    -fx-border-width: 2;
+    -fx-padding: 10;
 }
 
 .label_3 {

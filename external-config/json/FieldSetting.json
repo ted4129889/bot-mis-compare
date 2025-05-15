@@ -458,5 +458,9 @@
   "ALMINFFCT.txt" : {
     "primaryKeys" : [ ],
     "sortFields" : [ ]
+  },
+  "DWMM0010_[yyyymmdd].txt" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
   }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <table>botsrdb_sync.dbo.db_lnco_dds</table>
+    <table>botsrdb.dbo.db_lnco_dds</table>
     <field>
         <fieldName>db_lnco_pidno</fieldName>
         <maskType>1</maskType>

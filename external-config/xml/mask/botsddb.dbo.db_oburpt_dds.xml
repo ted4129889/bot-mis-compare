@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <table>botsddb_sync.dbo.db_oburpt_dds</table>
+    <table>botsddb.dbo.db_oburpt_dds</table>
 </data>
 

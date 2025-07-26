@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <table>botsrdb_sync.dbo.db_fcupr_dds</table>
+    <table>botsrdb.dbo.db_fcupr_dds</table>
+    <field>
+        <fieldName>db_fcupr_unino</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db_fcupr_finpid</fieldName>
+        <maskType>1</maskType>
+    </field>
+    <field>
+        <fieldName>db_fcupr_intpid</fieldName>
+        <maskType>1</maskType>
+    </field>
 </data>
 

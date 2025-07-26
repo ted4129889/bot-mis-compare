@@ -7,6 +7,8 @@
 #      exposure:
 #        include: health,shutdown,info
 spring:
+  main:
+    web-application-type: none
   #  config:
   #    import: file:external-parameters.properties
   #  datasource:
@@ -26,8 +28,8 @@ spring:
       root: info           # 設定全域日誌等級
       org.hibernate.SQL: DEBUG
       org.hibernate.type.descriptor.sql: TRACE  # 顯示參數值
-server:
-  port: 50082
+#server:
+#  port: 50082
 
 xmlPath: "external-config/xml/"
 batchFilePath: "batch-file/"

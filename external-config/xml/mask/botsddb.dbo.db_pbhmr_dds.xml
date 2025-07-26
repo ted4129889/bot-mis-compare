@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <table>botsddb_sync.dbo.db_pbhmr_dds</table>
+    <table>botsddb.dbo.db_pbhmr_dds</table>
     <field>
         <fieldName>db_pbhmr_entpno</fieldName>
         <maskType>1</maskType>

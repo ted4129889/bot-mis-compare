@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <table>botsrdb_sync.dbo.db_glblmr_dds</table>
+    <table>botsrdb.dbo.db_glblmr_dds</table>
     <field>
         <fieldName>db_glblmr_unino</fieldName>
         <maskType>1</maskType>
@@ -20,6 +20,10 @@
     <field>
         <fieldName>db_glblmr_dpactno</fieldName>
         <maskType>2</maskType>
+    </field>
+    <field>
+        <fieldName>db_glblmr_cifkey</fieldName>
+        <maskType>1</maskType>
     </field>
 </data>
 

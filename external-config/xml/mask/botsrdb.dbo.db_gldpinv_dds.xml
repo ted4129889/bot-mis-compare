@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <table>botsrdb_sync.dbo.db_gldpinv_dds</table>
+    <table>botsrdb.dbo.db_gldpinv_dds</table>
     <field>
         <fieldName>db_gldpinv_actno</fieldName>
         <maskType>2</maskType>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <table>botsrdb_sync.dbo.db_fchtr_dds</table>
+    <table>botsrdb.dbo.db_fchtr_dds</table>
+    <paramDate>db_fchtr_entday</paramDate>
     <field>
         <fieldName>db_fchtr_mactno</fieldName>
         <maskType>2</maskType>

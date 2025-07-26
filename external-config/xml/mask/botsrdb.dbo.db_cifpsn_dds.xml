@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <table>botsrdb_sync.dbo.db_cifpsn_dds</table>
+    <table>botsrdb.dbo.db_cifpsn_dds</table>
     <field>
         <fieldName>db_cifpsn_pidno</fieldName>
         <maskType>1</maskType>

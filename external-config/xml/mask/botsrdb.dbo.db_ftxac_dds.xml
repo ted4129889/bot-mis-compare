@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <table>botsrdb_sync.dbo.db_ftxac_dds</table>
+    <table>botsrdb.dbo.db_ftxac_dds</table>
     <field>
         <fieldName>db_ftxac_cifkey</fieldName>
         <maskType>1</maskType>

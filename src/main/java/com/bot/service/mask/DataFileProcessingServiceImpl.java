@@ -386,7 +386,10 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
         List<String> sqlFilePaths = new ArrayList<>();
 
         try (Stream<Path> paths = Files.walk(Paths.get(folderPath), 1)) { // 只讀取第一層檔案
-            sqlFilePaths = paths.filter(Files::isRegularFile).filter(path -> FilenameUtils.normalize(path.toString()).toLowerCase().endsWith(".txt")).map(Path::toString).collect(Collectors.toList());
+            sqlFilePaths = paths.filter(Files::isRegularFile).filter(path -> {
+                FilenameUtils.normalize(path.toString());
+                return true;
+            }).map(Path::toString).collect(Collectors.toList());
         } catch (IOException e) {
             LogProcess.info("Error reading SQL files");
         }

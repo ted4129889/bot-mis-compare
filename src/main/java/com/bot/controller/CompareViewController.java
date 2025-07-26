@@ -217,8 +217,8 @@ public class CompareViewController {
             if (db.hasFiles()) {
                 File folder = db.getFiles().get(0); // 只處理第一個拖入的資料夾
                 if (folder.isDirectory()) {
-                    Map<String, String> fileMap = Arrays.stream(folder.listFiles())
-                            .filter(file -> file.isFile() && file.getName().toLowerCase().endsWith(".txt"))
+                    Map<String, String> fileMap = Arrays.stream(Objects.requireNonNull(folder.listFiles()))
+                            .filter(File::isFile)
                             .collect(Collectors.toMap(
                                     File::getName,
                                     File::getAbsolutePath,
@@ -264,8 +264,8 @@ public class CompareViewController {
             if (db.hasFiles()) {
                 File folder = db.getFiles().get(0); // 只處理第一個拖入的資料夾
                 if (folder.isDirectory()) {
-                    Map<String, String> fileMap = Arrays.stream(folder.listFiles())
-                            .filter(file -> file.isFile() && file.getName().toLowerCase().endsWith(".txt"))
+                    Map<String, String> fileMap = Arrays.stream(Objects.requireNonNull(folder.listFiles()))
+                            .filter(File::isFile)
                             .collect(Collectors.toMap(
                                     File::getName,
                                     File::getAbsolutePath,
@@ -311,10 +311,10 @@ public class CompareViewController {
         maskDataFileService.processPairingColumn(fileName);
         LogProcess.info("fileName = " + fileName);
         List<String> columns = maskDataFileService.getColumnList();
-
+        LogProcess.info("maskDataFileService.getXmlAllFileName() = " + maskDataFileService.getXmlAllFileName());
 
         //先確認檔案名稱是否存在定義檔
-        if (maskDataFileService.getXmlAllFileName().contains(fileName)) {
+        if (!maskDataFileService.getXmlAllFileName().contains(fileName)) {
             if (!showAlert("檔案名稱不存在定義檔")) {
                 btnFieldSetting.setDisable(true);
                 btnCompare.setDisable(true);
@@ -530,7 +530,7 @@ public class CompareViewController {
         // 你目前載入的檔案名稱
         saveFileNameList = new ArrayList<>();
         for (String f : maskDataFileService.getXmlAllFileName()) {
-            saveFileNameList.add(f + ".txt");
+            saveFileNameList.add(f);
         }
         saveFileCongigMap = FileConfigManager.getConfigMap();
         FileConfigManager.ensureAllFilesExistAndSave(saveFileNameList);
@@ -577,7 +577,7 @@ public class CompareViewController {
         // 顯示於 Label
         label.setText(selectedDir.getAbsolutePath());
 
-        File[] txtFiles = selectedDir.listFiles(file -> file.isFile() && file.getName().toLowerCase().endsWith(".txt"));
+        File[] txtFiles = selectedDir.listFiles(File::isFile);
         if (txtFiles == null) return;
 
         Map<String, String> fileMap = Arrays.stream(txtFiles)

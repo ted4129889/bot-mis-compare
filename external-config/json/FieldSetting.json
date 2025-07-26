@@ -458,5 +458,489 @@
   "DWMM0010_[yyyymmdd].txt" : {
     "primaryKeys" : [ ],
     "sortFields" : [ ]
+  },
+  "ALMINFACCT" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AB932" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AB930" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AB897" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AB816" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AB744" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AB727" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AB656" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AB560R" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AB560" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AB374" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AB297" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "2MIS-YEARDAY" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "2MIS-XCRT" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "TODAY" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "2CRSC-TODAY" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "2MIS-AB1062" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "2MIS-AB1185" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "2MIS-D7VAR" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "2MIS-DEM-069" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "2MIS-DEM-076" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "2MIS-EBKCT" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "2MIS-FX-OBUFRT" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "2MISOBU" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "2MISPRDFIT[yyyymmdd]" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "2MISPRDFIT" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AB181" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "2MIS-TMU-FCTGAIN" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "2CRSC-DXCRT" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "RISK-TODAY" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "STAMPHOLE" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "TREASDLY" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "TRSCLS" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "TRSOPN" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "TRSVACC" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "OBUFX" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "NTFXPOT" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "NTFXPO" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DXCRT" : {
+    "primaryKeys" : [ "no", "currencyswname(no)" ],
+    "sortFields" : [ ]
+  },
+  "ELN-YEARDAYX" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "GVVAR" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "HOLE" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "LCOMPBCTL.DAT" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "LLCON" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "LLMR" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "LNCIF" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DWCTL" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DWMM0010.[yyyymmdd].D" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DWMM0010_[yyyymmdd]" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DWMM0008.[yyyymmdd].D" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DWMM0004.[yyyymmdd].D" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DWMM0003.[yyyymmdd].D" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DWMM0002.[yyyymmdd].D" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DWMM0010.[yyyymmdd].H" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DWMM0008.[yyyymmdd].H" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DWMM0004.[yyyymmdd].H" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DWMM0003.[yyyymmdd].H" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DWMM0002.[yyyymmdd].H" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DWMM0001.[yyyymmdd].H" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DWMM0001.[yyyymmdd].D" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUOT0100.[yyyymmdd].D" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUOT0004.[yyyymmdd].D" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUFX0010.[yyyymmdd].D" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUOT0001.[yyyymmdd].D" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUOT0003.[yyyymmdd].D" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUOT0003.[yyyymmdd].H" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUOT0002.[yyyymmdd].D" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUFX0003.[yyyymmdd].H" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUOT0100.[yyyymmdd].H" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUOT0004.[yyyymmdd].H" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUOT0002.[yyyymmdd].H" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUOT0001.[yyyymmdd].H" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUFX0009.[yyyymmdd].D" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUFX0008.[yyyymmdd].H" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUFX0009.[yyyymmdd].H" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUFX0010.[yyyymmdd].H" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUFX0008.[yyyymmdd].D" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUFX0006.[yyyymmdd].D" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUFX0007.[yyyymmdd].H" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUFX0007.[yyyymmdd].D" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUFX0005.[yyyymmdd].D" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUFX0005.[yyyymmdd].H" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUFX0006.[yyyymmdd].H" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUFX0004.[yyyymmdd].H" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "901232" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "DUFX0004.[yyyymmdd].D" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "D4VAR" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "D1VAR" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "CLFL" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "CKVAR" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "CKBAL" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "CIF-DHMR" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "CB-[yyyymmdd]" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "CB" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-PRDFIT[yyyymmdd]" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-TMU" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-TMU[yyyymmdd]" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-TODAY" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-YEARDAY" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-GL-VALUE" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-GL-DPINV" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-GL-DETAIL" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-GL-FPACNO" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-GL-MAIN" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-GL-PRICE" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-GL-TX" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "CAPTL1" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-FPRD" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-FPRD[yyyymmdd]" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-CUSDATA" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-FMCURCD" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-CUSADDR" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-CIFEXT" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-ACCTBAL-CT" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-ACCTBAL-PB" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AMPS-ACCTBAL-CK" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ALM-XCRT" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ALMINFNDP" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ALMINFIMEX" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ALMINFFMT" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ALMINFFCT" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
   }
 }

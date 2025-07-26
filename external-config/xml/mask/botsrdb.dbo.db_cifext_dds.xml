@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <table>botsrdb_sync.dbo.db_cifext_dds</table>
+    <table>botsrdb.dbo.db_cifext_dds</table>
     <field>
         <fieldName>db_cifext_name</fieldName>
         <maskType>4</maskType>

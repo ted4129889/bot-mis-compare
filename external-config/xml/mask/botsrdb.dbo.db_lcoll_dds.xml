@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<data>
-    <table>botsrdb_sync.dbo.db_lcoll_dds</table>
-    <field>
-        <fieldName>db_lcoll_actno</fieldName>
-        <maskType>2</maskType>
-    </field>
-</data>
-

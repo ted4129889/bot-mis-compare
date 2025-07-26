@@ -200,13 +200,13 @@ public class CompareDataServiceImpl implements CompareDataService {
             //用欄位對 A B資料 取得同一個欄位值
 
 
-            if (!Objects.equals(aRow.get(c), bRow.get(c))) {
+            if (!Objects.equals(aRow.get(c).trim(), bRow.get(c).trim())) {
                 map = new LinkedHashMap<>();
                 String desc = "";
                 if (!Objects.equals(bRow.get(customPrimaryKey), "")) {
-                    desc = "第" + index + "筆";
+                    desc = "第" + (index-1) + "筆";
                 } else {
-                    desc = "第" + bRow.get(customPrimaryKey) + "筆";
+                    desc = "第" + (Integer.parseInt(bRow.get(customPrimaryKey))-1) + "筆，點我連過去。";
                 }
 
                 String oldData = aRow.get(c);

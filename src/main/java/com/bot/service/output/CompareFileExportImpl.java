@@ -183,7 +183,7 @@ public class CompareFileExportImpl {
             if (isShowMissingData) {
                 makeCsv.writeToCsvBig5(mapConvert(missingResult, MISSING_DATA), outPutFile);
             }
-            //多於的資料
+            //多餘的資料
             outPutFile = outPutPath + EXTRA_DATA + "_" + dateTimeStr + ".csv";
             //刪除檔案
             textFileUtil.deleteFile(outPutFile);
@@ -220,7 +220,7 @@ public class CompareFileExportImpl {
     private Map<String, String> missingHeader() {
         Map<String, String> tmpMap = new LinkedHashMap<>();
 
-        tmpMap.put("desc", "以下為產出檔案缺少的資料，第幾筆看「BotData」");
+        tmpMap.put("desc", "以下為MISBH產出的檔案缺少的資料，第幾筆看「BotData」頁籤");
         tmpMap.put("pkCol", "PrimaryKey欄位");
         tmpMap.put("pk", "PrimaryKey值");
 
@@ -266,8 +266,8 @@ public class CompareFileExportImpl {
 
             String[] col_1 = r.getKey().split("#");
             String num = col_1[0];
-            String keyCol = col_1[1].replace(",", "+");
-            String key = col_1[2].replace(",", "+");
+            String keyCol = col_1[1];
+            String key = col_1[2];
 
             tmpMap.put("desc", "第" + num + "筆");
             tmpMap.put("pkCol", keyCol);
@@ -428,7 +428,7 @@ public class CompareFileExportImpl {
             if (col == 1 && row != 1) {
                 makeExcel.setLinkToSheetRow(BOT_DATA, Integer.parseInt(num) + 1);
             }
-            makeExcel.setValue(row, col, "第" + num + "筆");
+            makeExcel.setValue(row, col, "請看「BotData」頁籤的第" + num + "筆資料(在第"+(Integer.parseInt(num) + 1)+"列)，直接點我連過去");
             makeExcel.setValue(row, col + 1, keyCol);
             makeExcel.setValue(row, col + 2, key);
         }
@@ -466,7 +466,7 @@ public class CompareFileExportImpl {
             if (col == 1 && row != 1) {
                 makeExcel.setLinkToSheetRow(MIS_DATA, Integer.parseInt(num) + 1);
             }
-            makeExcel.setValue(row, col, "第" + num + "筆");
+            makeExcel.setValue(row, col, "請看「MisData」頁籤的第" + (Integer.parseInt(num) + 1) + "筆資料(在第"+(num)+"列)");
             makeExcel.setValue(row, col + 1, keyCol);
             makeExcel.setValue(row, col + 2, key);
         }

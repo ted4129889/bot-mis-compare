@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <header>
-        <useSqlData>false</useSqlData>
-        <separator></separator>
-    </header>
+    <header></header>
     <body>
-        <dataKey></dataKey>
-        <useSqlData>true</useSqlData>
-        <separator></separator>
         <field>
             <fieldName>rgday</fieldName>
             <fieldType>string</fieldType>
             <format>0000000</format>
             <length>7</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>brno</fieldName>
@@ -23,8 +15,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>apcnt</fieldName>
@@ -32,8 +22,6 @@
             <format>00000</format>
             <length>5</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>apamt</fieldName>
@@ -41,8 +29,6 @@
             <format>00000000000</format>
             <length>11</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>acccnt</fieldName>
@@ -50,8 +36,6 @@
             <format>00000</format>
             <length>5</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>accamt</fieldName>
@@ -59,8 +43,6 @@
             <format>00000000000</format>
             <length>11</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
     </body>
 </data>

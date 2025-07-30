@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
     <table>botsrdb.dbo.db_lmng_dds</table>
+    <field>
+        <fieldName>db_lmng_entpno</fieldName>
+        <maskType>1</maskType>
+    </field>
 </data>
-

@@ -1,78 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <txt>
+    <header>
+    </header>
+    <body>
         <field>
             <fieldName>brno</fieldName>
-            <length>3</length>
+            <fieldType>COMP</fieldType>
+            <length>1.5</length>
+            <decimal>0</decimal>
         </field>
         <field>
             <fieldName>apno</fieldName>
-            <length>3</length>
+            <fieldType>COMP</fieldType>
+            <length>1.5</length>
+            <decimal>0</decimal>
         </field>
         <field>
             <fieldName>curcd</fieldName>
-            <length>2</length>
+            <fieldType>COMP</fieldType>
+            <length>1</length>
+            <decimal>0</decimal>
         </field>
         <field>
             <fieldName>charcd</fieldName>
-            <length>2</length>
+            <fieldType>COMP</fieldType>
+            <length>1</length>
+            <decimal>0</decimal>
         </field>
         <field>
             <fieldName>brno1</fieldName>
-            <length>3</length>
+            <fieldType>COMP</fieldType>
+            <length>1.5</length>
+            <decimal>0</decimal>
         </field>
         <field>
             <fieldName>apno1</fieldName>
-            <length>3</length>
+            <fieldType>COMP</fieldType>
+            <length>1.5</length>
+            <decimal>0</decimal>
         </field>
         <field>
             <fieldName>srno1</fieldName>
-            <length>5</length>
+            <fieldType>COMP</fieldType>
+            <length>2.5</length>
+            <decimal>0</decimal>
         </field>
         <field>
             <fieldName>chkdg1</fieldName>
-            <length>1</length>
+            <fieldType>COMP</fieldType>
+            <length>0.5</length>
+            <decimal>0</decimal>
         </field>
         <field>
             <fieldName>pidno</fieldName>
+            <fieldType>X</fieldType>
             <length>10</length>
+            <decimal>0</decimal>
         </field>
         <field>
             <fieldName>prdcd</fieldName>
-            <length>3</length>
+            <fieldType>COMP</fieldType>
+            <length>1.5</length>
+            <decimal>0</decimal>
         </field>
         <field>
             <fieldName>ydbal</fieldName>
-            <length>17</length>
+            <fieldType>COMP</fieldType>
+            <length>8</length>
+            <decimal>2</decimal>
         </field>
         <field>
             <fieldName>dcnt</fieldName>
-            <length>4</length>
+            <fieldType>COMP</fieldType>
+            <length>2</length>
+            <decimal>0</decimal>
         </field>
         <field>
             <fieldName>damt</fieldName>
-            <length>17</length>
+            <fieldType>COMP</fieldType>
+            <length>8</length>
+            <decimal>2</decimal>
         </field>
         <field>
             <fieldName>ccnt</fieldName>
-            <length>4</length>
+            <fieldType>COMP</fieldType>
+            <length>2</length>
+            <decimal>0</decimal>
         </field>
         <field>
             <fieldName>camt</fieldName>
-            <length>17</length>
+            <fieldType>COMP</fieldType>
+            <length>8</length>
+            <decimal>2</decimal>
         </field>
         <field>
             <fieldName>tdbal</fieldName>
-            <length>17</length>
+            <fieldType>COMP</fieldType>
+            <length>8</length>
+            <decimal>2</decimal>
         </field>
         <field>
             <fieldName>tbsdy</fieldName>
-            <length>8</length>
+            <fieldType>COMP</fieldType>
+            <length>4</length>
+            <decimal>0</decimal>
         </field>
         <field>
             <fieldName>filler</fieldName>
-            <length>1</length>
+            <fieldType>COMP</fieldType>
+            <length>0.5</length>
+            <decimal>0</decimal>
         </field>
-    </txt>
+    </body>
+    <footer>
+    </footer>
 </data>
-

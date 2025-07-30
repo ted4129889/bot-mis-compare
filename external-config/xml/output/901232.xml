@@ -1,147 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
     <header>
-        <useSqlData>false</useSqlData>
         <separator>,</separator>
-        <field>
-            <fieldName>space</fieldName>
-            <fieldType>string</fieldType>
-            <format></format>
-            <length>22</length>
-            <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
-        </field>
-        <field>
-            <fieldName>' 同業名稱 '</fieldName>
-            <fieldType>string</fieldType>
-            <format></format>
-            <length>10</length>
-            <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
-        </field>
-        <field>
-            <fieldName>space</fieldName>
-            <fieldType>string</fieldType>
-            <format></format>
-            <length>22</length>
-            <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
-        </field>
-        <field>
-            <fieldName>separator</fieldName>
-            <fieldType>string</fieldType>
-            <format></format>
-            <length>1</length>
-            <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
-        </field>
-        <field>
-            <fieldName>space</fieldName>
-            <fieldType>string</fieldType>
-            <format></format>
-            <length>3</length>
-            <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
-        </field>
-        <field>
-            <fieldName>' 帳號 '</fieldName>
-            <fieldType>string</fieldType>
-            <format></format>
-            <length>6</length>
-            <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
-        </field>
-        <field>
-            <fieldName>space</fieldName>
-            <fieldType>string</fieldType>
-            <format></format>
-            <length>3</length>
-            <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
-        </field>
-        <field>
-            <fieldName>separator</fieldName>
-            <fieldType>string</fieldType>
-            <format></format>
-            <length>1</length>
-            <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
-        </field>
-        <field>
-            <fieldName>' 統一編號 '</fieldName>
-            <fieldType>string</fieldType>
-            <format></format>
-            <length>10</length>
-            <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
-        </field>
-        <field>
-            <fieldName>separator</fieldName>
-            <fieldType>string</fieldType>
-            <format></format>
-            <length>1</length>
-            <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
-        </field>
-        <field>
-            <fieldName>space</fieldName>
-            <fieldType>string</fieldType>
-            <format></format>
-            <length>4</length>
-            <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
-        </field>
-        <field>
-            <fieldName>' 餘額 '</fieldName>
-            <fieldType>string</fieldType>
-            <format></format>
-            <length>6</length>
-            <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
-        </field>
-        <field>
-            <fieldName>space</fieldName>
-            <fieldType>string</fieldType>
-            <format></format>
-            <length>5</length>
-            <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
-        </field>
-        <field>
-            <fieldName>separator</fieldName>
-            <fieldType>string</fieldType>
-            <format></format>
-            <length>1</length>
-            <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
-        </field>
-        <field>
-            <fieldName>space</fieldName>
-            <fieldType>string</fieldType>
-            <format></format>
-            <length>3</length>
-            <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
-        </field>
+<!--        <field>-->
+<!--            <fieldName>filler</fieldName>-->
+<!--            <fieldType>string</fieldType>-->
+<!--            <format></format>-->
+<!--            <length>22</length>-->
+<!--            <align>left</align>-->
+<!--        </field>-->
+<!--        <field>-->
+<!--            <fieldName>' 同業名稱 '</fieldName>-->
+<!--            <fieldType>string</fieldType>-->
+<!--            <format></format>-->
+<!--            <length>10</length>-->
+<!--            <align>left</align>-->
+<!--        </field>-->
+<!--        <field>-->
+<!--            <fieldName>space</fieldName>-->
+<!--            <fieldType>string</fieldType>-->
+<!--            <format></format>-->
+<!--            <length>22</length>-->
+<!--            <align>left</align>-->
+<!--        </field>-->
+<!--        <field>-->
+<!--            <fieldName>separator</fieldName>-->
+<!--            <fieldType>string</fieldType>-->
+<!--            <format></format>-->
+<!--            <length>1</length>-->
+<!--            <align>left</align>-->
+<!--        </field>-->
+<!--        <field>-->
+<!--            <fieldName>filler1</fieldName>-->
+<!--            <fieldType>string</fieldType>-->
+<!--            <format></format>-->
+<!--            <length>3</length>-->
+<!--            <align>left</align>-->
+<!--        </field>-->
+<!--        <field>-->
+<!--            <fieldName>' 帳號 '</fieldName>-->
+<!--            <fieldType>string</fieldType>-->
+<!--            <format></format>-->
+<!--            <length>6</length>-->
+<!--            <align>left</align>-->
+<!--        </field>-->
+<!--        <field>-->
+<!--            <fieldName>filler2</fieldName>-->
+<!--            <fieldType>string</fieldType>-->
+<!--            <format></format>-->
+<!--            <length>3</length>-->
+<!--            <align>left</align>-->
+<!--        </field>-->
+<!--        <field>-->
+<!--            <fieldName>separator</fieldName>-->
+<!--            <fieldType>string</fieldType>-->
+<!--            <format></format>-->
+<!--            <length>1</length>-->
+<!--            <align>left</align>-->
+<!--        </field>-->
+<!--        <field>-->
+<!--            <fieldName>' 統一編號 '</fieldName>-->
+<!--            <fieldType>string</fieldType>-->
+<!--            <format></format>-->
+<!--            <length>10</length>-->
+<!--            <align>left</align>-->
+<!--        </field>-->
+<!--        <field>-->
+<!--            <fieldName>separator</fieldName>-->
+<!--            <fieldType>string</fieldType>-->
+<!--            <format></format>-->
+<!--            <length>1</length>-->
+<!--            <align>left</align>-->
+<!--        </field>-->
+<!--        <field>-->
+<!--            <fieldName>filler4</fieldName>-->
+<!--            <fieldType>string</fieldType>-->
+<!--            <format></format>-->
+<!--            <length>4</length>-->
+<!--            <align>left</align>-->
+<!--        </field>-->
+<!--        <field>-->
+<!--            <fieldName>' 餘額 '</fieldName>-->
+<!--            <fieldType>string</fieldType>-->
+<!--            <format></format>-->
+<!--            <length>6</length>-->
+<!--            <align>left</align>-->
+<!--        </field>-->
+<!--        <field>-->
+<!--            <fieldName>filler5</fieldName>-->
+<!--            <fieldType>string</fieldType>-->
+<!--            <format></format>-->
+<!--            <length>5</length>-->
+<!--            <align>left</align>-->
+<!--        </field>-->
+<!--        <field>-->
+<!--            <fieldName>separator</fieldName>-->
+<!--            <fieldType>string</fieldType>-->
+<!--            <format></format>-->
+<!--            <length>1</length>-->
+<!--            <align>left</align>-->
+<!--        </field>-->
+<!--        <field>-->
+<!--            <fieldName>filler6</fieldName>-->
+<!--            <fieldType>string</fieldType>-->
+<!--            <format></format>-->
+<!--            <length>3</length>-->
+<!--            <align>left</align>-->
+<!--        </field>-->
     </header>
     <body>
-        <dataKey></dataKey>
-        <useSqlData>true</useSqlData>
         <separator>,</separator>
         <field>
             <fieldName>cmpname</fieldName>
@@ -149,8 +116,6 @@
             <format></format>
             <length>54</length>
             <align>left</align>
-            <oTableName>botsrdb.db_actcmp_dds</oTableName>
-            <oFieldName>db_actcmp_cmpname</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -158,8 +123,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>brno</fieldName>
@@ -167,8 +130,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>botsrdb.db_ckhmr_dds</oTableName>
-            <oFieldName>db_ckhmr_brno</oFieldName>
         </field>
         <field>
             <fieldName>apno</fieldName>
@@ -176,8 +137,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>botsrdb.db_ckhmr_dds</oTableName>
-            <oFieldName>db_ckhmr_apno</oFieldName>
         </field>
         <field>
             <fieldName>srno</fieldName>
@@ -185,8 +144,6 @@
             <format>00000</format>
             <length>5</length>
             <align>right</align>
-            <oTableName>botsrdb.db_ckhmr_dds</oTableName>
-            <oFieldName>db_ckhmr_srno</oFieldName>
         </field>
         <field>
             <fieldName>chkdg</fieldName>
@@ -194,8 +151,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>botsrdb.db_ckhmr_dds</oTableName>
-            <oFieldName>db_ckhmr_chkdg</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -203,17 +158,13 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
-            <fieldName>space</fieldName>
+            <fieldName>filler7</fieldName>
             <fieldType>string</fieldType>
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>eidno</fieldName>
@@ -221,17 +172,13 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName>botsrdb.db_ckhmr_dds</oTableName>
-            <oFieldName>db_ckhmr_entpno</oFieldName>
         </field>
         <field>
-            <fieldName>space</fieldName>
+            <fieldName>filler8</fieldName>
             <fieldType>string</fieldType>
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -239,17 +186,13 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>ydbal</fieldName>
             <fieldType>string</fieldType>
-            <format> 0000000000000.00;-0000000000000.00</format>
-            <length>35</length>
+            <format>+0000000000000.00;-0000000000000.00</format>
+            <length>17</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -257,17 +200,13 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
-            <fieldName>space</fieldName>
+            <fieldName>filler9</fieldName>
             <fieldType>string</fieldType>
             <format></format>
-            <length>3</length>
+            <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
     </body>
 </data>

@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <header>
-        <useSqlData>false</useSqlData>
-        <separator></separator>
-    </header>
+    <header></header>
     <body>
-        <dataKey></dataKey>
-        <useSqlData>false</useSqlData>
         <separator>,</separator>
         <field>
             <fieldName>brno</fieldName>
@@ -14,8 +9,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -23,8 +16,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>actno</fieldName>
@@ -32,8 +23,6 @@
             <format>000000000000</format>
             <length>12</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -41,8 +30,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>sortcd</fieldName>
@@ -50,8 +37,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -59,8 +44,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>entpno</fieldName>
@@ -68,8 +51,6 @@
             <format></format>
             <length>10</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -77,8 +58,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>pidno</fieldName>
@@ -86,8 +65,6 @@
             <format></format>
             <length>10</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -95,8 +72,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>fapno</fieldName>
@@ -104,8 +79,6 @@
             <format></format>
             <length>2</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -113,8 +86,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>bcode</fieldName>
@@ -122,8 +93,6 @@
             <format>0000</format>
             <length>4</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -131,8 +100,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>usage</fieldName>
@@ -140,8 +107,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -149,8 +114,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>cnnt</fieldName>
@@ -158,8 +121,6 @@
             <format></format>
             <length>14</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -167,8 +128,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>cnfe</fieldName>
@@ -176,8 +135,6 @@
             <format></format>
             <length>14</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -185,8 +142,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>lnnt</fieldName>
@@ -194,8 +149,6 @@
             <format></format>
             <length>14</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -203,8 +156,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>lnfe</fieldName>
@@ -212,8 +163,6 @@
             <format></format>
             <length>14</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -221,8 +170,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>odnt</fieldName>
@@ -230,8 +177,6 @@
             <format></format>
             <length>14</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -239,8 +184,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>odfe</fieldName>
@@ -248,8 +191,6 @@
             <format></format>
             <length>14</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -257,8 +198,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>odcd</fieldName>
@@ -266,8 +205,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -275,8 +212,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>sharmk</fieldName>
@@ -284,8 +219,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -293,8 +226,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>eiderr</fieldName>
@@ -302,8 +233,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -311,8 +240,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>piderr</fieldName>
@@ -320,8 +247,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -329,8 +254,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>base</fieldName>
@@ -338,8 +261,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -347,8 +268,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>sapno</fieldName>
@@ -356,8 +275,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -365,8 +282,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>mang</fieldName>
@@ -374,8 +289,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -383,8 +296,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>csdate</fieldName>
@@ -392,8 +303,6 @@
             <format></format>
             <length>10</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -401,8 +310,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>vludate</fieldName>
@@ -410,8 +317,6 @@
             <format></format>
             <length>10</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -419,8 +324,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>luspr</fieldName>
@@ -428,8 +331,6 @@
             <format></format>
             <length>10</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -437,8 +338,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>cedate</fieldName>
@@ -446,8 +345,6 @@
             <format></format>
             <length>10</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -455,8 +352,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>cpstcd</fieldName>
@@ -464,8 +359,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -473,8 +366,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>fitirt</fieldName>
@@ -482,8 +373,6 @@
             <format></format>
             <length>8</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -491,8 +380,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>sharid</fieldName>
@@ -500,8 +387,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -509,8 +394,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>newcd</fieldName>
@@ -518,8 +401,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -527,8 +408,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>scop</fieldName>
@@ -536,8 +415,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -545,8 +422,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>bkind</fieldName>
@@ -554,8 +429,6 @@
             <format></format>
             <length>6</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -563,8 +436,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>lncur</fieldName>
@@ -572,8 +443,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -581,8 +450,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>conamt</fieldName>
@@ -590,8 +457,6 @@
             <format></format>
             <length>14</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -599,8 +464,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>actbal</fieldName>
@@ -608,8 +471,6 @@
             <format></format>
             <length>14</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -617,8 +478,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>totcur</fieldName>
@@ -626,8 +485,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -635,8 +492,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>totln</fieldName>
@@ -644,8 +499,6 @@
             <format></format>
             <length>14</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -653,8 +506,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>sgaid</fieldName>
@@ -662,8 +513,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -671,8 +520,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>charcd</fieldName>
@@ -680,8 +527,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -689,8 +534,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>apkind</fieldName>
@@ -698,8 +541,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -707,8 +548,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>cycle</fieldName>
@@ -716,8 +555,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -725,8 +562,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>lntyp</fieldName>
@@ -734,8 +569,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -743,8 +576,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>fina</fieldName>
@@ -752,8 +583,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -761,8 +590,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>plckind</fieldName>
@@ -770,8 +597,6 @@
             <format>0000</format>
             <length>4</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -779,8 +604,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>trucd</fieldName>
@@ -788,8 +611,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -797,8 +618,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>sign</fieldName>
@@ -806,8 +625,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -815,8 +632,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>mncnt</fieldName>
@@ -824,8 +639,6 @@
             <format>0000</format>
             <length>4</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -833,8 +646,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>r0401cd</fieldName>
@@ -842,8 +653,6 @@
             <format>0000</format>
             <length>4</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -851,8 +660,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>cactno</fieldName>
@@ -860,8 +667,6 @@
             <format>000000000000</format>
             <length>12</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -869,8 +674,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>agbrno</fieldName>
@@ -878,8 +681,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -887,8 +688,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>clsprd</fieldName>
@@ -896,8 +695,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -905,8 +702,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>cptyp</fieldName>
@@ -914,8 +709,6 @@
             <format></format>
             <length>2</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -923,8 +716,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>bkind2</fieldName>
@@ -932,8 +723,6 @@
             <format></format>
             <length>6</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -941,8 +730,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>sgaper</fieldName>
@@ -950,8 +737,6 @@
             <format></format>
             <length>7</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -959,8 +744,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>refact</fieldName>
@@ -968,8 +751,6 @@
             <format></format>
             <length>16</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -977,8 +758,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>nation</fieldName>
@@ -986,8 +765,6 @@
             <format></format>
             <length>4</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -995,8 +772,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>cnflg</fieldName>
@@ -1004,8 +779,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1013,8 +786,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>cnguar</fieldName>
@@ -1022,8 +793,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1031,8 +800,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>rsknal</fieldName>
@@ -1040,8 +807,6 @@
             <format></format>
             <length>2</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1049,8 +814,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>cnbcode</fieldName>
@@ -1058,8 +821,6 @@
             <format></format>
             <length>6</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1067,8 +828,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>cnbscd</fieldName>
@@ -1076,8 +835,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
     </body>
 </data>

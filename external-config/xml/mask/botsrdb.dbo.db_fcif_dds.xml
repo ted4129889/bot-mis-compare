@@ -57,5 +57,16 @@
         <fieldName>db_fcif_birdt</fieldName>
         <maskType>8</maskType>
     </field>
+    <field>
+        <fieldName>db_fcif_ename1</fieldName>
+        <maskType>4</maskType>
+    </field>
+    <field>
+        <fieldName>db_fcif_ename2</fieldName>
+        <maskType>4</maskType>
+    </field>
+    <field>
+        <fieldName>db_fcif_ename3</fieldName>
+        <maskType>4</maskType>
+    </field>
 </data>
-

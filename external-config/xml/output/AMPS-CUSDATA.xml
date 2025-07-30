@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <header>
-        <useSqlData>false</useSqlData>
-        <separator></separator>
-    </header>
+    <header></header>
     <body>
-        <dataKey></dataKey>
-        <useSqlData>true</useSqlData>
         <separator>*,*</separator>
         <field>
             <fieldName>cusid</fieldName>
@@ -14,8 +9,6 @@
             <format></format>
             <length>10</length>
             <align>left</align>
-            <oTableName>botsrdb.db_fcif_dds</oTableName>
-            <oFieldName>db_fcif_cifkey</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -23,8 +16,6 @@
             <format></format>
             <length>3</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>name</fieldName>
@@ -32,8 +23,6 @@
             <format></format>
             <length>54</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -41,8 +30,6 @@
             <format></format>
             <length>3</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>birday</fieldName>
@@ -50,8 +37,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName>botsrdb.db_fcif_dds</oTableName>
-            <oFieldName>db_fcif_birdt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -59,8 +44,6 @@
             <format></format>
             <length>3</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>nation</fieldName>
@@ -68,8 +51,6 @@
             <format></format>
             <length>4</length>
             <align>left</align>
-            <oTableName>botsrdb.db_fcif_dds</oTableName>
-            <oFieldName>db_fcif_rgnal</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -77,8 +58,6 @@
             <format></format>
             <length>3</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>zipno1</fieldName>
@@ -86,8 +65,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>botsrdb.db_fcif_dds</oTableName>
-            <oFieldName>db_fcif_zip</oFieldName>
         </field>
         <field>
             <fieldName>zipno2</fieldName>
@@ -95,8 +72,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -104,8 +79,6 @@
             <format></format>
             <length>3</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>addr</fieldName>
@@ -113,8 +86,6 @@
             <format></format>
             <length>84</length>
             <align>left</align>
-            <oTableName>botsrdb.db_fcif_dds</oTableName>
-            <oFieldName>db_fcif_caddr</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -122,8 +93,6 @@
             <format></format>
             <length>3</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>email</fieldName>
@@ -131,8 +100,6 @@
             <format></format>
             <length>60</length>
             <align>left</align>
-            <oTableName>botsrdb.db_fcif_dds</oTableName>
-            <oFieldName>db_fcif_email</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -140,8 +107,6 @@
             <format></format>
             <length>3</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>hsrno</fieldName>
@@ -149,8 +114,6 @@
             <format></format>
             <length>20</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -158,8 +121,6 @@
             <format></format>
             <length>3</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>osrno</fieldName>
@@ -167,8 +128,6 @@
             <format></format>
             <length>20</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -176,8 +135,6 @@
             <format></format>
             <length>3</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>bsname</fieldName>
@@ -185,8 +142,6 @@
             <format></format>
             <length>26</length>
             <align>left</align>
-            <oTableName>botsrdb.db_fcif_dds</oTableName>
-            <oFieldName>db_fcif_pname</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -194,8 +149,6 @@
             <format></format>
             <length>3</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>bsidno</fieldName>
@@ -203,8 +156,6 @@
             <format></format>
             <length>10</length>
             <align>left</align>
-            <oTableName>botsrdb.db_fcif_dds</oTableName>
-            <oFieldName>db_fcif_pidno</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -212,8 +163,6 @@
             <format></format>
             <length>3</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>bsbirdy</fieldName>
@@ -221,8 +170,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -230,8 +177,6 @@
             <format></format>
             <length>3</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>csrno</fieldName>
@@ -239,8 +184,6 @@
             <format></format>
             <length>20</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -248,8 +191,6 @@
             <format></format>
             <length>3</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>bcode</fieldName>
@@ -257,8 +198,6 @@
             <format>0000</format>
             <length>4</length>
             <align>right</align>
-            <oTableName>botsrdb.db_fcif_dds</oTableName>
-            <oFieldName>db_fcif_bcode</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -266,8 +205,6 @@
             <format></format>
             <length>3</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>cphone</fieldName>
@@ -275,8 +212,6 @@
             <format></format>
             <length>10</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -284,8 +219,6 @@
             <format></format>
             <length>3</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>fsrno</fieldName>
@@ -293,8 +226,6 @@
             <format></format>
             <length>14</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -302,8 +233,6 @@
             <format></format>
             <length>3</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>class</fieldName>
@@ -311,8 +240,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -320,8 +247,6 @@
             <format></format>
             <length>3</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>extcnt</fieldName>
@@ -329,8 +254,6 @@
             <format>0000</format>
             <length>4</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
     </body>
 </data>

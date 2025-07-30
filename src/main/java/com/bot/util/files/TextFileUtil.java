@@ -200,7 +200,7 @@ public class TextFileUtil {
             return false;
         }
         // 允許：中文、英數字、底線(_)、@、.、-、空格
-        if (input.matches("^[\\u4e00-\\u9fa5a-zA-Z0-9_@.,?+-\\-\\s\\u3000]+$")) {
+        if (input.matches("^[\\u4e00-\\u9fa5a-zA-Z0-9_@.,?+*-\\-\\s\\u3000]+$")) {
             return true;
         } else {
             LogProcess.info("input =" + input);

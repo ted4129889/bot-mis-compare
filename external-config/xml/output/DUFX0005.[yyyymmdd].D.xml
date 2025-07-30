@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <header>
-        <useSqlData>false</useSqlData>
-        <separator></separator>
-    </header>
+    <header></header>
     <body>
-        <dataKey></dataKey>
-        <useSqlData>true</useSqlData>
         <separator>,</separator>
         <field>
             <fieldName>txdate</fieldName>
@@ -14,8 +9,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName>db_fbkbal_dds</oTableName>
-            <oFieldName>db_fbkbal_txdate</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -23,8 +16,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>bkcur</fieldName>
@@ -32,8 +23,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>db_fbkbal_dds</oTableName>
-            <oFieldName>db_fbkbal_bkcur</oFieldName>
         </field>
         <field>
             <fieldName>bksrno</fieldName>
@@ -41,8 +30,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>db_fbkbal_dds</oTableName>
-            <oFieldName>db_fbkbal_bksrno</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -50,17 +37,13 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>ydbal</fieldName>
             <fieldType>string</fieldType>
-            <format>-0000000000000.00</format>
+            <format>+0000000000000.00;-0000000000000.00</format>
             <length>17</length>
             <align>right</align>
-            <oTableName>db_fbkbal_dds</oTableName>
-            <oFieldName>db_fbkbal_ydbal</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -68,17 +51,13 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>tdbal</fieldName>
             <fieldType>string</fieldType>
-            <format>-0000000000000.00</format>
+            <format>+0000000000000.00;-0000000000000.00</format>
             <length>17</length>
             <align>right</align>
-            <oTableName>db_fbkbal_dds</oTableName>
-            <oFieldName>db_fbkbal_tdbal</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -86,8 +65,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dbcnt</fieldName>
@@ -95,8 +72,6 @@
             <format>00000</format>
             <length>5</length>
             <align>right</align>
-            <oTableName>db_fbkbal_dds</oTableName>
-            <oFieldName>db_fbkbal_dbcnt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -104,8 +79,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dbamt</fieldName>
@@ -113,8 +86,6 @@
             <format>00000000000.00</format>
             <length>14</length>
             <align>right</align>
-            <oTableName>db_fbkbal_dds</oTableName>
-            <oFieldName>db_fbkbal_dbamt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -122,8 +93,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>crcnt</fieldName>
@@ -131,8 +100,6 @@
             <format>00000</format>
             <length>5</length>
             <align>right</align>
-            <oTableName>db_fbkbal_dds</oTableName>
-            <oFieldName>db_fbkbal_crcnt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -140,8 +107,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>cramt</fieldName>
@@ -149,8 +114,6 @@
             <format>00000000000.00</format>
             <length>14</length>
             <align>right</align>
-            <oTableName>db_fbkbal_dds</oTableName>
-            <oFieldName>db_fbkbal_cramt</oFieldName>
         </field>
     </body>
 </data>

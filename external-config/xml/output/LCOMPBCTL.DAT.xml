@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <header>
-        <useSqlData>false</useSqlData>
-        <separator></separator>
-    </header>
+    <header></header>
     <body>
-        <dataKey></dataKey>
-        <useSqlData>true</useSqlData>
         <separator>,</separator>
         <field>
             <fieldName>rgno</fieldName>
@@ -14,8 +9,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>botsrdb.db_bctl_dds</oTableName>
-            <oFieldName>db_bctl_rgno</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -23,8 +16,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>area</fieldName>
@@ -32,8 +23,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>botsrdb.db_bctl_dds</oTableName>
-            <oFieldName>db_bctl_area</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -41,8 +30,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>brno</fieldName>
@@ -50,8 +37,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>botsrdb.db_bctl_dds</oTableName>
-            <oFieldName>db_bctl_brno</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -59,8 +44,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>boff</fieldName>
@@ -68,8 +51,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>botsrdb.db_bctl_dds</oTableName>
-            <oFieldName>db_bctl_boff</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -77,8 +58,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>micr</fieldName>
@@ -86,8 +65,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>botsrdb.db_bctl_dds</oTableName>
-            <oFieldName>db_bctl_micr</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -95,8 +72,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>frex</fieldName>
@@ -104,8 +79,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>botsrdb.db_bctl_dds</oTableName>
-            <oFieldName>db_bctl_frex</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -113,8 +86,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>rtolbr</fieldName>
@@ -122,8 +93,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>botsrdb.db_bctl_dds</oTableName>
-            <oFieldName>db_bctl_rtolbr</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -131,8 +100,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -140,8 +107,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>brname</fieldName>
@@ -149,8 +114,6 @@
             <format></format>
             <length>13</length>
             <align>left</align>
-            <oTableName>botsrdb.db_bctl_dds</oTableName>
-            <oFieldName>db_bctl_brname</oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -158,8 +121,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -167,8 +128,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>monbr</fieldName>
@@ -176,8 +135,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>botsrdb.db_bctl_dds</oTableName>
-            <oFieldName>db_bctl_monbr</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -185,8 +142,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>class</fieldName>
@@ -194,8 +149,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -203,8 +156,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>seq</fieldName>
@@ -212,8 +163,6 @@
             <format>000000</format>
             <length>6</length>
             <align>right</align>
-            <oTableName>botsrdb.db_bctl_dds</oTableName>
-            <oFieldName>db_bctl_seq</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -221,8 +170,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>arcd</fieldName>
@@ -230,8 +177,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>botsrdb.db_bctl_dds</oTableName>
-            <oFieldName>db_bctl_arcd</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -239,8 +184,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -248,8 +191,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>zipcd</fieldName>
@@ -257,8 +198,6 @@
             <format></format>
             <length>4</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -266,8 +205,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -275,8 +212,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>chcd</fieldName>
@@ -284,8 +219,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>botsrdb.db_bctl_dds</oTableName>
-            <oFieldName>db_bctl_chcd</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -293,8 +226,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>entpno</fieldName>
@@ -302,8 +233,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName>botsrdb.db_bctl_dds</oTableName>
-            <oFieldName>db_bctl_entpno</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -311,8 +240,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>sbrno</fieldName>
@@ -320,8 +247,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>botsrdb.db_bctl_dds</oTableName>
-            <oFieldName>db_bctl_sbrno</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -329,8 +254,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>taxno</fieldName>
@@ -338,8 +261,6 @@
             <format></format>
             <length>10</length>
             <align>left</align>
-            <oTableName>botsrdb.db_bctl_dds</oTableName>
-            <oFieldName>db_bctl_taxno</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -347,8 +268,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>city</fieldName>
@@ -356,8 +275,6 @@
             <format></format>
             <length>8</length>
             <align>left</align>
-            <oTableName>botsrdb.db_bctl_dds</oTableName>
-            <oFieldName>db_bctl_city</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -365,8 +282,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -374,8 +289,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>chnam</fieldName>
@@ -383,8 +296,6 @@
             <format></format>
             <length>20</length>
             <align>left</align>
-            <oTableName>botsrdb.db_bctl_dds</oTableName>
-            <oFieldName>db_bctl_chnam</oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -392,8 +303,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
     </body>
 </data>

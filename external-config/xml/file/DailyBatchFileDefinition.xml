@@ -45,6 +45,8 @@
                 <length>66</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AB932">
         <header></header>
@@ -80,6 +82,8 @@
                 <length>11</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AB930">
         <header></header>
@@ -115,6 +119,8 @@
                 <length>11</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AB897">
         <header></header>
@@ -150,6 +156,8 @@
                 <length>11</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AB816">
         <header></header>
@@ -185,6 +193,8 @@
                 <length>11</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AB744">
         <header></header>
@@ -220,6 +230,8 @@
                 <length>11</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AB727">
         <header></header>
@@ -255,6 +267,8 @@
                 <length>11</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AB656">
         <header></header>
@@ -290,6 +304,8 @@
                 <length>11</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AB560R">
         <header></header>
@@ -383,6 +399,8 @@
                 <length>3</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AB560">
         <header></header>
@@ -986,6 +1004,8 @@
                 <length>1</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AB374">
         <header></header>
@@ -1016,6 +1036,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AB297">
         <header></header>
@@ -1098,6 +1120,8 @@
                 <length>16</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="2MIS-YEARDAY">
         <header></header>
@@ -1398,6 +1422,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="2MIS-XCRT">
         <header></header>
@@ -1448,6 +1474,8 @@
                 <length>3</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="TODAY">
         <header></header>
@@ -1748,6 +1776,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="2CRSC-TODAY">
         <header></header>
@@ -2048,6 +2078,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="2MIS-AB1062">
         <header>
@@ -2110,6 +2142,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="2MIS-AB1185">
         <header>
@@ -2171,6 +2205,8 @@
                 <length>32</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="2MIS-D7VAR">
         <header></header>
@@ -2327,6 +2363,8 @@
                 <length>7</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="2MIS-DEM-069">
         <header></header>
@@ -2427,6 +2465,8 @@
                 <length>3</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="2MIS-DEM-076">
         <header></header>
@@ -2527,6 +2567,8 @@
                 <length>3</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="2MIS-EBKCT">
         <header></header>
@@ -2597,6 +2639,8 @@
                 <length>18</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="2MIS-FX-OBUFRT">
         <header></header>
@@ -2632,7 +2676,7 @@
                 <length>5</length>
             </field>
             <field>
-                <fieldName>space</fieldName>
+                <fieldName>filler</fieldName>
                 <fieldType>string</fieldType>
                 <length>8</length>
             </field>
@@ -2777,6 +2821,8 @@
                 <length>3</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="2MISOBU">
         <header></header>
@@ -2898,6 +2944,8 @@
                 <length>15</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="2MISPRDFIT[yyyymmdd]">
         <header></header>
@@ -2979,6 +3027,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="2MISPRDFIT">
         <header></header>
@@ -3060,6 +3110,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AB181">
         <header></header>
@@ -3081,6 +3133,8 @@
                 <length>2</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="2MIS-TMU-FCTGAIN">
         <header></header>
@@ -3121,6 +3175,8 @@
                 <length>16</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="2CRSC-DXCRT">
         <header></header>
@@ -3201,6 +3257,8 @@
                 <length>15</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="RISK-TODAY">
         <header></header>
@@ -3501,6 +3559,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="STAMPHOLE">
         <header></header>
@@ -3516,306 +3576,8 @@
                 <length>11</length>
             </field>
         </body>
-    </data>
-    <data fileName="TREASDLY">
-        <header></header>
-        <body>
-            <field>
-                <fieldName>holidy</fieldName>
-                <fieldType>string</fieldType>
-                <length>6</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>weekdy</fieldName>
-                <fieldType>string</fieldType>
-                <length>6</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>tbsdy</fieldName>
-                <fieldType>string</fieldType>
-                <length>8</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>nbsdy</fieldName>
-                <fieldType>string</fieldType>
-                <length>8</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>nnbsdy</fieldName>
-                <fieldType>string</fieldType>
-                <length>8</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>n3bsdy</fieldName>
-                <fieldType>string</fieldType>
-                <length>8</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>n4bsdy</fieldName>
-                <fieldType>string</fieldType>
-                <length>8</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>n5bsdy</fieldName>
-                <fieldType>string</fieldType>
-                <length>8</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>n6bsdy</fieldName>
-                <fieldType>string</fieldType>
-                <length>8</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>lbsdy</fieldName>
-                <fieldType>string</fieldType>
-                <length>8</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>llbsdy</fieldName>
-                <fieldType>string</fieldType>
-                <length>8</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>l3bsdy</fieldName>
-                <fieldType>string</fieldType>
-                <length>8</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>l4bsdy</fieldName>
-                <fieldType>string</fieldType>
-                <length>8</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>l5bsdy</fieldName>
-                <fieldType>string</fieldType>
-                <length>8</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>lmndy</fieldName>
-                <fieldType>string</fieldType>
-                <length>8</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>tmndy</fieldName>
-                <fieldType>string</fieldType>
-                <length>8</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>fnbsdy</fieldName>
-                <fieldType>string</fieldType>
-                <length>8</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>ndycnt</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>nndcnt</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>n3dcnt</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>n4dcnt</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>n5dcnt</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>n6dcnt</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>ldycnt</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>lldycnt</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>l3dycnt</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>l4dycnt</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>l5dycnt</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>timecd</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>lfnbsdy</fieldName>
-                <fieldType>string</fieldType>
-                <length>8</length>
-            </field>
-        </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="TREASDLY">
         <header></header>
@@ -4076,6 +3838,8 @@
                 <length>15</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="TRSCLS">
         <header></header>
@@ -4148,6 +3912,8 @@
                 <length>2</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="TRSOPN">
         <header></header>
@@ -4220,6 +3986,8 @@
                 <length>2</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="TRSVACC">
         <header></header>
@@ -4520,6 +4288,8 @@
                 <length>15</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="OBUFX">
         <header></header>
@@ -4820,6 +4590,8 @@
                 <length>15</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="NTFXPOT">
         <header></header>
@@ -4950,6 +4722,8 @@
                 <length>16</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="NTFXPO">
         <header></header>
@@ -5050,6 +4824,8 @@
                 <length>16</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DXCRT">
         <header></header>
@@ -5110,6 +4886,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="ELN-YEARDAYX">
         <header></header>
@@ -5410,6 +5188,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="GVVAR">
         <header></header>
@@ -5552,6 +5332,8 @@
                 <length>7</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="HOLE">
         <header></header>
@@ -5567,6 +5349,8 @@
                 <length>11</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="LCOMPBCTL.DAT">
         <header></header>
@@ -5787,6 +5571,8 @@
                 <length>1</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="LLCON">
         <header></header>
@@ -5900,6 +5686,8 @@
                 <length>1</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="LLMR">
         <header></header>
@@ -5951,6 +5739,8 @@
                 <length>7</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="LNCIF">
         <header></header>
@@ -6066,6 +5856,8 @@
                 <length>1</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DWCTL">
         <header></header>
@@ -6156,6 +5948,8 @@
                 <length>6</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DWMM0010.[yyyymmdd].D">
         <header></header>
@@ -6317,6 +6111,8 @@
                 <length>6</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DWMM0010_[yyyymmdd]">
         <header></header>
@@ -6478,6 +6274,8 @@
                 <length>6</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DWMM0008.[yyyymmdd].D">
         <header></header>
@@ -7082,6 +6880,8 @@
                 <length>1</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DWMM0004.[yyyymmdd].D">
         <header></header>
@@ -7163,6 +6963,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DWMM0003.[yyyymmdd].D">
         <header></header>
@@ -7265,6 +7067,8 @@
                 <length>2</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DWMM0002.[yyyymmdd].D">
         <header></header>
@@ -7295,6 +7099,8 @@
                 <length>2</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DWMM0010.[yyyymmdd].H">
         <header>
@@ -7330,6 +7136,8 @@
             </field>
         </header>
         <body></body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DWMM0008.[yyyymmdd].H">
         <header>
@@ -7365,13 +7173,16 @@
             </field>
         </header>
         <body></body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DWMM0004.[yyyymmdd].H">
-        <header> <field>
-            <fieldName>sday</fieldName>
-            <fieldType>string</fieldType>
-            <length>8</length>
-        </field>
+        <header>
+            <field>
+                <fieldName>sday</fieldName>
+                <fieldType>string</fieldType>
+                <length>8</length>
+            </field>
             <field>
                 <fieldName>eday</fieldName>
                 <fieldType>string</fieldType>
@@ -7399,6 +7210,8 @@
             </field>
         </header>
         <body></body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DWMM0003.[yyyymmdd].H">
         <header>
@@ -7434,6 +7247,8 @@
             </field>
         </header>
         <body></body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DWMM0002.[yyyymmdd].H">
         <header>
@@ -7469,6 +7284,8 @@
             </field>
         </header>
         <body></body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DWMM0001.[yyyymmdd].H">
         <header>
@@ -7504,6 +7321,8 @@
             </field>
         </header>
         <body></body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DWMM0001.[yyyymmdd].D">
         <header></header>
@@ -7804,6 +7623,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUOT0100.[yyyymmdd].D">
         <header></header>
@@ -8008,6 +7829,8 @@
                 <length>1</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUOT0004.[yyyymmdd].D">
         <header></header>
@@ -8078,6 +7901,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUFX0010.[yyyymmdd].D">
         <header>
@@ -8315,6 +8140,8 @@
                 <length>2</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUOT0001.[yyyymmdd].D">
         <header>
@@ -8616,6 +8443,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUOT0003.[yyyymmdd].D">
         <header>
@@ -8697,6 +8526,8 @@
                 <length>15</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUOT0003.[yyyymmdd].H">
         <header>
@@ -8732,6 +8563,8 @@
             </field>
         </header>
         <body></body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUOT0002.[yyyymmdd].D">
         <header>
@@ -8913,6 +8746,8 @@
                 <length>1</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUFX0003.[yyyymmdd].H">
         <header>
@@ -8948,6 +8783,8 @@
             </field>
         </header>
         <body></body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUOT0100.[yyyymmdd].H">
         <header>
@@ -8984,6 +8821,8 @@
         </header>
         <body>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUOT0004.[yyyymmdd].H">
         <header>
@@ -9020,6 +8859,8 @@
         </header>
         <body>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUOT0002.[yyyymmdd].H">
         <header>
@@ -9056,6 +8897,8 @@
         </header>
         <body>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUOT0001.[yyyymmdd].H">
         <header>
@@ -9091,6 +8934,8 @@
             </field>
         </header>
         <body></body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUFX0009.[yyyymmdd].D">
         <header>
@@ -9602,6 +9447,8 @@
                 <length>4</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUFX0008.[yyyymmdd].H">
         <header>
@@ -9637,6 +9484,8 @@
             </field>
         </header>
         <body></body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUFX0009.[yyyymmdd].H">
         <header>
@@ -9673,6 +9522,8 @@
         </header>
         <body>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUFX0010.[yyyymmdd].H">
         <header>
@@ -9709,6 +9560,8 @@
         </header>
         <body>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUFX0008.[yyyymmdd].D">
         <header>
@@ -10310,6 +10163,8 @@
                 <length>2</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUFX0006.[yyyymmdd].D">
         <header></header>
@@ -11123,6 +10978,8 @@
                 <length>1</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUFX0007.[yyyymmdd].H">
         <header>
@@ -11158,6 +11015,8 @@
             </field>
         </header>
         <body></body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUFX0007.[yyyymmdd].D">
         <header></header>
@@ -12434,6 +12293,8 @@
                 <length>1</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUFX0005.[yyyymmdd].D">
         <header>
@@ -12519,6 +12380,8 @@
             </field>
         </header>
         <body></body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUFX0005.[yyyymmdd].H">
         <header>
@@ -12554,6 +12417,8 @@
             </field>
         </header>
         <body></body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUFX0006.[yyyymmdd].H">
         <header>
@@ -12589,6 +12454,8 @@
             </field>
         </header>
         <body></body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUFX0004.[yyyymmdd].H">
         <header>
@@ -12624,159 +12491,221 @@
             </field>
         </header>
         <body></body>
+        <footer>
+        </footer>
     </data>
     <data fileName="901232">
         <header>
-            <field>
-                <fieldName>space</fieldName>
-                <fieldType>string</fieldType>
-                <length>22</length>
-            </field>
-            <field>
-                <fieldName>' 同業名稱 '</fieldName>
-                <fieldType>string</fieldType>
-                <length>10</length>
-            </field>
-            <field>
-                <fieldName>space</fieldName>
-                <fieldType>string</fieldType>
-                <length>22</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>space</fieldName>
-                <fieldType>string</fieldType>
-                <length>3</length>
-            </field>
-            <field>
-                <fieldName>' 帳號 '</fieldName>
-                <fieldType>string</fieldType>
-                <length>6</length>
-            </field>
-            <field>
-                <fieldName>space</fieldName>
-                <fieldType>string</fieldType>
-                <length>3</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>' 統一編號 '</fieldName>
-                <fieldType>string</fieldType>
-                <length>10</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>space</fieldName>
-                <fieldType>string</fieldType>
-                <length>4</length>
-            </field>
-            <field>
-                <fieldName>' 餘額 '</fieldName>
-                <fieldType>string</fieldType>
-                <length>6</length>
-            </field>
-            <field>
-                <fieldName>space</fieldName>
-                <fieldType>string</fieldType>
-                <length>5</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>space</fieldName>
-                <fieldType>string</fieldType>
-                <length>3</length>
-            </field>
+            <separator>,</separator>
+<!--            <field>-->
+<!--                <fieldName>filler</fieldName>-->
+<!--                <fieldType>string</fieldType>-->
+<!--                <format></format>-->
+<!--                <length>22</length>-->
+<!--                <align>left</align>-->
+<!--            </field>-->
+<!--            <field>-->
+<!--                <fieldName>' 同業名稱 '</fieldName>-->
+<!--                <fieldType>string</fieldType>-->
+<!--                <format></format>-->
+<!--                <length>10</length>-->
+<!--                <align>left</align>-->
+<!--            </field>-->
+<!--            <field>-->
+<!--                <fieldName>space</fieldName>-->
+<!--                <fieldType>string</fieldType>-->
+<!--                <format></format>-->
+<!--                <length>22</length>-->
+<!--                <align>left</align>-->
+<!--            </field>-->
+<!--            <field>-->
+<!--                <fieldName>separator</fieldName>-->
+<!--                <fieldType>string</fieldType>-->
+<!--                <format></format>-->
+<!--                <length>1</length>-->
+<!--                <align>left</align>-->
+<!--            </field>-->
+<!--            <field>-->
+<!--                <fieldName>filler1</fieldName>-->
+<!--                <fieldType>string</fieldType>-->
+<!--                <format></format>-->
+<!--                <length>3</length>-->
+<!--                <align>left</align>-->
+<!--            </field>-->
+<!--            <field>-->
+<!--                <fieldName>' 帳號 '</fieldName>-->
+<!--                <fieldType>string</fieldType>-->
+<!--                <format></format>-->
+<!--                <length>6</length>-->
+<!--                <align>left</align>-->
+<!--            </field>-->
+<!--            <field>-->
+<!--                <fieldName>filler2</fieldName>-->
+<!--                <fieldType>string</fieldType>-->
+<!--                <format></format>-->
+<!--                <length>3</length>-->
+<!--                <align>left</align>-->
+<!--            </field>-->
+<!--            <field>-->
+<!--                <fieldName>separator</fieldName>-->
+<!--                <fieldType>string</fieldType>-->
+<!--                <format></format>-->
+<!--                <length>1</length>-->
+<!--                <align>left</align>-->
+<!--            </field>-->
+<!--            <field>-->
+<!--                <fieldName>' 統一編號 '</fieldName>-->
+<!--                <fieldType>string</fieldType>-->
+<!--                <format></format>-->
+<!--                <length>10</length>-->
+<!--                <align>left</align>-->
+<!--            </field>-->
+<!--            <field>-->
+<!--                <fieldName>separator</fieldName>-->
+<!--                <fieldType>string</fieldType>-->
+<!--                <format></format>-->
+<!--                <length>1</length>-->
+<!--                <align>left</align>-->
+<!--            </field>-->
+<!--            <field>-->
+<!--                <fieldName>filler4</fieldName>-->
+<!--                <fieldType>string</fieldType>-->
+<!--                <format></format>-->
+<!--                <length>4</length>-->
+<!--                <align>left</align>-->
+<!--            </field>-->
+<!--            <field>-->
+<!--                <fieldName>' 餘額 '</fieldName>-->
+<!--                <fieldType>string</fieldType>-->
+<!--                <format></format>-->
+<!--                <length>6</length>-->
+<!--                <align>left</align>-->
+<!--            </field>-->
+<!--            <field>-->
+<!--                <fieldName>filler5</fieldName>-->
+<!--                <fieldType>string</fieldType>-->
+<!--                <format></format>-->
+<!--                <length>5</length>-->
+<!--                <align>left</align>-->
+<!--            </field>-->
+<!--            <field>-->
+<!--                <fieldName>separator</fieldName>-->
+<!--                <fieldType>string</fieldType>-->
+<!--                <format></format>-->
+<!--                <length>1</length>-->
+<!--                <align>left</align>-->
+<!--            </field>-->
+<!--            <field>-->
+<!--                <fieldName>filler6</fieldName>-->
+<!--                <fieldType>string</fieldType>-->
+<!--                <format></format>-->
+<!--                <length>3</length>-->
+<!--                <align>left</align>-->
+<!--            </field>-->
         </header>
         <body>
+            <separator>,</separator>
             <field>
                 <fieldName>cmpname</fieldName>
                 <fieldType>string</fieldType>
+                <format></format>
                 <length>54</length>
-                <maskType>4</maskType>
+                <align>left</align>
             </field>
             <field>
                 <fieldName>separator</fieldName>
                 <fieldType>string</fieldType>
+                <format></format>
                 <length>1</length>
+                <align>left</align>
             </field>
             <field>
                 <fieldName>brno</fieldName>
                 <fieldType>string</fieldType>
+                <format>000</format>
                 <length>3</length>
+                <align>right</align>
             </field>
             <field>
                 <fieldName>apno</fieldName>
                 <fieldType>string</fieldType>
+                <format>000</format>
                 <length>3</length>
+                <align>right</align>
             </field>
             <field>
                 <fieldName>srno</fieldName>
                 <fieldType>string</fieldType>
+                <format>00000</format>
                 <length>5</length>
+                <align>right</align>
             </field>
             <field>
                 <fieldName>chkdg</fieldName>
                 <fieldType>string</fieldType>
+                <format>0</format>
                 <length>1</length>
+                <align>right</align>
             </field>
             <field>
                 <fieldName>separator</fieldName>
                 <fieldType>string</fieldType>
+                <format></format>
                 <length>1</length>
+                <align>left</align>
             </field>
             <field>
-                <fieldName>space</fieldName>
+                <fieldName>filler7</fieldName>
                 <fieldType>string</fieldType>
+                <format></format>
                 <length>1</length>
+                <align>left</align>
             </field>
             <field>
                 <fieldName>eidno</fieldName>
                 <fieldType>string</fieldType>
+                <format>00000000</format>
                 <length>8</length>
-                <maskType>1</maskType>
+                <align>right</align>
             </field>
             <field>
-                <fieldName>space</fieldName>
+                <fieldName>filler8</fieldName>
                 <fieldType>string</fieldType>
+                <format></format>
                 <length>1</length>
+                <align>left</align>
             </field>
             <field>
                 <fieldName>separator</fieldName>
                 <fieldType>string</fieldType>
+                <format></format>
                 <length>1</length>
+                <align>left</align>
             </field>
             <field>
                 <fieldName>ydbal</fieldName>
                 <fieldType>string</fieldType>
-                <length>35</length>
+                <format>+0000000000000.00;-0000000000000.00</format>
+                <length>17</length>
+                <align>right</align>
             </field>
             <field>
                 <fieldName>separator</fieldName>
                 <fieldType>string</fieldType>
+                <format></format>
                 <length>1</length>
+                <align>left</align>
             </field>
             <field>
-                <fieldName>space</fieldName>
+                <fieldName>filler9</fieldName>
                 <fieldType>string</fieldType>
-                <length>3</length>
+                <format></format>
+                <length>1</length>
+                <align>left</align>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="DUFX0004.[yyyymmdd].D">
         <header></header>
@@ -13318,6 +13247,8 @@
                 <length>1</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="D4VAR">
         <header></header>
@@ -13460,6 +13391,8 @@
                 <length>7</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="D1VAR">
         <header></header>
@@ -13602,6 +13535,8 @@
                 <length>7</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="CLFL">
         <header></header>
@@ -14017,6 +13952,8 @@
                 <length>3</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="CKVAR">
         <header></header>
@@ -14159,6 +14096,8 @@
                 <length>7</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="CKBAL">
         <header></header>
@@ -14209,6 +14148,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="CIF-DHMR">
         <header></header>
@@ -14273,6 +14214,8 @@
                 <maskType>7</maskType>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="CB-[yyyymmdd]">
         <header></header>
@@ -14425,6 +14368,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="CB">
         <header></header>
@@ -14577,6 +14522,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-PRDFIT[yyyymmdd]">
         <header></header>
@@ -14660,6 +14607,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-TMU">
         <header></header>
@@ -15026,6 +14975,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-TMU[yyyymmdd]">
         <header></header>
@@ -15392,6 +15343,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-TODAY">
         <header></header>
@@ -15692,6 +15645,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-YEARDAY">
         <header></header>
@@ -15992,6 +15947,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-GL-VALUE">
         <header></header>
@@ -16022,6 +15979,8 @@
                 <length>2</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-GL-DPINV">
         <header></header>
@@ -16137,6 +16096,8 @@
                 <length>1</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-GL-DETAIL">
         <header></header>
@@ -16168,6 +16129,8 @@
                 <length>5</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-GL-FPACNO">
         <header></header>
@@ -16270,6 +16233,8 @@
                 <length>2</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-GL-MAIN">
         <header></header>
@@ -16321,6 +16286,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-GL-PRICE">
         <header></header>
@@ -16423,6 +16390,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-GL-TX">
         <header></header>
@@ -16584,6 +16553,8 @@
                 <length>6</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="CAPTL1">
         <header></header>
@@ -16609,6 +16580,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-FPRD">
         <header></header>
@@ -16689,6 +16662,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-FPRD[yyyymmdd]">
         <header></header>
@@ -16969,6 +16944,8 @@
                 <length>1</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-CUSDATA">
         <header></header>
@@ -17163,6 +17140,8 @@
                 <length>4</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-FMCURCD">
         <header></header>
@@ -17193,6 +17172,8 @@
                 <length>15</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-CUSADDR">
         <header></header>
@@ -17225,6 +17206,8 @@
                 <maskType>5</maskType>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-CIFEXT">
         <header></header>
@@ -17257,6 +17240,8 @@
                 <maskType>4</maskType>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-ACCTBAL-CT">
         <header></header>
@@ -17358,6 +17343,8 @@
                 <length>1</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-ACCTBAL-PB">
         <header></header>
@@ -17459,6 +17446,8 @@
                 <length>1</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="AMPS-ACCTBAL-CK">
         <header></header>
@@ -17560,6 +17549,8 @@
                 <length>1</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="ALM-XCRT">
         <header></header>
@@ -17610,6 +17601,8 @@
                 <length>15</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="ALMINFNDP">
         <header></header>
@@ -17675,6 +17668,8 @@
                 <length>39</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="ALMINFIMEX">
         <header>
@@ -17736,6 +17731,8 @@
                 <length>8</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="ALMINFFMT">
         <header>
@@ -17867,6 +17864,8 @@
                 <length>2</length>
             </field>
         </body>
+        <footer>
+        </footer>
     </data>
     <data fileName="ALMINFFCT">
         <header></header>
@@ -17957,5 +17956,2922 @@
                 <length>28</length>
             </field>
         </body>
+        <footer>
+        </footer>
+    </data>
+    <data fileName="R0108">
+        <header>
+        </header>
+        <body>
+            <field>
+                <fieldName>brno</fieldName>
+                <fieldType>string</fieldType>
+                <length>3</length>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>date</fieldName>
+                <fieldType>string</fieldType>
+                <length>7</length>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>cusno</fieldName>
+                <fieldType>string</fieldType>
+                <length>10</length>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>name</fieldName>
+                <fieldType>string</fieldType>
+                <length>12</length>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>actno</fieldName>
+                <fieldType>string</fieldType>
+                <length>12</length>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>opday</fieldName>
+                <fieldType>string</fieldType>
+                <length>8</length>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>eday</fieldName>
+                <fieldType>string</fieldType>
+                <length>8</length>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>bal_s</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>bal_i</fieldName>
+                <fieldType>string</fieldType>
+                <length>11</length>
+            </field>
+            <field>
+                <fieldName>dot</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>bal_f</fieldName>
+                <fieldType>string</fieldType>
+                <length>2</length>
+            </field>
+        </body>
+        <footer>
+        </footer>
+    </data>
+    <data fileName="R041">
+        <header>
+        </header>
+        <body>
+            <field>
+                <fieldName>brno</fieldName>
+                <fieldType>string</fieldType>
+                <length>3</length>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>date</fieldName>
+                <fieldType>string</fieldType>
+                <length>7</length>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>cusno</fieldName>
+                <fieldType>string</fieldType>
+                <length>10</length>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>name</fieldName>
+                <fieldType>string</fieldType>
+                <length>12</length>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>actno</fieldName>
+                <fieldType>string</fieldType>
+                <length>12</length>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>opday</fieldName>
+                <fieldType>string</fieldType>
+                <length>8</length>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>eday</fieldName>
+                <fieldType>string</fieldType>
+                <length>8</length>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>bal_s</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>bal_i</fieldName>
+                <fieldType>string</fieldType>
+                <length>11</length>
+            </field>
+            <field>
+                <fieldName>dot</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>bal_f</fieldName>
+                <fieldType>string</fieldType>
+                <length>2</length>
+            </field>
+        </body>
+        <footer>
+        </footer>
+    </data>
+    <data fileName="FasDpR0108">
+        <header>
+        </header>
+        <body>
+            <field>
+                <fieldName>br</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>flag</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>pidno</fieldName>
+                <fieldType>X</fieldType>
+                <length>10</length>
+                <decimal>0</decimal>
+                <maskType>1</maskType>
+            </field>
+            <field>
+                <fieldName>name</fieldName>
+                <fieldType>X</fieldType>
+                <length>12</length>
+                <decimal>0</decimal>
+                <maskType>4</maskType>
+            </field>
+            <field>
+                <fieldName>brno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>apno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>srno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>chkdg</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>opday</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>8</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>eday</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>8</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>bal</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+        </body>
+        <footer>
+        </footer>
+        <footer>
+        </footer>
+    </data>
+    <data fileName="FasFxGainObu">
+        <header>
+        </header>
+        <body>
+            <field>
+                <fieldName>yy</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>mm</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>brno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>irinst</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>irgain</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>irfee</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>orinst</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>orgain</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>orfee</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>exinst</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>exgain</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>exfee</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>iminst</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>imgain</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>imfee</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>lcfee</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>dpgain</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>ctgain</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>exglcn</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>exgl</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>otgl</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>otfee</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>ckgain</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>lngain</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>lnfee</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>lnotgl</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>bofee</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>sharamt</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>synamt</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>fingain</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>frtgain</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+        </body>
+        <footer>
+        </footer>
+        <footer>
+        </footer>
+    </data>
+    <data fileName="FasDpDhmr">
+        <header>
+        </header>
+        <body>
+            <field>
+                <fieldName>brno</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>apno</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>curcd</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>charcd</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>brno1</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>apno1</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>srno1</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>2.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>chkdg1</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>0.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>pidno</fieldName>
+                <fieldType>X</fieldType>
+                <length>10</length>
+                <decimal>0</decimal>
+                <maskType>1</maskType>
+            </field>
+            <field>
+                <fieldName>prdcd</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>ydbal</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>8</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>dcnt</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>damt</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>8</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>ccnt</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>camt</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>8</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>tdbal</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>8</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>0.5</length>
+                <decimal>0</decimal>
+            </field>
+        </body>
+        <footer>
+        </footer>
+    </data>
+    <data fileName="FasLnClfl">
+        <header>
+            <field>
+                <fieldName>rectyp_1</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>date</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+        </header>
+        <body>
+            <field>
+                <fieldName>rectyp_2</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>actno_2</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>12</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>lncur</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>entpno</fieldName>
+                <fieldType>X</fieldType>
+                <length>10</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>pidno</fieldName>
+                <fieldType>X</fieldType>
+                <length>10</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>conamt</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>nodamt</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>tfircd</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>bcode</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>usage</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>mang</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cpstcd</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>csdate</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cedate</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>oddate</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>scop</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>fina</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>sharid</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cnirt</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>tfirid</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>lntyp</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>bkind</fieldName>
+                <fieldType>X</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cusno</fieldName>
+                <fieldType>X</fieldType>
+                <length>10</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cusname</fieldName>
+                <fieldType>X</fieldType>
+                <length>120</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>bkindb</fieldName>
+                <fieldType>X</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>clamtb</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>cltakedownb</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>lncurb</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>sharidb</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>bcodeb</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>aivaldate</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>aiexpdate</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>sellerbch</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+        </body>
+        <footer>
+            <field>
+                <fieldName>rectyp_3</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>actno_3</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>12</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>sapno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>curcd</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>bal</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>apamt</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>charcd</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>apkind</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>apdate</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>prdate</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>idate</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>eday</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>fitirt</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>kinbr</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cbno</fieldName>
+                <fieldType>X</fieldType>
+                <length>15</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>jcictype</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+        </footer>
+    </data>
+    <data fileName="Fasctcif">
+        <header>
+        </header>
+        <body>
+            <field>
+                <fieldName>cusno</fieldName>
+                <fieldType>X</fieldType>
+                <length>10</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>brno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+        </body>
+        <footer>
+        </footer>
+    </data>
+    <data fileName="FasDpData2">
+        <header>
+        </header>
+        <body>
+            <field>
+                <fieldName>br</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>flag</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>pidno</fieldName>
+                <fieldType>X</fieldType>
+                <length>10</length>
+                <decimal>0</decimal>
+                <maskType>1</maskType>
+            </field>
+            <field>
+                <fieldName>name</fieldName>
+                <fieldType>X</fieldType>
+                <length>12</length>
+                <decimal>0</decimal>
+                <maskType>4</maskType>
+            </field>
+            <field>
+                <fieldName>brno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>apno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>srno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>chkdg</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>opday</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>8</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>eday</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>8</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>bal</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>flr</fieldName>
+                <fieldType>X</fieldType>
+                <length>13</length>
+                <decimal>0</decimal>
+            </field>
+        </body>
+        <footer>
+        </footer>
+    </data>
+    <data fileName="FasDpDhmrFc">
+        <header>
+        </header>
+        <body>
+            <field>
+                <fieldName>brno</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>apno</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>curcd</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>charcd</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>brno1</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>apno1</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>srno1</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>2.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>chkdg1</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>0.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>pidno</fieldName>
+                <fieldType>X</fieldType>
+                <length>10</length>
+                <decimal>0</decimal>
+                <maskType>1</maskType>
+            </field>
+            <field>
+                <fieldName>prdcd</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>ydbal</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>8</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>dcnt</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>damt</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>8</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>ccnt</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>camt</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>8</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>tdbal</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>8</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>tbsdy</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>0.5</length>
+                <decimal>0</decimal>
+            </field>
+        </body>
+        <footer>
+        </footer>
+    </data>
+    <data fileName="FasFpA138">
+        <header>
+        </header>
+        <body>
+            <field>
+                <fieldName>brno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>atm</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>rej</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cwd</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>inq</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>tfr</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>pin</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>dep</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>fwd</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>nbf</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>utp</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>tot_intro</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>rej_i</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cwd_i</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>inq_i</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>tfr_i</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>utp_i</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>tot_inter</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>tot_atm</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>tot_no</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>avg_brno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>avg_no</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>dep_i</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+        </body>
+        <footer>
+        </footer>
+    </data>
+    <data fileName="FasFpA116600">
+        <header>
+        </header>
+        <body>
+            <field>
+                <fieldName>atmno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cdwsno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>brno-f1</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>brno-m20</fieldName>
+                <fieldType>X</fieldType>
+                <length>20</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>brno-l3</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>brno-l2</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>brno-l1</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>atm-counter</fieldName>
+                <fieldType>X</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>servtime-i</fieldName>
+                <fieldType>X</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>servtime-f</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>realtime-i</fieldName>
+                <fieldType>X</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>realtime-f</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>rate-i</fieldName>
+                <fieldType>X</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>rate-f</fieldName>
+                <fieldType>X</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>jour-i</fieldName>
+                <fieldType>X</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>jour-f</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>rcpt-i</fieldName>
+                <fieldType>X</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>rcpt-f</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>disp-i</fieldName>
+                <fieldType>X</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>disp-f</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>comm-i</fieldName>
+                <fieldType>X</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>comm-f</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>card-i</fieldName>
+                <fieldType>X</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>card-f</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>power-i</fieldName>
+                <fieldType>X</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>power-f</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>sort</fieldName>
+                <fieldType>X</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>avg-counter-i</fieldName>
+                <fieldType>X</fieldType>
+                <length>5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>avg-counter-f</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>17</length>
+                <decimal>0</decimal>
+            </field>
+        </body>
+        <footer>
+        </footer>
+    </data>
+    <data fileName="FasFpA116699">
+        <header>
+        </header>
+        <body>
+            <field>
+                <fieldName>atmno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cdwsno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>brno-f1</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>brno-m20</fieldName>
+                <fieldType>X</fieldType>
+                <length>20</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>brno-l3</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>brno-l2</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>brno-l1</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>atm-counter</fieldName>
+                <fieldType>X</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>servtime-i</fieldName>
+                <fieldType>X</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>servtime-f</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>realtime-i</fieldName>
+                <fieldType>X</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>realtime-f</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>rate-i</fieldName>
+                <fieldType>X</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>rate-f</fieldName>
+                <fieldType>X</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>jour-i</fieldName>
+                <fieldType>X</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>jour-f</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>rcpt-i</fieldName>
+                <fieldType>X</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>rcpt-f</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>disp-i</fieldName>
+                <fieldType>X</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>disp-f</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>comm-i</fieldName>
+                <fieldType>X</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>comm-f</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>card-i</fieldName>
+                <fieldType>X</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>card-f</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>power-i</fieldName>
+                <fieldType>X</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>power-f</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>sort</fieldName>
+                <fieldType>X</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>atm-rate</fieldName>
+                <fieldType>X</fieldType>
+                <length>17</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>avg-counter-i</fieldName>
+                <fieldType>X</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>avg-counter-f</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+        </body>
+        <footer>
+        </footer>
+    </data>
+    <data fileName="FasLnAb181">
+        <header>
+        </header>
+        <body>
+            <field>
+                <fieldName>brno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>actno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>12</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>entpno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>8</length>
+                <decimal>0</decimal>
+                <maskType>0</maskType>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>sharid</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cycid</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>csdate</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>8</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cedate</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>8</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>fitirt</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>7</length>
+                <decimal>5</decimal>
+            </field>
+            <field>
+                <fieldName>sgaid</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>sgaper</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>6</length>
+                <decimal>3</decimal>
+            </field>
+            <field>
+                <fieldName>filler2</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+        </body>
+        <footer>
+        </footer>
+    </data>
+    <data fileName="FasLnAb297">
+        <header>
+        </header>
+        <body>
+            <field>
+                <fieldName>class</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>pidno</fieldName>
+                <fieldType>X</fieldType>
+                <length>10</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>actno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>12</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>type</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>bcode</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>scop</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>ntbal</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>15</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>ntbal_last</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>15</length>
+                <decimal>2</decimal>
+            </field>
+        </body>
+        <footer>
+        </footer>
+    </data>
+    <data fileName="FasLnAb374">
+        <header>
+        </header>
+        <body>
+            <field>
+                <fieldName>bcode</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>bal</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>13</length>
+                <decimal>0</decimal>
+            </field>
+        </body>
+        <footer>
+        </footer>
+    </data>
+    <data fileName="Faslnab560">
+        <header>
+            <field>
+                <fieldName>h</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>hfilnm</fieldName>
+                <fieldType>X</fieldType>
+                <length>5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>date</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>7</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>X</fieldType>
+                <length>380</length>
+                <decimal>0</decimal>
+            </field>
+        </header>
+        <body>
+            <field>
+                <fieldName>brno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>actno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>12</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>sortcd</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>entpno</fieldName>
+                <fieldType>X</fieldType>
+                <length>10</length>
+                <decimal>0</decimal>
+                <maskType>1</maskType>
+            </field>
+            <field>
+                <fieldName>pidno</fieldName>
+                <fieldType>X</fieldType>
+                <length>10</length>
+                <decimal>0</decimal>
+                <maskType>1</maskType>
+            </field>
+            <field>
+                <fieldName>fapno</fieldName>
+                <fieldType>X</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>bcode</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>usage</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cnnt</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>14</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>cnfe</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>14</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>lnnt</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>14</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>lnfe</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>14</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>odnt</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>14</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>odfe</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>14</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>odcd</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>sharmk</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>eiderr</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>piderr</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>base</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>sapno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>mang</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>csdate</fieldName>
+                <fieldType>X</fieldType>
+                <length>10</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>vludate</fieldName>
+                <fieldType>X</fieldType>
+                <length>10</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>luspr</fieldName>
+                <fieldType>X</fieldType>
+                <length>10</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cedate</fieldName>
+                <fieldType>X</fieldType>
+                <length>10</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cpstcd</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>fitirt</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>8</length>
+                <decimal>5</decimal>
+            </field>
+            <field>
+                <fieldName>sharid</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>newcd</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>scop</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>bkind</fieldName>
+                <fieldType>X</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>lncur</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>conamt</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>14</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>actbal</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>14</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>totcur</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>totln</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>14</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>sgaid</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>charcd</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>apkind</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cycle</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>lntyp</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>fina</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>plckind</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>trucd</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>mncnt</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>r0401cd</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>area</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>12</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>pcode_1</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>gpidno_1</fieldName>
+                <fieldType>X</fieldType>
+                <length>10</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>relid_1</fieldName>
+                <fieldType>X</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>pcode_2</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>gpidno_2</fieldName>
+                <fieldType>X</fieldType>
+                <length>10</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>relid_2</fieldName>
+                <fieldType>X</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>pcode_3</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>gpidno_3</fieldName>
+                <fieldType>X</fieldType>
+                <length>10</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>relid_3</fieldName>
+                <fieldType>X</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>pcode_4</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>gpidno_4</fieldName>
+                <fieldType>X</fieldType>
+                <length>10</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>relid_4</fieldName>
+                <fieldType>X</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>pcode_5</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>gpidno_5</fieldName>
+                <fieldType>X</fieldType>
+                <length>10</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>relid_5</fieldName>
+                <fieldType>X</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>emark</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>agbrno</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>clsprd</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>3</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cptyp</fieldName>
+                <fieldType>X</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>bkind2</fieldName>
+                <fieldType>X</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>sgaper</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>7</length>
+                <decimal>3</decimal>
+            </field>
+            <field>
+                <fieldName>refact</fieldName>
+                <fieldType>X</fieldType>
+                <length>16</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>nation</fieldName>
+                <fieldType>X</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cnflg</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cnguar</fieldName>
+                <fieldType>DISPLAY</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>rsknal</fieldName>
+                <fieldType>X</fieldType>
+                <length>2</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cnbcode</fieldName>
+                <fieldType>X</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cnbscd</fieldName>
+                <fieldType>X</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+        </body>
+        <footer>
+        </footer>
+    </data>
+    <data fileName="FasDpTrsvsum">
+        <header>
+        </header>
+        <body>
+            <field>
+                <fieldName>brno</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>svtdcd</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>0.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>charcd</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>curcd</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>36amt</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>9</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>37amt</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>9</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>38amt</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>9</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>39amt</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>9</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>45amt</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>9</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>sum</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>9</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>percent</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>2.5</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>2.5</length>
+                <decimal>0</decimal>
+            </field>
+        </body>
+        <footer>
+        </footer>
+    </data>
+    <data fileName="FasDpTrsvacc">
+        <header>
+        </header>
+        <body>
+            <field>
+                <fieldName>brno</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>svtdcd</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>0.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>charcd</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>curcd</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>nop36</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cls36</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cnt36</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>amt36</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>9</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>nop37</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cls37</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cnt37</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>amt37</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>9</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>nop38</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cls38</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cnt38</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>amt38</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>9</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>nop39</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cls39</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cnt39</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>amt39</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>9</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>nop45</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cls45</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cnt45</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>amt45</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>9</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>snop</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>scls</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>scnt</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>total</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>9</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>pct</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>2.5</length>
+                <decimal>2</decimal>
+            </field>
+            <field>
+                <fieldName>date</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>0.5</length>
+                <decimal>0</decimal>
+            </field>
+        </body>
+        <footer>
+        </footer>
+    </data>
+    <data fileName="FasDpTrsopn">
+        <header>
+        </header>
+        <body>
+            <field>
+                <fieldName>brno</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>svtdcd</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>0.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>charcd</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>curcd</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>actno</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>entpno</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>date</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+        </body>
+        <footer>
+        </footer>
+    </data>
+    <data fileName="FasDpTrscls">
+        <header>
+        </header>
+        <body>
+            <field>
+                <fieldName>brno</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>svtdcd</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>0.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>charcd</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>curcd</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>actno</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>entpno</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>date</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+            </field>
+        </body>
+        <footer>
+        </footer>
     </data>
 </file>

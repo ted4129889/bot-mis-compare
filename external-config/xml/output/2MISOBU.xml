@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <header>
-        <useSqlData>false</useSqlData>
-        <separator></separator>
-    </header>
+    <header></header>
     <body>
-        <dataKey></dataKey>
-        <useSqlData>true</useSqlData>
         <separator>,</separator>
         <field>
             <fieldName>genday</fieldName>
@@ -14,8 +9,6 @@
             <format>0000000</format>
             <length>7</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -23,8 +16,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>rbrno</fieldName>
@@ -32,8 +23,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>db_fcmr_dds</oTableName>
-            <oFieldName>db_fcmr_rbrno</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -41,8 +30,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>unino</fieldName>
@@ -50,8 +37,6 @@
             <format></format>
             <length>10</length>
             <align>left</align>
-            <oTableName>db_fcmr_dds</oTableName>
-            <oFieldName>db_fcmr_unino</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -59,8 +44,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>mbrno</fieldName>
@@ -68,8 +51,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>mapno</fieldName>
@@ -77,8 +58,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>msrno</fieldName>
@@ -86,8 +65,6 @@
             <format>00000</format>
             <length>5</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>mchkdg</fieldName>
@@ -95,8 +72,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -104,8 +79,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>brno</fieldName>
@@ -113,8 +86,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>apno</fieldName>
@@ -122,8 +93,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>srno</fieldName>
@@ -131,8 +100,6 @@
             <format>00000</format>
             <length>5</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>chkdg</fieldName>
@@ -140,8 +107,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -149,17 +114,13 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>curcd</fieldName>
             <fieldType>string</fieldType>
             <format>00</format>
-            <length>1</length>
+            <length>2</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -167,8 +128,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>actcls</fieldName>
@@ -176,8 +135,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -185,17 +142,13 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>avbal</fieldName>
             <fieldType>string</fieldType>
-            <format> 00000000000.00;-00000000000.00</format>
+            <format>+00000000000.00;-00000000000.00</format>
             <length>15</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -203,17 +156,13 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>ntavbal</fieldName>
             <fieldType>string</fieldType>
-            <format> 00000000000.00;-00000000000.00</format>
+            <format>+00000000000.00;-00000000000.00</format>
             <length>15</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
     </body>
 </data>

@@ -1,6 +1,7 @@
 /* (C) 2024 */
 package com.bot.util.xml.vo;
 
+import com.bot.util.xml.vo.XmlField;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class XmlHeaderOrBody {
+public class XmlHeaderBodyFooter {
 
     @JacksonXmlProperty(localName = "dataKey")
     private boolean dataKey;

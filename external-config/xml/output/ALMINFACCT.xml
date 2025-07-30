@@ -1,39 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
     <header>
-        <useSqlData>false</useSqlData>
-        <separator></separator>
         <field>
             <fieldName></fieldName>
             <fieldType>string</fieldType>
             <format></format>
             <length>92</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
-            <fieldName>batchDate</fieldName>
+            <fieldName>batchDate8</fieldName>
             <fieldType>string</fieldType>
             <format></format>
             <length>8</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
     </header>
     <body>
-        <dataKey></dataKey>
-        <useSqlData>true</useSqlData>
-        <separator></separator>
         <field>
             <fieldName>brno</fieldName>
             <fieldType>string</fieldType>
             <format>000</format>
             <length>3</length>
             <align>left</align>
-            <oTableName>botsrdb.db_accmr_dds</oTableName>
-            <oFieldName>db_accmr_brno</oFieldName>
         </field>
         <field>
             <fieldName>curcd</fieldName>
@@ -41,8 +30,6 @@
             <format>00</format>
             <length>2</length>
             <align>left</align>
-            <oTableName>botsrdb.db_accmr_dds</oTableName>
-            <oFieldName>db_accmr_curcd</oFieldName>
         </field>
         <field>
             <fieldName>acno</fieldName>
@@ -50,8 +37,6 @@
             <format></format>
             <length>6</length>
             <align>left</align>
-            <oTableName>botsrdb.db_accmr_dds</oTableName>
-            <oFieldName>db_accmr_acno</oFieldName>
         </field>
         <field>
             <fieldName>sbno</fieldName>
@@ -59,8 +44,6 @@
             <format></format>
             <length>4</length>
             <align>right</align>
-            <oTableName>botsrdb.db_accmr_dds</oTableName>
-            <oFieldName>db_accmr_sbno</oFieldName>
         </field>
         <field>
             <fieldName>tdbal</fieldName>
@@ -68,8 +51,6 @@
             <format> 000000000000000.00;-000000000000000.00</format>
             <length>19</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName></fieldName>
@@ -77,8 +58,6 @@
             <format></format>
             <length>66</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
     </body>
 </data>

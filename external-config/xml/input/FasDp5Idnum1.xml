@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <txt>
+    <header>
+    </header>
+    <body>
         <field>
             <fieldName>acbrno</fieldName>
             <length>3</length>
@@ -141,6 +143,7 @@
             <fieldName>flr1</fieldName>
             <length>1</length>
         </field>
-    </txt>
+        </body>
+    <footer>
+    </footer>
 </data>
-

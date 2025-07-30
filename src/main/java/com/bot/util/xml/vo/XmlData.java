@@ -20,24 +20,22 @@ import lombok.ToString;
 public class XmlData {
 
 
-
     @JacksonXmlProperty(localName = "header")
-    private XmlHeaderOrBody header;
+    private XmlHeaderBodyFooter header;
 
     @JacksonXmlProperty(localName = "body")
-    private XmlHeaderOrBody body;
+    private XmlHeaderBodyFooter body;
+
+    @JacksonXmlProperty(localName = "footer")
+    private XmlHeaderBodyFooter footer;
+
 
     @JacksonXmlProperty(localName = "table")
     private Table table;
 
-//    @JacksonXmlElementWrapper(useWrapping = false)
-//    @JacksonXmlProperty(localName = "field")
-//    private List<Field> fieldList = new ArrayList<>();
-
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "field")
-    private List<XmlField> xmlFieldList = new ArrayList<>();
-
+    private List<Field> fieldList = new ArrayList<>();
 
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "mapping")

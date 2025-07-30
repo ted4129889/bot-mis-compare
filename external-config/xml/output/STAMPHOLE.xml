@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <header>
-        <useSqlData>false</useSqlData>
-        <separator></separator>
-    </header>
+    <header></header>
     <body>
-        <dataKey></dataKey>
-        <useSqlData>true</useSqlData>
         <separator>,</separator>
         <field>
             <fieldName>eday</fieldName>
@@ -14,8 +9,6 @@
             <format>0000000</format>
             <length>7</length>
             <align>right</align>
-            <oTableName>botsddb.db_cthmr_dds</oTableName>
-            <oFieldName>db_cthmr_eday</oFieldName>
         </field>
         <field>
             <fieldName>ydbal</fieldName>
@@ -23,8 +16,6 @@
             <format>00000000000</format>
             <length>11</length>
             <align>right</align>
-            <oTableName>botsddb.db_cthmr_dds</oTableName>
-            <oFieldName>db_cthmr_ydbal</oFieldName>
         </field>
     </body>
 </data>

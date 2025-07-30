@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
     <header>
-        <useSqlData>false</useSqlData>
-        <separator></separator>
         <field>
             <fieldName></fieldName>
             <fieldType>string</fieldType>
             <format></format>
             <length>92</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>batchDate</fieldName>
@@ -18,22 +14,15 @@
             <format></format>
             <length>8</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
     </header>
     <body>
-        <dataKey></dataKey>
-        <useSqlData>true</useSqlData>
-        <separator></separator>
         <field>
             <fieldName>brno</fieldName>
             <fieldType>string</fieldType>
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>db_fmtmr_dds</oTableName>
-            <oFieldName>db_fmtmr_mbrno</oFieldName>
         </field>
         <field>
             <fieldName>apno</fieldName>
@@ -41,8 +30,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>db_fmtmr_dds</oTableName>
-            <oFieldName>db_fmtmr_mapno</oFieldName>
         </field>
         <field>
             <fieldName>srno</fieldName>
@@ -50,8 +37,6 @@
             <format>00000</format>
             <length>5</length>
             <align>right</align>
-            <oTableName>db_fmtmr_dds</oTableName>
-            <oFieldName>db_fmtmr_msrno</oFieldName>
         </field>
         <field>
             <fieldName>chkdg</fieldName>
@@ -59,8 +44,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fmtmr_dds</oTableName>
-            <oFieldName>db_fmtmr_mchkdg</oFieldName>
         </field>
         <field>
             <fieldName>sqno</fieldName>
@@ -68,8 +51,6 @@
             <format>0000</format>
             <length>4</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>sapno</fieldName>
@@ -77,8 +58,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>db_fmtmr_dds</oTableName>
-            <oFieldName>db_fmtmr_apno</oFieldName>
         </field>
         <field>
             <fieldName>curcd</fieldName>
@@ -86,8 +65,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>db_fmtmr_dds</oTableName>
-            <oFieldName>db_fmtmr_curcd</oFieldName>
         </field>
         <field>
             <fieldName>sqbal</fieldName>
@@ -95,8 +72,6 @@
             <format>00000000000.00</format>
             <length>14</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>eday</fieldName>
@@ -104,8 +79,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>intid</fieldName>
@@ -113,8 +86,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>prid</fieldName>
@@ -122,8 +93,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>prdate</fieldName>
@@ -131,8 +100,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>oidate</fieldName>
@@ -140,8 +107,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>idate</fieldName>
@@ -149,8 +114,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>irtcd</fieldName>
@@ -158,8 +121,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>db_fmtmr_dds</oTableName>
-            <oFieldName>db_fmtmr_irtcd</oFieldName>
         </field>
         <field>
             <fieldName>irid</fieldName>
@@ -167,8 +128,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>sqicd</fieldName>
@@ -176,8 +135,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>irnd</fieldName>
@@ -185,8 +142,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>lsibor</fieldName>
@@ -194,8 +149,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>spreads</fieldName>
@@ -203,8 +156,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>spread</fieldName>
@@ -212,8 +163,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>fitirt</fieldName>
@@ -221,8 +170,6 @@
             <format>00.00000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName></fieldName>
@@ -230,8 +177,6 @@
             <format></format>
             <length>2</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
     </body>
 </data>

@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
     <header>
-        <useSqlData>true</useSqlData>
-        <separator></separator>
         <field>
             <fieldName>sday</fieldName>
             <fieldType>string</fieldType>
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>eday</fieldName>
@@ -18,8 +14,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>flnm</fieldName>
@@ -27,8 +21,6 @@
             <format></format>
             <length>10</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>sysdate</fieldName>
@@ -36,8 +28,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>systime</fieldName>
@@ -45,8 +35,6 @@
             <format>000000</format>
             <length>6</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>totcnt</fieldName>
@@ -54,14 +42,8 @@
             <format>0000000000</format>
             <length>10</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
     </header>
-    <body>
-        <dataKey></dataKey>
-        <useSqlData>false</useSqlData>
-        <separator></separator>
-    </body>
+    <body></body>
 </data>
 

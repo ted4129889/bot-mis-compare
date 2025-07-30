@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <header>
-        <useSqlData>false</useSqlData>
-        <separator></separator>
-    </header>
+    <header></header>
     <body>
-        <dataKey></dataKey>
-        <useSqlData>true</useSqlData>
         <separator>,</separator>
         <field>
             <fieldName>prdno</fieldName>
@@ -14,8 +9,6 @@
             <format></format>
             <length>10</length>
             <align>left</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_prdno</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -23,8 +16,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>curcd</fieldName>
@@ -32,8 +23,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_curcd</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -41,8 +30,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>type</fieldName>
@@ -50,8 +37,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_type</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -59,8 +44,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>irtcd</fieldName>
@@ -68,8 +51,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_irtcd</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -77,8 +58,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>tscurfg</fieldName>
@@ -86,8 +65,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_tscurfg</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -95,8 +72,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>tscur</fieldName>
@@ -104,8 +79,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_tscur</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -113,8 +86,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>objcd</fieldName>
@@ -122,8 +93,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_objcd</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -131,8 +100,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>ctisday</fieldName>
@@ -140,8 +107,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_ctisday</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -149,8 +114,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>cteday</fieldName>
@@ -158,8 +121,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_cteday</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -167,8 +128,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>risktp</fieldName>
@@ -176,8 +135,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_risktp</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -185,8 +142,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>risk</fieldName>
@@ -194,8 +149,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_risk</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -203,8 +156,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>obuamt</fieldName>
@@ -212,8 +163,6 @@
             <format>00000000000.00</format>
             <length>14</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_obuamt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -221,8 +170,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dbuamt</fieldName>
@@ -230,8 +177,6 @@
             <format>00000000000.00</format>
             <length>14</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_dbuamt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -239,17 +184,13 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>obufit</fieldName>
             <fieldType>string</fieldType>
-            <format> 00000000000.00;-00000000000.00</format>
+            <format>+00000000000.00;-00000000000.00</format>
             <length>15</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_obufit</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -257,17 +198,13 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dbufit</fieldName>
             <fieldType>string</fieldType>
-            <format> 00000000000.00;-00000000000.00</format>
+            <format>+00000000000.00;-00000000000.00</format>
             <length>15</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_dbufit</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -275,8 +212,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>sday</fieldName>
@@ -284,8 +219,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_sday</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -293,8 +226,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>eday</fieldName>
@@ -302,8 +233,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_eday</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -311,8 +240,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>status</fieldName>
@@ -320,8 +247,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_status</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -329,8 +254,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>totcnt</fieldName>
@@ -338,8 +261,6 @@
             <format>000000</format>
             <length>6</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_totcnt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -347,8 +268,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>prdcd</fieldName>
@@ -356,8 +275,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_prdcd</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -365,8 +282,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>prdcdd</fieldName>
@@ -374,8 +289,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_prdcdd</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -383,8 +296,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>opteday</fieldName>
@@ -392,8 +303,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_opteday</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -401,17 +310,13 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>eqamt</fieldName>
             <fieldType>string</fieldType>
-            <format> 00000000000.00;-00000000000.00</format>
+            <format>+00000000000.00;-00000000000.00</format>
             <length>15</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_eqamt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -419,17 +324,13 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>eqamt1</fieldName>
             <fieldType>string</fieldType>
-            <format> 00000000000.00;-00000000000.00</format>
+            <format>+00000000000.00;-00000000000.00</format>
             <length>15</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_eqamt1</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -437,8 +338,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>pdtyp</fieldName>
@@ -446,8 +345,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_pdtyp</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -455,8 +352,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>irtid</fieldName>
@@ -464,8 +359,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_irtid</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -473,8 +366,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>tstyp</fieldName>
@@ -482,8 +373,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_tstyp</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -491,8 +380,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>paycd</fieldName>
@@ -500,8 +387,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fprd_dds</oTableName>
-            <oFieldName>db_fprd_paycd</oFieldName>
         </field>
     </body>
 </data>

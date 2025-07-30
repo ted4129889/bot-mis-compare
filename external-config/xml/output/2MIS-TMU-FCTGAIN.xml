@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <header>
-        <useSqlData>false</useSqlData>
-    </header>
+    <header></header>
     <body>
-        <dataKey></dataKey>
-        <useSqlData>true</useSqlData>
         <separator>,</separator>
         <field>
             <fieldName>yyyymm</fieldName>
@@ -13,8 +9,6 @@
             <format>000000</format>
             <length>6</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -22,8 +16,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>brno</fieldName>
@@ -31,8 +23,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>botsddb.db_oburpt_dds</oTableName>
-            <oFieldName>db_oburpt_ibrno</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -40,17 +30,13 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dbuamt</fieldName>
             <fieldType>numeric</fieldType>
-            <format> 00000000000.00;-00000000000.00</format>
+            <format>+00000000000.00;-00000000000.00</format>
             <length>16</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -58,17 +44,13 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>obuamt</fieldName>
             <fieldType>numeric</fieldType>
-            <format> 00000000000.00;-00000000000.00</format>
+            <format>+00000000000.00;-00000000000.00</format>
             <length>16</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
     </body>
 </data>

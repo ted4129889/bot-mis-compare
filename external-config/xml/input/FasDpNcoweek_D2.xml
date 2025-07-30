@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <txt>
+    <header>
+    </header>
+    <body>
         <field>
             <fieldName>ctl_yymmdd</fieldName>
             <length>8</length>
@@ -25,6 +27,7 @@
             <fieldName>filler</fieldName>
             <length>372</length>
         </field>
-    </txt>
+        </body>
+    <footer>
+    </footer>
 </data>
-

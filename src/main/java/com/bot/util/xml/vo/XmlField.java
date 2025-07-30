@@ -27,14 +27,17 @@ public class XmlField {
     @JacksonXmlProperty(localName = "length")
     private String length;
 
+    @JacksonXmlProperty(localName = "decimal")
+    private String decimal;
+
     @JacksonXmlProperty(localName = "align")
     private String align;
 
-    @JacksonXmlProperty(localName = "oTableName")
-    private String oTableName;
-
-    @JacksonXmlProperty(localName = "oFieldName")
-    private String oFieldName;
+//    @JacksonXmlProperty(localName = "oTableName")
+//    private String oTableName;
+//
+//    @JacksonXmlProperty(localName = "oFieldName")
+//    private String oFieldName;
 
     @JacksonXmlProperty(localName = "maskType")
     private String maskType;

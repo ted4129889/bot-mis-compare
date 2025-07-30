@@ -1,138 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <txt>
+    <header>
+    </header>
+    <body>
         <field>
-            <fieldName>rectyp</fieldName>
+            <fieldName>rectyp-2</fieldName>
             <length>1</length>
         </field>
         <field>
-            <fieldName>p1-actno-2</fieldName>
+            <fieldName>actno-2</fieldName>
             <length>12</length>
         </field>
         <field>
-            <fieldName>p1-lncur</fieldName>
+            <fieldName>lncur</fieldName>
             <length>2</length>
         </field>
         <field>
-            <fieldName>p1-entpno</fieldName>
+            <fieldName>entpno</fieldName>
             <length>10</length>
         </field>
         <field>
-            <fieldName>p1-pidno</fieldName>
+            <fieldName>pidno</fieldName>
             <length>10</length>
         </field>
         <field>
-            <fieldName>p1-conamt</fieldName>
+            <fieldName>conamt</fieldName>
             <length>14</length>
         </field>
         <field>
-            <fieldName>p1-nodamt</fieldName>
+            <fieldName>nodamt</fieldName>
             <length>14</length>
         </field>
         <field>
-            <fieldName>p1-tfircd</fieldName>
+            <fieldName>tfircd</fieldName>
             <length>2</length>
         </field>
         <field>
-            <fieldName>p1-bcode</fieldName>
+            <fieldName>bcode</fieldName>
             <length>4</length>
         </field>
         <field>
-            <fieldName>p1-usage</fieldName>
+            <fieldName>usage</fieldName>
             <length>1</length>
         </field>
         <field>
-            <fieldName>p1-mang</fieldName>
+            <fieldName>mang</fieldName>
             <length>1</length>
         </field>
         <field>
-            <fieldName>p1-cpstcd</fieldName>
+            <fieldName>cpstcd</fieldName>
             <length>1</length>
         </field>
         <field>
-            <fieldName>p1-csdate</fieldName>
+            <fieldName>csdate</fieldName>
             <length>7</length>
         </field>
         <field>
-            <fieldName>p1-cedate</fieldName>
+            <fieldName>cedate</fieldName>
             <length>7</length>
         </field>
         <field>
-            <fieldName>p1-oddate</fieldName>
+            <fieldName>oddate</fieldName>
             <length>7</length>
         </field>
         <field>
-            <fieldName>p1-scop</fieldName>
+            <fieldName>scop</fieldName>
             <length>1</length>
         </field>
         <field>
-            <fieldName>p1-fina</fieldName>
+            <fieldName>fina</fieldName>
             <length>1</length>
         </field>
         <field>
-            <fieldName>p1-sharid</fieldName>
+            <fieldName>sharid</fieldName>
             <length>1</length>
         </field>
         <field>
-            <fieldName>p1-cnirt</fieldName>
+            <fieldName>cnirt</fieldName>
             <length>8</length>
         </field>
         <field>
-            <fieldName>p1-tfirid</fieldName>
+            <fieldName>tfirid</fieldName>
             <length>2</length>
         </field>
         <field>
-            <fieldName>p1-lntyp</fieldName>
+            <fieldName>lntyp</fieldName>
             <length>1</length>
         </field>
         <field>
-            <fieldName>p1-bkind</fieldName>
+            <fieldName>bkind</fieldName>
             <length>6</length>
         </field>
         <field>
-            <fieldName>p1-cusno</fieldName>
+            <fieldName>cusno</fieldName>
             <length>10</length>
         </field>
         <field>
-            <fieldName>p1-cusname</fieldName>
+            <fieldName>cusname</fieldName>
             <length>120</length>
         </field>
         <field>
-            <fieldName>p1-bkindb</fieldName>
+            <fieldName>bkindb</fieldName>
             <length>6</length>
         </field>
         <field>
-            <fieldName>p1-clamtb</fieldName>
+            <fieldName>clamtb</fieldName>
             <length>14</length>
         </field>
         <field>
-            <fieldName>p1-cltakedownb</fieldName>
+            <fieldName>cltakedownb</fieldName>
             <length>14</length>
         </field>
         <field>
-            <fieldName>p1-lncurb</fieldName>
+            <fieldName>lncurb</fieldName>
             <length>2</length>
         </field>
         <field>
-            <fieldName>p1-sharidb</fieldName>
+            <fieldName>sharidb</fieldName>
             <length>1</length>
         </field>
         <field>
-            <fieldName>p1-bcodeb</fieldName>
+            <fieldName>bcodeb</fieldName>
             <length>4</length>
         </field>
         <field>
-            <fieldName>p1-aivaldate</fieldName>
+            <fieldName>aivaldate</fieldName>
             <length>7</length>
         </field>
         <field>
-            <fieldName>p1-aiexpdate</fieldName>
+            <fieldName>aiexpdate</fieldName>
             <length>7</length>
         </field>
         <field>
-            <fieldName>p1-sellerbch</fieldName>
+            <fieldName>sellerbch</fieldName>
             <length>3</length>
         </field>
-    </txt>
+        </body>
+    <footer>
+    </footer>
 </data>
-

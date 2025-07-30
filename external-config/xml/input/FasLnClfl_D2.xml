@@ -1,70 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <txt>
+    <header>
+    </header>
+    <body>
         <field>
-            <fieldName>rectyp</fieldName>
+            <fieldName>rectyp-3</fieldName>
             <length>1</length>
         </field>
         <field>
-            <fieldName>p2-actno-3</fieldName>
+            <fieldName>actno-3</fieldName>
             <length>12</length>
         </field>
         <field>
-            <fieldName>p2-sapno</fieldName>
+            <fieldName>sapno</fieldName>
             <length>3</length>
         </field>
         <field>
-            <fieldName>p2-curcd</fieldName>
+            <fieldName>curcd</fieldName>
             <length>2</length>
         </field>
         <field>
-            <fieldName>p2-bal</fieldName>
+            <fieldName>bal</fieldName>
             <length>14</length>
         </field>
         <field>
-            <fieldName>p2-apamt</fieldName>
+            <fieldName>apamt</fieldName>
             <length>14</length>
         </field>
         <field>
-            <fieldName>p2-charcd</fieldName>
+            <fieldName>charcd</fieldName>
             <length>3</length>
         </field>
         <field>
-            <fieldName>p2-apkind</fieldName>
+            <fieldName>apkind</fieldName>
             <length>2</length>
         </field>
         <field>
-            <fieldName>p2-apdate</fieldName>
+            <fieldName>apdate</fieldName>
             <length>7</length>
         </field>
         <field>
-            <fieldName>p2-prdate</fieldName>
+            <fieldName>prdate</fieldName>
             <length>7</length>
         </field>
         <field>
-            <fieldName>p2-idate</fieldName>
+            <fieldName>idate</fieldName>
             <length>7</length>
         </field>
         <field>
-            <fieldName>p2-eday</fieldName>
+            <fieldName>eday</fieldName>
             <length>7</length>
         </field>
         <field>
-            <fieldName>p2-fitirt</fieldName>
-            <length>7</length>
+            <fieldName>fitirt</fieldName>
+            <length>8</length>
         </field>
         <field>
-            <fieldName>p2-kinbr</fieldName>
+            <fieldName>kinbr</fieldName>
             <length>3</length>
         </field>
         <field>
-            <fieldName>p2-cbno</fieldName>
+            <fieldName>cbno</fieldName>
             <length>15</length>
         </field>
         <field>
-            <fieldName>p2-jcictype</fieldName>
+            <fieldName>jcictype</fieldName>
             <length>1</length>
         </field>
-    </txt>
+        </body>
+    <footer>
+    </footer>
 </data>
-

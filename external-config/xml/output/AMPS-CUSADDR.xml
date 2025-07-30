@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <header>
-        <useSqlData>false</useSqlData>
-        <separator></separator>
-    </header>
+    <header></header>
     <body>
-        <dataKey></dataKey>
-        <useSqlData>true</useSqlData>
-        <separator></separator>
         <field>
             <fieldName>ludate</fieldName>
             <fieldType>string</fieldType>
             <format>0000000</format>
             <length>7</length>
             <align>right</align>
-            <oTableName>botsrdb.db_actcmp_dds</oTableName>
-            <oFieldName>db_actcmp_ludate</oFieldName>
         </field>
         <field>
             <fieldName>cusid</fieldName>
@@ -23,8 +15,6 @@
             <format></format>
             <length>10</length>
             <align>left</align>
-            <oTableName>botsrdb.db_cifact_dds</oTableName>
-            <oFieldName>db_cifact_cifkey</oFieldName>
         </field>
         <field>
             <fieldName>zipno1</fieldName>
@@ -32,8 +22,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>botsrdb.db_actcmp_dds</oTableName>
-            <oFieldName>db_actcmp_zipno1</oFieldName>
         </field>
         <field>
             <fieldName>zipno2</fieldName>
@@ -41,8 +29,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>botsrdb.db_actcmp_dds</oTableName>
-            <oFieldName>db_actcmp_zipno2</oFieldName>
         </field>
         <field>
             <fieldName>addr</fieldName>
@@ -50,8 +36,6 @@
             <format></format>
             <length>84</length>
             <align>left</align>
-            <oTableName>botsrdb.db_actcmp_dds</oTableName>
-            <oFieldName>db_actcmp_addr</oFieldName>
         </field>
     </body>
 </data>

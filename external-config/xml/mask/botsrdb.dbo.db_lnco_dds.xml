@@ -57,5 +57,8 @@
         <fieldName>db_lnco_cellphon</fieldName>
         <maskType>7</maskType>
     </field>
+        <field>
+        <fieldName>db_lnco_agent</fieldName>
+        <maskType>1</maskType>
+    </field>
 </data>
-

@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <header>
-        <useSqlData>false</useSqlData>
-        <separator></separator>
-    </header>
+    <header></header>
     <body>
-        <dataKey></dataKey>
-        <useSqlData>true</useSqlData>
         <separator>,</separator>
         <field>
             <fieldName>acbrno</fieldName>
@@ -14,8 +9,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_acbrno</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -23,8 +16,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -32,8 +23,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>year</fieldName>
@@ -41,8 +30,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_year</oFieldName>
         </field>
         <field>
             <fieldName>prefix</fieldName>
@@ -50,8 +37,6 @@
             <format></format>
             <length>2</length>
             <align>left</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_prefix</oFieldName>
         </field>
         <field>
             <fieldName>apcod</fieldName>
@@ -59,8 +44,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_apcod</oFieldName>
         </field>
         <field>
             <fieldName>srno</fieldName>
@@ -68,8 +51,6 @@
             <format>00000</format>
             <length>5</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_srno</oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -77,8 +58,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -86,8 +65,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>bkcur</fieldName>
@@ -95,8 +72,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_bkcur</oFieldName>
         </field>
         <field>
             <fieldName>bksrno</fieldName>
@@ -104,8 +79,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_bksrno</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -113,8 +86,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -122,8 +93,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>entpno</fieldName>
@@ -131,8 +100,6 @@
             <format></format>
             <length>10</length>
             <align>left</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_entpno</oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -140,8 +107,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -149,8 +114,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>corpno</fieldName>
@@ -158,8 +121,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_corpno</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -167,8 +128,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>lnactno</fieldName>
@@ -176,8 +135,6 @@
             <format>000000000000</format>
             <length>12</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_lnactno</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -185,8 +142,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>ovduact</fieldName>
@@ -194,8 +149,6 @@
             <format>000000000000</format>
             <length>12</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_ovduact</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -203,8 +156,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>rbrno</fieldName>
@@ -212,8 +163,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_rbrno</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -221,8 +170,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>kinbr</fieldName>
@@ -230,8 +177,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_kinbr</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -239,8 +184,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>actcls</fieldName>
@@ -248,8 +191,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_actcls</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -257,8 +198,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>amtcd</fieldName>
@@ -266,8 +205,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_amtcd</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -275,8 +212,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>vdaycd</fieldName>
@@ -284,8 +219,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_vdaycd</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -293,8 +226,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>adccd</fieldName>
@@ -302,8 +233,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_adccd</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -311,8 +240,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>obufg</fieldName>
@@ -320,8 +247,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_obufg</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -329,8 +254,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>gnofg</fieldName>
@@ -338,8 +261,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_gnofg</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -347,8 +268,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>covfg</fieldName>
@@ -356,8 +275,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_covfg</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -365,8 +282,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>lmtfg</fieldName>
@@ -374,8 +289,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_lmtfg</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -383,8 +296,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -392,8 +303,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>aptyp</fieldName>
@@ -401,8 +310,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_aptyp</oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -410,8 +317,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -419,8 +324,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>curcd</fieldName>
@@ -428,8 +331,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_curcd</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -437,8 +338,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>lctyp</fieldName>
@@ -446,8 +345,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_lctyp</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -455,8 +352,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>adcbk</fieldName>
@@ -464,8 +359,6 @@
             <format>0000000</format>
             <length>7</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_adcbk</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -473,8 +366,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -482,8 +373,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>aswfcd</fieldName>
@@ -491,8 +380,6 @@
             <format></format>
             <length>11</length>
             <align>left</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_aswfcd</oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -500,8 +387,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -509,8 +394,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>tclbk</fieldName>
@@ -518,8 +401,6 @@
             <format>0000000</format>
             <length>7</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_tclbk</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -527,8 +408,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -536,8 +415,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>tswfcd</fieldName>
@@ -545,8 +422,6 @@
             <format></format>
             <length>11</length>
             <align>left</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_tswfcd</oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -554,8 +429,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -563,8 +436,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -572,8 +443,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>icdno</fieldName>
@@ -581,8 +450,6 @@
             <format></format>
             <length>16</length>
             <align>left</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_icdno</oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -590,8 +457,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -599,8 +464,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>imcnt</fieldName>
@@ -608,8 +471,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_imcnt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -617,8 +478,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>modcnt</fieldName>
@@ -626,8 +485,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_modcnt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -635,8 +492,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>abscnt</fieldName>
@@ -644,8 +499,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_abscnt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -653,8 +506,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>rbcnt</fieldName>
@@ -662,8 +513,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_rbcnt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -671,8 +520,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>lgcnt</fieldName>
@@ -680,8 +527,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_lgcnt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -689,8 +534,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>amdcnt</fieldName>
@@ -698,8 +541,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_amdcnt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -707,8 +548,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>bprcnt</fieldName>
@@ -716,8 +555,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_bprcnt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -725,8 +562,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>lcxrate</fieldName>
@@ -734,8 +569,6 @@
             <format>00000.000000000</format>
             <length>15</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_lcxrate</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -743,8 +576,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -752,8 +583,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>cntrycd</fieldName>
@@ -761,8 +590,6 @@
             <format></format>
             <length>2</length>
             <align>left</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_cntrycd</oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -770,8 +597,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -779,8 +604,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>pcent</fieldName>
@@ -788,8 +611,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_pcent</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -797,8 +618,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -806,8 +625,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>split</fieldName>
@@ -815,8 +632,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_split</oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -824,8 +639,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -833,8 +646,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -842,8 +653,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>bkcode1</fieldName>
@@ -851,8 +660,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_bkcode1</oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -860,8 +667,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -869,8 +674,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -878,8 +681,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>bkcode2</fieldName>
@@ -887,8 +688,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_bkcode2</oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -896,8 +695,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -905,8 +702,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>lwsno</fieldName>
@@ -914,8 +709,6 @@
             <format>0000</format>
             <length>4</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_lwsno</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -923,8 +716,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>ltxtno</fieldName>
@@ -932,8 +723,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_ltxtno</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -941,8 +730,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>ofcamt</fieldName>
@@ -950,8 +737,6 @@
             <format>00000000000.00</format>
             <length>14</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_ofcamt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -959,8 +744,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>olcamt</fieldName>
@@ -968,8 +751,6 @@
             <format>00000000000.00</format>
             <length>14</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_olcamt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -977,8 +758,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>olcbal</fieldName>
@@ -986,8 +765,6 @@
             <format>00000000000.00</format>
             <length>14</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_olcbal</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -995,8 +772,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>mgamt</fieldName>
@@ -1004,8 +779,6 @@
             <format>00000000000.00</format>
             <length>14</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_mgamt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1013,8 +786,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>mgbal</fieldName>
@@ -1022,8 +793,6 @@
             <format>00000000000.00</format>
             <length>14</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_mgbal</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1031,8 +800,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>ibbal</fieldName>
@@ -1040,8 +807,6 @@
             <format>00000000000.00</format>
             <length>14</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_ibbal</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1049,8 +814,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>prebal</fieldName>
@@ -1058,8 +821,6 @@
             <format>00000000000.00</format>
             <length>14</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_prebal</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1067,8 +828,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>bprbal</fieldName>
@@ -1076,8 +835,6 @@
             <format>00000000000.00</format>
             <length>14</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_bprbal</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1085,8 +842,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>fcamt</fieldName>
@@ -1094,8 +849,6 @@
             <format>00000000000.00</format>
             <length>14</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_fcamt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1103,8 +856,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>ulnamt</fieldName>
@@ -1112,8 +863,6 @@
             <format>00000000000.00</format>
             <length>14</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_ulnamt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1121,8 +870,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>ulnbal</fieldName>
@@ -1130,8 +877,6 @@
             <format>00000000000.00</format>
             <length>14</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_ulnbal</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1139,8 +884,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>actpayf</fieldName>
@@ -1148,8 +891,6 @@
             <format>00000000000.00</format>
             <length>14</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_actpayf</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1157,8 +898,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>actrcvf</fieldName>
@@ -1166,8 +905,6 @@
             <format>00000000000.00</format>
             <length>14</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_actrcvf</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1175,8 +912,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>isudt</fieldName>
@@ -1184,8 +919,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_isudt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1193,8 +926,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>vldate</fieldName>
@@ -1202,8 +933,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_vldate</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1211,8 +940,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>eday</fieldName>
@@ -1220,8 +947,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_eday</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1229,8 +954,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>ltxday</fieldName>
@@ -1238,8 +961,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_ltxday</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1247,8 +968,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>btenor</fieldName>
@@ -1256,8 +975,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_btenor</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1265,8 +982,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>stenor</fieldName>
@@ -1274,8 +989,6 @@
             <format>000</format>
             <length>3</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_stenor</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1283,8 +996,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>custom</fieldName>
@@ -1292,8 +1003,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_custom</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1301,8 +1010,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>cn</fieldName>
@@ -1310,8 +1017,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_cn</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1319,8 +1024,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -1328,8 +1031,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>ebtype</fieldName>
@@ -1337,8 +1038,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_ebtype</oFieldName>
         </field>
         <field>
             <fieldName>ebyear</fieldName>
@@ -1346,8 +1045,6 @@
             <format>0000</format>
             <length>4</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_ebyear</oFieldName>
         </field>
         <field>
             <fieldName>ebsrno</fieldName>
@@ -1355,8 +1052,6 @@
             <format>00000</format>
             <length>5</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_ebsrno</oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -1364,8 +1059,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1373,8 +1066,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>lnseq</fieldName>
@@ -1382,8 +1073,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_lnseq</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1391,8 +1080,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -1400,8 +1087,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>exnal</fieldName>
@@ -1409,8 +1094,6 @@
             <format></format>
             <length>2</length>
             <align>left</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_exnal</oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -1418,8 +1101,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -1427,8 +1108,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -1436,8 +1115,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>imnal</fieldName>
@@ -1445,8 +1122,6 @@
             <format></format>
             <length>2</length>
             <align>left</align>
-            <oTableName>db_fimmr_dds</oTableName>
-            <oFieldName>db_fimmr_imnal</oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -1454,8 +1129,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
     </body>
 </data>

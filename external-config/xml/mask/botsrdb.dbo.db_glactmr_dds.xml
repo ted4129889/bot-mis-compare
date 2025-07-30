@@ -18,8 +18,11 @@
         <maskType>2</maskType>
     </field>
     <field>
-        <fieldName>db_glactmr_ltdpactno</fieldName>
-        <maskType>2</maskType>
+        <fieldName>db_glactmr_cifkey</fieldName>
+        <maskType>1</maskType>
+    </field>
+        <field>
+        <fieldName>db_glactmr_ciferr</fieldName>
+        <maskType>1</maskType>
     </field>
 </data>
-

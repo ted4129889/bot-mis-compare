@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
     <header>
-        <useSqlData>false</useSqlData>
     </header>
     <body>
-        <dataKey></dataKey>
-        <useSqlData>true</useSqlData>
         <separator>,</separator>
         <field>
             <fieldName>gendy</fieldName>
@@ -13,8 +10,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -22,8 +17,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>fromcurswnm</fieldName>
@@ -31,8 +24,6 @@
             <format></format>
             <length>3</length>
             <align>left</align>
-            <oTableName>botsrdb.db_fcurr_dds</oTableName>
-            <oFieldName>db_fcurr_swfnam</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -40,8 +31,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>curcd</fieldName>
@@ -49,8 +38,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>botsrdb.db_fxcrt_dds</oTableName>
-            <oFieldName>db_fxcrt_curcd</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -58,8 +45,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>tocurswnm</fieldName>
@@ -67,8 +52,6 @@
             <format></format>
             <length>3</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -76,8 +59,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>eqnt</fieldName>
@@ -85,8 +66,6 @@
             <format>00000.000000000</format>
             <length>15</length>
             <align>right</align>
-            <oTableName>botsrdb.db_fxcrt_dds</oTableName>
-            <oFieldName>db_fxcrt_acrat</oFieldName>
         </field>
     </body>
 </data>

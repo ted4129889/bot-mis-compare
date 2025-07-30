@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <txt>
+    <header>
+    </header>
+    <body>
         <field>
             <fieldName>brno</fieldName>
             <length>3</length>
@@ -301,6 +303,7 @@
             <fieldName>cnbscd</fieldName>
             <length>1</length>
         </field>
-    </txt>
+        </body>
+    <footer>
+    </footer>
 </data>
-

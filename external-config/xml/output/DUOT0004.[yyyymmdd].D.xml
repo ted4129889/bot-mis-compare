@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-    <header>
-        <useSqlData>false</useSqlData>
-        <separator></separator>
-    </header>
+    <header></header>
     <body>
-        <dataKey></dataKey>
-        <useSqlData>true</useSqlData>
         <separator>,</separator>
         <field>
             <fieldName>dquo</fieldName>
@@ -14,8 +9,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>irtcd</fieldName>
@@ -23,8 +16,6 @@
             <format></format>
             <length>2</length>
             <align>left</align>
-            <oTableName>botsrdb.db_intr_dds</oTableName>
-            <oFieldName>db_intr_irtcd</oFieldName>
         </field>
         <field>
             <fieldName>dquo</fieldName>
@@ -32,8 +23,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -41,8 +30,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>curcd</fieldName>
@@ -50,8 +37,6 @@
             <format>00</format>
             <length>2</length>
             <align>right</align>
-            <oTableName>botsrdb.db_intr_dds</oTableName>
-            <oFieldName>db_intr_curcd</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -59,8 +44,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>irday</fieldName>
@@ -68,8 +51,6 @@
             <format>00000000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName>botsrdb.db_intr_dds</oTableName>
-            <oFieldName>db_intr_irday</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -77,8 +58,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>intrt</fieldName>
@@ -86,8 +65,6 @@
             <format>00.00000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName>botsrdb.db_intr_dds</oTableName>
-            <oFieldName>db_intr_intrt</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -95,8 +72,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>flag</fieldName>
@@ -104,8 +79,6 @@
             <format>0</format>
             <length>1</length>
             <align>right</align>
-            <oTableName>botsrdb.db_intr_dds</oTableName>
-            <oFieldName>db_intr_irtflg</oFieldName>
         </field>
         <field>
             <fieldName>separator</fieldName>
@@ -113,8 +86,6 @@
             <format></format>
             <length>1</length>
             <align>left</align>
-            <oTableName></oTableName>
-            <oFieldName></oFieldName>
         </field>
         <field>
             <fieldName>fixrt</fieldName>
@@ -122,8 +93,6 @@
             <format>00.00000</format>
             <length>8</length>
             <align>right</align>
-            <oTableName>botsrdb.db_intr_dds</oTableName>
-            <oFieldName>db_intr_fixrt</oFieldName>
         </field>
     </body>
 </data>

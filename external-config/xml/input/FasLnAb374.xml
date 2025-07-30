@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<data>
-    <txt>
+<data fileName="FasLnAb374">
+    <header>
+    </header>
+    <body>
         <field>
             <fieldName>bcode</fieldName>
+            <fieldType>DISPLAY</fieldType>
             <length>4</length>
+            <decimal>0</decimal>
         </field>
         <field>
             <fieldName>bal</fieldName>
+            <fieldType>DISPLAY</fieldType>
             <length>13</length>
+            <decimal>0</decimal>
         </field>
-    </txt>
+    </body>
+    <footer>
+    </footer>
 </data>
-

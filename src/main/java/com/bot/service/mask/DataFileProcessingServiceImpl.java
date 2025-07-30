@@ -535,6 +535,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
         for (XmlField xmlField : xmlFieldList) {
             xmlLength = xmlLength + parse.string2Integer(xmlField.getLength());
         }
+
         byte[] bytes = line.getBytes(charset);
         int dataLength = bytes.length;
 
@@ -618,9 +619,12 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
         int h = 0;
         int b = 0;
         fileName = FilenameUtils.normalize(fileName);
+//        LogProcess.info("fileNamefileNamefileName = " +fileName);
+//        LogProcess.info("fileNamefileNamefileName = " +fileName);
         // 確認檔案路徑 是否與 允許的路徑匹配
         // 讀取檔案內容
         lines = textFileUtil.readFileContent(fileName, CHARSET_BIG5);
+//        LogProcess.info("lineslineslineslines = " +lines);
         for (String s : lines) {
 
             index++;

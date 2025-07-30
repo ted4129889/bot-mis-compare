@@ -61,5 +61,13 @@
         <fieldName>db_cifcmp_birday</fieldName>
         <maskType>2</maskType>
     </field>
-</data>
+    <field>
+        <fieldName>db_cifcmp_cname</fieldName>
+        <maskType>4</maskType>
+    </field>
+        <field>
+        <fieldName>db_cifcmp_cname2</fieldName>
+        <maskType>4</maskType>
+    </field>
 
+</data>

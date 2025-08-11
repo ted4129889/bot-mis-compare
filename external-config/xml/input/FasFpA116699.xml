@@ -16,39 +16,9 @@
             <decimal>0</decimal>
         </field>
         <field>
-            <fieldName>brno-f1</fieldName>
+            <fieldName>brno</fieldName>
             <fieldType>X</fieldType>
-            <length>1</length>
-            <decimal>0</decimal>
-        </field>
-        <field>
-            <fieldName>brno-m20</fieldName>
-            <fieldType>X</fieldType>
-            <length>20</length>
-            <decimal>0</decimal>
-        </field>
-        <field>
-            <fieldName>brno-l3</fieldName>
-            <fieldType>X</fieldType>
-            <length>1</length>
-            <decimal>0</decimal>
-        </field>
-        <field>
-            <fieldName>brno-l2</fieldName>
-            <fieldType>X</fieldType>
-            <length>1</length>
-            <decimal>0</decimal>
-        </field>
-        <field>
-            <fieldName>brno-l1</fieldName>
-            <fieldType>X</fieldType>
-            <length>1</length>
-            <decimal>0</decimal>
-        </field>
-        <field>
-            <fieldName>filler</fieldName>
-            <fieldType>X</fieldType>
-            <length>3</length>
+            <length>27</length>
             <decimal>0</decimal>
         </field>
         <field>

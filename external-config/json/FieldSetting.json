@@ -532,7 +532,7 @@
     "sortFields" : [ ]
   },
   "2MIS-D7VAR" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "brno", "apno", "curcd", "charcd", "brno1", "apno1", "srno1", "chkdg1" ],
     "sortFields" : [ ]
   },
   "2MIS-DEM-069" : {
@@ -604,11 +604,11 @@
     "sortFields" : [ ]
   },
   "NTFXPOT" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "date", "curcd" ],
     "sortFields" : [ ]
   },
   "NTFXPO" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "date", "brno", "curcd", "code" ],
     "sortFields" : [ ]
   },
   "DXCRT" : {
@@ -816,7 +816,7 @@
     "sortFields" : [ ]
   },
   "CKVAR" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "brno", "actno" ],
     "sortFields" : [ ]
   },
   "CKBAL" : {

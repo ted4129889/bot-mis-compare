@@ -41,6 +41,7 @@ public class CompareFileExportImpl {
     private TextFileUtil textFileUtil;
     @Autowired
     private MaskUtil maskUtil;
+
     private static final String CHARSET_BIG5 = "Big5";
     private static final String CHARSET_UTF8 = "UTF-8";
     private final String BOT_DATA = "BotData";
@@ -71,6 +72,9 @@ public class CompareFileExportImpl {
     public String dateTimeStr = "";
     public String dateTimeStr2 = "";
     public LocalDateTime dateTime;
+
+    private int dataCount = 0;
+
     public void run(String fileName, List<Map<String, String>> getOldDataResult, List<Map<String, String>> getNewDataResult, List<Map<String, String>> getComparisonResult, Map<String, Map<String, String>> getMissingData, Map<String, Map<String, String>> getExtraData, CompareSetting setting) {
 
         fileName = fileName.replace(".txt", "");
@@ -153,7 +157,7 @@ public class CompareFileExportImpl {
             textFileUtil.deleteFile(outPutFile);
 
             if (isShowOldData) {
-                makeCsv.writeToCsvBig5(oldDataResult, outPutFile);
+                dataCount = makeCsv.writeToCsvBig5(oldDataResult, outPutFile);
             }
 
 
@@ -163,7 +167,7 @@ public class CompareFileExportImpl {
             textFileUtil.deleteFile(outPutFile);
 
             if (isShowNewData) {
-                makeCsv.writeToCsvBig5(newDataResult, outPutFile);
+                dataCount = makeCsv.writeToCsvBig5(newDataResult, outPutFile);
             }
             //比對結果
             outPutFile = outPutPath + RESULT_DATA + "_" + dateTimeStr + ".csv";
@@ -172,7 +176,7 @@ public class CompareFileExportImpl {
 
 
             if (isShowComparisonData) {
-                makeCsv.writeToCsvBig5(mapConvert(comparisonResult), outPutFile);
+                dataCount = makeCsv.writeToCsvBig5(mapConvert(comparisonResult), outPutFile);
             }
 
             //缺少的資料
@@ -181,7 +185,7 @@ public class CompareFileExportImpl {
             textFileUtil.deleteFile(outPutFile);
 
             if (isShowMissingData) {
-                makeCsv.writeToCsvBig5(mapConvert(missingResult, MISSING_DATA), outPutFile);
+                dataCount = makeCsv.writeToCsvBig5(mapConvert(missingResult, MISSING_DATA), outPutFile);
             }
             //多餘的資料
             outPutFile = outPutPath + EXTRA_DATA + "_" + dateTimeStr + ".csv";
@@ -190,7 +194,7 @@ public class CompareFileExportImpl {
 
 
             if (isShowExtraData) {
-                makeCsv.writeToCsvBig5(mapConvert(extraResult, EXTRA_DATA), outPutFile);
+                dataCount = makeCsv.writeToCsvBig5(mapConvert(extraResult, EXTRA_DATA), outPutFile);
             }
         } catch (IOException e) {
             LogProcess.error("csv output error");
@@ -428,7 +432,7 @@ public class CompareFileExportImpl {
             if (col == 1 && row != 1) {
                 makeExcel.setLinkToSheetRow(BOT_DATA, Integer.parseInt(num) + 1);
             }
-            makeExcel.setValue(row, col, "請看「BotData」頁籤的第" + num + "筆資料(在第"+(Integer.parseInt(num) + 1)+"列)，直接點我連過去");
+            makeExcel.setValue(row, col, "請看「BotData」頁籤的第" + num + "筆資料(在第" + (Integer.parseInt(num) + 1) + "列)，直接點我連過去");
             makeExcel.setValue(row, col + 1, keyCol);
             makeExcel.setValue(row, col + 2, key);
         }
@@ -466,7 +470,7 @@ public class CompareFileExportImpl {
             if (col == 1 && row != 1) {
                 makeExcel.setLinkToSheetRow(MIS_DATA, Integer.parseInt(num) + 1);
             }
-            makeExcel.setValue(row, col, "請看「MisData」頁籤的第" + (Integer.parseInt(num) + 1) + "筆資料(在第"+(num)+"列)");
+            makeExcel.setValue(row, col, "請看「MisData」頁籤的第" + (num)  + "筆資料(在第" + (Integer.parseInt(num) + 1)+ "列)");
             makeExcel.setValue(row, col + 1, keyCol);
             makeExcel.setValue(row, col + 2, key);
         }
@@ -483,7 +487,7 @@ public class CompareFileExportImpl {
 
 
         //扣1是因為扣除欄位
-        int botTotal = oldDataResult.size() -1;
+        int botTotal = oldDataResult.size() - 1;
         int misTotal = newDataResult.size() - 1;
         int diffCount = comparisonResult.size();
         int missCount = missingResult.size();
@@ -497,10 +501,15 @@ public class CompareFileExportImpl {
 
     }
 
-    public void init(){
+    public void init() {
         outputResultRpt.clear();
         dateTimeStr = "";
         dateTimeStr2 = "";
+    }
+
+
+    public void show(){
+
     }
 
 }

@@ -4,6 +4,7 @@ package com.bot.service.mask;
 import com.bot.dto.CompareSetting;
 import com.bot.service.compare.CompareDataService;
 import com.bot.service.output.templates.CompareResultRpt;
+import com.bot.util.files.FileNameUtil;
 import com.bot.util.log.LogProcess;
 import com.bot.service.mask.config.FileConfig;
 import com.bot.service.mask.config.SortFieldConfig;
@@ -57,6 +58,10 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
     @Autowired
     private TextFileUtil textFileUtil;
     @Autowired
+    private FileNameUtil fileNameUtil;
+
+
+    @Autowired
     private MaskUtil maskUtil;
     @Autowired
     private DataMasker dataMasker;
@@ -102,6 +107,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 
     List<XmlField> xmlFieldList_H = new ArrayList<>();
     List<XmlField> xmlFieldList_B = new ArrayList<>();
+    List<XmlField> xmlFieldList_F = new ArrayList<>();
     private List<Map<String, String>> comparisonResult = new ArrayList<>();
     private Map<String, Map<String, String>> missingResult = new LinkedHashMap<>();
     private Map<String, Map<String, String>> extraResult = new LinkedHashMap<>();
@@ -203,6 +209,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
     /**
      *
      */
+    //TODO 此方法目前未使用到
     private void pairingProfile(String tbotOutputPath) {
         int calcuTotal = 0;
         //台銀原檔案路徑
@@ -252,13 +259,18 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 
         //允許路徑
         cFile = FilenameUtils.normalize(cFile);
+
+        String comparecFile = Paths.get(cFile).getFileName().toString();
         cList = new ArrayList<>();
         dataKey = new ArrayList<>();
+
 
         try {
             existflag = false;
             for (XmlData data : xmlDataList) {
-                if (cFile.contains(data.getFileName())) {
+                if (comparecFile.equals(data.getFileName())) {
+                    LogProcess.info("cFile = " + comparecFile);
+                    LogProcess.info("data.getFileName() = " + data.getFileName());
                     outPutFile = data.getFileName();
                     existflag = true;
 
@@ -324,8 +336,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 //                    LogProcess.info("oFilePath = " + oFilePath);
 //                    LogProcess.info("nFilePath = " + nFilePath);
                     //確認檔案名稱 是否存在定義檔
-
-                    if (tmpXmlFileName.contains(tmpFileName)) {
+                    if (tmpXmlFileName.stream().anyMatch(tmpFileName::equals)) {
                         //原始檔案
                         pairingProfile2(oFilePath, TEXTAREA_1);
                         //比對檔案
@@ -412,6 +423,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
             // 解析 XML 檔案格式
             xmlFieldList_H = xmlData.getHeader().getFieldList();
             xmlFieldList_B = xmlData.getBody().getFieldList();
+//            xmlFieldList_F = xmlData.getBody().getFieldList();
 
             //為蒐集表頭及內容欄位
             columnAllList = new ArrayList<>();
@@ -453,7 +465,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                 }
             }
         } catch (Exception e) {
-            LogProcess.error("performMasking error");
+            LogProcess.error("performMasking error",e);
         }
 
         return result;

@@ -23,6 +23,7 @@ import java.util.Objects;
 @Scope("prototype")
 public class MakeExcel {
 
+    private final int LIMIT_COUNT=60000;
     private Workbook openedWorkbook = null;
 
     public Sheet openedSheet = null;
@@ -39,6 +40,8 @@ public class MakeExcel {
     private CreationHelper helper = null;
     private Hyperlink link = null;
 
+    private Object sheetName = "";
+    private int sheetSubNumber = 1;
     public MakeExcel() {
         // 自動檢測未關閉情況
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -70,7 +73,7 @@ public class MakeExcel {
         openExcel(fileName, sheetName);
 
         this.fileName = fileName;
-
+        this.sheetName =sheetName;
 
     }
 
@@ -142,6 +145,9 @@ public class MakeExcel {
             } catch (IOException e) {
             }
         }
+
+        //一般Style設定(套用所有欄位)
+        commonStyleSetting();
     }
 
     /**
@@ -211,6 +217,14 @@ public class MakeExcel {
      */
     public void setValue(int row, int col, Object val) {
         checkOpenFiles();
+//            6001
+//        if(row > LIMIT_COUNT){
+//            row = row -LIMIT_COUNT * sheetSubNumber;
+//            newSheet(this.sheetName.toString());
+//            useSheet(this.sheetName.toString()+sheetSubNumber);
+//            sheetSubNumber++;
+//        }
+
 
         Row pRow = openedSheet.getRow(row - 1);
         if (pRow == null) {
@@ -241,8 +255,7 @@ public class MakeExcel {
     // 根據 Object 型別設定值
     private void sellValueType(Cell cell, Object value) {
 
-        //一般Style設定
-        commonStyleSetting();
+
 
         //設定
         if (link != null) {
@@ -495,5 +508,23 @@ public class MakeExcel {
                 || Character.UnicodeScript.of(c) == Character.UnicodeScript.HIRAGANA
                 || Character.UnicodeScript.of(c) == Character.UnicodeScript.KATAKANA
                 || (c >= 0xFF01 && c <= 0xFF60); // 全形符號範圍
+    }
+
+
+    /**
+     * 判斷是否超過最大行數(預設60000列)
+     * @param row 當前列數
+     */
+    public boolean isOverRowLimit(int row) {
+        return  row <= LIMIT_COUNT;
+    }
+
+    /**
+     * 判斷是否超過最大行數(自行指定)
+     * @param row 當前列數
+     * @param limitCount 最大行數
+     */
+    public boolean isOverRowLimit(int row,int limitCount) {
+        return  row <= limitCount;
     }
 }

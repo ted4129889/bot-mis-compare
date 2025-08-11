@@ -72,9 +72,9 @@ public class TextFileUtil {
                 /* FORTIFY: The file Contents is securely controlled and validated */
                 while ((line = reader.readLine()) != null && isValidInput(line)) {
                     lineCount++;
-                    if (lineCount > maxLines) {
-                        throw new IllegalStateException("檔案過大，超過最大行數限制");
-                    }
+//                    if (lineCount > maxLines) {
+//                        throw new IllegalStateException("檔案過大，超過最大行數限制");
+//                    }
 
                     if (System.currentTimeMillis() - startTime > timeout) {
                         throw new TimeoutException("讀取時間過長，操作超時");
@@ -199,20 +199,20 @@ public class TextFileUtil {
             LogProcess.info("isValidInput is null");
             return false;
         }
+        return true;
         // 允許：中文、英數字、底線(_)、@、.、-、空格
-        if (input.matches("^[\\u4e00-\\u9fa5a-zA-Z0-9_@.,?+*-\\-\\s\\u3000]+$")) {
-            return true;
-        } else {
-            LogProcess.info("input =" + input);
-            LogProcess.info("Not Match");
-            return false;
-        }
+//        if (input.matches("^[\\u4e00-\\u9fa5a-zA-Z0-9_@.,?+*-\\-\\s\\u3000]+$")) {
+//            return true;
+//        } else {
+//            LogProcess.info("input =" + input);
+//            LogProcess.info("Not Match");
+//            return false;
+//        }
     }
 
     public String replaceDateWithPlaceholder(String fileName) {
-        // 偵測 8 碼數字（yyyyMMdd 格式）
-        Pattern pattern = Pattern.compile("\\d{8}");
-
+        // 偵測 7 或 8 碼數字（yyyyMMdd 格式）
+        Pattern pattern = Pattern.compile("(\\d{7}|\\d{8})");
 //        fileName = fileName.replace(".txt", "");
 
         Matcher matcher = pattern.matcher(fileName);

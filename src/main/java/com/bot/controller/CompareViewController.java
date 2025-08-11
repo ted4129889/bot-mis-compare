@@ -645,7 +645,7 @@ public class CompareViewController {
     /**
      * 顯示提示訊息
      */
-    private boolean showAlert(String message) {
+    public boolean showAlert(String message) {
 
 //        Alert alert = new Alert(Alert.AlertType.INFORMATION);
 //        alert.setHeight(200);

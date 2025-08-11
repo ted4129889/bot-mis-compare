@@ -12497,111 +12497,111 @@
     <data fileName="901232">
         <header>
             <separator>,</separator>
-<!--            <field>-->
-<!--                <fieldName>filler</fieldName>-->
-<!--                <fieldType>string</fieldType>-->
-<!--                <format></format>-->
-<!--                <length>22</length>-->
-<!--                <align>left</align>-->
-<!--            </field>-->
-<!--            <field>-->
-<!--                <fieldName>' 同業名稱 '</fieldName>-->
-<!--                <fieldType>string</fieldType>-->
-<!--                <format></format>-->
-<!--                <length>10</length>-->
-<!--                <align>left</align>-->
-<!--            </field>-->
-<!--            <field>-->
-<!--                <fieldName>space</fieldName>-->
-<!--                <fieldType>string</fieldType>-->
-<!--                <format></format>-->
-<!--                <length>22</length>-->
-<!--                <align>left</align>-->
-<!--            </field>-->
-<!--            <field>-->
-<!--                <fieldName>separator</fieldName>-->
-<!--                <fieldType>string</fieldType>-->
-<!--                <format></format>-->
-<!--                <length>1</length>-->
-<!--                <align>left</align>-->
-<!--            </field>-->
-<!--            <field>-->
-<!--                <fieldName>filler1</fieldName>-->
-<!--                <fieldType>string</fieldType>-->
-<!--                <format></format>-->
-<!--                <length>3</length>-->
-<!--                <align>left</align>-->
-<!--            </field>-->
-<!--            <field>-->
-<!--                <fieldName>' 帳號 '</fieldName>-->
-<!--                <fieldType>string</fieldType>-->
-<!--                <format></format>-->
-<!--                <length>6</length>-->
-<!--                <align>left</align>-->
-<!--            </field>-->
-<!--            <field>-->
-<!--                <fieldName>filler2</fieldName>-->
-<!--                <fieldType>string</fieldType>-->
-<!--                <format></format>-->
-<!--                <length>3</length>-->
-<!--                <align>left</align>-->
-<!--            </field>-->
-<!--            <field>-->
-<!--                <fieldName>separator</fieldName>-->
-<!--                <fieldType>string</fieldType>-->
-<!--                <format></format>-->
-<!--                <length>1</length>-->
-<!--                <align>left</align>-->
-<!--            </field>-->
-<!--            <field>-->
-<!--                <fieldName>' 統一編號 '</fieldName>-->
-<!--                <fieldType>string</fieldType>-->
-<!--                <format></format>-->
-<!--                <length>10</length>-->
-<!--                <align>left</align>-->
-<!--            </field>-->
-<!--            <field>-->
-<!--                <fieldName>separator</fieldName>-->
-<!--                <fieldType>string</fieldType>-->
-<!--                <format></format>-->
-<!--                <length>1</length>-->
-<!--                <align>left</align>-->
-<!--            </field>-->
-<!--            <field>-->
-<!--                <fieldName>filler4</fieldName>-->
-<!--                <fieldType>string</fieldType>-->
-<!--                <format></format>-->
-<!--                <length>4</length>-->
-<!--                <align>left</align>-->
-<!--            </field>-->
-<!--            <field>-->
-<!--                <fieldName>' 餘額 '</fieldName>-->
-<!--                <fieldType>string</fieldType>-->
-<!--                <format></format>-->
-<!--                <length>6</length>-->
-<!--                <align>left</align>-->
-<!--            </field>-->
-<!--            <field>-->
-<!--                <fieldName>filler5</fieldName>-->
-<!--                <fieldType>string</fieldType>-->
-<!--                <format></format>-->
-<!--                <length>5</length>-->
-<!--                <align>left</align>-->
-<!--            </field>-->
-<!--            <field>-->
-<!--                <fieldName>separator</fieldName>-->
-<!--                <fieldType>string</fieldType>-->
-<!--                <format></format>-->
-<!--                <length>1</length>-->
-<!--                <align>left</align>-->
-<!--            </field>-->
-<!--            <field>-->
-<!--                <fieldName>filler6</fieldName>-->
-<!--                <fieldType>string</fieldType>-->
-<!--                <format></format>-->
-<!--                <length>3</length>-->
-<!--                <align>left</align>-->
-<!--            </field>-->
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>string</fieldType>
+                <format></format>
+                <length>22</length>
+                <align>left</align>
+            </field>
+            <field>
+                <fieldName>' 同業名稱 '</fieldName>
+                <fieldType>string</fieldType>
+                <format></format>
+                <length>10</length>
+                <align>left</align>
+            </field>
+            <field>
+                <fieldName>space</fieldName>
+                <fieldType>string</fieldType>
+                <format></format>
+                <length>22</length>
+                <align>left</align>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <format></format>
+                <length>1</length>
+                <align>left</align>
+            </field>
+            <field>
+                <fieldName>filler1</fieldName>
+                <fieldType>string</fieldType>
+                <format></format>
+                <length>3</length>
+                <align>left</align>
+            </field>
+            <field>
+                <fieldName>' 帳號 '</fieldName>
+                <fieldType>string</fieldType>
+                <format></format>
+                <length>6</length>
+                <align>left</align>
+            </field>
+            <field>
+                <fieldName>filler2</fieldName>
+                <fieldType>string</fieldType>
+                <format></format>
+                <length>3</length>
+                <align>left</align>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <format></format>
+                <length>1</length>
+                <align>left</align>
+            </field>
+            <field>
+                <fieldName>' 統一編號 '</fieldName>
+                <fieldType>string</fieldType>
+                <format></format>
+                <length>10</length>
+                <align>left</align>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <format></format>
+                <length>1</length>
+                <align>left</align>
+            </field>
+            <field>
+                <fieldName>filler4</fieldName>
+                <fieldType>string</fieldType>
+                <format></format>
+                <length>4</length>
+                <align>left</align>
+            </field>
+            <field>
+                <fieldName>' 餘額 '</fieldName>
+                <fieldType>string</fieldType>
+                <format></format>
+                <length>6</length>
+                <align>left</align>
+            </field>
+            <field>
+                <fieldName>filler5</fieldName>
+                <fieldType>string</fieldType>
+                <format></format>
+                <length>5</length>
+                <align>left</align>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <format></format>
+                <length>1</length>
+                <align>left</align>
+            </field>
+            <field>
+                <fieldName>filler6</fieldName>
+                <fieldType>string</fieldType>
+                <format></format>
+                <length>3</length>
+                <align>left</align>
+            </field>
         </header>
         <body>
             <separator>,</separator>
@@ -18579,12 +18579,14 @@
                 <fieldType>X</fieldType>
                 <length>10</length>
                 <decimal>0</decimal>
+                <maskType>1</maskType>
             </field>
             <field>
                 <fieldName>pidno</fieldName>
                 <fieldType>X</fieldType>
                 <length>10</length>
                 <decimal>0</decimal>
+                <maskType>1</maskType>
             </field>
             <field>
                 <fieldName>conamt</fieldName>
@@ -19236,39 +19238,9 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>brno-f1</fieldName>
+                <fieldName>brno-merge</fieldName>
                 <fieldType>X</fieldType>
-                <length>1</length>
-                <decimal>0</decimal>
-            </field>
-            <field>
-                <fieldName>brno-m20</fieldName>
-                <fieldType>X</fieldType>
-                <length>20</length>
-                <decimal>0</decimal>
-            </field>
-            <field>
-                <fieldName>brno-l3</fieldName>
-                <fieldType>X</fieldType>
-                <length>1</length>
-                <decimal>0</decimal>
-            </field>
-            <field>
-                <fieldName>brno-l2</fieldName>
-                <fieldType>X</fieldType>
-                <length>1</length>
-                <decimal>0</decimal>
-            </field>
-            <field>
-                <fieldName>brno-l1</fieldName>
-                <fieldType>X</fieldType>
-                <length>1</length>
-                <decimal>0</decimal>
-            </field>
-            <field>
-                <fieldName>filler</fieldName>
-                <fieldType>X</fieldType>
-                <length>3</length>
+                <length>27</length>
                 <decimal>0</decimal>
             </field>
             <field>
@@ -19556,39 +19528,9 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>brno-f1</fieldName>
+                <fieldName>brno-merge</fieldName>
                 <fieldType>X</fieldType>
-                <length>1</length>
-                <decimal>0</decimal>
-            </field>
-            <field>
-                <fieldName>brno-m20</fieldName>
-                <fieldType>X</fieldType>
-                <length>20</length>
-                <decimal>0</decimal>
-            </field>
-            <field>
-                <fieldName>brno-l3</fieldName>
-                <fieldType>X</fieldType>
-                <length>1</length>
-                <decimal>0</decimal>
-            </field>
-            <field>
-                <fieldName>brno-l2</fieldName>
-                <fieldType>X</fieldType>
-                <length>1</length>
-                <decimal>0</decimal>
-            </field>
-            <field>
-                <fieldName>brno-l1</fieldName>
-                <fieldType>X</fieldType>
-                <length>1</length>
-                <decimal>0</decimal>
-            </field>
-            <field>
-                <fieldName>filler</fieldName>
-                <fieldType>X</fieldType>
-                <length>3</length>
+                <length>27</length>
                 <decimal>0</decimal>
             </field>
             <field>
@@ -20813,6 +20755,7 @@
                 <fieldType>COMP</fieldType>
                 <length>4</length>
                 <decimal>0</decimal>
+                <maskType>1</maskType>
             </field>
             <field>
                 <fieldName>date</fieldName>
@@ -20863,6 +20806,7 @@
                 <fieldType>COMP</fieldType>
                 <length>4</length>
                 <decimal>0</decimal>
+                <maskType>1</maskType>
             </field>
             <field>
                 <fieldName>date</fieldName>

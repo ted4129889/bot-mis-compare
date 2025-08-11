@@ -30,11 +30,12 @@ public class MakeCsv {
      * @param dataList 資料列表
      * @param filePath 檔案完整路徑（例如：ComparisonResult/result.csv）
      * @throws IOException
+     * @return 回傳筆數
      */
-    public void writeToCsvBig5(List<Map<String, String>> dataList, String filePath) throws IOException {
+    public int writeToCsvBig5(List<Map<String, String>> dataList, String filePath) throws IOException {
         if (dataList == null || dataList.isEmpty()) {
             System.out.println("無資料可寫入 CSV。");
-            return;
+            return 0;
         }
 
         filePath = FilenameUtils.normalize(filePath);
@@ -50,7 +51,7 @@ public class MakeCsv {
 
         // 取欄位順序（用第一筆）
         List<String> headers = new ArrayList<>(dataList.get(0).keySet());
-
+        int cnt = 0;
         try (BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(new FileOutputStream(file), Charset.forName(CHARSET_BIG5)))) {
 
@@ -60,6 +61,7 @@ public class MakeCsv {
 
             // 寫入每筆資料
             for (Map<String, String> row : dataList) {
+                cnt++;
                 List<String> values = row.entrySet().stream()
                         .map(entry -> escapeCsv(entry.getValue()))
                         .collect(Collectors.toList());
@@ -67,8 +69,8 @@ public class MakeCsv {
                 writer.newLine();
             }
         }
-
         LogProcess.info("export CSV（Big5） file name ： " + filePath);
+        return cnt;
     }
 
     // 處理 CSV 特殊字元

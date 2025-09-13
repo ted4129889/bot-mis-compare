@@ -23,7 +23,12 @@ public class CompareResultRpt {
 
 
             // 累加區
-            int totalBot = 0, totalMis = 0, totalDiff = 0, totalMiss = 0, totalExtra = 0;
+            int totalBot = 0;
+            int totalMis = 0;
+            int totalDiff = 0;
+            int totalColDiff = 0;
+            int totalMiss = 0;
+            int totalExtra = 0;
             StringBuilder fullReport = new StringBuilder();
 
             for (int page = 0; page < totalPages; page++) {
@@ -45,15 +50,16 @@ public class CompareResultRpt {
                     //s 表示字串（string）
                     //數字是「最小欄位寬度」
                     detailBuilder.append(String.format(
-                            "%-5d %-21s  %10d %10d %10d %10d %10d %-10s%n",
+                            "%-5d %-14s  %10d %10d %10d %10d %10d %10d %-10s%n",
                             i + 1, r.getFileName(), r.getBotTotal(), r.getMisTotal(),
-                            r.getDiffCount(), r.getMissCount(), r.getExtraCount(), r.getNote()
+                            r.getDiffCount(), r.getDiffColCount(),r.getMissCount(), r.getExtraCount(), r.getNote()
                     ));
 
                     // 總計累加
                     totalBot += r.getBotTotal();
                     totalMis += r.getMisTotal();
                     totalDiff += r.getDiffCount();
+                    totalColDiff += r.getDiffColCount();
                     totalMiss += r.getMissCount();
                     totalExtra += r.getExtraCount();
                 }
@@ -77,8 +83,8 @@ public class CompareResultRpt {
                 // 最後一頁才加 SUMMARY
                 if (page == totalPages - 1) {
                     String summary = String.format(
-                            "                        總計 %10d %10d %10d %10d %10d",
-                            totalBot, totalMis, totalDiff, totalMiss, totalExtra);
+                            "                總計 %10d %10d %10d %10d %10d %10d",
+                            totalBot, totalMis, totalDiff,totalColDiff, totalMiss, totalExtra);
                     template = template.replace("{{SUMMARY}}", summary)
                             .replace("{{FILETOTAL}}", String.valueOf(records.size()));
                 } else {

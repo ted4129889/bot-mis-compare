@@ -56,7 +56,7 @@
             <VBox spacing="5" prefWidth="350" maxWidth="350">
                 <HBox>
                     <VBox prefWidth="175" VBox.vgrow="ALWAYS">
-                        <Label text="(可勾選)主鍵欄位" styleClass="label bold"/>
+                        <Label text="主鍵欄位" styleClass="label bold"/>
                     </VBox>
                     <VBox prefWidth="175" VBox.vgrow="ALWAYS" alignment="CENTER_RIGHT">
                         <Button fx:id="btnFieldSetting" text="儲存檔案欄位設定" onAction="#saveFields"
@@ -73,7 +73,7 @@
                     </VBox>
                 </ScrollPane>
                 <HBox>
-                    <Label text="(可勾選)欄位排序設定" styleClass="label bold"/>
+                    <Label text="欄位排序設定" styleClass="label bold"/>
                 </HBox>
                 <ScrollPane fitToWidth="true" prefHeight="250">
                     <VBox spacing="10">

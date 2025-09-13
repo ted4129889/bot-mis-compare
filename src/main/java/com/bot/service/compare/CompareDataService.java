@@ -36,5 +36,7 @@ public interface CompareDataService {
 
     List<Map<String, String>> getOldDataResult();
 
+    int getDiffCount();
+
 
 }

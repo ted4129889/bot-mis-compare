@@ -32,6 +32,7 @@ public class CompareDataServiceImpl implements CompareDataService {
     List<Map<String, String>> oldDataResult = new ArrayList<>();
     List<Map<String, String>> newDataResult = new ArrayList<>();
 
+    private int diffCount = 0;
     @Autowired
     MaskUtil maskUtil;
 
@@ -50,6 +51,8 @@ public class CompareDataServiceImpl implements CompareDataService {
         extraMap = new LinkedHashMap<>();
         //欄位
         columns = new ArrayList<>();
+        //差異筆數
+        diffCount = 0;
 
         LogProcess.info("dataKey = " + dataKey);
         LogProcess.info("filterColList = " + filterColList);
@@ -186,6 +189,11 @@ public class CompareDataServiceImpl implements CompareDataService {
         return oldDataResult;
     }
 
+    @Override
+    public int getDiffCount() {
+        return this.diffCount;
+    }
+
     /***
      * 將匹配到的資料串，根據欄位一一比對處理
      * */
@@ -193,6 +201,7 @@ public class CompareDataServiceImpl implements CompareDataService {
 
         Map<String, String> map = new LinkedHashMap<>();
 
+        boolean checkRowError = false;
 
         //已知的檔案欄位
         for (String c : columns) {
@@ -207,9 +216,9 @@ public class CompareDataServiceImpl implements CompareDataService {
                 map = new LinkedHashMap<>();
                 String desc = "";
                 if (!Objects.equals(bRow.get(customPrimaryKey), "")) {
-                    desc = "第" + (index-1) + "筆";
+                    desc = "第" + (index - 1) + "筆";
                 } else {
-                    desc = "第" + (Integer.parseInt(bRow.get(customPrimaryKey))-1) + "筆，點我連過去。";
+                    desc = "第" + (Integer.parseInt(bRow.get(customPrimaryKey)) - 1) + "筆，點我連過去。";
                 }
 
                 String oldData = aRow.get(c);
@@ -226,8 +235,14 @@ public class CompareDataServiceImpl implements CompareDataService {
                 map.put("oldData", oldData);
                 map.put("newData", newData);
                 result.add(map);
+
+                checkRowError = true;
             }
 
+        }
+
+        if (checkRowError) {
+            diffCount = diffCount + 1;
         }
 
     }

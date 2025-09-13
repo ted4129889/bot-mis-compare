@@ -489,14 +489,15 @@ public class CompareFileExportImpl {
         //扣1是因為扣除欄位
         int botTotal = oldDataResult.size() - 1;
         int misTotal = newDataResult.size() - 1;
-        int diffCount = comparisonResult.size();
+        int diffColCount = comparisonResult.size();//差異欄位數
+        int diffCount = compareDataService.getDiffCount();//差異筆數
         int missCount = missingResult.size();
         int extraCount = extraResult.size();
 
         String note = "";
 
 
-        outputResultRpt.add(new CompareResultBean(fileName, botTotal, misTotal, diffCount, missCount, extraCount, note));
+        outputResultRpt.add(new CompareResultBean(fileName, botTotal, misTotal,diffCount, diffColCount, missCount, extraCount, note));
 
 
     }

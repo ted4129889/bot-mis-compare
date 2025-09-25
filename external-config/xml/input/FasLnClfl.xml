@@ -162,7 +162,7 @@
         <field>
             <fieldName>bkindb</fieldName>
             <fieldType>X</fieldType>
-            <length>7</length>
+            <length>6</length>
             <decimal>0</decimal>
         </field>
         <field>

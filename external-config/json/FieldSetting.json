@@ -500,11 +500,11 @@
     "sortFields" : [ ]
   },
   "AB374" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "bcode", "tbsdy" ],
     "sortFields" : [ ]
   },
   "AB297" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "tbsdy", "class", "pidno", "actno", "type", "bcode" ],
     "sortFields" : [ ]
   },
   "2MIS-YEARDAY" : {
@@ -532,7 +532,7 @@
     "sortFields" : [ ]
   },
   "2MIS-D7VAR" : {
-    "primaryKeys" : [ "brno", "apno", "curcd", "charcd", "brno1", "apno1", "srno1", "chkdg1" ],
+    "primaryKeys" : [ "curcd", "charcd", "brno1", "apno1", "srno1", "chkdg1" ],
     "sortFields" : [ ]
   },
   "2MIS-DEM-069" : {
@@ -584,23 +584,23 @@
     "sortFields" : [ ]
   },
   "TREASDLY" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "date", "brno" ],
     "sortFields" : [ ]
   },
   "TRSCLS" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "date", "brno", "actno", "entpno" ],
     "sortFields" : [ ]
   },
   "TRSOPN" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "date", "brno", "actno", "entpno" ],
     "sortFields" : [ ]
   },
   "TRSVACC" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "date", "brno", "svtdcd", "charcd", "curcd" ],
     "sortFields" : [ ]
   },
   "OBUFX" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "yyymm", "brno" ],
     "sortFields" : [ ]
   },
   "NTFXPOT" : {
@@ -608,7 +608,7 @@
     "sortFields" : [ ]
   },
   "NTFXPO" : {
-    "primaryKeys" : [ "date", "brno", "curcd", "code" ],
+    "primaryKeys" : [ "date", "brno", "curcd" ],
     "sortFields" : [ ]
   },
   "DXCRT" : {
@@ -620,7 +620,7 @@
     "sortFields" : [ ]
   },
   "GVVAR" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "brno", "actno", "cusno", "tdbal", "var" ],
     "sortFields" : [ ]
   },
   "HOLE" : {
@@ -804,11 +804,11 @@
     "sortFields" : [ ]
   },
   "D4VAR" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "brno", "actno", "cusno", "tdbal", "var" ],
     "sortFields" : [ ]
   },
   "D1VAR" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "brno", "actno", "cusno", "tdbal", "var" ],
     "sortFields" : [ ]
   },
   "CLFL" : {
@@ -816,7 +816,7 @@
     "sortFields" : [ ]
   },
   "CKVAR" : {
-    "primaryKeys" : [ "brno", "actno" ],
+    "primaryKeys" : [ "brno", "actno", "cusno", "tdbal", "var" ],
     "sortFields" : [ ]
   },
   "CKBAL" : {
@@ -828,11 +828,11 @@
     "sortFields" : [ ]
   },
   "CB-[yyyymmdd]" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "cifkey", "brno" ],
     "sortFields" : [ ]
   },
   "CB" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "cifkey", "brno" ],
     "sortFields" : [ ]
   },
   "AMPS-PRDFIT[yyyymmdd]" : {
@@ -884,7 +884,7 @@
     "sortFields" : [ ]
   },
   "CAPTL1" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "type", "edate" ],
     "sortFields" : [ ]
   },
   "AMPS-FPRD" : {
@@ -1508,11 +1508,11 @@
     "sortFields" : [ ]
   },
   "R0108" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "brno", "date", "cusno", "actno" ],
     "sortFields" : [ ]
   },
   "R041" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "date", "cusno", "actno" ],
     "sortFields" : [ ]
   },
   "FasDpR0108" : {
@@ -1568,6 +1568,26 @@
     "sortFields" : [ ]
   },
   "Faslnab560" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasFxGain" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasDpdhmr" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "Fasdpctcif" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasLnAb560" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasDpBankbal" : {
     "primaryKeys" : [ ],
     "sortFields" : [ ]
   }

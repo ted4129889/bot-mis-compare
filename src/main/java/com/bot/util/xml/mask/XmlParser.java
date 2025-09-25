@@ -35,7 +35,7 @@ public class XmlParser {
 
         // 沒有檔案拋錯誤
         if (!file.exists()) {
-            LogProcess.info("not find file = " + xmlFileName);
+            LogProcess.info(log,"not find file = " + xmlFileName);
             return null;
         }
         // 驗證讀取的XML檔案是否在指定的路徑上
@@ -61,9 +61,9 @@ public class XmlParser {
 
         // 沒有檔案拋錯誤
         if (!file.exists()) {
-            LogProcess.info("config file is not exist: " + file);
+            LogProcess.info(log,"config file is not exist: " + file);
         } else {
-            LogProcess.info("config file is exist: " + file);
+            LogProcess.info(log,"config file is exist: " + file);
         }
 
         // 驗證讀取的XML檔案是否在指定的路徑上

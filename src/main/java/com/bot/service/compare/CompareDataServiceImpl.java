@@ -5,6 +5,7 @@ import com.bot.service.mask.config.SortFieldConfig;
 import com.bot.util.comparator.ComparatorUtil;
 import com.bot.util.log.LogProcess;
 import com.bot.util.mask.MaskUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+@Slf4j
 @Service
 public class CompareDataServiceImpl implements CompareDataService {
     @Value("${localFile.mis.batch.compare.new.directory}")
@@ -36,128 +38,8 @@ public class CompareDataServiceImpl implements CompareDataService {
     @Autowired
     MaskUtil maskUtil;
 
-    private final String customPrimaryKey = "row";
+    private final String customPrimaryKey = "primaryKey";
     private String groupKey = "";
-
-    @Override
-    public void parseData(List<Map<String, String>> aData, List<Map<String, String>> bData, List<String> dataKey, List<String> filterColList, List<SortFieldConfig> sortFieldConfig, List<String> maskFieldList, boolean headerBodyMode) {
-        //最後輸出結果
-        result = new ArrayList<>();
-        //符合的資料
-        matchMap = new LinkedHashMap<>();
-        //不符合的資料(缺少)
-        missingMap = new LinkedHashMap<>();
-        //不符合的資料(多餘)
-        extraMap = new LinkedHashMap<>();
-        //欄位
-        columns = new ArrayList<>();
-        //差異筆數
-        diffCount = 0;
-
-        LogProcess.info("dataKey = " + dataKey);
-        LogProcess.info("filterColList = " + filterColList);
-//        LogProcess.info("aData bef = " + aData);
-//        LogProcess.info("bData bef= " + bData);
-
-
-        //將資料挑選欄位
-        List<Map<String, String>> aDataTmp = aData;
-        List<Map<String, String>> aDataResult = IntStream.range(0, aDataTmp.size())
-                .mapToObj(i -> {
-                    Map<String, String> row = aDataTmp.get(i);
-                    return filterFieldsBySelection(row, filterColList, dataKey, i); // 流水號從 0 開始
-                })
-                .collect(Collectors.toList());
-
-
-        List<Map<String, String>> bDataTmp = bData;
-        List<Map<String, String>> bDataResult = IntStream.range(0, bDataTmp.size())
-                .mapToObj(i -> {
-                    Map<String, String> row = bDataTmp.get(i);
-                    return filterFieldsBySelection(row, filterColList, dataKey, i);
-                })
-                .collect(Collectors.toList());
-//        LogProcess.info("aData = " + aData);
-//        LogProcess.info("bData = " + bData);
-
-        //將資料做排序
-        aDataResult = ComparatorUtil.sortByFields(aDataResult, sortFieldConfig);
-
-        bDataResult = ComparatorUtil.sortByFields(bDataResult, sortFieldConfig);
-
-//        LogProcess.info("aData sort = " + aDataResult);
-//        LogProcess.info("bData sort= " + bDataResult);
-
-        //原始檔案
-        oldDataResult = new ArrayList<>();
-        oldDataResult.addAll(maskUtil.maskKeysMultipleData(aDataResult, maskFieldList));
-        //比對的檔案
-        newDataResult = new ArrayList<>();
-        newDataResult.addAll(maskUtil.maskKeysMultipleData(bDataResult, maskFieldList));
-
-        //將資料賦予Key，用來比對
-        Map<String, Map<String, String>> aDataMap = buildIndex(aDataResult, dataKey);
-        Map<String, Map<String, String>> bDataMap = buildIndex(bDataResult, dataKey);
-
-//        LogProcess.info("aMapIndex = " + aDataMap);
-//        LogProcess.info("bMapIndex = " + bDataMap);
-
-
-        //扣掉表頭
-        int index = -1;
-        // 以 A 為主比對 B
-        for (Map.Entry<String, Map<String, String>> entry : aDataMap.entrySet()) {
-            index++;
-            String key = entry.getKey();
-
-            //是否表頭資料與內容資料同時存在
-            if (headerBodyMode) {
-                //第1筆為表頭的欄位名稱，第3筆為內容的欄位名稱
-                if (index == 0 || index == 2) {
-                    groupKey = key;
-                    for (Map.Entry<String, String> col : entry.getValue().entrySet()) {
-                        columns.add(col.getValue());
-                    }
-                }
-            } else {
-                //第1筆為表頭的欄位名稱，
-                if (index == 0) {
-                    groupKey = key;
-                    for (Map.Entry<String, String> col : entry.getValue().entrySet()) {
-                        columns.add(col.getValue());
-                    }
-                }
-            }
-
-            if (bDataMap.containsKey(key)) {
-
-                processData(index, entry.getKey(), entry.getValue(), bDataMap.get(key), maskFieldList);
-                // A 和 B 都有
-
-                matchMap.put(index + "#" + groupKey + "#" + entry.getKey(), entry.getValue());
-            } else {
-                // B 缺少 A 的資料
-                missingMap.put(index + "#" + groupKey + "#" + entry.getKey(), entry.getValue());
-            }
-        }
-
-        index = -1;
-        // 檢查 B 有但 A 沒有的資料（B 多出來）
-        for (Map.Entry<String, Map<String, String>> entry : bDataMap.entrySet()) {
-            index++;
-            String key = entry.getKey();
-            if (!aDataMap.containsKey(key)) {
-                // B 多出來
-                extraMap.put(index + "#" + groupKey + "#" + entry.getKey(), entry.getValue());
-            }
-        }
-
-//        LogProcess.info("columns = " + columns);
-//        LogProcess.info("matchMap = " + matchMap);
-//        LogProcess.info("missingMap = " + missingMap);
-//        LogProcess.info("extraMap = " + extraMap);
-//        LogProcess.info("result = " + result);
-    }
 
     @Override
     public Map<String, Map<String, String>> getMatchData() {
@@ -194,6 +76,132 @@ public class CompareDataServiceImpl implements CompareDataService {
         return this.diffCount;
     }
 
+
+    @Override
+    public void parseData(List<Map<String, String>> aData, List<Map<String, String>> bData, List<String> dataKey, List<String> filterColList, List<SortFieldConfig> sortFieldConfig, List<String> maskFieldList, boolean headerBodyMode) {
+        //最後輸出結果
+        result = new ArrayList<>();
+        //符合的資料
+        matchMap = new LinkedHashMap<>();
+        //不符合的資料(缺少)
+        missingMap = new LinkedHashMap<>();
+        //不符合的資料(多餘)
+        extraMap = new LinkedHashMap<>();
+        //欄位
+        columns = new ArrayList<>();
+        //差異筆數
+        diffCount = 0;
+
+        LogProcess.info(log, "dataKey = " + dataKey);
+        LogProcess.info(log, "filterColList = " + filterColList);
+
+
+
+        //將資料挑選欄位
+        List<Map<String, String>> aDataTmp = aData;
+        List<Map<String, String>> aDataResult = IntStream.range(0, aDataTmp.size())
+                .mapToObj(i -> {
+                    Map<String, String> row = aDataTmp.get(i);
+                    return filterFieldsBySelection(row, filterColList, dataKey, i); // 流水號從 0 開始
+                })
+                .collect(Collectors.toList());
+
+
+        List<Map<String, String>> bDataTmp = bData;
+        List<Map<String, String>> bDataResult = IntStream.range(0, bDataTmp.size())
+                .mapToObj(i -> {
+                    Map<String, String> row = bDataTmp.get(i);
+                    return filterFieldsBySelection(row, filterColList, dataKey, i);
+                })
+                .collect(Collectors.toList());
+//        LogProcess.info(log,"aData = " + aData.size());
+//        LogProcess.info(log,"aData = " + aData.size());
+
+        //將資料做排序
+        aDataResult = ComparatorUtil.sortByFields(aDataResult, sortFieldConfig);
+
+        bDataResult = ComparatorUtil.sortByFields(bDataResult, sortFieldConfig);
+
+//        LogProcess.info(log,"aData sort = " + aDataResult.size());
+//        LogProcess.info(log,"bData sort= " + bDataResult.size());
+
+        //原始檔案
+        oldDataResult = new ArrayList<>();
+        //處理遮蔽
+        oldDataResult.addAll(maskUtil.maskKeysMultipleData(aDataResult, maskFieldList,headerBodyMode));
+        //比對的檔案
+        newDataResult = new ArrayList<>();
+        //處理遮蔽
+        newDataResult.addAll(maskUtil.maskKeysMultipleData(bDataResult, maskFieldList,headerBodyMode));
+
+//        LogProcess.info(log,"oldDataResult  = " + oldDataResult.size());
+//        LogProcess.info(log,"oldDataResult  = " + oldDataResult.getFirst());
+//        LogProcess.info(log,"newDataResult = " + newDataResult.size());
+//        LogProcess.info(log,"newDataResult = " + newDataResult.getFirst());
+
+        //將資料賦予Key，用來比對
+        Map<String, Map<String, String>> aDataMap = buildIndex(aDataResult, dataKey);
+        Map<String, Map<String, String>> bDataMap = buildIndex(bDataResult, dataKey);
+
+//        LogProcess.info(log,"aDataMap  = " + aDataMap.size());
+//        LogProcess.info(log,"bDataMap = " + bDataMap.size());
+
+        //扣掉表頭
+        int index = -1;
+        // 以 A 為主比對 B
+        for (Map.Entry<String, Map<String, String>> entry : aDataMap.entrySet()) {
+            index++;
+            String key = entry.getKey();
+
+            //是否表頭資料與內容資料同時存在
+            if (headerBodyMode) {
+                //第1筆為表頭的欄位名稱，第3筆為內容的欄位名稱
+                if (index == 0 || index == 2) {
+                    groupKey = key;
+                    for (Map.Entry<String, String> col : entry.getValue().entrySet()) {
+                        columns.add(col.getValue());
+                    }
+                }
+            } else {
+                //第1筆為表頭的欄位名稱，
+                if (index == 0) {
+                    groupKey = key;
+                    for (Map.Entry<String, String> col : entry.getValue().entrySet()) {
+                        columns.add(col.getValue());
+                    }
+                }
+            }
+
+            if (bDataMap.containsKey(key)) {
+
+                processData(index, entry.getKey(), entry.getValue(), bDataMap.get(key), maskFieldList);
+                // A 和 B 都有
+
+                matchMap.put(entry.getKey(), entry.getValue());
+            } else {
+                // B 缺少 A 的資料
+                missingMap.put(entry.getKey() + "," + groupKey, entry.getValue());
+            }
+        }
+
+        index = -1;
+        // 檢查 B 有但 A 沒有的資料（B 多出來）
+        for (Map.Entry<String, Map<String, String>> entry : bDataMap.entrySet()) {
+            index++;
+            String key = entry.getKey();
+            if (!aDataMap.containsKey(key)) {
+                // B 多出來
+                extraMap.put(entry.getKey() + "," + groupKey, entry.getValue());
+            }
+        }
+
+//        LogProcess.info(log,"columns = " + columns);
+//        LogProcess.info(log,"matchMap = " + matchMap.size());
+//        LogProcess.info(log,"missingMap = " + missingMap.size());
+//        LogProcess.info(log,"extraMap = " + extraMap.size());
+//        LogProcess.info(log,"result = " + result.size());
+    }
+
     /***
      * 將匹配到的資料串，根據欄位一一比對處理
      * */
@@ -215,25 +223,17 @@ public class CompareDataServiceImpl implements CompareDataService {
             if (!Objects.equals(aVal, bVal)) {
                 map = new LinkedHashMap<>();
                 String desc = "";
-                if (!Objects.equals(bRow.get(customPrimaryKey), "")) {
-                    desc = "第" + (index - 1) + "筆";
-                } else {
-                    desc = "第" + (Integer.parseInt(bRow.get(customPrimaryKey)) - 1) + "筆，點我連過去。";
-                }
+
 
                 String oldData = aRow.get(c);
                 String newData = bRow.get(c);
-//                if (maskFieldList.contains(c)) {
-//                    oldData = "ooo";
-//                    newData = "ooo";
-//                }
 
-                map.put("desc", desc);
-                map.put("pkGrp", groupKey);
                 map.put("pk", key);
+                map.put("pkGrp", groupKey);
                 map.put("col", c);
                 map.put("oldData", oldData);
                 map.put("newData", newData);
+
                 result.add(map);
 
                 checkRowError = true;
@@ -272,8 +272,6 @@ public class CompareDataServiceImpl implements CompareDataService {
                         LinkedHashMap::new
                 )
         );
-
-
     }
 
     /**
@@ -306,8 +304,8 @@ public class CompareDataServiceImpl implements CompareDataService {
      */
     private String makeCompositeKey(Map<String, String> row, List<String> primaryKeyFields) {
         return primaryKeyFields.stream()
-                .map(row::get)
-                .collect(Collectors.joining(","));
+                .map(field -> row.getOrDefault(field, "")) // 沒值時補空字串
+                .collect(Collectors.joining("#"));
     }
 
     /**
@@ -316,20 +314,29 @@ public class CompareDataServiceImpl implements CompareDataService {
      * @param original       資料來源 Map<String, String>
      * @param selectedFields 需要的欄位 List<String>
      * @param dataKey        主鍵清單 List<String>
+     * @param rowNum         行號
      * @return 篩選過後的資料 Map<String, String>
      */
-    public Map<String, String> filterFieldsBySelection(Map<String, String> original, List<String> selectedFields, List<String> dataKey, int rowNum) {
+    public Map<String, String> filterFieldsBySelection(
+            Map<String, String> original,
+            List<String> selectedFields,
+            List<String> dataKey,
+            int rowNum) {
 
-
-        //若沒有選擇 哪個欄位要比對的話則跳過(UI上暫時拿掉這功能)
-//        if (selectedFields == null || selectedFields.isEmpty()) {
-//            return filtered;
-//        }
         Map<String, String> filtered = new LinkedHashMap<>();
 
-        // 先放自訂主鍵在最前面（如果需要補）
-        if (dataKey == null || dataKey.isEmpty()) {
-            // rowNum=0 表示表頭
+        // 組合 dataKey 成一個字串，放在第一個位置
+        if (dataKey != null && !dataKey.isEmpty()) {
+            String compositeKey = dataKey.stream()
+                    .map(field -> {
+                        String v = original.get(field);
+                        return v == null ? "" : v; // null 安全處理，去掉空白
+                    })
+                    .collect(Collectors.joining("#"));
+
+            filtered.put(customPrimaryKey, rowNum == 0 ? customPrimaryKey : compositeKey);
+        } else {
+            // 若沒有 dataKey，依舊用 rowNum 當 key
             filtered.put(customPrimaryKey, rowNum == 0 ? customPrimaryKey : String.valueOf(rowNum));
         }
 
@@ -337,22 +344,7 @@ public class CompareDataServiceImpl implements CompareDataService {
         original.entrySet().stream()
                 .filter(entry -> selectedFields.contains(entry.getKey()))
                 .forEach(entry -> filtered.put(entry.getKey(), entry.getValue()));
-//        filtered = original.entrySet().stream()
-//                .filter(entry -> selectedFields.contains(entry.getKey()))
-//                .collect(Collectors.toMap(
-//                        Map.Entry::getKey,
-//                        Map.Entry::getValue,
-//                        (a, b) -> a,
-//                        LinkedHashMap::new
-//                ));
 
-//        //若沒有key則自動補上 自訂的key
-//        if (dataKey == null || dataKey.isEmpty()) {
-//            //rowNum=0 表示表頭
-//            filtered.put(customPrimaryKey, rowNum == 0 ? customPrimaryKey : String.valueOf(rowNum));
-//        }
-
-//        LogProcess.info("filtered = " + filtered);
         return filtered;
     }
 

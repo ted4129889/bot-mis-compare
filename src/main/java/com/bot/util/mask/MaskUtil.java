@@ -1,5 +1,6 @@
 /* (C) 2023 */
 package com.bot.util.mask;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -13,13 +14,13 @@ public class MaskUtil {
     private static String latestMessage = "";
 
     /**
-     * 傳回遮蔽過後的新 List<Map<String, String>>
+     * 傳回遮蔽過後的 List<Map<String, String>>
      *
      * @param dataList    原始資料
      * @param maskKeyList 要遮蔽的 key 名稱列表
      * @return 遮蔽過的新 List
      */
-    public  List<Map<String, String>> maskKeysMultipleData(List<Map<String, String>> dataList, List<String> maskKeyList) {
+    public List<Map<String, String>> maskKeysMultipleData(List<Map<String, String>> dataList, List<String> maskKeyList, boolean existHeader) {
         if (dataList == null || maskKeyList == null || maskKeyList.isEmpty()) {
             return dataList;
         }
@@ -30,11 +31,19 @@ public class MaskUtil {
             Map<String, String> row = dataList.get(i);
             Map<String, String> newRow = new LinkedHashMap<>();
 
-            if (i == 0) {
-                // 首筆，直接原樣拷貝
-                newRow.putAll(row);
+            if (existHeader) {
+                if (i == 0) {
+                    // 首筆，直接原樣拷貝
+                    newRow.putAll(row);
+                } else {
+                    // 從第2筆開始遮蔽
+                    for (Map.Entry<String, String> entry : row.entrySet()) {
+                        String key = entry.getKey();
+                        String value = entry.getValue();
+                        newRow.put(key, value);
+                    }
+                }
             } else {
-                // 從第2筆開始遮蔽
                 for (Map.Entry<String, String> entry : row.entrySet()) {
                     String key = entry.getKey();
                     String value = entry.getValue();
@@ -49,13 +58,13 @@ public class MaskUtil {
 
 
     /**
-     * 傳回遮蔽過後的新 Map<String, String>
+     * 傳回遮蔽過後的 Map<String, String>
      *
      * @param dataMap     單一筆資料 Map
      * @param maskKeyList 要遮蔽的 key 名稱列表
      * @return 遮蔽過的新 Map
      */
-    public  Map<String, String> maskKeysSingleData(Map<String, String> dataMap, List<String> maskKeyList ) {
+    public Map<String, String> maskKeysSingleData(Map<String, String> dataMap, List<String> maskKeyList) {
         if (dataMap == null || maskKeyList == null || maskKeyList.isEmpty()) {
             return dataMap;  // 如果是空的，直接回傳原本
         }

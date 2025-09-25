@@ -4,13 +4,14 @@ package com.bot.service.mask.config;
 import com.bot.util.log.LogProcess;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-
+@Slf4j
 @Component
 public class FileConfigManager {
     private static final ObjectMapper mapper = new ObjectMapper();
@@ -52,7 +53,7 @@ public class FileConfigManager {
 
         try {
             if (configMap == null || configMap.isEmpty()) {
-                LogProcess.info("configMap is empty. Skipping save.");
+                LogProcess.info(log,"configMap is empty. Skipping save.");
                 return;
             }
 //            LogProcess.info("正在寫入 configMap = " + mapper.writeValueAsString(configMap));
@@ -92,7 +93,7 @@ public class FileConfigManager {
      */
     public static Optional<FileConfig> getConfigByFileName(String fileName) {
         Map<String, FileConfig> configMap = load(); // 載入整個 JSON 檔案
-        LogProcess.info("load configMap ==" + configMap.toString());
+        LogProcess.info(log,"load configMap ==" + configMap.toString());
 
 
         return Optional.ofNullable(configMap.get(fileName)); // 根據檔名找設定
@@ -106,7 +107,7 @@ public class FileConfigManager {
         if (updData != null && updData != null) {
             save(updData);
         } else {
-            LogProcess.info("Skip update: fileName or config is null");
+            LogProcess.info(log,"Skip update: fileName or config is null");
         }
         ;
     }

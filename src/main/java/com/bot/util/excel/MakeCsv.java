@@ -1,6 +1,7 @@
 package com.bot.util.excel;
 
 import com.bot.util.log.LogProcess;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
  *
  * @author Ted Lin
  */
-
+@Slf4j
 @Component("MakeCsv")
 @Scope("prototype")
 public class MakeCsv {
@@ -69,7 +70,7 @@ public class MakeCsv {
                 writer.newLine();
             }
         }
-        LogProcess.info("export CSV（Big5） file name ： " + filePath);
+        LogProcess.info(log,"export CSV（Big5） file name ： " + filePath);
         return cnt;
     }
 
@@ -136,9 +137,9 @@ public class MakeCsv {
         if (parentDir != null && !parentDir.exists()) {
             boolean created = parentDir.mkdirs();
             if (created) {
-                LogProcess.info("已建立資料夾：" + parentDir.getAbsolutePath());
+                LogProcess.info(log,"已建立資料夾：" + parentDir.getAbsolutePath());
             } else {
-                LogProcess.warn("資料夾建立失敗：" + parentDir.getAbsolutePath());
+                LogProcess.warn(log,"資料夾建立失敗：" + parentDir.getAbsolutePath());
             }
         }
 

@@ -97,9 +97,9 @@
         <field>
             <fieldName>pidno</fieldName>
             <fieldType>string</fieldType>
-            <format>0000000000</format>
+            <format>          </format>
             <length>10</length>
-            <align>right</align>
+            <align>left</align>
         </field>
         <field>
             <fieldName>separator</fieldName>

@@ -24,6 +24,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -36,7 +37,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Slf4j
 @Component
 public class CompareViewController {
 
@@ -136,7 +137,7 @@ public class CompareViewController {
             String selected1 = listView1.getSelectionModel().getSelectedItem();
             if (selected1 != null) {
                 String s1 = oldPath + "\\" + selected1;
-                LogProcess.info("打開: " + s1);
+                LogProcess.info(log,"打開: " + s1);
                 openFileSmart(new File(s1));
             }
 
@@ -309,9 +310,9 @@ public class CompareViewController {
         sortSelectionBox.getChildren().clear();
 
         maskDataFileService.processPairingColumn(fileName);
-        LogProcess.info("fileName = " + fileName);
+        LogProcess.info(log,"fileName = " + fileName);
         List<String> columns = maskDataFileService.getColumnList();
-        LogProcess.info("maskDataFileService.getXmlAllFileName() = " + maskDataFileService.getXmlAllFileName());
+        LogProcess.info(log,"maskDataFileService.getXmlAllFileName() = " + maskDataFileService.getXmlAllFileName());
 
         //先確認檔案名稱是否存在定義檔
         if (!maskDataFileService.getXmlAllFileName().contains(fileName)) {

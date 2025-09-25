@@ -5,6 +5,7 @@ import com.bot.util.log.LogProcess;
 import com.bot.util.files.TextFileUtil;
 import com.bot.util.xml.mask.xmltag.Mapping;
 import com.bot.util.xml.vo.XmlData;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
-
+@Slf4j
 @Component
 public class IdMapping {
     @Value("${localFile.mis.xml.mask.convert}")
@@ -42,17 +43,17 @@ public class IdMapping {
         File randomMaskFile = new File(randomMask);
         if (!randomMaskFile.exists()) {
             generateRandomXml(randomMask);
-            LogProcess.info("config file is not exist,gen: " + randomMaskFile);
+            LogProcess.info(log,"config file is not exist,gen: " + randomMaskFile);
         } else {
-            LogProcess.info("config file is exist: " + randomMaskFile);
+            LogProcess.info(log,"config file is exist: " + randomMaskFile);
         }
 
         File unifiedMaskFile = new File(unifiedMask);
         if (!unifiedMaskFile.exists()) {
             generateUnifiedXml(unifiedMask);
-            LogProcess.info("config file is not exist,gen: " + unifiedMaskFile);
+            LogProcess.info(log,"config file is not exist,gen: " + unifiedMaskFile);
         } else {
-            LogProcess.info("config file is exist: " + unifiedMaskFile);
+            LogProcess.info(log,"config file is exist: " + unifiedMaskFile);
         }
 
         XmlParser xmlParser = new XmlParser();

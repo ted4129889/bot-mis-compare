@@ -20,6 +20,7 @@ import com.bot.util.xml.vo.XmlField;
 import com.bot.util.xml.vo.XmlFile;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,7 +38,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
+@Slf4j
 @Component
 public class DataFileProcessingServiceImpl implements DataFileProcessingService {
 //    @Value("${localFile.mis.batch.bot_output}")
@@ -156,7 +157,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
             xmlFile = xmlParser.parseXmlFile2(dailyBatchFileDefinitionFile);
             xmlDataList = xmlFile.getDataList();
 
-            LogProcess.info("讀取 external-config/xml/bot_output 資料夾下的 DailyBatchFileDefinition.xml 定義檔內有" + xmlDataList.size() + "組 <data> 格式");
+            LogProcess.info(log,"讀取 external-config/xml/bot_output 資料夾下的 DailyBatchFileDefinition.xml 定義檔內有" + xmlDataList.size() + "組 <data> 格式");
 
             for (XmlData data : xmlDataList) {
                 tmpXmlFileName.add(data.getFileName());
@@ -166,7 +167,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
             //允許的路徑(JSON)
             String fieldSettingFile = FilenameUtils.normalize(fieldSettinngFile);
 
-            LogProcess.info("config file is exist: " + fieldSettingFile);
+            LogProcess.info(log,"config file is exist: " + fieldSettingFile);
             File allowedFile = new File(fieldSettingFile);
 
             ObjectMapper mapper = new ObjectMapper();
@@ -197,7 +198,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 
     @Override
     public List<String> getColumnList() {
-        LogProcess.info("columnList =" + columnAllList);
+        LogProcess.info(log,"columnList =" + columnAllList);
         return columnAllList;
     }
 
@@ -214,8 +215,8 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
         int calcuTotal = 0;
         //台銀原檔案路徑
         List<String> folderList = getFilePaths(tbotOutputPath);
-        LogProcess.info("在batch-file/bot_output資料夾內的檔案有" + folderList.size() + "個，清單如下...");
-        LogProcess.info(folderList.toString());
+        LogProcess.info(log,"在batch-file/bot_output資料夾內的檔案有" + folderList.size() + "個，清單如下...");
+        LogProcess.info(log,folderList.toString());
         for (String requestedFilePath : folderList) {
             //允許路徑
             requestedFilePath = FilenameUtils.normalize(requestedFilePath);
@@ -242,11 +243,11 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                 }
 
             } catch (Exception e) {
-                LogProcess.info("pairingProfile error");
+                LogProcess.info(log,"pairingProfile error");
             }
         }
 
-        LogProcess.info("產出遮蔽後的檔案在 batch-file/bot_output_mask 資料夾,有" + calcuTotal + "個檔案");
+        LogProcess.info(log,"產出遮蔽後的檔案在 batch-file/bot_output_mask 資料夾,有" + calcuTotal + "個檔案");
     }
 
     /**
@@ -269,21 +270,25 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
             existflag = false;
             for (XmlData data : xmlDataList) {
                 if (comparecFile.equals(data.getFileName())) {
-                    LogProcess.info("cFile = " + comparecFile);
-                    LogProcess.info("data.getFileName() = " + data.getFileName());
+                    LogProcess.info(log,"cFile = " + comparecFile);
+                    LogProcess.info(log,"data.getFileName() = " + data.getFileName());
                     outPutFile = data.getFileName();
                     existflag = true;
 
                     performMasking(cFile, data, uiTextArea);
+//                    LogProcess.warn(log,"cList= {}",cList);
+//                    LogProcess.warn(log,"cList= {}",cList.size());
 
                     if (TEXTAREA_2.equals(uiTextArea)) {
-
+//                        LogProcess.warn(log,"bcList= {}",cList);
+//                        LogProcess.warn(log,"bcList= {}",cList.size());
                         bFileData = new ArrayList<>();
                         bFileData.addAll(cList);
 
 
                     } else if (TEXTAREA_1.equals(uiTextArea)) {
-
+//                        LogProcess.warn(log,"acList= {}",cList);
+//                        LogProcess.warn(log,"acList= {}",cList.size());
                         aFileData = new ArrayList<>();
                         aFileData.addAll(cList);
                     }
@@ -292,8 +297,9 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 
             }
 
+
         } catch (Exception e) {
-            LogProcess.warn("pairingProfile2 error");
+            LogProcess.warn(log,"pairingProfile2 error");
         }
 
     }
@@ -319,12 +325,12 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 
 
                 if (newFileNameMap.get(fileName) != null) {
-                    LogProcess.info("file name = " + fileName);
+                    LogProcess.info(log,"file name = " + fileName);
 
                     FileConfig thisFileConfig = fieldSettingList.get(tmpFileName);
 
                     List<String> dataKeyList = thisFileConfig.getPrimaryKeys();
-                    LogProcess.info("dataKey = " + dataKeyList);
+                    LogProcess.info(log,"dataKey = " + dataKeyList);
 
                     List<SortFieldConfig> thisSortFieldConfig = thisFileConfig.getSortFields();
 
@@ -343,7 +349,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                         pairingProfile2(nFilePath, TEXTAREA_2);
 //                        LogProcess.info("aFileData name = " + aFileData);
 //                        LogProcess.info("bFileData name = " + bFileData);
-                        LogProcess.info("columnList name = " + columnAllList);
+                        LogProcess.info(log,"columnList name = " + columnAllList);
                         //開始比對
                         compareDataService.parseData(aFileData, bFileData, dataKeyList, columnAllList, thisSortFieldConfig, maskUtil.removePrimaryKeysFromMaskKeys(maskFieldList, dataKeyList), headerBodyMode);
 
@@ -381,7 +387,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                 }
             }
         } catch (Exception e) {
-            LogProcess.info("processPairingColumn error");
+            LogProcess.info(log,"processPairingColumn error");
         }
 
     }
@@ -402,7 +408,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                 return true;
             }).map(Path::toString).collect(Collectors.toList());
         } catch (IOException e) {
-            LogProcess.info("Error reading SQL files");
+            LogProcess.info(log,"Error reading SQL files");
         }
         return sqlFilePaths;
     }
@@ -444,7 +450,9 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
             if (headerMode && bodyMode) {
                 headerBodyMode = true;
             }
-
+            LogProcess.info(log,"headerMode = {}",headerMode);
+            LogProcess.info(log,"bodyMode = {}",bodyMode);
+            LogProcess.info(log,"headerBodyMode = {}",headerBodyMode);
 
             // header處理
             if (headerMode) {
@@ -465,7 +473,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                 }
             }
         } catch (Exception e) {
-            LogProcess.error("performMasking error",e);
+            LogProcess.error(log,"performMasking error",e);
         }
 
         return result;
@@ -554,8 +562,9 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 //        LogProcess.info("xmlFieldList :" + xmlFieldList );
         //先比對檔案資料長度是否與定義檔加總一致
         if (xmlLength != dataLength) {
-            LogProcess.info("xml length = " + xmlLength + " VS data length = " + dataLength);
-            return line;
+            LogProcess.warn(log,"xml length = " + xmlLength + " VS data length = " + dataLength);
+            LogProcess.warn(log,"line = {}" + line);
+//            return line;
         }
         //起始位置
         int sPos = 0;
@@ -599,7 +608,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                     s.append(valueMask);
                     map.put(fieledName, valueMask);
                 } catch (IOException ex) {
-                    LogProcess.warn("", ex);
+                    LogProcess.warn(log,"", ex);
                 }
             } else {
                 s.append(value);
@@ -634,12 +643,18 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 //        LogProcess.info("fileNamefileNamefileName = " +fileName);
 //        LogProcess.info("fileNamefileNamefileName = " +fileName);
         // 確認檔案路徑 是否與 允許的路徑匹配
+        int LINE_LENGTH = 0;
+        for (XmlField field : xmlFieldList) {
+            LINE_LENGTH += Integer.parseInt(field.getLength());
+        }
+
         // 讀取檔案內容
-        lines = textFileUtil.readFileContent(fileName, CHARSET_BIG5);
-//        LogProcess.info("lineslineslineslines = " +lines);
+        lines = textFileUtil.readFileContent(fileName, CHARSET_BIG5,LINE_LENGTH);
+
         for (String s : lines) {
 
             index++;
+
             if (headerBodyMode) {
                 b++;
 

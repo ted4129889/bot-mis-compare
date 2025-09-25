@@ -9,15 +9,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
-import java.nio.charset.Charset;
-import java.nio.charset.CharsetEncoder;
-import java.nio.charset.CodingErrorAction;
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.*;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeoutException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,57 +40,55 @@ public class TextFileUtil {
      *                    charsets are "UTF-8" and "BIG5".
      * @return List of strings where each string is a line read from the file specified by filePath.
      */
-    public List<String> readFileContent(String filePath, String charsetName) {
+    public List<String> readFileContent(String filePath, String charsetName, int lineSize) {
 
         String normalizedPath = FilenameUtils.normalize(filePath);
         Path path = Paths.get(normalizedPath);
-        Charset charset = null;
+
         List<String> fileContents = new ArrayList<>();
 
+        Charset charset = null;
         if ("UTF-8".equalsIgnoreCase(charsetName)) {
             charset = StandardCharsets.UTF_8;
         } else if ("BIG5".equalsIgnoreCase(charsetName)) {
             charset = Charset.forName("Big5");
         } else {
-        }
-        BufferedReader reader = null;
-        try {
-            // 驗證檔案是否存在以及是否可讀性
-            if (!Files.exists(path) || !Files.isReadable(path)) {
-                throw new IllegalArgumentException(
-                        "File does not exist or does not differ：" + path);
-            } else {
-                reader = Files.newBufferedReader(path, charset);
-
-                String line;
-                int lineCount = 0;
-                long startTime = System.currentTimeMillis();
-                /* FORTIFY: The file Contents is securely controlled and validated */
-                while ((line = reader.readLine()) != null && isValidInput(line)) {
-                    lineCount++;
-//                    if (lineCount > maxLines) {
-//                        throw new IllegalStateException("檔案過大，超過最大行數限制");
-//                    }
-
-                    if (System.currentTimeMillis() - startTime > timeout) {
-                        throw new TimeoutException("讀取時間過長，操作超時");
-                    }
-
-                    fileContents.add(line);
-                }
-            }
-        } catch (IOException | TimeoutException e) {
-            LogProcess.info("Error Message: file is problem");
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close(); // 很重要！
-                } catch (IOException e) {
-                    LogProcess.info("fail: close file ");
-                }
-            }
+            charset = Charset.forName(charsetName);
         }
 
+        CharsetDecoder decoder = charset.newDecoder()
+                .onMalformedInput(CodingErrorAction.IGNORE)
+                .onUnmappableCharacter(CodingErrorAction.IGNORE);
+        //CodingErrorAction.REPORT 只顯示警告錯誤的字串
+        //CodingErrorAction.REPLACE 將錯誤的字串替換成�
+        //CodingErrorAction.IGNORE 忽略
+//        decoder.replaceWith("~");
+
+        int lineCount = 0;
+        try (InputStream rawIn = Files.newInputStream(path);
+
+             Reader in = new InputStreamReader(rawIn, decoder);
+             BufferedReader reader = new BufferedReader(in, 8192)) {
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                lineCount++;
+                // 簡單偵測：若這行包含替代字元，打警告，之後再決定是否回頭抓原始 HEX
+                if (line.indexOf('\uFFFD') >= 0) {
+                    LogProcess.warn(log, "Line {} has invalid bytes  => {}", lineCount, line);
+                    LogProcess.warn(log, "Line {} has invalid bytes  => {}", lineCount, line.length());
+                }
+                if (line.length() != lineSize) {
+                    line = line.substring(line.length() - lineSize);
+                }
+                fileContents.add(line.trim());
+            }
+            LogProcess.info(log, "1 source data count = {}", lineCount);
+
+        } catch (IOException e) {
+            LogProcess.info(log, "2 source data count = {}", lineCount);
+            LogProcess.error(log, "Error Message: file is problem = {}", e.getMessage(), e);
+        }
         return fileContents;
     }
 
@@ -142,10 +136,10 @@ public class TextFileUtil {
                     writer.newLine();
                 }
             } catch (Exception e) {
-                LogProcess.info("Error Message: not found file");
+                LogProcess.info(log, "Error Message: not found file");
             }
         } catch (Exception e) {
-            LogProcess.info("Error Message: There is a problem with the file");
+            LogProcess.info(log, "Error Message: There is a problem with the file");
         }
     }
 
@@ -172,10 +166,12 @@ public class TextFileUtil {
                             }
                         });
             } catch (IOException e) {
-                LogProcess.info("Error Message: delete dir fail");
+                LogProcess.info(log, "Error Message: delete dir fail");
             }
         }
     }
+
+
 
     public void deleteFile(String filePath) {
         Path path = Paths.get(filePath);
@@ -183,7 +179,7 @@ public class TextFileUtil {
             try {
                 Files.delete(path);
             } catch (IOException e) {
-                LogProcess.info("Error Message: delete file fail");
+                LogProcess.info(log, "Error Message: delete file fail");
             }
         }
     }
@@ -196,7 +192,7 @@ public class TextFileUtil {
 
     private boolean isValidInput(String input) {
         if (input == null || input.length() == 0) {
-            LogProcess.info("isValidInput is null");
+            LogProcess.info(log, "isValidInput is null");
             return false;
         }
         return true;

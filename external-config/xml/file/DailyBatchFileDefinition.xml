@@ -4243,7 +4243,7 @@
                 <length>1</length>
             </field>
             <field>
-                <fieldName>percent</fieldName>
+                <fieldName>pct</fieldName>
                 <fieldType>string</fieldType>
                 <length>3</length>
             </field>
@@ -13397,7 +13397,7 @@
     <data fileName="D1VAR">
         <header></header>
         <body>
-            <field>
+            <field> 
                 <fieldName>brno</fieldName>
                 <fieldType>string</fieldType>
                 <length>3</length>
@@ -18233,7 +18233,7 @@
         <footer>
         </footer>
     </data>
-    <data fileName="FasFxGainObu">
+    <data fileName="FasFxGain">
         <header>
         </header>
         <body>
@@ -18429,7 +18429,7 @@
         <footer>
         </footer>
     </data>
-    <data fileName="FasDpDhmr">
+    <data fileName="FasDpdhmr">
         <header>
         </header>
         <body>
@@ -18856,7 +18856,7 @@
             </field>
         </footer>
     </data>
-    <data fileName="Fasctcif">
+    <data fileName="Fasdpctcif">
         <header>
         </header>
         <body>
@@ -19958,7 +19958,7 @@
         <footer>
         </footer>
     </data>
-    <data fileName="Faslnab560">
+    <data fileName="FasLnAb560">
         <header>
             <field>
                 <fieldName>h</fieldName>
@@ -20813,6 +20813,57 @@
                 <fieldType>COMP</fieldType>
                 <length>4</length>
                 <decimal>0</decimal>
+            </field>
+        </body>
+        <footer>
+        </footer>
+    </data>
+    <data fileName="FasDpBankbal">
+        <header>
+        </header>
+        <body>
+            <field>
+                <fieldName>cname</fieldName>
+                <fieldType>X</fieldType>
+                <length>12</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>cname2</fieldName>
+                <fieldType>X</fieldType>
+                <length>42</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>sbrno</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>1.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>filler</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>0.5</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>actno</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>6</length>
+                <decimal>0</decimal>
+            </field>
+            <field>
+                <fieldName>eidno</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>4</length>
+                <decimal>0</decimal>
+                <maskType>1</maskType>
+            </field>
+            <field>
+                <fieldName>ydbal</fieldName>
+                <fieldType>COMP</fieldType>
+                <length>8</length>
+                <decimal>2</decimal>
             </field>
         </body>
         <footer>

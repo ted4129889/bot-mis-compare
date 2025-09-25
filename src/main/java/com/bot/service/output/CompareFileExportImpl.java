@@ -1,26 +1,28 @@
 package com.bot.service.output;
 
 
-import com.bot.controller.CompareViewController;
 import com.bot.dto.CompareSetting;
-import com.bot.service.output.templates.CompareResultBean;
-import com.bot.util.log.LogProcess;
 import com.bot.service.compare.CompareDataService;
-import com.bot.service.mask.config.SortFieldConfig;
+import com.bot.service.output.templates.CompareResultBean;
 import com.bot.util.excel.MakeCsv;
 import com.bot.util.excel.MakeExcel;
 import com.bot.util.files.TextFileUtil;
+import com.bot.util.log.LogProcess;
 import com.bot.util.mask.MaskUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
+@Slf4j
 @Component
 public class CompareFileExportImpl {
 
@@ -138,7 +140,7 @@ public class CompareFileExportImpl {
                 exportTextFile(fileName);
                 break;
             default:
-                LogProcess.info("chooseExportFileType is null");
+                LogProcess.info(log, "chooseExportFileType is null");
                 break;
         }
 
@@ -197,7 +199,7 @@ public class CompareFileExportImpl {
                 dataCount = makeCsv.writeToCsvBig5(mapConvert(extraResult, EXTRA_DATA), outPutFile);
             }
         } catch (IOException e) {
-            LogProcess.error("csv output error");
+            LogProcess.error(log, "csv output error");
 
         }
     }
@@ -206,9 +208,8 @@ public class CompareFileExportImpl {
         List<Map<String, String>> tmpList = new ArrayList<>();
 
         Map<String, String> tmpMap = new LinkedHashMap<>();
-        tmpMap.put("desc", "資料結果，第幾筆看「MisData」");
+        tmpMap.put("pk", "用PrimaryKey值查詢差異");
         tmpMap.put("pkGrp", "PrimaryKey欄位");
-        tmpMap.put("pk", "PrimaryKey值");
         tmpMap.put("col", "錯誤欄位");
         tmpMap.put("oldData", "原始檔案的值");
         tmpMap.put("newData", "新產出檔案的值");
@@ -224,9 +225,9 @@ public class CompareFileExportImpl {
     private Map<String, String> missingHeader() {
         Map<String, String> tmpMap = new LinkedHashMap<>();
 
-        tmpMap.put("desc", "以下為MISBH產出的檔案缺少的資料，第幾筆看「BotData」頁籤");
+        tmpMap.put("pk", "用PrimaryKey值查詢差異,Bot Data");
         tmpMap.put("pkCol", "PrimaryKey欄位");
-        tmpMap.put("pk", "PrimaryKey值");
+        tmpMap.put("value", "PrimaryKey值");
 
         return tmpMap;
     }
@@ -234,9 +235,9 @@ public class CompareFileExportImpl {
     private Map<String, String> extraHeader() {
         Map<String, String> tmpMap = new LinkedHashMap<>();
 
-        tmpMap.put("desc", "以下為產出檔案多出來的資料，第幾筆看「MisData」");
+        tmpMap.put("pk", "用PrimaryKey值查詢差異,查看Mis Data");
         tmpMap.put("pkCol", "PrimaryKey欄位");
-        tmpMap.put("pk", "PrimaryKey值");
+        tmpMap.put("value", "PrimaryKey值");
 
         return tmpMap;
     }
@@ -268,14 +269,14 @@ public class CompareFileExportImpl {
         for (Map.Entry<String, Map<String, String>> r : map.entrySet()) {
             tmpMap = new LinkedHashMap<>();
 
-            String[] col_1 = r.getKey().split("#");
-            String num = col_1[0];
-            String keyCol = col_1[1];
-            String key = col_1[2];
+            String[] keyGrp = r.getKey().split(",");
+            String key = keyGrp[0];
+            String keyCol = keyGrp[1];
+            String value = r.getValue().toString();
 
-            tmpMap.put("desc", "第" + num + "筆");
-            tmpMap.put("pkCol", keyCol);
             tmpMap.put("pk", key);
+            tmpMap.put("pkCol", keyCol);
+            tmpMap.put("value", value);
 
             tmpList.add(tmpMap);
         }
@@ -326,6 +327,7 @@ public class CompareFileExportImpl {
 
 
         makeExcel.useSheet(BOT_DATA);
+//        LogProcess.info(log,"oldDataResult = " + oldDataResult.size());
 
         int col = 0;
         int row = 0;
@@ -345,6 +347,7 @@ public class CompareFileExportImpl {
 
     private void misFilePage() {
         makeExcel.newSheet(MIS_DATA);
+//        LogProcess.info(log,"newDataResult = " + newDataResult.size());
 
         int col = 0;
         int row = 0;
@@ -371,15 +374,14 @@ public class CompareFileExportImpl {
 
         int col = 1;
         int row = 1;
-//        LogProcess.info("comparisonResult = " + comparisonResult);
+//        LogProcess.info(log,"comparisonResult = " + comparisonResult.size());
 
 
-        makeExcel.setValue(row, col, "資料結果，第幾筆看「MisData」");
+        makeExcel.setValue(row, col, "用PrimaryKey值查詢差異");
         makeExcel.setValue(row, col + 1, "PrimaryKey欄位");
-        makeExcel.setValue(row, col + 2, "PrimaryKey值");
-        makeExcel.setValue(row, col + 3, "錯誤欄位");
-        makeExcel.setValue(row, col + 4, "原始檔案的值");
-        makeExcel.setValue(row, col + 5, "新產出檔案的值");
+        makeExcel.setValue(row, col + 2, "錯誤的欄位");
+        makeExcel.setValue(row, col + 3, "原始檔案的值");
+        makeExcel.setValue(row, col + 4, "新產出檔案的值");
 
         for (Map<String, String> r : comparisonResult) {
             col = 1;
@@ -392,7 +394,7 @@ public class CompareFileExportImpl {
                 if (col == 1 && row != 1) {
 //                    LogProcess.info("value = " + value);
                     String number = value.replaceAll("[^0-9]", ""); // 移除所有非數字
-                    makeExcel.setLinkToSheetRow(MIS_DATA, Integer.parseInt(number) + 1);
+//                    makeExcel.setLinkToSheetRow(MIS_DATA, Integer.parseInt(number) + 1);
                 }
                 makeExcel.setValue(row, col, value);
                 col++;
@@ -416,25 +418,25 @@ public class CompareFileExportImpl {
         int row = 1;
 
 
-        makeExcel.setValue(row, col, "以下為產出檔案缺少的資料，第幾筆看「BotData」");
+        makeExcel.setValue(row, col, "用PrimaryKey值查詢差異,查看 Bot Data");
         makeExcel.setValue(row, col + 1, "PrimaryKey欄位");
         makeExcel.setValue(row, col + 2, "PrimaryKey值");
 
         for (Map.Entry<String, Map<String, String>> r : missingResult.entrySet()) {
             col = 1;
             row++;
-            String[] col_1 = r.getKey().split("#");
-            String num = col_1[0];
-            String keyCol = col_1[1];
-            String key = col_1[2];
+            String[] keyGrp = r.getKey().split(",");
+            String key = keyGrp[0];
+            String keyCol = keyGrp[1];
+            String value = r.getValue().toString();
 
             //第一筆給予鏈結
             if (col == 1 && row != 1) {
-                makeExcel.setLinkToSheetRow(BOT_DATA, Integer.parseInt(num) + 1);
+//                makeExcel.setLinkToSheetRow(BOT_DATA, Integer.parseInt(num) + 1);
             }
-            makeExcel.setValue(row, col, "請看「BotData」頁籤的第" + num + "筆資料(在第" + (Integer.parseInt(num) + 1) + "列)，直接點我連過去");
+            makeExcel.setValue(row, col, key);
             makeExcel.setValue(row, col + 1, keyCol);
-            makeExcel.setValue(row, col + 2, key);
+            makeExcel.setValue(row, col + 2, value);
         }
 
         makeExcel.autoSizeColumn();
@@ -455,24 +457,25 @@ public class CompareFileExportImpl {
         int row = 1;
 
 
-        makeExcel.setValue(row, col, "以下為產出檔案多出來的資料，第幾筆看「MisData」");
+        makeExcel.setValue(row, col, "用PrimaryKey值查詢差異,查看 Mis Data");
         makeExcel.setValue(row, col + 1, "PrimaryKey欄位");
         makeExcel.setValue(row, col + 2, "PrimaryKey值");
 
         for (Map.Entry<String, Map<String, String>> r : extraResult.entrySet()) {
             col = 1;
             row++;
-            String[] col_1 = r.getKey().split("#");
-            String num = col_1[0];
-            String keyCol = col_1[1];
-            String key = col_1[2];
+            String[] keyGrp = r.getKey().split(",");
+            String key = keyGrp[0];
+            String keyCol = keyGrp[1];
+            String value = r.getValue().toString();
+
             //第一筆給予鏈結
             if (col == 1 && row != 1) {
-                makeExcel.setLinkToSheetRow(MIS_DATA, Integer.parseInt(num) + 1);
+//                makeExcel.setLinkToSheetRow(BOT_DATA, Integer.parseInt(num) + 1);
             }
-            makeExcel.setValue(row, col, "請看「MisData」頁籤的第" + (num)  + "筆資料(在第" + (Integer.parseInt(num) + 1)+ "列)");
+            makeExcel.setValue(row, col, key);
             makeExcel.setValue(row, col + 1, keyCol);
-            makeExcel.setValue(row, col + 2, key);
+            makeExcel.setValue(row, col + 2, value);
         }
         makeExcel.autoSizeColumn();
 
@@ -494,10 +497,14 @@ public class CompareFileExportImpl {
         int missCount = missingResult.size();
         int extraCount = extraResult.size();
 
+        int errorCount = diffCount + missCount + extraCount;
+
+        double accuracyPercent = 0.0;
+        accuracyPercent = 100.0 - Math.round(errorCount * 10000.0 / botTotal) / 100.0;
+        System.out.println("accuracyPercent = " + accuracyPercent + "%");
         String note = "";
 
-
-        outputResultRpt.add(new CompareResultBean(fileName, botTotal, misTotal,diffCount, diffColCount, missCount, extraCount, note));
+        outputResultRpt.add(new CompareResultBean(fileName, botTotal, misTotal, diffCount, diffColCount, missCount, extraCount, accuracyPercent, note));
 
 
     }
@@ -509,7 +516,7 @@ public class CompareFileExportImpl {
     }
 
 
-    public void show(){
+    public void show() {
 
     }
 

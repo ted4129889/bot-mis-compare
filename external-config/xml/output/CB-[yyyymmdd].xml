@@ -20,9 +20,9 @@
         <field>
             <fieldName>brno</fieldName>
             <fieldType>string</fieldType>
-            <format></format>
+            <format>000</format>
             <length>3</length>
-            <align>left</align>
+            <align>right</align>
         </field>
         <field>
             <fieldName>separator</fieldName>

@@ -1,6 +1,7 @@
 package com.bot.util.excel;
 
 import com.bot.util.log.LogProcess;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.common.usermodel.HyperlinkType;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
@@ -18,7 +19,7 @@ import java.util.Objects;
  *
  * @author Ted Lin
  */
-
+@Slf4j
 @Component("MakeExcel")
 @Scope("prototype")
 public class MakeExcel {
@@ -86,9 +87,9 @@ public class MakeExcel {
      */
     private void openExcel(String fileName, Object sheetName) {
         checkOpenFiles();
-        LogProcess.info("Excel open");
+        LogProcess.info(log,"Excel open");
 
-        LogProcess.info("export file name : " + fileName);
+        LogProcess.info(log,"export file name : " + fileName);
 
         File file = new File(fileName);
 
@@ -97,9 +98,9 @@ public class MakeExcel {
         if (parentDir != null && !parentDir.exists()) {
             boolean created = parentDir.mkdirs();
             if (created) {
-                LogProcess.info("已建立資料夾：" + parentDir.getAbsolutePath());
+                LogProcess.info(log,"已建立資料夾：" + parentDir.getAbsolutePath());
             } else {
-                LogProcess.warn("資料夾建立失敗：" + parentDir.getAbsolutePath());
+                LogProcess.warn(log,"資料夾建立失敗：" + parentDir.getAbsolutePath());
             }
         }
 
@@ -124,7 +125,7 @@ public class MakeExcel {
                     openedWorkbook = new HSSFWorkbook(fis);
                 }
 
-                LogProcess.info("openExcel fileName = " + fileName);
+                LogProcess.info(log,"openExcel fileName = " + fileName);
 
                 //判斷使用的sheetName 是用 字串名稱 或是 數字表示(0表示第一個頁籤)
                 if (sheetName instanceof String) {
@@ -132,7 +133,7 @@ public class MakeExcel {
                 } else {
                     openedSheet = openedWorkbook.getSheetAt(Integer.parseInt(sheetName.toString()) - 1);
                 }
-                LogProcess.info("openExcel sheetname = " + sheetName);
+                LogProcess.info(log,"openExcel sheetname = " + sheetName);
 
                 //若沒有此頁籤，則新增
                 if (openedSheet == null) {
@@ -171,7 +172,7 @@ public class MakeExcel {
             }
             Object result = getCellValue(tmpCell);
 
-            LogProcess.info("Get Value = " + result.toString());
+            LogProcess.info(log,"Get Value = " + result.toString());
             return result;
         }
     }
@@ -319,11 +320,11 @@ public class MakeExcel {
             }
 
         } catch (IOException e) {
-            LogProcess.warn("save or close fail");
+            LogProcess.warn(log,"save or close fail");
         }
 
 
-        LogProcess.info("Excel close");
+        LogProcess.info(log,"Excel close");
     }
 
     private void saveExcel() throws IOException {
@@ -386,9 +387,9 @@ public class MakeExcel {
             if (sheetIndex != -1) {
                 // 修改頁籤名稱
                 openedWorkbook.setSheetName(sheetIndex, newSheetName);
-                LogProcess.info("Sheet 名稱修改成功：" + newSheetName);
+                LogProcess.info(log,"Sheet 名稱修改成功：" + newSheetName);
             } else {
-                LogProcess.info("找不到頁籤：" + sheetName);
+                LogProcess.info(log,"找不到頁籤：" + sheetName);
             }
         }
 

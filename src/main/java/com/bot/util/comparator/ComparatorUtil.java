@@ -79,7 +79,7 @@ public class ComparatorUtil {
                 return value;
             }
         }
-        LogProcess.info("convertComparable value=" + value);
+        LogProcess.info(log,"convertComparable value=" + value);
         return value;
     }
 

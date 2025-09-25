@@ -16,9 +16,10 @@ public class CompareResultBean {
     private int diffCount;
     private int missCount;
     private int extraCount;
+    private double accuracy;
     private String note;
 
-    public CompareResultBean(String fileName, int botTotal, int misTotal,int diffCount,  int diffColCount, int missCount, int extraCount, String note) {
+    public CompareResultBean(String fileName, int botTotal, int misTotal, int diffCount, int diffColCount, int missCount, int extraCount, double accuracy, String note) {
         this.fileName = fileName;
         this.botTotal = botTotal;
         this.misTotal = misTotal;
@@ -26,6 +27,7 @@ public class CompareResultBean {
         this.diffColCount = diffColCount;
         this.missCount = missCount;
         this.extraCount = extraCount;
+        this.accuracy = accuracy;
         this.note = note;
     }
 

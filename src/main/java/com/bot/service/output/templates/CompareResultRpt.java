@@ -2,13 +2,17 @@ package com.bot.service.output.templates;
 
 import com.bot.util.log.LogProcess;
 import com.bot.util.templates.TemplateUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.*;
 
+@Slf4j
 @Component("CompareResultRpt")
 public class CompareResultRpt {
     public void exec(List<CompareResultBean> records, String date1, String date2) {
@@ -29,6 +33,7 @@ public class CompareResultRpt {
             int totalColDiff = 0;
             int totalMiss = 0;
             int totalExtra = 0;
+            double totalAccuracy = 0.0;
             StringBuilder fullReport = new StringBuilder();
 
             for (int page = 0; page < totalPages; page++) {
@@ -50,9 +55,16 @@ public class CompareResultRpt {
                     //s 表示字串（string）
                     //數字是「最小欄位寬度」
                     detailBuilder.append(String.format(
-                            "%-5d %-14s  %10d %10d %10d %10d %10d %10d %-10s%n",
-                            i + 1, r.getFileName(), r.getBotTotal(), r.getMisTotal(),
-                            r.getDiffCount(), r.getDiffColCount(),r.getMissCount(), r.getExtraCount(), r.getNote()
+                            "%-5d %-14s %10d %10d %10d %10d %10d %10.2f%% %-10s%n",
+                            i + 1,
+                            r.getFileName(),
+                            r.getBotTotal(),
+                            r.getMisTotal(),
+                            r.getDiffCount(),
+                            r.getMissCount(),
+                            r.getExtraCount(),
+                            r.getAccuracy(),
+                            r.getNote()
                     ));
 
                     // 總計累加
@@ -62,8 +74,9 @@ public class CompareResultRpt {
                     totalColDiff += r.getDiffColCount();
                     totalMiss += r.getMissCount();
                     totalExtra += r.getExtraCount();
+                    totalAccuracy += r.getAccuracy();
                 }
-
+                totalAccuracy = totalAccuracy / end;
                 // 每頁都重新載入樣板（不同頁數變數）
                 String tplPath = "templates/CompareResultRpt.tpl";
 
@@ -83,8 +96,8 @@ public class CompareResultRpt {
                 // 最後一頁才加 SUMMARY
                 if (page == totalPages - 1) {
                     String summary = String.format(
-                            "                總計 %10d %10d %10d %10d %10d %10d",
-                            totalBot, totalMis, totalDiff,totalColDiff, totalMiss, totalExtra);
+                            "                總計 %10d %10d %10d %10d %10d %10.2f%%",
+                            totalBot, totalMis, totalDiff, totalMiss, totalExtra, totalAccuracy);
                     template = template.replace("{{SUMMARY}}", summary)
                             .replace("{{FILETOTAL}}", String.valueOf(records.size()));
                 } else {
@@ -97,10 +110,10 @@ public class CompareResultRpt {
             }
 
             Files.writeString(Path.of("ComparisonResult/CheckResultList_" + date1 + ".txt"), fullReport);
-            LogProcess.info("報表產出完成");
+            LogProcess.info(log, "報表產出完成");
 
         } catch (IOException e) {
-            LogProcess.error("read or write template fail:" + e.getMessage());
+            LogProcess.error(log, "read or write template fail:" + e.getMessage());
         }
     }
 }

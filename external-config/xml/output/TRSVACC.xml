@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<data>
+<data fileName="TRSVACC" >
     <header></header>
     <body>
         <separator>,</separator>
@@ -74,7 +74,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>36nop</fieldName>
+            <fieldName>nop36</fieldName>
             <fieldType>string</fieldType>
             <format>00000000</format>
             <length>8</length>
@@ -88,7 +88,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>36cls</fieldName>
+            <fieldName>cls36</fieldName>
             <fieldType>string</fieldType>
             <format>00000000</format>
             <length>8</length>
@@ -102,7 +102,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>36cnt</fieldName>
+            <fieldName>cnt36</fieldName>
             <fieldType>string</fieldType>
             <format>00000000</format>
             <length>8</length>
@@ -116,7 +116,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>36amt</fieldName>
+            <fieldName>amt36</fieldName>
             <fieldType>string</fieldType>
             <format>000000000000000</format>
             <length>15</length>
@@ -130,7 +130,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>37nop</fieldName>
+            <fieldName>nop37</fieldName>
             <fieldType>string</fieldType>
             <format>00000000</format>
             <length>8</length>
@@ -144,7 +144,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>37cls</fieldName>
+            <fieldName>cls37</fieldName>
             <fieldType>string</fieldType>
             <format>00000000</format>
             <length>8</length>
@@ -158,7 +158,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>37cnt</fieldName>
+            <fieldName>cnt37</fieldName>
             <fieldType>string</fieldType>
             <format>00000000</format>
             <length>8</length>
@@ -172,7 +172,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>37amt</fieldName>
+            <fieldName>amt37</fieldName>
             <fieldType>string</fieldType>
             <format>000000000000000</format>
             <length>15</length>
@@ -186,7 +186,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>38nop</fieldName>
+            <fieldName>nop38</fieldName>
             <fieldType>string</fieldType>
             <format>00000000</format>
             <length>8</length>
@@ -200,7 +200,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>38cls</fieldName>
+            <fieldName>cls38</fieldName>
             <fieldType>string</fieldType>
             <format>00000000</format>
             <length>8</length>
@@ -214,7 +214,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>38cnt</fieldName>
+            <fieldName>cnt38</fieldName>
             <fieldType>string</fieldType>
             <format>00000000</format>
             <length>8</length>
@@ -228,7 +228,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>38amt</fieldName>
+            <fieldName>amt38</fieldName>
             <fieldType>string</fieldType>
             <format>000000000000000</format>
             <length>15</length>
@@ -242,7 +242,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>39nop</fieldName>
+            <fieldName>nop39</fieldName>
             <fieldType>string</fieldType>
             <format>00000000</format>
             <length>8</length>
@@ -256,7 +256,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>39cls</fieldName>
+            <fieldName>cls39</fieldName>
             <fieldType>string</fieldType>
             <format>00000000</format>
             <length>8</length>
@@ -270,7 +270,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>39cnt</fieldName>
+            <fieldName>cnt39</fieldName>
             <fieldType>string</fieldType>
             <format>00000000</format>
             <length>8</length>
@@ -284,7 +284,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>39amt</fieldName>
+            <fieldName>amt39</fieldName>
             <fieldType>string</fieldType>
             <format>000000000000000</format>
             <length>15</length>
@@ -354,7 +354,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>percent</fieldName>
+            <fieldName>pct</fieldName>
             <fieldType>string</fieldType>
             <format>000</format>
             <length>3</length>
@@ -368,7 +368,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>45nop</fieldName>
+            <fieldName>nop45</fieldName>
             <fieldType>string</fieldType>
             <format>00000000</format>
             <length>8</length>
@@ -382,7 +382,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>45cls</fieldName>
+            <fieldName>cls45</fieldName>
             <fieldType>string</fieldType>
             <format>00000000</format>
             <length>8</length>
@@ -396,7 +396,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>45cnt</fieldName>
+            <fieldName>cnt45</fieldName>
             <fieldType>string</fieldType>
             <format>00000000</format>
             <length>8</length>
@@ -410,7 +410,7 @@
             <align>left</align>
         </field>
         <field>
-            <fieldName>45amt</fieldName>
+            <fieldName>amt45</fieldName>
             <fieldType>string</fieldType>
             <format>000000000000000</format>
             <length>15</length>
@@ -418,4 +418,3 @@
         </field>
     </body>
 </data>
-

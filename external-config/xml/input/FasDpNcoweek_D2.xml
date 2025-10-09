@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <header>
+    </header>
+    <body>
+        <field>
+            <fieldName>ctl_yymmdd</fieldName>
+            <length>8</length>
+        </field>
+        <field>
+            <fieldName>ctl_week</fieldName>
+            <length>1</length>
+        </field>
+        <field>
+            <fieldName>ctl_cnt</fieldName>
+            <length>4</length>
+        </field>
+        <field>
+            <fieldName>ctl_eof</fieldName>
+            <length>3</length>
+        </field>
+        <field>
+            <fieldName>ctl_text</fieldName>
+            <length>22</length>
+        </field>
+        <field>
+            <fieldName>filler</fieldName>
+            <length>372</length>
+        </field>
+        </body>
+    <footer>
+    </footer>
+</data>

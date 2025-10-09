@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <header>
+        <field>
+            <fieldName></fieldName>
+            <fieldType>string</fieldType>
+            <format></format>
+            <length>92</length>
+            <align>left</align>
+        </field>
+        <field>
+            <fieldName>batchDate8</fieldName>
+            <fieldType>string</fieldType>
+            <format></format>
+            <length>8</length>
+            <align>right</align>
+        </field>
+    </header>
+    <body>
+        <field>
+            <fieldName>brno</fieldName>
+            <fieldType>string</fieldType>
+            <format>000</format>
+            <length>3</length>
+            <align>left</align>
+        </field>
+        <field>
+            <fieldName>curcd</fieldName>
+            <fieldType>string</fieldType>
+            <format>00</format>
+            <length>2</length>
+            <align>left</align>
+        </field>
+        <field>
+            <fieldName>acno</fieldName>
+            <fieldType>string</fieldType>
+            <format></format>
+            <length>6</length>
+            <align>left</align>
+        </field>
+        <field>
+            <fieldName>sbno</fieldName>
+            <fieldType>string</fieldType>
+            <format></format>
+            <length>4</length>
+            <align>right</align>
+        </field>
+        <field>
+            <fieldName>tdbal</fieldName>
+            <fieldType>string</fieldType>
+            <format> 000000000000000.00;-000000000000000.00</format>
+            <length>19</length>
+            <align>left</align>
+        </field>
+        <field>
+            <fieldName></fieldName>
+            <fieldType>string</fieldType>
+            <format></format>
+            <length>66</length>
+            <align>left</align>
+        </field>
+    </body>
+</data>
+

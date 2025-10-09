@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <header>
+        <separator>,</separator>
+        <field>
+            <fieldName>sday</fieldName>
+            <fieldType>string</fieldType>
+            <format>00000000</format>
+            <length>8</length>
+            <align>right</align>
+        </field>
+        <field>
+            <fieldName>eday</fieldName>
+            <fieldType>string</fieldType>
+            <format>00000000</format>
+            <length>8</length>
+            <align>right</align>
+        </field>
+        <field>
+            <fieldName>flnm</fieldName>
+            <fieldType>string</fieldType>
+            <format></format>
+            <length>10</length>
+            <align>left</align>
+        </field>
+        <field>
+            <fieldName>sysdy</fieldName>
+            <fieldType>string</fieldType>
+            <format>00000000</format>
+            <length>8</length>
+            <align>right</align>
+        </field>
+        <field>
+            <fieldName>systm</fieldName>
+            <fieldType>string</fieldType>
+            <format>000000</format>
+            <length>6</length>
+            <align>right</align>
+        </field>
+        <field>
+            <fieldName>totcnt</fieldName>
+            <fieldType>string</fieldType>
+            <format>0000000000</format>
+            <length>10</length>
+            <align>right</align>
+        </field>
+    </header>
+    <body></body>
+</data>
+

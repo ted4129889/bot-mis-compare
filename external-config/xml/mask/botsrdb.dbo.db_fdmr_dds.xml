@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <table>botsrdb.dbo.db_fdmr_dds</table>
+    <field>
+        <fieldName>db_fdmr_union</fieldName>
+        <maskType>1</maskType>
+    </field>
+</data>

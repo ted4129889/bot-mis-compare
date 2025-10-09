@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data fileName="2MIS-ENTX">
+    <header>
+        <separator></separator>
+    </header>
+    <body>
+        <separator></separator>
+        <field>
+            <fieldName>entx_entpno</fieldName>
+            <fieldType>string</fieldType>
+            <format></format>
+            <length>10</length>
+            <align>left</align>
+        </field>
+    </body>
+    <footer>
+        <separator></separator>
+    </footer>
+</data>
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data fileName="MLYDAY">
+    <header>
+        <separator></separator>
+    </header>
+    <body>
+        <separator>,</separator>
+        <field>
+            <fieldName>mlyday_yymm</fieldName>
+            <fieldType>string</fieldType>
+            <format></format>
+            <length>5</length>
+            <align>left</align>
+        </field>
+        <field>
+            <fieldName>separator</fieldName>
+            <fieldType>string</fieldType>
+            <format></format>
+            <length>1</length>
+            <align>left</align>
+        </field>
+        <field>
+            <fieldName>mlyday_dd</fieldName>
+            <fieldType>string</fieldType>
+            <format></format>
+            <length>2</length>
+            <align>left</align>
+        </field>
+    </body>
+    <footer>
+        <separator></separator>
+    </footer>
+</data>
+

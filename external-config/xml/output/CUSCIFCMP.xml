@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data fileName="CUSCIFCMP">
+    <header></header>
+    <body>
+        <separator>,</separator>
+        <field>
+            <fieldName>cusno</fieldName>
+            <fieldType>string</fieldType>
+            <format></format>
+            <length>8</length>
+            <align>left</align>
+        </field>
+        <field>
+            <fieldName>separator</fieldName>
+            <fieldType>string</fieldType>
+            <format></format>
+            <length>1</length>
+            <align>left</align>
+        </field>
+        <field>
+            <fieldName>name</fieldName>
+            <fieldType>string</fieldType>
+            <format></format>
+            <length>54</length>
+            <align>left</align>
+        </field>
+    </body>
+    <footer>
+        <separator></separator>
+    </footer>
+</data>
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data fileName="CRVTDATE">
+    <header>
+        <separator></separator>
+        <dataKey></dataKey>
+    </header>
+    <body>
+        <separator></separator>
+        <dataKey></dataKey>
+        <field>
+            <fieldName>yymm</fieldName>
+            <fieldType>string</fieldType>
+            <format>00000</format>
+            <length>5</length>
+            <align>right</align>
+        </field>
+    </body>
+    <footer>
+        <separator></separator>
+    </footer>
+</data>
+

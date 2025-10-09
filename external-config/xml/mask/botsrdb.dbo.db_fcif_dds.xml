@@ -22,6 +22,14 @@
         <maskType>5</maskType>
     </field>
     <field>
+        <fieldName>db_fcif_eaddr1</fieldName>
+        <maskType>5</maskType>
+    </field>
+    <field>
+        <fieldName>db_fcif_eaddr2</fieldName>
+        <maskType>5</maskType>
+    </field>
+    <field>
         <fieldName>db_fcif_caddr</fieldName>
         <maskType>5</maskType>
     </field>

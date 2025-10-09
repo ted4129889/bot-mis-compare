@@ -649,7 +649,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
         }
 
         // 讀取檔案內容
-        lines = textFileUtil.readFileContent(fileName, CHARSET_BIG5,LINE_LENGTH);
+        lines = textFileUtil.readFileContent(fileName, CHARSET_BIG5);
 
         for (String s : lines) {
 

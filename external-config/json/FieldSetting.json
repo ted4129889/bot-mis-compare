@@ -812,7 +812,7 @@
     "sortFields" : [ ]
   },
   "CLFL" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "date", "actno", "lncur", "entpno", "pidno", "bcode", "usage", "csdate", "cedate", "actno_2", "curcd" ],
     "sortFields" : [ ]
   },
   "CKVAR" : {
@@ -1588,6 +1588,94 @@
     "sortFields" : [ ]
   },
   "FasDpBankbal" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "AB297-[yyyymmdd]" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasCmsCkvar" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasCmsD1var" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasCmsD4var" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasCmsGvvar" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasEisdbTrct" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasEisdbTrln" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasEisdbTrint" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasEisdbTreasdly" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasEisdbTrsvacc" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasEisdbTrscls" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasEisdbTrsopn" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasEisdbFxpo" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasEisdbFxpot" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasCmsorddbD4var" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasCmsorddbD1var" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasCmsorddbCkvar" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasCmsorddbGvvar" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasCmsorddbCtvar" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "A138" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "A116600" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "A116699" : {
     "primaryKeys" : [ ],
     "sortFields" : [ ]
   }

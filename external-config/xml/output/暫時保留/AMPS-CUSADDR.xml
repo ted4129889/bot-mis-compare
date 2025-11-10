@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <header></header>
+    <body>
+        <field>
+            <fieldName>ludate</fieldName>
+            <fieldType>string</fieldType>
+            <format>0000000</format>
+            <length>7</length>
+            <align>right</align>
+        </field>
+        <field>
+            <fieldName>cusid</fieldName>
+            <fieldType>string</fieldType>
+            <format></format>
+            <length>10</length>
+            <align>left</align>
+        </field>
+        <field>
+            <fieldName>zipno1</fieldName>
+            <fieldType>string</fieldType>
+            <format>000</format>
+            <length>3</length>
+            <align>right</align>
+        </field>
+        <field>
+            <fieldName>zipno2</fieldName>
+            <fieldType>string</fieldType>
+            <format>00</format>
+            <length>2</length>
+            <align>right</align>
+        </field>
+        <field>
+            <fieldName>addr</fieldName>
+            <fieldType>string</fieldType>
+            <format></format>
+            <length>84</length>
+            <align>left</align>
+        </field>
+    </body>
+</data>
+

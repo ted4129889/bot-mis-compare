@@ -824,7 +824,7 @@
     "sortFields" : [ ]
   },
   "CIF-DHMR" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "cusno", "brno" ],
     "sortFields" : [ ]
   },
   "CB-[yyyymmdd]" : {

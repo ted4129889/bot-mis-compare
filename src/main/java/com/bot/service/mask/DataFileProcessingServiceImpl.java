@@ -46,8 +46,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 
     @Value("${localFile.mis.batch.output}")
     private String outputPath;
-
-    @Value("${localFile.mis.xml.output.def}")
+    @Value("${localFile.mis.xml.file_def}")
     private String botMaskXmlFile;
     @Value("${localFile.mis.json.field_setting.directory}")
     private String fieldSettinngFile;
@@ -309,8 +308,10 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
      */
     public void pairingProfile3(Map<String, String> oldFileNameMap, Map<String, String> newFileNameMap, Map<String, FileConfig> fieldSettingList, CompareSetting setting) {
         //台銀原檔案路徑
-//        LogProcess.info("oldFileNameList = " + oldFileNameMap);
-//        LogProcess.info("newFileNameList = " + newFileNameMap);
+        LogProcess.info(log,"oldFileNameList = " + oldFileNameMap);
+        LogProcess.info(log,"newFileNameList = " + newFileNameMap);
+        LogProcess.info(log,"fieldSettingList = " + fieldSettingList);
+        LogProcess.info(log,"setting = " + setting);
 
         this.settings = setting;
 

@@ -1,26 +1,6 @@
-#management:
-#  endpoint:
-#    shutdown:
-#      enabled: true
-#  endpoints:
-#    web:
-#      exposure:
-#        include: health,shutdown,info
 spring:
   main:
     web-application-type: none
-  #  config:
-  #    import: file:external-parameters.properties
-  #  datasource:
-  #    url: jdbc:sqlserver://${DB_IP}:${DB_PORT};encrypt=true;trustServerCertificate=true;
-  #    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-  #    username: ${DB_USERNAME}
-  #    password: ${DB_PW}
-  #    enc-secret-key: ${DB_PW_ENC_KEY}
-  #    hikari:
-  #      maximum-pool-size: 10
-  #      connection-test-query: SELECT 1
-  #      validation-timeout: 3000
   logging:
     file:
       name: logs/app.log   # 指定 Log 檔案位置
@@ -28,8 +8,6 @@ spring:
       root: info           # 設定全域日誌等級
       org.hibernate.SQL: DEBUG
       org.hibernate.type.descriptor.sql: TRACE  # 顯示參數值
-#server:
-#  port: 50082
 
 xmlPath: "external-config/xml/"
 batchFilePath: "batch-file/"
@@ -52,7 +30,7 @@ localFile:
       output:
         directory: "${xmlPath}output/"
         bot_directory: "${xmlPath}bot_output/"
-        def: "${xmlPath}file/DailyBatchFileDefinition.xml"
+      file_def: "${xmlPath}file/DailyBatchFileDefinition.xml"
       mask:
         directory: "${xmlPath}mask/"
         convert: "${xmlPath}mask/convert/"
@@ -60,7 +38,6 @@ localFile:
       excel: "ComparisonResult/excel/"
       csv: "ComparisonResult/csv/"
       txt: "ComparisonResult/CheckResultList.txt"
-
     json:
       field_setting:
         directory: "external-config/json/FieldSetting.json"

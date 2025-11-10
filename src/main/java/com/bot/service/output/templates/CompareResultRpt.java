@@ -18,8 +18,6 @@ public class CompareResultRpt {
     public void exec(List<CompareResultBean> records, String date1, String date2) {
         String template = null;
         try {
-
-
             //每50筆換一頁(不含表頭表尾)
             int pageSize = 50;
             //先確認有幾頁

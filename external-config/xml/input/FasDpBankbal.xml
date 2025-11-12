@@ -6,14 +6,9 @@
         <field>
             <fieldName>cname</fieldName>
             <fieldType>X</fieldType>
-            <length>12</length>
+            <length>54</length>
             <decimal>0</decimal>
-        </field>
-        <field>
-            <fieldName>cname2</fieldName>
-            <fieldType>X</fieldType>
-            <length>42</length>
-            <decimal>0</decimal>
+            <maskType>4</maskType>
         </field>
         <field>
             <fieldName>sbrno</fieldName>
@@ -28,27 +23,9 @@
             <decimal>0</decimal>
         </field>
         <field>
-            <fieldName>brno</fieldName>
+            <fieldName>actno</fieldName>
             <fieldType>COMP</fieldType>
-            <length>1.5</length>
-            <decimal>0</decimal>
-        </field>
-        <field>
-            <fieldName>apno</fieldName>
-            <fieldType>COMP</fieldType>
-            <length>1.5</length>
-            <decimal>0</decimal>
-        </field>
-        <field>
-            <fieldName>srno</fieldName>
-            <fieldType>COMP</fieldType>
-            <length>2.5</length>
-            <decimal>0</decimal>
-        </field>
-        <field>
-            <fieldName>chkdg</fieldName>
-            <fieldType>COMP</fieldType>
-            <length>0.5</length>
+            <length>6</length>
             <decimal>0</decimal>
         </field>
         <field>
@@ -56,6 +33,7 @@
             <fieldType>COMP</fieldType>
             <length>4</length>
             <decimal>0</decimal>
+            <maskType>1</maskType>
         </field>
         <field>
             <fieldName>ydbal</fieldName>

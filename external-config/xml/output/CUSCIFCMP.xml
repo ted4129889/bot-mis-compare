@@ -8,7 +8,7 @@
             <fieldType>string</fieldType>
             <format></format>
             <length>8</length>
-            <align>left</align>
+            <align>right</align>
         </field>
         <field>
             <fieldName>separator</fieldName>

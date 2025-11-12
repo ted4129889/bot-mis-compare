@@ -1,52 +1,387 @@
-/* style.css */
-.label {
-    -fx-font-size: 16px;
-    -fx-font-family: "Microsoft JhengHei", "Arial", sans-serif;
+跳至內容
+聊天歷程紀錄
+
+你說：
+可以幫我把這段FXML，風格改比較溫和一點的感覺嗎
+
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.bot.controller.CompareViewController"
+            stylesheets="@fxmlStyle.css">
+    <top>
+        <VBox spacing="10" alignment="CENTER_LEFT">
+            <!--  這段是與下方間距拉開-->
+            <BorderPane.margin>
+                <Insets bottom="20"/>
+            </BorderPane.margin>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Button fx:id="btnLoadFolder1" text="原始檔案資料夾位置" onAction="#loadFolder1" prefWidth="200"
+                        styleClass="label bold"/>
+                <Label fx:id="labelFile1" text="未選擇" prefWidth="600" maxWidth="600" styleClass="label bold"/>
+            </HBox>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Button fx:id="btnLoadFolder2" text="需比對檔案資料夾位置" onAction="#loadFolder2"
+                        prefWidth="200" styleClass="label bold"/>
+                <Label fx:id="labelFile2" text="未選擇" prefWidth="600" maxWidth="600" styleClass="label bold"/>
+            </HBox>
+            <HBox alignment="CENTER_LEFT">
+                <VBox spacing="5" alignment="CENTER_LEFT">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="匯出格式：" styleClass="label bold"/>
+                        <RadioButton fx:id="radioExcel" text="excel" selected="true"/>
+                        <RadioButton fx:id="radioCsv" text="csv" selected="true"/>
+                    </HBox>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="只顯示比對錯誤結果：" styleClass="label bold"/>
+                        <CheckBox fx:id="checkBoxOnlyError"/>
+                    </HBox>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="遮蔽機敏欄位：" styleClass="label bold"/>
+                        <CheckBox fx:id="checkBoxUseMask"/>
+                    </HBox>
+                </VBox>
+
+                <!-- 加這個空白區塊來撐開 -->
+                <Region HBox.hgrow="ALWAYS"/>
+                <VBox spacing="5" alignment="BOTTOM_RIGHT">
+                    <HBox spacing="10" >
+                        <Button fx:id="btnCompare" text="比對並匯出結果" onAction="#compareFiles" disable="true" styleClass="label bold"/>
+                        <Button fx:id="btnClear" text="清除畫面" onAction="#clearScreen" styleClass="label bold"/>
+                    </HBox>
+                </VBox>
+            </HBox>
+
+        </VBox>
+    </top>
+
+    <center>
+        <HBox>
+            <VBox spacing="5" prefWidth="350" maxWidth="350">
+                <HBox>
+                    <VBox prefWidth="175" VBox.vgrow="ALWAYS">
+                        <Label text="主鍵欄位" styleClass="label bold"/>
+                    </VBox>
+                    <VBox prefWidth="175" VBox.vgrow="ALWAYS" alignment="CENTER_RIGHT">
+                        <Button fx:id="btnFieldSetting" text="儲存檔案欄位設定" onAction="#saveFields"
+                                styleClass="label bold"/>
+                    </VBox>
+                </HBox>
+                <ScrollPane fitToWidth="true" prefHeight="250">
+                    <VBox spacing="10">
+                        <VBox fx:id="pkSelectionBox" spacing="10">
+                            <Label fx:id="hintLabel1" wrapText="true"
+                                   text="可點選「原始檔案清單」及「比對檔案清單」中有相同檔名的檔案，可設定主鍵欄位"
+                                   styleClass="label bold"/>
+                        </VBox>
+                    </VBox>
+                </ScrollPane>
+                <HBox>
+                    <Label text="欄位排序設定" styleClass="label bold"/>
+                </HBox>
+                <ScrollPane fitToWidth="true" prefHeight="250">
+                    <VBox spacing="10">
+
+                        <VBox fx:id="sortSelectionBox" spacing="10">
+                            <Label fx:id="hintLabel2" wrapText="true"
+                                   text="可點選「原始檔案清單」及「比對檔案清單」中有相同檔名的檔案，可設定欄位排序"
+                                   styleClass="label bold"/>
+
+                            <!-- 每個欄位將以 HBox 呈現：欄位名稱 + 主鍵勾選 + 升序 + 降序 -->
+                            <!-- 動態產生於 Controller 中 -->
+                        </VBox>
+
+                    </VBox>
+
+                </ScrollPane>
+            </VBox>
+            <SplitPane dividerPositions="0.5" HBox.hgrow="ALWAYS">
+                <VBox spacing="5" prefWidth="250">
+                    <Label text="原始檔案清單"/>
+
+                    <ListView fx:id="listView1" onMouseClicked="#onListView1Click1" VBox.vgrow="ALWAYS">
+                        <Label fx:id="listViewlabel1"
+                               wrapText="true"
+                               prefWidth="250"
+                               styleClass="label_3"
+                               text="請先點選左上方「原始檔案資料夾位置」按鈕 或是 將資料夾拖曳至此區域，會列出資料夾內所有TXT檔案。"/>
+                    </ListView>
+                </VBox>
+                <VBox spacing="5" prefWidth="250">
+                    <Label text="比對檔案清單"/>
+
+                    <ListView fx:id="listView2" onMouseClicked="#onListView1Click2" VBox.vgrow="ALWAYS">
+                        <Label fx:id="listViewlabel2"
+                               wrapText="true"
+                               prefWidth="250"
+                               styleClass="label_3"
+                               text="請先點選左上方「需比對檔案資料夾位置」按鈕 或是 將資料夾拖曳至此區域，會列出資料夾內所有TXT檔案。"/>
+                    </ListView>
+                </VBox>
+            </SplitPane>
+        </HBox>
+    </center>
+</BorderPane>
+ChatGPT 說：
+這段結構本身蠻清楚，我幫你調成「比較溫和、乾淨」的感覺：把滿版粗體收斂一點，按鈕和標題分層，適度留白，保留 fx:id / onAction 不動，你只要在 CSS 裡搭配柔和色系就會很有感。
+
+下面是調整後的 FXML（已內嵌一些可搭配的 styleClass 名稱）：
+
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.bot.controller.CompareViewController"
+            stylesheets="@fxmlStyle.css"
+            styleClass="root-soft">
+
+    <!-- 上方設定區 -->
+    <top>
+        <VBox spacing="12" alignment="CENTER_LEFT" styleClass="top-panel">
+            <BorderPane.margin>
+                <Insets bottom="16"/>
+            </BorderPane.margin>
+
+            <!-- 原始檔案路徑 -->
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Button fx:id="btnLoadFolder1"
+                        text="選擇原始檔案資料夾"
+                        onAction="#loadFolder1"
+                        prefWidth="200"
+                        styleClass="btn-primary"/>
+                <Label fx:id="labelFile1"
+                       text="尚未選擇資料夾"
+                       prefWidth="600"
+                       maxWidth="600"
+                       styleClass="label-soft"/>
+            </HBox>
+
+            <!-- 比對檔案路徑 -->
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Button fx:id="btnLoadFolder2"
+                        text="選擇比對檔案資料夾"
+                        onAction="#loadFolder2"
+                        prefWidth="200"
+                        styleClass="btn-primary"/>
+                <Label fx:id="labelFile2"
+                       text="尚未選擇資料夾"
+                       prefWidth="600"
+                       maxWidth="600"
+                       styleClass="label-soft"/>
+            </HBox>
+
+            <!-- 匯出設定 + 按鈕區 -->
+            <HBox alignment="CENTER_LEFT">
+                <VBox spacing="6" alignment="CENTER_LEFT">
+
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+                        <Label text="匯出格式" styleClass="section-label"/>
+                        <RadioButton fx:id="radioExcel"
+                                     text="Excel"
+                                     selected="true"
+                                     styleClass="radio-soft"/>
+                        <RadioButton fx:id="radioCsv"
+                                     text="CSV"
+                                     selected="true"
+                                     styleClass="radio-soft"/>
+                    </HBox>
+
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+                        <Label text="只顯示比對錯誤結果" styleClass="label-soft"/>
+                        <CheckBox fx:id="checkBoxOnlyError" styleClass="checkbox-soft"/>
+                    </HBox>
+
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+                        <Label text="遮蔽機敏欄位" styleClass="label-soft"/>
+                        <CheckBox fx:id="checkBoxUseMask" styleClass="checkbox-soft"/>
+                    </HBox>
+                </VBox>
+
+                <!-- 撐開空間 -->
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- 主要操作按鈕區 -->
+                <VBox spacing="6" alignment="BOTTOM_RIGHT">
+                    <HBox spacing="8">
+                        <Button fx:id="btnCompare"
+                                text="開始比對與匯出"
+                                onAction="#compareFiles"
+                                disable="true"
+                                styleClass="btn-accent"/>
+                        <Button fx:id="btnClear"
+                                text="清除畫面"
+                                onAction="#clearScreen"
+                                styleClass="btn-ghost"/>
+                    </HBox>
+                </VBox>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- 中央內容區 -->
+    <center>
+        <HBox spacing="12" padding="10">
+            <!-- 左側欄位設定 -->
+            <VBox spacing="8" prefWidth="350" maxWidth="350" styleClass="panel-soft">
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="主鍵欄位設定" styleClass="section-title"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="btnFieldSetting"
+                            text="儲存欄位設定"
+                            onAction="#saveFields"
+                            styleClass="btn-secondary"/>
+                </HBox>
+
+                <ScrollPane fitToWidth="true" prefHeight="220" styleClass="scroll-soft">
+                    <VBox spacing="8">
+                        <VBox fx:id="pkSelectionBox" spacing="6">
+                            <Label fx:id="hintLabel1"
+                                   wrapText="true"
+                                   text="請於下方清單點選相同檔名的檔案，以設定對應的主鍵欄位。"
+                                   styleClass="hint-label"/>
+                        </VBox>
+                    </VBox>
+                </ScrollPane>
+
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="欄位排序設定" styleClass="section-title-small"/>
+                </HBox>
+
+                <ScrollPane fitToWidth="true" prefHeight="220" styleClass="scroll-soft">
+                    <VBox spacing="8">
+                        <VBox fx:id="sortSelectionBox" spacing="6">
+                            <Label fx:id="hintLabel2"
+                                   wrapText="true"
+                                   text="選取檔案後，可於此設定欄位排序優先順序。"
+                                   styleClass="hint-label"/>
+                            <!-- 動態欄位由 Controller 產生 -->
+                        </VBox>
+                    </VBox>
+                </ScrollPane>
+            </VBox>
+
+            <!-- 右側檔案清單 -->
+            <SplitPane dividerPositions="0.5" HBox.hgrow="ALWAYS" styleClass="split-soft">
+                <VBox spacing="6" prefWidth="250">
+                    <Label text="原始檔案清單" styleClass="section-label"/>
+                    <ListView fx:id="listView1"
+                              onMouseClicked="#onListView1Click1"
+                              VBox.vgrow="ALWAYS"
+                              styleClass="list-soft">
+                        <Label fx:id="listViewlabel1"
+                               wrapText="true"
+                               prefWidth="250"
+                               styleClass="hint-label"
+                               text="請先選擇原始檔案資料夾，或將資料夾拖曳至此區域，系統將列出內含的 TXT 檔案。"/>
+                    </ListView>
+                </VBox>
+
+                <VBox spacing="6" prefWidth="250">
+                    <Label text="比對檔案清單" styleClass="section-label"/>
+                    <ListView fx:id="listView2"
+                              onMouseClicked="#onListView1Click2"
+                              VBox.vgrow="ALWAYS"
+                              styleClass="list-soft">
+                        <Label fx:id="listViewlabel2"
+                               wrapText="true"
+                               prefWidth="250"
+                               styleClass="hint-label"
+                               text="請先選擇比對檔案資料夾，或將資料夾拖曳至此區域，系統將列出內含的 TXT 檔案。"/>
+                    </ListView>
+                </VBox>
+            </SplitPane>
+        </HBox>
+    </center>
+</BorderPane>
+再幫你給一小段 CSS 方向（加到 fxmlStyle.css 就好）：
+
+.root-soft {
+    -fx-background-color: #f7f8fb;
 }
 
-.label_12 {
-    -fx-font-size: 12px;
-    -fx-font-family: "Microsoft JhengHei", "Arial", sans-serif;
+.top-panel {
+    -fx-padding: 16 18 8 18;
 }
 
-
-.root {
-    -fx-font-family: "Segoe UI", sans-serif;
-    -fx-font-size: 13px;
+.panel-soft {
+    -fx-background-color: #ffffff;
+    -fx-padding: 12;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.03), 6, 0, 0, 2);
 }
 
-.button {
-    -fx-background-color: #c7c9c9;
-    -fx-text-fill: black;
-    -fx-background-radius: 6;
-    -fx-padding: 6 12;
-}
-
-.button:hover {
-    -fx-background-color: #9cadad;
-}
-
-.label {
-    -fx-text-fill: #333;
-}
-
-.label-bold {
+.section-title {
+    -fx-font-size: 14px;
     -fx-font-weight: bold;
+    -fx-text-fill: #4a5568;
+}
+
+.section-title-small {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4a5568;
+}
+
+.section-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #4a5568;
+    -fx-font-weight: semi-bold;
+}
+
+.label-soft {
+    -fx-text-fill: #4a5568;
+    -fx-font-size: 12px;
 }
 
 .hint-label {
-    -fx-text-fill: #888;
-    -fx-padding: 4 0 4 8;
+    -fx-text-fill: #718096;
+    -fx-font-size: 11px;
 }
 
-.drop-zone {
-    -fx-border-color: #ccc;
-    -fx-border-style: dashed;
-    -fx-border-width: 2;
-    -fx-padding: 10;
+.btn-primary {
+    -fx-background-color: linear-gradient(to bottom, #a8d8ea, #82c4d9);
+    -fx-text-fill: #2b3a42;
+    -fx-background-radius: 6;
+    -fx-padding: 6 14;
 }
 
-.label_3 {
-    -fx-text-fill: red;
-    -fx-opacity: 1.0;
+.btn-accent {
+        -fx-background-color: linear-gradient(to bottom, #81d8b8, #5ec2a8);
+        -fx-text-fill: white;
+        -fx-background-radius: 6;
+        -fx-font-weight: bold;
+}
+
+.btn-secondary {
+    -fx-background-color: #edf2f7;
+    -fx-text-fill: #2d3748;
+    -fx-background-radius: 6;
+}
+
+.btn-ghost {
+       -fx-background-color: transparent;
+        -fx-border-color: #cbd5e0;
+        -fx-text-fill: #4a5568;
+        -fx-border-radius: 6;
+}
+
+.list-soft {
+    -fx-background-color: #ffffff;
+}
+
+.scroll-soft {
+    -fx-background-color: transparent;
+}
+
+.radio-soft, .checkbox-soft {
+    -fx-text-fill: #4a5568;
+}
+
+.split-soft {
+    -fx-padding: 0 0 0 4;
 }

@@ -124,27 +124,28 @@
             <decimal>0</decimal>
         </field>
         <field>
-            <fieldName>filler</fieldName>
+            <fieldName>filler1</fieldName>
             <fieldType>COMP</fieldType>
             <length>0.5</length>
             <decimal>0</decimal>
         </field>
         <field>
             <fieldName>unino</fieldName>
-            <fieldType>X</fieldType>
-            <length>10</length>
+            <fieldType>COMP</fieldType>
+            <length>5</length>
             <decimal>0</decimal>
+            <maskType>1</maskType>
         </field>
         <field>
             <fieldName>actno</fieldName>
-            <fieldType>X</fieldType>
-            <length>12</length>
+            <fieldType>COMP</fieldType>
+            <length>6</length>
             <decimal>0</decimal>
         </field>
         <field>
             <fieldName>docno</fieldName>
-            <fieldType>X</fieldType>
-            <length>16</length>
+            <fieldType>COMP</fieldType>
+            <length>8</length>
             <decimal>0</decimal>
         </field>
         <field>
@@ -268,9 +269,9 @@
             <decimal>0</decimal>
         </field>
         <field>
-            <fieldName>filler</fieldName>
-            <fieldType>X</fieldType>
-            <length>268</length>
+            <fieldName>filler2</fieldName>
+            <fieldType>COMP</fieldType>
+            <length>134</length>
             <decimal>0</decimal>
         </field>
     </body>

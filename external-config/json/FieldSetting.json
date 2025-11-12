@@ -1668,7 +1668,7 @@
     "sortFields" : [ ]
   },
   "A138" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "yy", "mm", "brno" ],
     "sortFields" : [ ]
   },
   "A116600" : {
@@ -1676,6 +1676,270 @@
     "sortFields" : [ ]
   },
   "A116699" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "2MIS-ENTX" : {
+    "primaryKeys" : [ "entx-entpno" ],
+    "sortFields" : [ ]
+  },
+  "AB196" : {
+    "primaryKeys" : [ "yyymm", "brno" ],
+    "sortFields" : [ ]
+  },
+  "AB196BIG" : {
+    "primaryKeys" : [ "yyymm", "brno" ],
+    "sortFields" : [ ]
+  },
+  "AB196SMALL" : {
+    "primaryKeys" : [ "yyymm", "brno" ],
+    "sortFields" : [ ]
+  },
+  "BRORD" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "CIF" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "CRIF" : {
+    "primaryKeys" : [ "crpbk", "swfcd" ],
+    "sortFields" : [ ]
+  },
+  "CRVT" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "CRVTDATE" : {
+    "primaryKeys" : [ "yymm" ],
+    "sortFields" : [ ]
+  },
+  "CSTRT" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "CUSBKCHC" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "CUSBKCUS1" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "CUSBSDT" : {
+    "primaryKeys" : [ "yymm", "fxeyymm" ],
+    "sortFields" : [ ]
+  },
+  "CUSCIFCMP" : {
+    "primaryKeys" : [ "cusno" ],
+    "sortFields" : [ ]
+  },
+  "CUSDACNO" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "CUSFXBR" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "CUSSACNO" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FXORD1" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FXORD2" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FXVT" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "INCOME" : {
+    "primaryKeys" : [ "yyymm", "brno", "dept", "curcd", "acno", "sbno" ],
+    "sortFields" : [ ]
+  },
+  "LNCUS" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "LNORD" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "MLYDAY" : {
+    "primaryKeys" : [ "mlyday_yymm", "mlyday_dd" ],
+    "sortFields" : [ ]
+  },
+  "NTBSDT" : {
+    "primaryKeys" : [ "bsdate" ],
+    "sortFields" : [ ]
+  },
+  "TRCT" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "TREASINT" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "TRES" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "XCRT" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasAcMrgrptCheck" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasAcR245y" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasAcR408" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasAcR904" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasAcTintrM4" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasAlIfdDp" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasAlIfdDpNdp" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasAlIfdIhtx" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasAlIfdL1" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasAlIfdL1Ndp" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasAlIfdLhtx" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasCmsCusfx" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasCmsFeeFx" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasCmsFeeLn" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasCmsIfdfx" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasDpAvemlyCt" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasEisCrvt" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasEisTrct" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasFx107m" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "FasLnAb196" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasCmsdbCusfxbr" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasEisdbCrvt" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasCmsdbXcrt" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasCmsdbCstrt" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasCmsdbDacno" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasCmsdbSacno" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasEisdbFxvt" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasEisdbTres" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasCmsdbBkcas" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasCmsdbBkcus" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasCmsdbBkcf" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasCmsdbBkcnt" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasCmsdbBkcfx" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasCmsdbBkchc" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasEisdbTreasury" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasCmsorddbMlynum" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasCmsdbMlynum" : {
     "primaryKeys" : [ ],
     "sortFields" : [ ]
   }

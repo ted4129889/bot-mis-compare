@@ -16,7 +16,7 @@
         <field>
             <fieldName>separator</fieldName>
             <fieldType>string</fieldType>
-            <format/>
+            <format></format>
             <length>1</length>
             <align>left</align>
         </field>
@@ -30,21 +30,21 @@
         <field>
             <fieldName>separator</fieldName>
             <fieldType>string</fieldType>
-            <format/>
+            <format></format>
             <length>1</length>
             <align>left</align>
         </field>
         <field>
             <fieldName>dept</fieldName>
             <fieldType>string</fieldType>
-            <format/>
+            <format></format>
             <length>1</length>
             <align>left</align>
         </field>
         <field>
             <fieldName>separator</fieldName>
             <fieldType>string</fieldType>
-            <format/>
+            <format></format>
             <length>1</length>
             <align>left</align>
         </field>
@@ -58,7 +58,7 @@
         <field>
             <fieldName>separator</fieldName>
             <fieldType>string</fieldType>
-            <format/>
+            <format></format>
             <length>1</length>
             <align>left</align>
         </field>
@@ -72,21 +72,21 @@
         <field>
             <fieldName>separator</fieldName>
             <fieldType>string</fieldType>
-            <format/>
+            <format></format>
             <length>1</length>
             <align>left</align>
         </field>
         <field>
             <fieldName>sbno</fieldName>
             <fieldType>string</fieldType>
-            <format/>
+            <format></format>
             <length>4</length>
             <align>left</align>
         </field>
         <field>
             <fieldName>separator</fieldName>
             <fieldType>string</fieldType>
-            <format/>
+            <format></format>
             <length>1</length>
             <align>left</align>
         </field>
@@ -100,7 +100,7 @@
         <field>
             <fieldName>separator</fieldName>
             <fieldType>string</fieldType>
-            <format/>
+            <format></format>
             <length>1</length>
             <align>left</align>
         </field>

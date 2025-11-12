@@ -1,6 +1,7 @@
 package com.bot.service.mask;
 
 
+import com.bot.dataprocess.JobExecutorService;
 import com.bot.dto.CompareSetting;
 import com.bot.service.compare.CompareDataService;
 import com.bot.service.output.templates.CompareResultRpt;
@@ -47,10 +48,15 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
     @Value("${localFile.mis.batch.output}")
     private String outputPath;
     @Value("${localFile.mis.xml.file_def}")
-    private String botMaskXmlFile;
+    private String botMaskXmlFilePath;
+    @Value("${localFile.mis.xml.file_def2}")
+    private String botMaskXmlFilePath2;
     @Value("${localFile.mis.json.field_setting.directory}")
     private String fieldSettinngFile;
 
+
+    @Autowired
+    private JobExecutorService jobExecutorService;
     @Autowired
     private XmlParser xmlParser;
     @Autowired
@@ -149,12 +155,24 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
         try {
 
             //允許的路徑(XML)
-            String dailyBatchFileDefinitionFile = FilenameUtils.normalize(botMaskXmlFile);
+            String dailyBatchFileDefinitionFile = FilenameUtils.normalize(botMaskXmlFilePath);
+            String monthlyBatchFileDefinitionFile = FilenameUtils.normalize(botMaskXmlFilePath2);
+
+            List<XmlData> xmlDataListD = new ArrayList<>();
+            List<XmlData> xmlDataListM = new ArrayList<>();
 
             XmlFile xmlFile;
 
+
             xmlFile = xmlParser.parseXmlFile2(dailyBatchFileDefinitionFile);
-            xmlDataList = xmlFile.getDataList();
+            xmlDataListD = xmlFile.getDataList();
+
+            xmlDataList.addAll(xmlDataListD);
+
+            xmlFile = xmlParser.parseXmlFile2(monthlyBatchFileDefinitionFile);
+            xmlDataListM = xmlFile.getDataList();
+
+            xmlDataList.addAll(xmlDataListM);
 
             LogProcess.info(log,"讀取 external-config/xml/bot_output 資料夾下的 DailyBatchFileDefinition.xml 定義檔內有" + xmlDataList.size() + "組 <data> 格式");
 
@@ -564,7 +582,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
         //先比對檔案資料長度是否與定義檔加總一致
         if (xmlLength != dataLength) {
             LogProcess.warn(log,"xml length = " + xmlLength + " VS data length = " + dataLength);
-            LogProcess.warn(log,"line = {}" + line);
+//            LogProcess.warn(log,"line = {}" + line);
 //            return line;
         }
         //起始位置
@@ -725,5 +743,9 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
         return fileName.matches(regex);
     }
 
+
+    private void sHandle(String fileName){
+        jobExecutorService.runJob("CUSDACNO");
+    }
 
 }

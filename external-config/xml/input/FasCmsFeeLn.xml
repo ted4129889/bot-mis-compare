@@ -35,8 +35,8 @@
         </field>
         <field>
             <fieldName>cusno</fieldName>
-            <fieldType>COMP</fieldType>
-            <length>5</length>
+            <fieldType>X</fieldType>
+            <length>10</length>
             <decimal>0</decimal>
         </field>
         <field>

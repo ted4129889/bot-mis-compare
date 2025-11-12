@@ -31,6 +31,7 @@ localFile:
         directory: "${xmlPath}output/"
         bot_directory: "${xmlPath}bot_output/"
       file_def: "${xmlPath}file/DailyBatchFileDefinition.xml"
+      file_def2: "${xmlPath}file/MonthlyBatchFileDefinition.xml"
       mask:
         directory: "${xmlPath}mask/"
         convert: "${xmlPath}mask/convert/"

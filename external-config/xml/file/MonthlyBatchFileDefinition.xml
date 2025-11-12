@@ -2555,6 +2555,7 @@
                 <fieldName>name</fieldName>
                 <fieldType>string</fieldType>
                 <length>54</length>
+                <maskType>4</maskType>
             </field>
         </body>
         <footer>
@@ -4792,7 +4793,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler1</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -4804,7 +4805,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler2</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -4812,11 +4813,11 @@
             <field>
                 <fieldName>amt2</fieldName>
                 <fieldType>DISPLAY</fieldType>
-                <length>8</length>
+                <length>9</length>
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler3</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -4828,7 +4829,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler4</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -4840,7 +4841,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler5</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -4852,7 +4853,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler6</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -4864,7 +4865,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler7</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -4872,11 +4873,11 @@
             <field>
                 <fieldName>amt3</fieldName>
                 <fieldType>DISPLAY</fieldType>
-                <length>11</length>
+                <length>12</length>
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler8</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -4888,7 +4889,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler9</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -4900,7 +4901,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler10</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -4908,11 +4909,11 @@
             <field>
                 <fieldName>amt5</fieldName>
                 <fieldType>DISPLAY</fieldType>
-                <length>9</length>
+                <length>10</length>
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler11</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -4924,7 +4925,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler12</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -4936,7 +4937,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler13</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -4944,11 +4945,11 @@
             <field>
                 <fieldName>amt7</fieldName>
                 <fieldType>DISPLAY</fieldType>
-                <length>10</length>
+                <length>11</length>
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler14</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -4960,7 +4961,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler15</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -4972,7 +4973,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler16</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -4984,7 +4985,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler17</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -4996,7 +4997,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler18</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -7112,8 +7113,8 @@
             </field>
             <field>
                 <fieldName>cusno</fieldName>
-                <fieldType>COMP</fieldType>
-                <length>5</length>
+                <fieldType>X</fieldType>
+                <length>10</length>
                 <decimal>0</decimal>
                 <maskType>1</maskType>
             </field>
@@ -7247,8 +7248,8 @@
             </field>
             <field>
                 <fieldName>cusno</fieldName>
-                <fieldType>COMP</fieldType>
-                <length>5</length>
+                <fieldType>X</fieldType>
+                <length>10</length>
                 <decimal>0</decimal>
                 <maskType>1</maskType>
             </field>
@@ -7471,7 +7472,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler1</fieldName>
                 <fieldType>COMP</fieldType>
                 <length>0.5</length>
                 <decimal>0</decimal>
@@ -7616,7 +7617,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler2</fieldName>
                 <fieldType>COMP</fieldType>
                 <length>134</length>
                 <decimal>0</decimal>
@@ -7925,7 +7926,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler1</fieldName>
                 <fieldType>X</fieldType>
                 <length>4</length>
                 <decimal>0</decimal>
@@ -7937,7 +7938,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler2</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -7949,7 +7950,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler3</fieldName>
                 <fieldType>X</fieldType>
                 <length>5</length>
                 <decimal>0</decimal>
@@ -7961,7 +7962,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler4</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -7973,7 +7974,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler5</fieldName>
                 <fieldType>X</fieldType>
                 <length>7</length>
                 <decimal>0</decimal>
@@ -7985,7 +7986,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler6</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -7997,7 +7998,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler7</fieldName>
                 <fieldType>X</fieldType>
                 <length>5</length>
                 <decimal>0</decimal>
@@ -8009,7 +8010,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler8</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -8021,7 +8022,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler9</fieldName>
                 <fieldType>X</fieldType>
                 <length>7</length>
                 <decimal>0</decimal>
@@ -8033,7 +8034,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler10</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -8045,7 +8046,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler11</fieldName>
                 <fieldType>X</fieldType>
                 <length>7</length>
                 <decimal>0</decimal>
@@ -8057,7 +8058,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler12</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -8069,7 +8070,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler13</fieldName>
                 <fieldType>X</fieldType>
                 <length>7</length>
                 <decimal>0</decimal>
@@ -8081,7 +8082,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler14</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -8093,7 +8094,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler15</fieldName>
                 <fieldType>X</fieldType>
                 <length>5</length>
                 <decimal>0</decimal>
@@ -8105,7 +8106,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler16</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -8117,7 +8118,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler17</fieldName>
                 <fieldType>X</fieldType>
                 <length>7</length>
                 <decimal>0</decimal>
@@ -8129,7 +8130,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler18</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -8141,7 +8142,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler19</fieldName>
                 <fieldType>X</fieldType>
                 <length>5</length>
                 <decimal>0</decimal>
@@ -8153,7 +8154,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler20</fieldName>
                 <fieldType>X</fieldType>
                 <length>7</length>
                 <decimal>0</decimal>
@@ -8165,7 +8166,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler21</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -8177,7 +8178,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler22</fieldName>
                 <fieldType>X</fieldType>
                 <length>17</length>
                 <decimal>0</decimal>
@@ -8215,7 +8216,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler1</fieldName>
                 <fieldType>X</fieldType>
                 <length>4</length>
                 <decimal>0</decimal>
@@ -8227,7 +8228,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler2</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -8239,7 +8240,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler3</fieldName>
                 <fieldType>X</fieldType>
                 <length>5</length>
                 <decimal>0</decimal>
@@ -8251,7 +8252,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler4</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -8263,7 +8264,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler5</fieldName>
                 <fieldType>X</fieldType>
                 <length>7</length>
                 <decimal>0</decimal>
@@ -8275,7 +8276,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler6</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -8287,7 +8288,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler7</fieldName>
                 <fieldType>X</fieldType>
                 <length>5</length>
                 <decimal>0</decimal>
@@ -8299,7 +8300,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler8</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -8311,7 +8312,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler9</fieldName>
                 <fieldType>X</fieldType>
                 <length>7</length>
                 <decimal>0</decimal>
@@ -8323,7 +8324,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler10</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -8335,7 +8336,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler11</fieldName>
                 <fieldType>X</fieldType>
                 <length>7</length>
                 <decimal>0</decimal>
@@ -8347,7 +8348,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler12</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -8359,7 +8360,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler13</fieldName>
                 <fieldType>X</fieldType>
                 <length>7</length>
                 <decimal>0</decimal>
@@ -8371,7 +8372,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler14</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -8383,7 +8384,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler15</fieldName>
                 <fieldType>X</fieldType>
                 <length>5</length>
                 <decimal>0</decimal>
@@ -8395,7 +8396,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler16</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -8407,7 +8408,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler17</fieldName>
                 <fieldType>X</fieldType>
                 <length>7</length>
                 <decimal>0</decimal>
@@ -8419,7 +8420,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler18</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -8431,7 +8432,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler19</fieldName>
                 <fieldType>X</fieldType>
                 <length>5</length>
                 <decimal>0</decimal>
@@ -8443,7 +8444,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler20</fieldName>
                 <fieldType>X</fieldType>
                 <length>7</length>
                 <decimal>0</decimal>
@@ -8461,7 +8462,7 @@
                 <decimal>0</decimal>
             </field>
             <field>
-                <fieldName>filler</fieldName>
+                <fieldName>filler21</fieldName>
                 <fieldType>X</fieldType>
                 <length>1</length>
                 <decimal>0</decimal>
@@ -11288,6 +11289,40 @@
                 <fieldName>cusno</fieldName>
                 <fieldType>string</fieldType>
                 <length>10</length>
+                <maskType>1</maskType>
+            </field>
+            <field>
+                <fieldName>brno</fieldName>
+                <fieldType>string</fieldType>
+                <length>3</length>
+            </field>
+            <field>
+                <fieldName>apid</fieldName>
+                <fieldType>string</fieldType>
+                <length>4</length>
+            </field>
+            <field>
+                <fieldName>yyyymm</fieldName>
+                <fieldType>string</fieldType>
+                <length>6</length>
+            </field>
+            <field>
+                <fieldName>mlynum</fieldName>
+                <fieldType>string</fieldType>
+                <length>16</length>
+            </field>
+        </body>
+        <footer></footer>
+    </data>
+    <!--    20251106 因為檔名給錯，這段先補上-->
+    <data fileName="ConvFasCmsdbMlynum">
+        <header></header>
+        <body>
+            <field>
+                <fieldName>cusno</fieldName>
+                <fieldType>string</fieldType>
+                <length>10</length>
+                <maskType>1</maskType>
             </field>
             <field>
                 <fieldName>brno</fieldName>
@@ -11313,11 +11348,3 @@
         <footer></footer>
     </data>
 </file>
-
-
-
-
-
-
-
-

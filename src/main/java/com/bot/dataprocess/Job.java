@@ -41,5 +41,5 @@ public interface Job {
     /**
      * 執行入口方法
      */
-    void execute();
+    JobResult execute(JobContext ctx);
 }

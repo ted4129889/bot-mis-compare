@@ -23,7 +23,8 @@ public class JobExecutorService {
      * @param ctx
      */
     public JobResult runJob(String jobName, JobContext ctx) {
-        String key = jobName == null ? "" : jobName.trim().toUpperCase(Locale.ROOT);
+//        String key = jobName == null ? "" : jobName.trim().toUpperCase(Locale.ROOT);
+        String key = jobName == null ? "" : jobName.trim();
         Job job = jobMap.get(key);
         if (job == null) {
             throw new IllegalArgumentException("無對應 Job: " + key);

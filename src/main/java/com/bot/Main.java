@@ -22,10 +22,10 @@ public class Main {
 //
 //        JobContext ctx = new JobContext(Path.of("D:/BOTProject/com-bot-mis-compare/batch-file/input"),
 //                Path.of("D:/BOTProject/com-bot-mis-compare/batch-file/output"),
-//                "CUSDACNO"
+//                "botsddb_20250930.dbo.db_achmr_dds"
 //        );
 //        // 單一行執行測試
-//        api.getBean(JobExecutorService.class).runJob("CUSDACNO", ctx);
+//        api.getBean(JobExecutorService.class).runJob("DB_ACHMR", ctx);
 //
 //        // 若要結束程式（避免 Spring 繼續跑 web server），可以關閉上下文
 //        SpringApplication.exit(api);

@@ -1792,7 +1792,7 @@
     "sortFields" : [ ]
   },
   "XCRT" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "yymm", "curcd" ],
     "sortFields" : [ ]
   },
   "FasAcMrgrptCheck" : {
@@ -1940,6 +1940,14 @@
     "sortFields" : [ ]
   },
   "ConvFasCmsdbMlynum" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasPbckacno" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasMisdbAptab" : {
     "primaryKeys" : [ ],
     "sortFields" : [ ]
   }

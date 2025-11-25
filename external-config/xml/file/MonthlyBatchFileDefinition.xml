@@ -2160,7 +2160,7 @@
             <field>
                 <fieldName>yymm</fieldName>
                 <fieldType>string</fieldType>
-                <length>6</length>
+                <length>5</length>
             </field>
             <field>
                 <fieldName>separator</fieldName>

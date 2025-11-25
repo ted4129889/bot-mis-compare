@@ -1720,7 +1720,7 @@
     "sortFields" : [ ]
   },
   "CUSBKCHC" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "cusno", "curcd", "yymm" ],
     "sortFields" : [ ]
   },
   "CUSBKCUS1" : {
@@ -1748,11 +1748,11 @@
     "sortFields" : [ ]
   },
   "FXORD1" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "brno", "order", "cusno" ],
     "sortFields" : [ ]
   },
   "FXORD2" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "brno", "order", "cusno" ],
     "sortFields" : [ ]
   },
   "FXVT" : {
@@ -1948,6 +1948,10 @@
     "sortFields" : [ ]
   },
   "ConvFasMisdbAptab" : {
+    "primaryKeys" : [ ],
+    "sortFields" : [ ]
+  },
+  "ConvFasEisTres3" : {
     "primaryKeys" : [ ],
     "sortFields" : [ ]
   }

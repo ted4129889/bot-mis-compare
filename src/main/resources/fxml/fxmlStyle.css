@@ -330,7 +330,7 @@ ChatGPT 說：
 .section-label {
     -fx-font-size: 12px;
     -fx-text-fill: #4a5568;
-    -fx-font-weight: semi-bold;
+    -fx-font-weight: bold;
 }
 
 .label-soft {

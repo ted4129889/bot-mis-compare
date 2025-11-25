@@ -5,9 +5,7 @@ spring:
     file:
       name: logs/app.log   # 指定 Log 檔案位置
     level:
-      root: info           # 設定全域日誌等級
-      org.hibernate.SQL: DEBUG
-      org.hibernate.type.descriptor.sql: TRACE  # 顯示參數值
+      root: trace           # 設定全域日誌等級
 
 xmlPath: "external-config/xml/"
 batchFilePath: "batch-file/"

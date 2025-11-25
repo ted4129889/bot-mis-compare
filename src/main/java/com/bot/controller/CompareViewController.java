@@ -171,7 +171,7 @@ public class CompareViewController {
         checkBoxOnlyError.setSelected(false);
 
         checkBoxUseMask.setDisable(true);
-        checkBoxUseMask.setSelected(true);
+        checkBoxUseMask.setSelected(false);
 
 
         //左側提示標籤 不啟用

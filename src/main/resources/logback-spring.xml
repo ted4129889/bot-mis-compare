@@ -1,35 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <!-- 控制日誌級別 (INFO, DEBUG, WARN, ERROR) -->
-    <logger name="com.bot" level="INFO" />
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>
 
+    <!-- 可由外部覆蓋的參數（xxxx.properties、application.yml、-D、環境變數皆可） -->
+    <springProperty scope="context" name="LOG_LEVEL" source="LOG_LEVEL" defaultValue="INFO"/>
+    <springProperty scope="context" name="AP_LOG_LEVEL" source="AP_LOG_LEVEL" defaultValue="INFO"/>
+    <springProperty scope="context" name="JDBC_TDS_LEVEL" source="JDBC_TDS_LEVEL" defaultValue="INFO"/>
+
+    <!-- 路徑/檔名可帶參數；LOG_PATH 預設 logs 以避免 logpath_IS_UNDEFINED -->
+    <property name="LOG_PATH" value="${LOG_PATH:-logs}"/>
+    <property name="LOG_FILE" value="${LOG_FILE:-app}"/>
+
+    <!-- 你的專案 package 級別（外部參數可覆蓋） -->
+    <logger name="com.bot" level="${AP_LOG_LEVEL}"/>
+
+    <!-- 選擇性：MSSQL JDBC trace；量很大，預設關；需要時啟用：-DJDBC_TDS_LEVEL=TRACE -->
+    <logger name="com.microsoft.sqlserver.jdbc.TDSCommand" level="${JDBC_TDS_LEVEL}"/>
+
+    <!-- 日期戳 -->
     <timestamp key="DATE" datePattern="yyyy-MM-dd"/>
-
-    <!-- 控制台輸出 -->
+    <!-- Console -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <!-- 基本檔案輸出 -->
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <!-- 前日期的 log 檔案 -->
-        <file>app-${DATE}.log</file>
-        <!-- 根據大小與日期滾動的策略 -->
+    <!-- 檔案：依大小輪轉，app.log → app.1.log.gz, app.2.log.gz ... -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}.${DATE}.log</file>
+
+        <!-- 每檔 20MB 就切，檔名：app.2025-09-15.0.log、app.2025-09-15.1.log ... -->
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-
-            <!-- 歷史檔案名稱格式（帶日期與序號） -->
-            <fileNamePattern>app-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-
-            <!-- 單個檔案大小上限（5MB） -->
-            <maxFileSize>5MB</maxFileSize>
-
-            <!-- 保留 30 天的日誌檔案 -->
-            <maxHistory>30</maxHistory>
-
-            <!-- 總共最大儲存空間 (1GB) -->
-            <totalSizeCap>1GB</totalSizeCap>
-
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <maxFileSize>20MB</maxFileSize>
+            <!-- 不要設定 maxHistory、totalSizeCap，就不會自動刪舊檔 -->
         </rollingPolicy>
 
         <encoder>
@@ -37,9 +42,8 @@
         </encoder>
     </appender>
 
-    <!-- 級別 -->
-    <root level="INFO">
-        <appender-ref ref="CONSOLE" />
-        <appender-ref ref="FILE" />
+    <root level="${LOG_LEVEL:-INFO}">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
     </root>
 </configuration>

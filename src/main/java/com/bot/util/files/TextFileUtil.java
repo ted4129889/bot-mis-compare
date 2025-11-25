@@ -208,8 +208,8 @@ public class TextFileUtil {
                 lineCount++;
                 // 簡單偵測：若這行包含替代字元，打警告，之後再決定是否回頭抓原始 HEX
                 if (line.indexOf('\uFFFD') >= 0) {
-                    LogProcess.warn(log, "Line {} has invalid bytes  => {}", lineCount, line);
-                    LogProcess.warn(log, "Line {} has invalid bytes  => {}", lineCount, line.length());
+                   // LogProcess.warn(log, "Line {} has invalid bytes  => {}", lineCount, line);
+                   // LogProcess.warn(log, "Line {} has invalid bytes  => {}", lineCount, line.length());
                 }
                 if (line.length() != lineSize) {
                     line = line.substring(line.length() - lineSize);
@@ -445,16 +445,16 @@ public class TextFileUtil {
 
                         // 分別顯示原因，讓 log 更明確
                         if (hasBadStrict) {
-                            LogProcess.warn(log, "[Line {}] ⚠️ 嚴格解碼失敗 (badStrict=true) HEX[..]={}", lineNo, window);
+                           // LogProcess.warn(log, "[Line {}] ⚠️ 嚴格解碼失敗 (badStrict=true) HEX[..]={}", lineNo, window);
                         }
                         if (hasReplacement) {
-                            LogProcess.warn(log, "[Line {}] ⚠️ 出現替代字 (� 或 ?) HEX[..]={}", lineNo, window);
+                           // LogProcess.warn(log, "[Line {}] ⚠️ 出現替代字 (� 或 ?) HEX[..]={}", lineNo, window);
                         }
                         if (hasIllegalBig5) {
-                            LogProcess.warn(log, "[Line {}] ⚠️ 非法 Big5 位元組 (illegalAt={}) HEX[..]={}", lineNo, illegalAt, window);
+                           // LogProcess.warn(log, "[Line {}] ⚠️ 非法 Big5 位元組 (illegalAt={}) HEX[..]={}", lineNo, illegalAt, window);
                         }
                         if (hasEbcdicLike) {
-//                            LogProcess.warn(log, "[Line {}] ⚠️ 疑似 EBCDIC 編碼 HEX[..]={}", lineNo, window);
+//                           // LogProcess.warn(log, "[Line {}] ⚠️ 疑似 EBCDIC 編碼 HEX[..]={}", lineNo, window);
                         }
                     }
                 } else {
@@ -502,16 +502,16 @@ public class TextFileUtil {
 
                     // 分別顯示原因，讓 log 更明確
                     if (hasBadStrict) {
-                        LogProcess.warn(log, "[Line {}] ⚠️ 嚴格解碼失敗 (badStrict=true) HEX[..]={}", lineNo, window);
+                       // LogProcess.warn(log, "[Line {}] ⚠️ 嚴格解碼失敗 (badStrict=true) HEX[..]={}", lineNo, window);
                     }
                     if (hasReplacement) {
-                        LogProcess.warn(log, "[Line {}] ⚠️ 出現替代字 (� 或 ?) HEX[..]={}", lineNo, window);
+                       // LogProcess.warn(log, "[Line {}] ⚠️ 出現替代字 (� 或 ?) HEX[..]={}", lineNo, window);
                     }
                     if (hasIllegalBig5) {
-                        LogProcess.warn(log, "[Line {}] ⚠️ 非法 Big5 位元組 (illegalAt={}) HEX[..]={}", lineNo, illegalAt, window);
+                       // LogProcess.warn(log, "[Line {}] ⚠️ 非法 Big5 位元組 (illegalAt={}) HEX[..]={}", lineNo, illegalAt, window);
                     }
                     if (hasEbcdicLike) {
-//                        LogProcess.warn(log, "[Line {}] ⚠️ 疑似 EBCDIC 編碼 HEX[..]={}", lineNo, window);
+//                       // LogProcess.warn(log, "[Line {}] ⚠️ 疑似 EBCDIC 編碼 HEX[..]={}", lineNo, window);
                     }
                 }
             }

@@ -13,9 +13,9 @@ import org.springframework.security.crypto.encrypt.TextEncryptor;
 public class DecryptPwdInitializer
         implements ApplicationContextInitializer<ConfigurableApplicationContext> {
     private static final String SALT = "5c0744940b5c369b"; // 一個隨機鹽值（每次加密可以使用相同的鹽值）
-    private static final String VAR_PW = "spring.datasource.password";
+    private static final String VAR_PW = "spring.datasource.pw";
     private static final String VAR_ENC_SECRET_KEY = "spring.datasource.enc-secret-key";
-    private static final String DEC_PW_NAME = "decrypted-password-properties";
+    private static final String DEC_PW_NAME = "decrypted-pw-properties";
     private static final String PROFILE = "spring.profiles.active";
     private static final String LOCAL = "local";
 

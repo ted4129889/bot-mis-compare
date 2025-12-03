@@ -1,7 +1,7 @@
-package com.bot.service.compare;
+package com.bot.compare;
 
 
-import com.bot.service.mask.config.SortFieldConfig;
+import com.bot.mask.config.SortFieldConfig;
 import com.bot.util.comparator.ComparatorUtil;
 import com.bot.util.log.LogProcess;
 import com.bot.util.mask.MaskUtil;
@@ -217,8 +217,8 @@ public class CompareDataServiceImpl implements CompareDataService {
             //用欄位對 A B資料 取得同一個欄位值
 
 
-            String aVal = (aRow.get(c) != null ? aRow.get(c).replace("*", "").trim() : "");
-            String bVal = (bRow.get(c) != null ? bRow.get(c).replace("*", "").trim() : "");
+            String aVal = (aRow.get(c) != null ? aRow.get(c).replace("*", "").replace("9", " ").trim() : "");
+            String bVal = (bRow.get(c) != null ? bRow.get(c).replace("*", "").replace("9", " ").trim() : "");
 
             if (!Objects.equals(aVal, bVal)) {
                 map = new LinkedHashMap<>();

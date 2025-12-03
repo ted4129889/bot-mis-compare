@@ -269,10 +269,10 @@ public class TextFileUtil {
                     writer.newLine();
                 }
             } catch (Exception e) {
-                LogProcess.info(log, "Error Message: not found file");
+                LogProcess.error(log, "Error Message: not found file",e);
             }
         } catch (Exception e) {
-            LogProcess.info(log, "Error Message: There is a problem with the file");
+            LogProcess.error(log, "Error Message: There is a problem with the file",e);
         }
     }
 

@@ -25,7 +25,10 @@ public class XmlParser {
     @Autowired
     private SecureXmlMapper secureXmlMapper;
 
-    public XmlData parseXmlFile(String xmlFileName) throws IOException {
+    /**
+     * 解析xml檔案，回傳 XmlData(xml資料欄位) class
+     * */
+    public XmlData parseFileRtnXmlData(String xmlFileName) throws IOException {
         XmlMapper xmlMapper = secureXmlMapper.createXmlMapper();
         // 路徑驗證
         File validXmlPath = new File(XML_PATH);
@@ -51,7 +54,10 @@ public class XmlParser {
         return xmlMapper.readValue(confirmFile, XmlData.class);
     }
 
-    public XmlFile parseXmlFile2(String xmlFileName) throws IOException {
+    /**
+     * 解析xml檔案，回傳 XmlFile(xml檔案) class
+     * */
+    public XmlFile parseXmlRtnXmlFile(String xmlFileName) throws IOException {
         XmlMapper xmlMapper = secureXmlMapper.createXmlMapper();
         // 路徑驗證
         File validXmlPath = new File(XML_PATH);

@@ -1,28 +1,28 @@
 package com.bot.controller;
 
-import com.bot.dto.CompareSetting;
-import com.bot.util.log.LogProcess;
-import com.bot.service.mask.DataFileProcessingService;
-import com.bot.service.mask.config.FileConfig;
-import com.bot.service.mask.config.FileConfigManager;
-import com.bot.service.mask.config.SortFieldConfig;
-import com.bot.service.output.CompareFileExportImpl;
+import com.bot.config.CompareSetting;
+import com.bot.mask.DataFileProcessingService;
+import com.bot.mask.DataFileProcessingServiceImpl;
+import com.bot.mask.config.FileConfig;
+import com.bot.mask.config.FileConfigManager;
+import com.bot.mask.config.SortFieldConfig;
+import com.bot.output.CompareFileExportImpl;
 import com.bot.util.files.TextFileUtil;
+import com.bot.util.log.LogProcess;
 import javafx.animation.PauseTransition;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,16 +32,14 @@ import org.springframework.stereotype.Component;
 import java.awt.*;
 import java.io.File;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+
 @Slf4j
 @Component
 public class CompareViewController {
-
-
     //    @Value("${localFile.mis.batch.compare.new.directory}")
 //    private String newFilePath;
 //    @Value("${localFile.mis.batch.compare.old.directory}")
@@ -50,10 +48,15 @@ public class CompareViewController {
     private String resultTxt;
     private String STR_BIG5 = "Big5";
     private String STR_UTF8 = "UTF-8";
+
+
     @Autowired
     TextFileUtil textFileUtil;
     @Autowired
     DataFileProcessingService maskDataFileService;
+
+    @Autowired
+    DataFileProcessingServiceImpl dataFileProcessingServiceImpl;
     @Autowired
     CompareFileExportImpl compareFileExportImpl;
     private Path lastDirectoryPath; // 紀錄上一次選擇的資料夾
@@ -70,6 +73,8 @@ public class CompareViewController {
     @FXML
     private RadioButton radioExcel;
     @FXML
+    private RadioButton radioTxt;
+    @FXML
     private RadioButton radioCsv;
     @FXML
     private Label labelFile1;
@@ -85,8 +90,8 @@ public class CompareViewController {
     public Label listViewlabel2;
     @FXML
     private CheckBox checkBoxOnlyError;
-    @FXML
-    private CheckBox checkBoxUseMask;
+//    @FXML
+//    private CheckBox checkBoxUseMask;
     @FXML
     private VBox fieldSelectionBox;
     @FXML
@@ -137,7 +142,7 @@ public class CompareViewController {
             String selected1 = listView1.getSelectionModel().getSelectedItem();
             if (selected1 != null) {
                 String s1 = oldPath + "\\" + selected1;
-                LogProcess.info(log,"打開: " + s1);
+                LogProcess.info(log, "打開: " + s1);
                 openFileSmart(new File(s1));
             }
 
@@ -170,8 +175,8 @@ public class CompareViewController {
         checkBoxOnlyError.setDisable(true);
         checkBoxOnlyError.setSelected(false);
 
-        checkBoxUseMask.setDisable(true);
-        checkBoxUseMask.setSelected(false);
+//        checkBoxUseMask.setDisable(true);
+//        checkBoxUseMask.setSelected(false);
 
 
         //左側提示標籤 不啟用
@@ -310,9 +315,12 @@ public class CompareViewController {
         sortSelectionBox.getChildren().clear();
 
         maskDataFileService.processPairingColumn(fileName);
-        LogProcess.info(log,"fileName = " + fileName);
+        LogProcess.info(log, "fileName = " + fileName);
+//        List<String> columns = maskDataFileService.getColumnList();
         List<String> columns = maskDataFileService.getColumnList();
-        LogProcess.info(log,"maskDataFileService.getXmlAllFileName() = " + maskDataFileService.getXmlAllFileName());
+
+
+        LogProcess.info(log, "maskDataFileService.getXmlAllFileName() = " + maskDataFileService.getXmlAllFileName());
 
         //先確認檔案名稱是否存在定義檔
         if (!maskDataFileService.getXmlAllFileName().contains(fileName)) {
@@ -513,7 +521,7 @@ public class CompareViewController {
             radioExcel.setDisable(false);
             radioCsv.setDisable(false);
             checkBoxOnlyError.setDisable(false);
-            checkBoxUseMask.setDisable(false);
+//            checkBoxUseMask.setDisable(false);
 
             //顯示提示
             hintLabel1.setVisible(true);
@@ -610,23 +618,30 @@ public class CompareViewController {
     @FXML
     public void compareFiles() {
 
-        if (radioCsv.isSelected() && radioExcel.isSelected()) {
-            compareFileExportImpl.chooseExportFileType = "Both";
+        if (radioTxt.isSelected() ) {
+//            compareFileExportImpl.chooseExportFileType = "Both";
+//            dataFileProcessingServiceImpl.chooseExportFileType = "Both";
+            compareFileExportImpl.chooseExportFileType = radioTxt.getText();
+            dataFileProcessingServiceImpl.chooseExportFileType = radioTxt.getText();
         } else if (radioExcel.isSelected()) {
             // 輸出 EXCEL
             compareFileExportImpl.chooseExportFileType = radioExcel.getText();
+            dataFileProcessingServiceImpl.chooseExportFileType = radioExcel.getText();
         } else if (radioCsv.isSelected()) {
             // 輸出 CSV
             compareFileExportImpl.chooseExportFileType = radioCsv.getText();
+            dataFileProcessingServiceImpl.chooseExportFileType = radioCsv.getText();
         } else {
             compareFileExportImpl.chooseExportFileType = "";
+            dataFileProcessingServiceImpl.chooseExportFileType = "";
             if (!showAlert("請選擇比對輸出的檔案類型")) return;
         }
 
 
         boolean outPutOnlyErrorData = checkBoxOnlyError.isSelected();
 
-        boolean outPutUseMask = checkBoxUseMask.isSelected();
+        boolean outPutUseMask = false;
+//        boolean outPutUseMask = checkBoxUseMask.isSelected();
         //每次比對時，要刪除清單
         textFileUtil.deleteFile(resultTxt);
 
@@ -636,7 +651,7 @@ public class CompareViewController {
         LocalDateTime dateTime = LocalDateTime.now();
         compareFileExportImpl.dateTime = dateTime;
         // 比對後並輸出
-        maskDataFileService.exec("", "", oldFileNameMap, newFileNameMap, saveFileCongigMap, setting);
+        maskDataFileService.exec(oldFileNameMap, newFileNameMap, saveFileCongigMap, setting);
 
         if (!showAlert("比對完成!")) return;
 
@@ -935,4 +950,6 @@ public class CompareViewController {
             e.printStackTrace();
         }
     }
+
+
 }

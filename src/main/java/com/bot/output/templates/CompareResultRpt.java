@@ -1,4 +1,4 @@
-package com.bot.service.output.templates;
+package com.bot.output.templates;
 
 import com.bot.util.log.LogProcess;
 import com.bot.util.templates.TemplateUtil;
@@ -6,8 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.*;

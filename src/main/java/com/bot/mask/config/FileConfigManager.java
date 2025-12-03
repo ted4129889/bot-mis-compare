@@ -1,4 +1,4 @@
-package com.bot.service.mask.config;
+package com.bot.mask.config;
 
 
 import com.bot.util.log.LogProcess;

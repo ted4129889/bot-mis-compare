@@ -1,7 +1,7 @@
-package com.bot.service.compare;
+package com.bot.compare;
 
 
-import com.bot.service.mask.config.SortFieldConfig;
+import com.bot.mask.config.SortFieldConfig;
 
 import java.util.List;
 import java.util.Map;

@@ -166,31 +166,6 @@ public class FormatData {
 
 
     /**
-     * 計算字串的「顯示寬度」，中文字和全形空白算 2，其他字元算 1
-     */
-    public int getDisplayWidth(String str) {
-        int length = 0;
-        for (char c : str.toCharArray()) {
-            if (isChinese(c) || isFullWidthSpace(c)) {
-                length += 2;
-            } else {
-                length += 1;
-            }
-        }
-        return length;
-    }
-
-    // 判斷是否為中文
-    public boolean isChinese(char c) {
-        return String.valueOf(c).matches("[\\u4e00-\\u9fa5]");
-    }
-
-    // 判斷是否為全形空白（U+3000）
-    public boolean isFullWidthSpace(char c) {
-        return c == '\u3000';
-    }
-
-    /**
      * 中文替換成*、全型空白補2個半型空白
      */
     public String getMakedValue(String str, String replaceTxt) {
@@ -211,4 +186,110 @@ public class FormatData {
         return t;
     }
 
+    /**
+     * 計算字串的「顯示寬度」，中文字和全形空白算 2，其他字元算 1
+     */
+    public int getDisplayWidth(String str) {
+        int length = 0;
+        for (char c : str.toCharArray()) {
+            if (isChinese(c) || isFullWidthSpace(c) || isFullWidthChar(c) || isSpecialWidthChar(c)) {
+                length += 2;
+            } else {
+                length += 1;
+            }
+        }
+        return length;
+    }
+
+    /**
+     * 中文替換成2個replaceTxt、全形空白補2個半形空白、
+     * 其他全形字元也補2個replaceTxt，半形補1個replaceTxt
+     */
+    public String getReplaceValue(String str, String replaceTxt) {
+        StringBuilder result = new StringBuilder();
+
+        for (char c : str.toCharArray()) {
+            if (isChinese(c)) {
+                // 中文佔兩位
+                result.append(replaceTxt).append(replaceTxt);
+            } else if (isFullWidthSpace(c)) {
+                // 全形空白補兩個半形空白
+                result.append(replaceTxt).append(replaceTxt);
+            } else if ( isSpecialWidthChar(c)) {
+                // 特殊字體補兩個半行空白
+                result.append(replaceTxt).append(replaceTxt);
+            } else if (isFullWidthChar(c)) {
+                // 其他全形字元替換1個字
+                result.append(replaceTxt).append(replaceTxt);
+            } else {
+                // 其他半形字元替換1個字
+                result.append(replaceTxt);
+            }
+        }
+
+        return result.toString();
+    }
+
+    public String getReplaceSpace(String str, String replaceTxt) {
+        StringBuilder result = new StringBuilder();
+        for (char c : str.toCharArray()) {
+
+            if (isChinese(c)) {
+                // 中文佔兩位
+                result.append(c);
+            } else if ( isSpecialWidthChar(c)) {
+                // 特殊字體補兩個半行空白
+                result.append(replaceTxt).append(replaceTxt);
+            } else if (isFullWidthSpace(c)) {
+                // 全形空白補兩個半形空白
+                result.append(replaceTxt).append(replaceTxt);
+            } else  if (isFullWidthChar(c)) {
+                // 其他全形字元替換1個字
+                result.append(c);
+            } else {
+                // 其他半形字元替換1個字
+                result.append(c);
+            }
+        }
+
+        return result.toString();
+    }
+
+    // 判斷是否為中文
+    public boolean isChinese(char c) {
+        Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
+        return ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS
+                || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A
+                || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B
+                || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS
+                || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS_SUPPLEMENT
+                || ub == Character.UnicodeBlock.MISCELLANEOUS_SYMBOLS;
+    }
+
+    /** 判斷是否為全形空白（Unicode: \u3000） */
+    private boolean isFullWidthSpace(char c) {
+        return c == '\u3000';
+    }
+
+    /** 判斷是否為全形字元（包含全形英數與符號） */
+    private boolean isFullWidthChar(char c) {
+        // 中日韓統一表意文字 (中文)
+        if (c >= 0x4E00 && c <= 0x9FFF) return true;
+
+        // 全形 ASCII、全形標點
+        if (c >= 0xFF01 && c <= 0xFF60) return true;
+        if (c >= 0xFFE0 && c <= 0xFFE6) return true;
+
+        // 注音符號 ㄅㄆㄇㄈ ㄧㄨㄩ
+        if (c >= 0x3100 && c <= 0x312F) return true;
+
+        // 注音擴展
+        if (c >= 0x31A0 && c <= 0x31BF) return true;
+
+        return false;
+    }
+    /** 亂碼 / 特殊字，視覺寬度通常 = 2 */
+    private boolean isSpecialWidthChar(char c){
+        return  c >= 0xE000 && c <= 0xF8FF;
+    }
 }

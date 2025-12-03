@@ -1,9 +1,9 @@
-package com.bot.service.output;
+package com.bot.output;
 
 
-import com.bot.dto.CompareSetting;
-import com.bot.service.compare.CompareDataService;
-import com.bot.service.output.templates.CompareResultBean;
+import com.bot.config.CompareSetting;
+import com.bot.compare.CompareDataService;
+import com.bot.output.templates.CompareResultBean;
 import com.bot.util.excel.MakeCsv;
 import com.bot.util.excel.MakeExcel;
 import com.bot.util.files.TextFileUtil;
@@ -33,6 +33,8 @@ public class CompareFileExportImpl {
     private String resultExcelFolder;
     @Value("${localFile.mis.compare_result.txt}")
     private String resultTxt;
+    @Value("${localFile.mis.compare_result.final}")
+    private String resultFinal;
     @Autowired
     private MakeExcel makeExcel;
     @Autowired

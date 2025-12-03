@@ -1,19 +1,13 @@
-package com.bot.dto;
-
-import java.util.List;
+package com.bot.config;
 
 public class CompareSetting {
     private boolean exportOnlyErrorFile;//
     private boolean exportUseMask;//
-//    private boolean includeHeader;
-//    private List<String> selectedFields;
 
     // 私有建構子（不直接 new，只能用 Builder）
     private CompareSetting(Builder builder) {
         this.exportOnlyErrorFile = builder.exportOnlyErrorFile;
         this.exportUseMask = builder.exportUseMask;
-//        this.includeHeader = builder.includeHeader;
-//        this.selectedFields = builder.selectedFields;
     }
 
     // 提供靜態 builder() 方法

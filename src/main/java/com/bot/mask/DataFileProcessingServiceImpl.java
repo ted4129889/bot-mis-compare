@@ -1,15 +1,18 @@
-package com.bot.service.mask;
+package com.bot.mask;
 
 
 import com.bot.dataprocess.JobContext;
 import com.bot.dataprocess.JobExecutorService;
 import com.bot.dataprocess.JobResult;
-import com.bot.dto.CompareSetting;
-import com.bot.service.compare.CompareDataService;
-import com.bot.service.mask.config.FileConfig;
-import com.bot.service.mask.config.SortFieldConfig;
-import com.bot.service.output.CompareFileExportImpl;
-import com.bot.service.output.templates.CompareResultRpt;
+import com.bot.config.CompareSetting;
+import com.bot.config.XmlDef;
+import com.bot.compare.CompareDataService;
+import com.bot.comparer.CompareExec;
+import com.bot.mask.config.FileConfig;
+import com.bot.mask.config.SortFieldConfig;
+import com.bot.output.CompareFileExportImpl;
+import com.bot.output.templates.CompareResultBean;
+import com.bot.output.templates.CompareResultRpt;
 import com.bot.util.files.FileNameUtil;
 import com.bot.util.files.TextFileUtil;
 import com.bot.util.log.LogProcess;
@@ -28,14 +31,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -68,7 +73,8 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
     @Autowired
     private FileNameUtil fileNameUtil;
 
-
+    @Autowired
+    XmlDef xmlDef;
     @Autowired
     private MaskUtil maskUtil;
     @Autowired
@@ -79,12 +85,17 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
     private CompareResultRpt compareResultRpt;
     @Autowired
     private CompareDataService compareDataService;
+    @Autowired
+    private CompareExec compareExec;
+
     //畫面區域1
     private static final String TEXTAREA_1 = "textarea1";
     //畫面區域2
     private static final String TEXTAREA_2 = "textarea2";
     private static final String CHARSET_BIG5 = "Big5";
     private static final String CHARSET_UTF8 = "UTF-8";
+    //比對用資料夾名稱
+    private static final String COMPARISON_RESULT_FOLDER = "ComparisonResult";
 
     CompareSetting settings;
 
@@ -93,11 +104,12 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
     List<Map<String, String>> aFileData = new ArrayList<>();
     List<Map<String, String>> bFileData = new ArrayList<>();
     //存放定義檔案(DailyBatchFileDefinition.xml) 不會變
-    List<XmlData> xmlDataList = new ArrayList<>();
+
+    public List<XmlData> xmlDataList = new ArrayList<>();
     //遮蔽欄位名稱
     List<String> maskFieldList = new ArrayList<>();
     List<XmlField> xmlFieldList = new ArrayList<>();
-    Map<String, FileConfig> jsonFile = new LinkedHashMap<>();
+    public Map<String, FileConfig> jsonFile = new LinkedHashMap<>();
     /**
      * 先存下定義檔的fileName
      */
@@ -123,65 +135,105 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
     private boolean bodyMode = false;
     private boolean headerBodyMode = false;
 
-    @Override
-    public boolean exec() {
-        return exec("", "");
-    }
+    public String chooseExportFileType = "";
 
     @Override
     public boolean exec(String cFilePath, String uiTextArea) {
-        return exec(cFilePath, uiTextArea, null, null, null, null);
+        return exec(null, null, null, null);
     }
 
     @Override
-    public boolean exec(String cFilePath, String uiTextArea, Map<String, String> oldFileNameMap, Map<String, String> newFileNameMap, Map<String, FileConfig> fieldSettingList, CompareSetting setting) {
-
+    public boolean exec(Map<String, String> oldFileNameMap, Map<String, String> newFileNameMap, Map<String, FileConfig> fieldSettingList, CompareSetting setting) {
         //允許的路徑
-//        String tbotOutputPath = FilenameUtils.normalize(botOutputPath);
-
         if (oldFileNameMap != null && newFileNameMap != null) {
-            pairingProfile3(oldFileNameMap, newFileNameMap, fieldSettingList, setting);
-
-        } else {
-//            pairingProfile(tbotOutputPath);
+            LogProcess.info(log,"oldFileNameMap = {}",oldFileNameMap);
+            LogProcess.info(log,"newFileNameMap = {}",newFileNameMap);
+//            pairingProfileAll(oldFileNameMap, newFileNameMap, fieldSettingList, setting);
+            pairingFileGo(oldFileNameMap, newFileNameMap);
         }
         return true;
     }
 
     /**
-     * 讀取xml定義檔 和 json檔案
+     * edit:20251201 新版本比對
+     * 比對資料夾內的所有檔案
      */
-    @PostConstruct
-    private void readDefinitionXml() {
+    private void pairingFileGo(Map<String, String> oldFileNameMap, Map<String, String> newFileNameMap) {
+        //比對結果 清單
+        List<CompareResultBean> compareResultBeanList = new ArrayList<>();
 
-        try {
+        //現在時間
+        LocalDateTime dateTime = LocalDateTime.now();
+        String dateTimeStr = dateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmm"));
+        String dateTimeStr2 = dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
 
-            //允許的路徑(XML)
-            String dailyBatchFileDefinitionFile = FilenameUtils.normalize(botMaskXmlFilePath);
-            String monthlyBatchFileDefinitionFile = FilenameUtils.normalize(botMaskXmlFilePath2);
-
-            List<XmlData> xmlDataListD = new ArrayList<>();
-            List<XmlData> xmlDataListM = new ArrayList<>();
-
-            XmlFile xmlFile;
+        //bot 檔案夾路徑
+        String botFilePath = "";
+        //misbh 檔案夾路徑
+        String misFilePath = "";
 
 
-            xmlFile = xmlParser.parseXmlFile2(dailyBatchFileDefinitionFile);
-            xmlDataListD = xmlFile.getDataList();
+        for (Map.Entry<String, String> o : oldFileNameMap.entrySet()) {
 
-            xmlDataList.addAll(xmlDataListD);
+            String fileName = o.getKey();
+            String tmpFileName = textFileUtil.replaceDateWithPlaceholder(fileName);
 
-            xmlFile = xmlParser.parseXmlFile2(monthlyBatchFileDefinitionFile);
-            xmlDataListM = xmlFile.getDataList();
+            // 用 tmpFileName 比對 new file map
+            String newFilePath = newFileNameMap.get(tmpFileName);
 
-            xmlDataList.addAll(xmlDataListM);
+            if (newFilePath != null) {
 
-            LogProcess.info(log, "讀取 external-config/xml/bot_output 資料夾下的 DailyBatchFileDefinition.xml 定義檔內有" + xmlDataList.size() + "組 <data> 格式");
+                botFilePath = FilenameUtils.normalize(o.getValue());
+                misFilePath = FilenameUtils.normalize(newFilePath);
 
-            for (XmlData data : xmlDataList) {
-                tmpXmlFileName.add(data.getFileName());
+                LogProcess.info(log, "fileName = {}", fileName);
+                LogProcess.info(log, "botFilePath = {}", botFilePath);
+                LogProcess.info(log, "misFilePath = {}", misFilePath);
+
+                compareResultBeanList.add(compareExec.exec(botFilePath, misFilePath, fileName,chooseExportFileType));
             }
 
+        }
+        //最後輸出結果總表
+        compareResultRpt.exec(compareResultBeanList, dateTimeStr, dateTimeStr2);
+    }
+
+    /**
+     * (初始化)啟動時，直接載入定義檔
+     */
+    private void readDefinitionXml() {
+        try {
+            //允許的路徑(XML)
+            //日批定義檔
+            String dailyBatchFileDefinitionFile = FilenameUtils.normalize(botMaskXmlFilePath);
+            //月批定義檔
+            String monthlyBatchFileDefinitionFile = FilenameUtils.normalize(botMaskXmlFilePath2);
+
+            //日批定義檔list
+            List<XmlData> xmlDataListD;
+            //月批定義檔list
+            List<XmlData> xmlDataListM;
+            //xml class
+            XmlFile xmlFile;
+
+            //解析XML儲存到list
+            xmlFile = xmlParser.parseXmlRtnXmlFile(dailyBatchFileDefinitionFile);
+            xmlDataListD = xmlFile.getDataList();
+            xmlDataList.addAll(xmlDataListD);
+
+            //解析XML儲存到list
+            xmlFile = xmlParser.parseXmlRtnXmlFile(monthlyBatchFileDefinitionFile);
+            xmlDataListM = xmlFile.getDataList();
+            xmlDataList.addAll(xmlDataListM);
+
+            LogProcess.info(log, "讀取 external-config/xml/file 內的定義檔，共有" + xmlDataList.size() + "組 <data> 格式");
+
+
+            //儲存檔案名稱
+            tmpXmlFileName =
+                    xmlDataList.stream()
+                            .map(XmlData::getFileName)
+                            .toList();
 
             //允許的路徑(JSON)
             String fieldSettingFile = FilenameUtils.normalize(fieldSettinngFile);
@@ -193,9 +245,8 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
             jsonFile = mapper.readValue(allowedFile, new TypeReference<>() {
             });
 
-
-            File folder = new File("ComparisonResult");
-
+            //先新增一個資料夾，放比對結果用
+            File folder = new File(COMPARISON_RESULT_FOLDER);
             if (!folder.exists()) {
                 boolean created = folder.mkdirs(); // 可建立多層路徑
                 if (created) {
@@ -205,13 +256,9 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                 }
             }
 
-
         } catch (IOException e) {
-
             throw new RuntimeException(e);
         }
-
-
     }
 
 
@@ -227,64 +274,19 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
     }
 
     /**
-     *
-     */
-    //TODO 此方法目前未使用到
-    private void pairingProfile(String tbotOutputPath) {
-        int calcuTotal = 0;
-        //台銀原檔案路徑
-        List<String> folderList = getFilePaths(tbotOutputPath);
-        LogProcess.info(log, "在batch-file/bot_output資料夾內的檔案有" + folderList.size() + "個，清單如下...");
-        LogProcess.info(log, folderList.toString());
-
-        for (String requestedFilePath : folderList) {
-            //允許路徑
-            requestedFilePath = FilenameUtils.normalize(requestedFilePath);
-            try {
-                for (XmlData data : xmlDataList) {
-                    if (requestedFilePath.contains(data.getFileName())) {
-
-
-                        List<String> outputData = performMasking(requestedFilePath, data, "");
-
-                        //重新指向資料夾路徑
-                        String reNamePath = requestedFilePath.replace("bot_output", "bot_output_mask");
-
-                        //確認允許路徑
-                        String maskPath = FilenameUtils.normalize(reNamePath);
-
-                        //刪除原檔案
-                        textFileUtil.deleteFile(maskPath);
-
-                        //輸出檔案
-                        textFileUtil.writeFileContent(maskPath, outputData, CHARSET_BIG5);
-
-                        calcuTotal++;
-                    }
-                }
-
-            } catch (Exception e) {
-                LogProcess.info(log, "pairingProfile error");
-            }
-        }
-
-        LogProcess.info(log, "產出遮蔽後的檔案在 batch-file/bot_output_mask 資料夾,有" + calcuTotal + "個檔案");
-    }
-
-    /**
      * 單支檔案處理(配合UI畫面)
      *
      * @param cFile      檔案名稱(含路徑)
      * @param uiTextArea 清單類型(原始檔案清單、比對檔案清單)
      */
-    public void pairingProfile2(String cFile, String uiTextArea) {
+    public void pairingProfile(String cFile, String uiTextArea) {
 
         //允許路徑
         cFile = FilenameUtils.normalize(cFile);
 
         String comparecFile = Paths.get(cFile).getFileName().toString();
 
-        comparecFile = comparecFile.contains("_")? comparecFile.substring(0, comparecFile.lastIndexOf("_")): comparecFile;
+        comparecFile = comparecFile.contains("_") ? comparecFile.substring(0, comparecFile.lastIndexOf("_")) : comparecFile;
 
         cList = new ArrayList<>();
         dataKey = new ArrayList<>();
@@ -302,19 +304,13 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                     existflag = true;
 
                     performMasking(cFile, data, uiTextArea);
-//                    LogProcess.warn(log,"cList= {}",cList);
-//                    LogProcess.warn(log,"cList= {}",cList.size());
 
                     if (TEXTAREA_2.equals(uiTextArea)) {
-//                        LogProcess.warn(log,"bcList= {}",cList);
-//                        LogProcess.warn(log,"bcList= {}",cList.size());
                         bFileData = new ArrayList<>();
                         bFileData.addAll(cList);
 
 
                     } else if (TEXTAREA_1.equals(uiTextArea)) {
-//                        LogProcess.warn(log,"acList= {}",cList);
-//                        LogProcess.warn(log,"acList= {}",cList.size());
                         aFileData = new ArrayList<>();
                         aFileData.addAll(cList);
                     }
@@ -323,9 +319,8 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 
             }
 
-
         } catch (Exception e) {
-            LogProcess.warn(log, "pairingProfile2 error");
+            LogProcess.error(log, "pairingProfile2 error = {}", e.getMessage(), e);
         }
 
     }
@@ -333,101 +328,100 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
     /**
      * 比對資料夾內的所有檔案
      */
-    public void pairingProfile3(Map<String, String> oldFileNameMap, Map<String, String> newFileNameMap, Map<String, FileConfig> fieldSettingList, CompareSetting setting) {
-        //台銀原檔案路徑
-        LogProcess.info(log, "oldFileNameList = " + oldFileNameMap);
-        LogProcess.info(log, "newFileNameList = " + newFileNameMap);
-        LogProcess.info(log, "fieldSettingList = " + fieldSettingList);
-        LogProcess.info(log, "setting = " + setting);
+    private void pairingProfileAll(Map<String, String> oldFileNameMap, Map<String, String> newFileNameMap, Map<String, FileConfig> fieldSettingList, CompareSetting setting) {
+        LogProcess.info(log, "BOT FileName List = {}", oldFileNameMap);
+        LogProcess.info(log, "MISBH FileName List = {}", newFileNameMap);
+        LogProcess.info(log, "Field Setting List = {}", fieldSettingList);
+        LogProcess.info(log, "Compare Setting = {}", setting);
 
         this.settings = setting;
 
         //處理特殊案例
         Set<String> specialHandle = Set.of("CUSDACNO");
-        String oFilePath = "";
-        String nFilePath = "";
-        if (!oldFileNameMap.isEmpty() && !newFileNameMap.isEmpty()) {
-            //以原始的檔案為主 去匹配 要比對的檔案
-            for (Map.Entry<String, String> o : oldFileNameMap.entrySet()) {
 
-                String fileName = o.getKey();
-                String tmpFileName = textFileUtil.replaceDateWithPlaceholder(fileName);
+        //bot 檔案夾路徑
+        String botFilePath = "";
+        //misbh 檔案夾路徑
+        String misFilePath = "";
 
+        //以原始的檔案為主 去匹配 要比對的檔案
+        for (Map.Entry<String, String> o : oldFileNameMap.entrySet()) {
 
-                if (newFileNameMap.get(fileName) != null) {
-                    LogProcess.info(log, "file name = " + fileName);
+            String fileName = o.getKey();
+            //處理檔案有日期格式[yyyymmdd]
+            String tmpFileName = textFileUtil.replaceDateWithPlaceholder(fileName);
 
-                    FileConfig thisFileConfig = fieldSettingList.get(tmpFileName);
+            if (newFileNameMap.get(fileName) != null) {
+                LogProcess.info(log, "file name = ", fileName);
 
-                    List<String> dataKeyList = thisFileConfig.getPrimaryKeys();
-                    LogProcess.info(log, "dataKey = " + dataKeyList);
+                FileConfig thisFileConfig = fieldSettingList.get(tmpFileName);
+                //取得當前檔案設置的key
+                List<String> dataKeyList = thisFileConfig.getPrimaryKeys();
+                //取得當前檔案設置的排序
+                List<SortFieldConfig> thisSortFieldConfig = thisFileConfig.getSortFields();
+                LogProcess.info(log, "dataKeyList = {}", dataKeyList);
+                LogProcess.info(log, "thisSortFieldConfig ={}", thisSortFieldConfig);
 
-                    List<SortFieldConfig> thisSortFieldConfig = thisFileConfig.getSortFields();
+                botFilePath = FilenameUtils.normalize(o.getValue());
+                misFilePath = FilenameUtils.normalize(newFileNameMap.get(o.getKey()));
 
-//                    LogProcess.info("sortOrderMap = " + thisSortFieldConfig);
-                    tmpFileName = tmpFileName.replace(".txt", "");
-                    oFilePath = FilenameUtils.normalize(o.getValue());
-                    nFilePath = FilenameUtils.normalize(newFileNameMap.get(o.getKey()));
+                LogProcess.info(log, "botFilePath = ", botFilePath);
+                LogProcess.info(log, "misFilePath = ", misFilePath);
 
-                    LogProcess.info(log,"oFilePath = " + oFilePath);
-                    LogProcess.info(log,"nFilePath = " + nFilePath);
-                    //確認檔案名稱 是否存在定義檔
-                    if (tmpXmlFileName.stream().anyMatch(tmpFileName::equals)) {
+                //確認檔案名稱 是否存在定義檔
+                if (tmpXmlFileName.stream().anyMatch(tmpFileName::equals)) {
 
-                        //如果遇到特殊案例需要個案處理
-                        if (specialHandle.contains(tmpFileName)) {
-                            //處理CUSDACNO
-                            JobResult botJobResult = sHandle(oFilePath,tmpFileName);
+                    //如果遇到特殊案例需要個案處理
+                    if (specialHandle.contains(tmpFileName)) {
+                        //處理CUSDACNO
+                        JobResult botJobResult = sHandle(botFilePath, tmpFileName);
 
-                            JobResult misJobResult = sHandle(nFilePath,tmpFileName);
-
-
-                            Map<String,Path> getBotOutputFiles = botJobResult.getOutputFilesMap();
-                            Map<String,Path> getMisOutputFiles = misJobResult.getOutputFilesMap();
-                            for (Map.Entry<String,Path> p : getBotOutputFiles.entrySet()) {
-
-                                oFilePath = FilenameUtils.normalize(p.getValue().toString());
-                                nFilePath = FilenameUtils.normalize(getMisOutputFiles.get(p.getKey()).toString());
-
-                                LogProcess.info(log, "oFilePath = {},nFilePath = {}" + oFilePath,nFilePath);
+                        JobResult misJobResult = sHandle(misFilePath, tmpFileName);
 
 
-                                //原始檔案
-                                pairingProfile2(oFilePath, TEXTAREA_1);
-                                //比對檔案
-                                pairingProfile2(nFilePath, TEXTAREA_2);
+                        Map<String, Path> getBotOutputFiles = botJobResult.getOutputFilesMap();
+                        Map<String, Path> getMisOutputFiles = misJobResult.getOutputFilesMap();
+                        for (Map.Entry<String, Path> p : getBotOutputFiles.entrySet()) {
 
-                                LogProcess.info(log, "columnList name = " + columnAllList);
-                                //開始比對
-                                compareDataService.parseData(aFileData, bFileData, dataKeyList, columnAllList, thisSortFieldConfig, maskUtil.removePrimaryKeysFromMaskKeys(maskFieldList, dataKeyList), headerBodyMode);
+                            botFilePath = FilenameUtils.normalize(p.getValue().toString());
+                            misFilePath = FilenameUtils.normalize(getMisOutputFiles.get(p.getKey()).toString());
 
-                                //執行結果
-                                compareFileExportImpl.run(p.getKey(), compareDataService.getOldDataResult(), compareDataService.getNewDataResult(), compareDataService.getComparisonResult(), compareDataService.getMissingData(), compareDataService.getExtraData(), setting);
-                            }
-
-
-                        } else {
+                            LogProcess.info(log, "botFilePath = {},misFilePath = {}", botFilePath, misFilePath);
 
                             //原始檔案
-                            pairingProfile2(oFilePath, TEXTAREA_1);
+                            pairingProfile(botFilePath, TEXTAREA_1);
                             //比對檔案
-                            pairingProfile2(nFilePath, TEXTAREA_2);
-//                        LogProcess.info("aFileData name = " + aFileData);
-//                        LogProcess.info("bFileData name = " + bFileData);
+                            pairingProfile(misFilePath, TEXTAREA_2);
+
                             LogProcess.info(log, "columnList name = " + columnAllList);
                             //開始比對
                             compareDataService.parseData(aFileData, bFileData, dataKeyList, columnAllList, thisSortFieldConfig, maskUtil.removePrimaryKeysFromMaskKeys(maskFieldList, dataKeyList), headerBodyMode);
 
                             //執行結果
-                            compareFileExportImpl.run(fileName, compareDataService.getOldDataResult(), compareDataService.getNewDataResult(), compareDataService.getComparisonResult(), compareDataService.getMissingData(), compareDataService.getExtraData(), setting);
+                            compareFileExportImpl.run(p.getKey(), compareDataService.getOldDataResult(), compareDataService.getNewDataResult(), compareDataService.getComparisonResult(), compareDataService.getMissingData(), compareDataService.getExtraData(), setting);
                         }
 
+                    } else {
+
+                        //原始檔案
+                        pairingProfile(botFilePath, TEXTAREA_1);
+                        //比對檔案
+                        pairingProfile(misFilePath, TEXTAREA_2);
+//                        LogProcess.info("aFileData name = " + aFileData);
+//                        LogProcess.info("bFileData name = " + bFileData);
+                        LogProcess.info(log, "columnList name = " + columnAllList);
+                        //開始比對
+                        compareDataService.parseData(aFileData, bFileData, dataKeyList, columnAllList, thisSortFieldConfig, maskUtil.removePrimaryKeysFromMaskKeys(maskFieldList, dataKeyList), headerBodyMode);
+
+                        //執行結果
+                        compareFileExportImpl.run(fileName, compareDataService.getOldDataResult(), compareDataService.getNewDataResult(), compareDataService.getComparisonResult(), compareDataService.getMissingData(), compareDataService.getExtraData(), setting);
                     }
 
                 }
 
-
             }
+
+
         }
 
         //最後輸出執行結果檔案
@@ -438,6 +432,14 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 
     @Override
     public void processPairingColumn(String fileName) {
+
+        xmlDataList = xmlDef.xmlDataList;
+
+        //儲存檔案名稱
+        tmpXmlFileName =
+                xmlDataList.stream()
+                        .map(XmlData::getFileName)
+                        .toList();
 
         //每次觸發 須將欄位初始化
         columnList = new ArrayList<>();
@@ -541,8 +543,6 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
             }
 
 
-
-
         } catch (Exception e) {
             LogProcess.error(log, "performMasking error", e);
         }
@@ -610,6 +610,175 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
     }
 
     /**
+     * 轉檔檔案處理(用逗號間隔)
+     *
+     * @param xmlFieldList 定義檔欄位
+     * @param line         單筆資料串
+     * @return 回傳遮罩後的資料
+     */
+    private Map<String, String> processField(List<XmlField> xmlFieldList, String line) {
+
+        int xmlColumnCnt = (int) xmlFieldList.stream()
+                .filter(f -> !"separator".equals(f.getFieldName()))
+                .count();
+
+
+        String[] sLine = line.split(",");
+        int dataLength = sLine.length;
+        //先比對檔案資料長度是否與定義檔加總一致
+        if (xmlColumnCnt != dataLength) {
+            LogProcess.debug(log, "xml length = " + xmlColumnCnt + " VS data length = " + dataLength);
+
+            return new HashMap<>();
+        }
+
+        Map<String, String> map = new LinkedHashMap<>();
+        //起始位置
+        StringBuilder s = new StringBuilder();
+
+        int i = 0;
+        //XML定義檔的格式
+        for (int idx = 0; idx < xmlFieldList.size(); idx++) {
+            XmlField xmlField = xmlFieldList.get(idx);
+            String fieldName = xmlField.getFieldName();
+            String maskType = xmlField.getMaskType();
+            String value = sLine[i];
+
+//            LogProcess.info(log, "xmlFieldh = " + xmlField + ",value = " + value);
+            //略過分隔符號
+            if ("separator".equals(fieldName)) {
+                s.append(value);
+                continue;
+            }
+            i++;
+
+            if (maskType != null) {
+                String valueMask = cleanAndRestore(value, v -> {
+                    try {
+
+                        return dataMasker.applyMask(v, maskType);
+                    } catch (IOException e) {
+                        LogProcess.error(log, "error = {}", e);
+                    }
+                    return v;
+                });
+                map.put(fieldName, valueMask);
+                s.append(valueMask);
+            } else {
+                map.put(fieldName, value);
+                s.append(value);
+            }
+
+        }
+
+        return map;
+    }
+
+    public String cleanAndRestore(String input, Function<String, String> processor) {
+        if (input == null || input.length() < 2) return input;
+
+        char first = input.charAt(0);
+        char last = input.charAt(input.length() - 1);
+
+        if (first == last && isWrapSymbol(first)) {
+            String core = input.substring(1, input.length() - 1);
+            String processed = processor.apply(core);
+            return first + processed + last;
+        }
+
+        return processor.apply(input);
+    }
+
+    private static boolean isWrapSymbol(char ch) {
+        return ch == '"' || ch == '\'' || ch == '*' || ch == '$' || ch == '(' || ch == ')' || ch == '!';
+    }
+
+    /**
+     * 匹配單筆資料定義檔欄位，用逗號分隔
+     *
+     * @param xmlFieldList 定義檔欄位
+     * @param line         單筆資料串
+     * @return 回傳遮罩後的資料
+     */
+    private String processField2(List<XmlField> xmlFieldList, String line, int index) {
+        Charset charset = Charset.forName("Big5");
+        Charset charset2 = Charset.forName("UTF-8");
+
+        Map<String, String> map = new LinkedHashMap<>();
+
+        int xmlLength = 0;
+
+        for (XmlField xmlField : xmlFieldList) {
+            xmlLength = xmlLength + parse.string2Integer(xmlField.getLength());
+        }
+
+        byte[] bytes = line.getBytes(charset);
+        int dataLength = bytes.length;
+
+//        LogProcess.info("xmlFieldList :" + xmlFieldList );
+        //先比對檔案資料長度是否與定義檔加總一致
+        if (xmlLength != dataLength) {
+//            LogProcess.warn(log, "xml length = " + xmlLength + " VS data length = " + dataLength);
+//            LogProcess.warn(log,"line = {}" + line);
+//            return line;
+        }
+        //起始位置
+        int sPos = 0;
+        StringBuilder s = new StringBuilder();
+
+        //XML定義檔的格式
+        for (XmlField xmlField : xmlFieldList) {
+
+            //取得定義黨內的 欄位名稱、長度、遮蔽代號
+            String fieledName = xmlField.getFieldName();
+            int length = parse.string2Integer(xmlField.getLength());
+            String maskType = xmlField.getMaskType();
+
+            // 取得可以安全使用的 substring 結尾 index
+            String remaining = line.substring(sPos);
+            int safeCut = getSafeSubstringLength(remaining, length, charset);
+
+            // 切出這個欄位字串
+            String value = remaining.substring(0, safeCut);
+
+            // 更新 char index 位置（要考慮已用掉的實際字元數）
+            sPos += safeCut;
+
+            //略過分隔符號
+            if ("separator".equals(fieledName)) {
+                s.append(value);
+                continue;
+            }
+
+            //判斷有無遮蔽欄位
+            if (!Objects.isNull(maskType)) {
+                try {
+                    //進行遮蔽處理
+                    String valueMask = "";
+
+                    if (this.settings.isExportUseMask()) {
+                        valueMask = dataMasker.applyMask(value, maskType);
+                    } else {
+                        valueMask = value;
+                    }
+                    s.append(valueMask);
+                    map.put(fieledName, valueMask);
+                } catch (IOException ex) {
+                    LogProcess.warn(log, "", ex);
+                }
+            } else {
+                s.append(value);
+                map.put(fieledName, value);
+            }
+
+        }
+
+        cList.add(map);
+        return s.toString();
+    }
+
+
+    /**
      * 匹配單筆資料定義檔欄位，並將資料做遮蔽處理
      *
      * @param xmlFieldList 定義檔欄位
@@ -633,7 +802,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
 //        LogProcess.info("xmlFieldList :" + xmlFieldList );
         //先比對檔案資料長度是否與定義檔加總一致
         if (xmlLength != dataLength) {
-            LogProcess.warn(log, "xml length = " + xmlLength + " VS data length = " + dataLength);
+//            LogProcess.warn(log, "xml length = " + xmlLength + " VS data length = " + dataLength);
 //            LogProcess.warn(log,"line = {}" + line);
 //            return line;
         }
@@ -796,7 +965,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
     }
 
 
-    private JobResult sHandle(String inputPath,String fileName) {
+    private JobResult sHandle(String inputPath, String fileName) {
         JobContext ctx = new JobContext(Path.of(inputPath), Path.of(inputPath), fileName);
         return jobExecutorService.runJob("CUSDACNO", ctx);
     }

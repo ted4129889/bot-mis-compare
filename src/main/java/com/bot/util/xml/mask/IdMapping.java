@@ -57,8 +57,8 @@ public class IdMapping {
         }
 
         XmlParser xmlParser = new XmlParser();
-        XmlData randomMaskData = xmlParser.parseXmlFile(randomMask);
-        XmlData unifiedMaskData = xmlParser.parseXmlFile(unifiedMask);
+        XmlData randomMaskData = xmlParser.parseFileRtnXmlData(randomMask);
+        XmlData unifiedMaskData = xmlParser.parseFileRtnXmlData(unifiedMask);
 
         mappingHashMap = new HashMap<>();
         unifiedMappingHashMap = new HashMap<>();

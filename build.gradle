@@ -53,6 +53,12 @@ dependencies {
     //excel
     implementation 'org.apache.poi:poi:5.4.0'
     implementation 'org.apache.poi:poi-ooxml:5.4.0'
+
+    //rockdb
+    implementation 'org.rocksdb:rocksdbjni:7.10.2'
+
+//    implementation files('libs/TBConvert-0.0.1.jar')
+
 }
 
 javafx {

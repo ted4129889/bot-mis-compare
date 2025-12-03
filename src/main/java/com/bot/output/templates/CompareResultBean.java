@@ -1,4 +1,4 @@
-package com.bot.service.output.templates;
+package com.bot.output.templates;
 
 
 import lombok.Getter;
@@ -8,6 +8,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+
 public class CompareResultBean {
     private String fileName;
     private int botTotal;
@@ -18,7 +19,8 @@ public class CompareResultBean {
     private int extraCount;
     private double accuracy;
     private String note;
-
+    public CompareResultBean(){
+    }
     public CompareResultBean(String fileName, int botTotal, int misTotal, int diffCount, int diffColCount, int missCount, int extraCount, double accuracy, String note) {
         this.fileName = fileName;
         this.botTotal = botTotal;

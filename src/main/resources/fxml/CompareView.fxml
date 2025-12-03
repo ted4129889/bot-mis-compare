@@ -25,17 +25,18 @@
                 <VBox spacing="5" alignment="CENTER_LEFT">
                     <HBox spacing="10" alignment="CENTER_LEFT">
                         <Label text="匯出格式：" styleClass="label bold"/>
-                        <RadioButton fx:id="radioExcel" text="excel" selected="true"/>
-                        <RadioButton fx:id="radioCsv" text="csv" selected="true"/>
+                        <RadioButton fx:id="radioTxt" text="text" selected="true"/>
+                        <RadioButton fx:id="radioExcel" text="excel" selected="false" visible="false"/>
+                        <RadioButton fx:id="radioCsv" text="csv" selected="false" visible="false"/>
                     </HBox>
                     <HBox spacing="10" alignment="CENTER_LEFT">
                         <Label text="只顯示比對錯誤結果：" styleClass="label bold"/>
                         <CheckBox fx:id="checkBoxOnlyError"/>
                     </HBox>
-                    <HBox spacing="10" alignment="CENTER_LEFT">
-                        <Label text="遮蔽機敏欄位：" styleClass="label bold"/>
-                        <CheckBox fx:id="checkBoxUseMask"/>
-                    </HBox>
+<!--                    <HBox spacing="10" alignment="CENTER_LEFT">-->
+<!--                        <Label text="遮蔽機敏欄位：" styleClass="label bold"/>-->
+<!--                        <CheckBox fx:id="checkBoxUseMask"/>-->
+<!--                    </HBox>-->
                 </VBox>
 
                 <!-- 加這個空白區塊來撐開 -->
@@ -44,10 +45,10 @@
                     <HBox spacing="10" >
                         <Button fx:id="btnCompare" text="比對並匯出結果" onAction="#compareFiles" disable="true" styleClass="label bold"/>
                         <Button fx:id="btnClear" text="清除畫面" onAction="#clearScreen" styleClass="label bold"/>
+<!--                        <Button fx:id="btnTestDb" text="測試資料庫連線" onAction="#onTestDbConnection" styleClass="label bold"/>-->
                     </HBox>
                 </VBox>
             </HBox>
-
         </VBox>
     </top>
 

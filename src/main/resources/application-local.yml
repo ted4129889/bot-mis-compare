@@ -9,7 +9,6 @@ spring:
 
 xmlPath: "external-config/xml/"
 batchFilePath: "batch-file/"
-
 localFile:
   mis:
     batch:
@@ -34,9 +33,11 @@ localFile:
         directory: "${xmlPath}mask/"
         convert: "${xmlPath}mask/convert/"
     compare_result:
+      main : "ComparisonResult/"
       excel: "ComparisonResult/excel/"
       csv: "ComparisonResult/csv/"
-      txt: "ComparisonResult/CheckResultList.txt"
+      txt: "ComparisonResult/txt/"
+      final: "ComparisonResult/CheckResultList.txt"
     json:
       field_setting:
         directory: "external-config/json/FieldSetting.json"

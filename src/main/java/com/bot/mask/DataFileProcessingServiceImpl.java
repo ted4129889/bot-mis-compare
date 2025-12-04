@@ -1,13 +1,13 @@
 package com.bot.mask;
 
 
+import com.bot.compare.CompareDataService;
+import com.bot.comparer.CompareExec;
+import com.bot.config.CompareSetting;
+import com.bot.config.XmlDef;
 import com.bot.dataprocess.JobContext;
 import com.bot.dataprocess.JobExecutorService;
 import com.bot.dataprocess.JobResult;
-import com.bot.config.CompareSetting;
-import com.bot.config.XmlDef;
-import com.bot.compare.CompareDataService;
-import com.bot.comparer.CompareExec;
 import com.bot.mask.config.FileConfig;
 import com.bot.mask.config.SortFieldConfig;
 import com.bot.output.CompareFileExportImpl;
@@ -146,8 +146,8 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
     public boolean exec(Map<String, String> oldFileNameMap, Map<String, String> newFileNameMap, Map<String, FileConfig> fieldSettingList, CompareSetting setting) {
         //允許的路徑
         if (oldFileNameMap != null && newFileNameMap != null) {
-            LogProcess.info(log,"oldFileNameMap = {}",oldFileNameMap);
-            LogProcess.info(log,"newFileNameMap = {}",newFileNameMap);
+            LogProcess.info(log, "oldFileNameMap = {}", oldFileNameMap);
+            LogProcess.info(log, "newFileNameMap = {}", newFileNameMap);
 //            pairingProfileAll(oldFileNameMap, newFileNameMap, fieldSettingList, setting);
             pairingFileGo(oldFileNameMap, newFileNameMap);
         }
@@ -190,7 +190,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                 LogProcess.info(log, "botFilePath = {}", botFilePath);
                 LogProcess.info(log, "misFilePath = {}", misFilePath);
 
-                compareResultBeanList.add(compareExec.exec(botFilePath, misFilePath, fileName,chooseExportFileType));
+                compareResultBeanList.add(compareExec.exec(botFilePath, misFilePath, fileName, chooseExportFileType));
             }
 
         }
@@ -445,11 +445,17 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
         columnList = new ArrayList<>();
         dataKey = new ArrayList<>();
         fileName = fileName.replace(".txt", "");
+
         try {
             existflag = false;
             for (XmlData data : xmlDataList) {
+                //特殊排除有分割檔案 並且 檔案名稱後面為 底線+流水號的
+//                int idx = fileName.lastIndexOf("_");
+//                String a = (idx > 0) ? fileName.substring(0, idx) : fileName;
+                String b = data.getFileName();
+
                 //先將檔案名稱中，有日期先轉為yyyymmdd
-                if (textFileUtil.replaceDateWithPlaceholder(fileName).equals(data.getFileName())) {
+                if (fileName.contains(b)) {
                     existflag = true;
                     //為了取得 PK 以及 欄位
                     performMasking("", data, "");
@@ -799,12 +805,8 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
         byte[] bytes = line.getBytes(charset);
         int dataLength = bytes.length;
 
-//        LogProcess.info("xmlFieldList :" + xmlFieldList );
         //先比對檔案資料長度是否與定義檔加總一致
         if (xmlLength != dataLength) {
-//            LogProcess.warn(log, "xml length = " + xmlLength + " VS data length = " + dataLength);
-//            LogProcess.warn(log,"line = {}" + line);
-//            return line;
         }
         //起始位置
         int sPos = 0;

@@ -12076,6 +12076,58 @@
         <footer>
         </footer>
     </data>
+    <data fileName="MLYNUM_DB">
+        <header></header>
+        <body>
+            <field>
+                <fieldName>cusno</fieldName>
+                <fieldType>string</fieldType>
+                <length>10</length>
+                <maskType>1</maskType>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>brno</fieldName>
+                <fieldType>string</fieldType>
+                <length>3</length>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>apid</fieldName>
+                <fieldType>string</fieldType>
+                <length>4</length>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>yyyymm</fieldName>
+                <fieldType>string</fieldType>
+                <length>6</length>
+            </field>
+            <field>
+                <fieldName>separator</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>mlynum</fieldName>
+                <fieldType>string</fieldType>
+                <length>16</length>
+            </field>
+        </body>
+        <footer></footer>
+    </data>
 </file>
 
 

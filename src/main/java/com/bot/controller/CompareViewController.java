@@ -13,10 +13,10 @@ import javafx.animation.PauseTransition;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.*;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
@@ -33,8 +33,8 @@ import java.awt.*;
 import java.io.File;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -90,7 +90,7 @@ public class CompareViewController {
     public Label listViewlabel2;
     @FXML
     private CheckBox checkBoxOnlyError;
-//    @FXML
+    //    @FXML
 //    private CheckBox checkBoxUseMask;
     @FXML
     private VBox fieldSelectionBox;
@@ -308,8 +308,11 @@ public class CompareViewController {
      * 檢查ListView1 和 檢查ListView2 選許的項目決定是否顯示欄位跟PK
      */
     private void checkListViewItem(String fileName, boolean bothExist) {
+//        LogProcess.info(log, "fileName111 = " + fileName);
+        int idx = textFileUtil.replaceDateWithPlaceholder(fileName).lastIndexOf("_");
+        fileName = (idx > 0) ? fileName.substring(0, idx) : fileName;
 
-        fileName = textFileUtil.replaceDateWithPlaceholder(fileName);
+//        fileName = textFileUtil.replaceDateWithPlaceholder(fileName);
 
         pkSelectionBox.getChildren().clear();
         sortSelectionBox.getChildren().clear();
@@ -618,7 +621,7 @@ public class CompareViewController {
     @FXML
     public void compareFiles() {
 
-        if (radioTxt.isSelected() ) {
+        if (radioTxt.isSelected()) {
 //            compareFileExportImpl.chooseExportFileType = "Both";
 //            dataFileProcessingServiceImpl.chooseExportFileType = "Both";
             compareFileExportImpl.chooseExportFileType = radioTxt.getText();
@@ -910,7 +913,8 @@ public class CompareViewController {
 ////
 //        LogProcess.info("file.exists()：" + file.exists());
 //        LogProcess.info("Desktop.isDesktopSupported()：" + Desktop.isDesktopSupported());
-////        File nFile = new File(currentDir);
+
+    /// /        File nFile = new File(currentDir);
 //        try {
 //            if (file.exists() && Desktop.isDesktopSupported()) {
 //                Desktop.getDesktop().open(file);
@@ -921,7 +925,6 @@ public class CompareViewController {
 //            ex.printStackTrace();
 //        }
 //    }
-
     private void openFileSmart(File file) {
         if (Desktop.isDesktopSupported()) {
             try {

@@ -7,7 +7,6 @@ import com.bot.reader.LineParser;
 import com.bot.output.templates.CompareResultBean;
 import com.bot.output.templates.CompareResultRpt;
 import com.bot.util.log.LogProcess;
-import com.bot.util.txcontrol.util.text.astart.AstarUtils;
 import com.bot.util.text.FormatData;
 import com.bot.writer.OutputReporter;
 import lombok.extern.slf4j.Slf4j;

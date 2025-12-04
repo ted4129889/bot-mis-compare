@@ -1502,5 +1502,9 @@
   "DACNO_DB" : {
     "primaryKeys" : [ "brno", "cusno", "alcd", "yymm", "actno", "curcd" ],
     "sortFields" : [ ]
+  },
+  "MLYNUM_DB" : {
+    "primaryKeys" : [ "cusno", "brno", "apid", "yyyymm" ],
+    "sortFields" : [ ]
   }
 }

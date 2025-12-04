@@ -51,22 +51,20 @@ public class LineParser {
                     Arrays.copyOfRange(
                             lineBytes, sPos,sPos+length);
 
-            String value = new String(fieldBytes,charset);
-
+            String value = new String(fieldBytes,charset).trim();
             if(def.getName().contains("separator")){
 
-                if(".".equals(value)){
+                if(",".equals(value)){
                     globalSeparator.set(value);
                     useSplitMode.set(true);
                     LogProcess.info(log,"use parseLineBySplit ");
                     LogProcess.info(log,"separator = {} ",value);
 
                 }else{
-
                     // separator為逗號以外，改用長度處理
                     globalSeparator.set(""); // 或 null 亦可
                     useSplitMode.set(false);
-                    LogProcess.info(log,"use parseLineByFixed");
+                    LogProcess.info(log,"use parseLineByFixed1");
                     return "";
                 }
 
@@ -77,7 +75,7 @@ public class LineParser {
         // 找不到 separator
         globalSeparator.set(""); // 或 null 亦可
         useSplitMode.set(false);
-        LogProcess.info(log,"use parseLineByFixed");
+        LogProcess.info(log,"use parseLineByFixed2");
         return "";
 
     }
@@ -85,6 +83,7 @@ public class LineParser {
 
         //先檢查分隔符號決定使用哪一種方式處理
         detectSeparator(line,defs);
+
         if (useSplitMode.get()) {
             return parseLineBySplit(line, defs, globalSeparator.get());
         } else {
@@ -166,7 +165,7 @@ public class LineParser {
         Map<String, String> fieldMap = new HashMap<>();
         StringBuilder fullBuilder = new StringBuilder();
         StringBuilder keyGroup = new StringBuilder();
-        show = true;
+        show = false;
 
         line = line.replaceAll("[☆□]", "?").replaceAll("[*?]", " ").replaceAll("\"", " ");        // 這些改成空白
 

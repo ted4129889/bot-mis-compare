@@ -3,9 +3,8 @@ package com.bot.comparer;
 import com.bot.config.XmlDef;
 import com.bot.domain.FieldDef;
 import com.bot.domain.RowData;
-import com.bot.output.templates.CompareResultBean;
-import com.bot.reader.FileParser;
 import com.bot.mask.config.FileConfig;
+import com.bot.output.templates.CompareResultBean;
 import com.bot.util.log.LogProcess;
 import com.bot.util.xml.vo.XmlData;
 import com.bot.util.xml.vo.XmlField;
@@ -16,8 +15,6 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,7 +29,7 @@ public class CompareExec {
     @Autowired
     CompareExecService compareExecService;
 
-    public CompareResultBean exec(String pathA ,String pathB,String fileName,String fileType) {
+    public CompareResultBean exec(String pathA, String pathB, String fileName, String fileType) {
 
         //初始化，定義檔資料載入
 //        xmlDef.readDefinitionXml();
@@ -40,19 +37,28 @@ public class CompareExec {
         List<XmlData> xmlDataList = xmlDef.xmlDataList;
         //取得檔案設定檔
         Map<String, FileConfig> jsonFile = xmlDef.jsonFile;
+        LogProcess.info(log, "jsonFile = {}",jsonFile);
 
+
+
+        //特殊排除有分割檔案 並且 檔案名稱後面為 底線+流水號的
+        int idx = fileName.lastIndexOf("_");
+        String finalFileName = (idx > 0) ? fileName.substring(0, idx) : fileName;
+//        String finalFileName = fileName;
+        LogProcess.info(log, "fileNamefileNamefileName = {}",fileName);
         //取得定義檔案的內容
-        String finalFileName1 = fileName;
         XmlData xmlData = xmlDataList.stream()
-                .filter(v -> finalFileName1.equals(v.getFileName()))
+                .filter(v -> finalFileName.contains(v.getFileName()))
                 .findFirst()
                 .orElse(null);
 
         //取得欄位訊息
         List<XmlField> fieldList = xmlData.getBody().getFieldList();
-
+        //特殊排除有分割檔案 並且 檔案名稱後面為 底線+流水號的
+//        idx = fileName.lastIndexOf("_");
+//        String jsonFileName = (idx > 0) ? fileName.substring(0, idx) : fileName;
         //檔案設定(key或sort)
-        FileConfig cfg = jsonFile.getOrDefault(fileName, null);
+        FileConfig cfg = jsonFile.getOrDefault(finalFileName, null);
 
         //取得key
         List<String> keyList = cfg.getPrimaryKeys();
@@ -65,10 +71,8 @@ public class CompareExec {
         LogProcess.info(log, "defs List = {}", defs);
 
 
-        FileParser parser = new FileParser(defs);
         Map<String, RowData> mapA = null;
 
-        LogProcess.info(log, "FileParser parser = {}", parser);
         LogProcess.info(log, "pathA = {}", Paths.get(pathA));
         LogProcess.info(log, "pathB = {}", Paths.get(pathB));
 
@@ -77,7 +81,7 @@ public class CompareExec {
         CompareResultBean compareResultBean = new CompareResultBean();
         try {
 
-            compareResultBean = compareExecService.compare(Path.of(pathA), Path.of(pathB), defs,fileName,fileType);
+            compareResultBean = compareExecService.compare(Path.of(pathA), Path.of(pathB), defs, fileName, fileType);
 
         } catch (IOException e) {
             throw new RuntimeException(e);

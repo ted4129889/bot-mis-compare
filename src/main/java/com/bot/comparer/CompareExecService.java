@@ -3,9 +3,9 @@ package com.bot.comparer;
 import com.bot.db.RocksDbManager;
 import com.bot.domain.FieldDef;
 import com.bot.domain.RowData;
-import com.bot.reader.LineParser;
 import com.bot.output.templates.CompareResultBean;
 import com.bot.output.templates.CompareResultRpt;
+import com.bot.reader.LineParser;
 import com.bot.util.log.LogProcess;
 import com.bot.util.text.FormatData;
 import com.bot.writer.OutputReporter;
@@ -16,13 +16,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,12 +38,12 @@ public class CompareExecService {
     @Value("${localFile.mis.compare_result.main}")
     private String resultMain;
     @Autowired
-    private FormatData  formatData;
+    private FormatData formatData;
 
     @Autowired
     private CompareResultRpt compareResultRpt;
 
-    public CompareResultBean compare(Path fileA, Path fileB, List<FieldDef> defs, String fileName,String fileType) throws Exception {
+    public CompareResultBean compare(Path fileA, Path fileB, List<FieldDef> defs, String fileName, String fileType) throws Exception {
 
         LocalDateTime dateTime = LocalDateTime.now();
 
@@ -87,7 +85,7 @@ public class CompareExecService {
                     aCount++;
 
                     //轉map
-                    RowData rawA = LineParser.parseLine(formatData.getReplaceSpace(line," "), defs);
+                    RowData rawA = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs);
 
 //                    OutputReporter.reportFileA(rawA, aFileOutPutPath);
                     // A key hash
@@ -99,8 +97,8 @@ public class CompareExecService {
                     // flag=0 + fullHash + A raw
                     String value = "0|" + fullHash + "|" + rawA.toJson();
 
-                    if(line.contains("ABOC,130,BJ,CN,00000000335,4,0000001,202506")){
-                        LogProcess.info(log,"A value ={},{}",keyHash,value);
+                    if (line.contains("ABOC,130,BJ,CN,00000000335,4,0000001,202506")) {
+                        LogProcess.info(log, "A value ={},{}", keyHash, value);
                     }
                     //寫進RocksDb
                     db.put(keyHash, value);
@@ -122,7 +120,7 @@ public class CompareExecService {
                 while ((line = br.readLine()) != null) {
                     bCount++;
                     //轉map
-                    RowData rawB = LineParser.parseLine(formatData.getReplaceSpace(line," "), defs);
+                    RowData rawB = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs);
 //                    OutputReporter.reportFileA(rawB, bFileOutPutPath);
                     // B key hash
                     String keyHash = rawB.getKeyHash();
@@ -130,16 +128,16 @@ public class CompareExecService {
                     // B full raw hash
                     String fullHashB = rawB.getFullHash();
 
-                    if(line.contains("ABOC,130,BJ,CN,00000000335,4,0000001,202506")){
-                        LogProcess.info(log,"B value ={},{}",keyHash,fullHashB);
+                    if (line.contains("ABOC,130,BJ,CN,00000000335,4,0000001,202506")) {
+                        LogProcess.info(log, "B value ={},{}", keyHash, fullHashB);
                     }
 
 
                     //用 B key hash 找 A raw data
                     String valueInA = db.get(keyHash);
 
-                    if(line.contains("ABOC,130,BJ,CN,00000000335,4,0000001,202506")){
-                        LogProcess.info(log,"valueInA ={}",valueInA);
+                    if (line.contains("ABOC,130,BJ,CN,00000000335,4,0000001,202506")) {
+                        LogProcess.info(log, "valueInA ={}", valueInA);
                     }
                     //找不到，表示 B 多資料
                     if (valueInA == null) {
@@ -157,12 +155,12 @@ public class CompareExecService {
                         String newValue = "1|" + fullHashA + "|" + rawA;
                         db.put(keyHash, newValue);
 
-                        if(line.contains("ABOC,130,BJ,CN,00000000335,4,0000001,202506")){
+                        if (line.contains("ABOC,130,BJ,CN,00000000335,4,0000001,202506")) {
 
-                            LogProcess.info(log,"A =>B value ={},{}",keyHash,newValue);
+                            LogProcess.info(log, "A =>B value ={},{}", keyHash, newValue);
 
-                            LogProcess.info(log,"fullHashA ={}",fullHashA);
-                            LogProcess.info(log,"fullHashB ={}",fullHashB);
+                            LogProcess.info(log, "fullHashA ={}", fullHashA);
+                            LogProcess.info(log, "fullHashB ={}", fullHashB);
 
                         }
 
@@ -194,10 +192,10 @@ public class CompareExecService {
                 String fullHash = parts[1];
                 String rawA = parts[2];
 
-                if(value.contains("ABOC,130,BJ,CN,00000000335,4,0000001,202506")){
-                    LogProcess.info(log,"flag => {}",flag);
-                    LogProcess.info(log,"fullHash => {}",fullHash);
-                    LogProcess.info(log,"rawA => {}",rawA);
+                if (value.contains("ABOC,130,BJ,CN,00000000335,4,0000001,202506")) {
+                    LogProcess.info(log, "flag => {}", flag);
+                    LogProcess.info(log, "fullHash => {}", fullHash);
+                    LogProcess.info(log, "rawA => {}", rawA);
                 }
 
                 if ("0".equals(flag)) {
@@ -208,7 +206,7 @@ public class CompareExecService {
 
             it.close();
 
-           return exportTextFile(Path.of(fileName).getFileName().toString());
+            return exportTextFile(Path.of(fileName).getFileName().toString());
 
         }
     }
@@ -227,7 +225,7 @@ public class CompareExecService {
             if (!Objects.equals(v1, v2)) {
                 sb.append(String.format("欄位[%s] 不同: bot='%s', mis='%s'\n",
                         def.getName(), v1, v2));
-            }        return sb.toString();
+            }
         }
         sb.append("----------------------------------\n");
         return sb.toString();

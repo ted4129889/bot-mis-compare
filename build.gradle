@@ -72,7 +72,7 @@ test {
 
 
 application {
-    mainClass = 'com.bot.Main'
+    mainClass = 'com.bot.CompareApplication'
 }
 
 

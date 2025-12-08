@@ -455,7 +455,7 @@ public class DataFileProcessingServiceImpl implements DataFileProcessingService 
                 String b = data.getFileName();
 
                 //先將檔案名稱中，有日期先轉為yyyymmdd
-                if (fileName.contains(b)) {
+                if (fileName.equals(b)) {
                     existflag = true;
                     //為了取得 PK 以及 欄位
                     performMasking("", data, "");

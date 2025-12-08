@@ -27,7 +27,7 @@ public class LineParser {
     // 沒 separator → fixed-length
     private static final AtomicBoolean useSplitMode = new AtomicBoolean(false);
 
-    public static String detectSeparator(String line, List<FieldDef> defs){
+    public static String detectSeparator(String line, List<FieldDef> defs) {
 
         // 已經偵測過就直接回傳（不用再掃）
         if (globalSeparator.get() != null) {
@@ -49,22 +49,22 @@ public class LineParser {
 
             byte[] fieldBytes =
                     Arrays.copyOfRange(
-                            lineBytes, sPos,sPos+length);
+                            lineBytes, sPos, sPos + length);
 
-            String value = new String(fieldBytes,charset).trim();
-            if(def.getName().contains("separator")){
-
-                if(",".equals(value)){
+            String value = new String(fieldBytes, charset).trim();
+            if (def.getName().contains("separator")) {
+                LogProcess.info(log, "separator = {} ", value);
+                if (",".equals(value)) {
                     globalSeparator.set(value);
                     useSplitMode.set(true);
-                    LogProcess.info(log,"use parseLineBySplit ");
-                    LogProcess.info(log,"separator = {} ",value);
+                    LogProcess.info(log, "use parseLineBySplit ");
 
-                }else{
+
+                } else {
                     // separator為逗號以外，改用長度處理
                     globalSeparator.set(""); // 或 null 亦可
                     useSplitMode.set(false);
-                    LogProcess.info(log,"use parseLineByFixed1");
+                    LogProcess.info(log, "use parseLineByFixed1");
                     return "";
                 }
 
@@ -75,14 +75,15 @@ public class LineParser {
         // 找不到 separator
         globalSeparator.set(""); // 或 null 亦可
         useSplitMode.set(false);
-        LogProcess.info(log,"use parseLineByFixed2");
+        LogProcess.info(log, "use parseLineByFixed2");
         return "";
 
     }
+
     public static RowData parseLine(String line, List<FieldDef> defs) {
 
         //先檢查分隔符號決定使用哪一種方式處理
-        detectSeparator(line,defs);
+        detectSeparator(line, defs);
 
         if (useSplitMode.get()) {
             return parseLineBySplit(line, defs, globalSeparator.get());
@@ -95,10 +96,12 @@ public class LineParser {
 
     /**
      * 使用固定長度處理字串
+     *
      * @param line 資料行
      * @param defs 定義檔欄位(List<FieldDef>)
      * @return RowData
-     * */
+     *
+     */
     public static RowData parseLineByFixed(String line, List<FieldDef> defs) {
 
         Map<String, String> fieldMap = new HashMap<>();
@@ -111,10 +114,10 @@ public class LineParser {
 
         byte[] lineBytes = line.getBytes(charset);
 
-        if(line.contains("36818587")){
+        if (line.contains("36818587")) {
             show = true;
-            if(show) LogProcess.info(log,"lineBytes = {}",lineBytes);
-            if(show) LogProcess.info(log,"lineBytes length = {}",lineBytes.length);
+            if (show) LogProcess.info(log, "lineBytes = {}", lineBytes);
+            if (show) LogProcess.info(log, "lineBytes length = {}", lineBytes.length);
         }
 
         //初始位置
@@ -126,14 +129,14 @@ public class LineParser {
 
             byte[] fieldBytes =
                     Arrays.copyOfRange(
-                            lineBytes, sPos,sPos+length);
+                            lineBytes, sPos, sPos + length);
 
 
-            String value = new String(fieldBytes,charset);
+            String value = new String(fieldBytes, charset);
 
-            if(show) LogProcess.info(log,"fieldBytes = {}",fieldBytes);
-            if(show) LogProcess.info(log,"fieldBytes length = {}",fieldBytes.length);
-            if(show) LogProcess.info(log,"value = {}",value);
+            if (show) LogProcess.info(log, "fieldBytes = {}", fieldBytes);
+            if (show) LogProcess.info(log, "fieldBytes length = {}", fieldBytes.length);
+            if (show) LogProcess.info(log, "value = {}", value);
 
             fieldMap.put(def.getName(), value);
             // key hash
@@ -155,12 +158,14 @@ public class LineParser {
 
     /**
      * 使用分隔符號處理字串
-     * @param line 資料行
-     * @param defs 定義檔欄位(List<FieldDef>)
+     *
+     * @param line      資料行
+     * @param defs      定義檔欄位(List<FieldDef>)
      * @param separator 分隔符號
      * @return RowData
-     * */
-    public static RowData parseLineBySplit(String line, List<FieldDef> defs,String separator) {
+     *
+     */
+    public static RowData parseLineBySplit(String line, List<FieldDef> defs, String separator) {
 
         Map<String, String> fieldMap = new HashMap<>();
         StringBuilder fullBuilder = new StringBuilder();
@@ -173,11 +178,11 @@ public class LineParser {
 
         String regex = Pattern.quote(separator);
 
-        String[] lines = line.split(regex,-1);
+        String[] lines = line.split(regex, -1);
 
-        if(line.contains("ABOC,130,BJ,CN,00000000335,4,0000001,202506")){
+        if (line.contains("ABOC,130,BJ,CN,00000000335,4,0000001,202506")) {
             show = true;
-            if(show) LogProcess.info(log,"lineBytes = {}",line);
+            if (show) LogProcess.info(log, "lineBytes = {}", line);
         }
 
         int idx = 0;
@@ -188,17 +193,17 @@ public class LineParser {
             if (def.getName().contains("separator")) {
                 continue;
             }
-            if(show) LogProcess.info(log,"def.getName() = {}",def.getName());
+            if (show) LogProcess.info(log, "def.getName() = {}", def.getName());
 
             // 取出 value
-            String value =  lines[idx].trim();
+            String value = lines[idx].trim();
             idx++;
-            if(show) LogProcess.info(log,"1.value = {}",value);
+            if (show) LogProcess.info(log, "1.value = {}", value);
 
             // 依照欄位長度補滿
             value = padToByteLength(value, def.getLength(), charset);
 
-            if(show) LogProcess.info(log,"2.value = {}",value);
+            if (show) LogProcess.info(log, "2.value = {}", value);
 
             // 放入 map
             fieldMap.put(def.getName(), value);
@@ -212,24 +217,22 @@ public class LineParser {
             fullBuilder.append(value);
 
 
-
         }
         String kg = keyGroup.length() > 0 ? keyGroup.substring(0, keyGroup.length() - 1) : "";
-        if(show) LogProcess.info(log,"kg = {}",kg);
+        if (show) LogProcess.info(log, "kg = {}", kg);
 
-        if(show) LogProcess.info(log,"hash(kg) = {}",hash(kg));
+        if (show) LogProcess.info(log, "hash(kg) = {}", hash(kg));
 
 //        LogProcess.info(log,"fieldMap = {}",fieldMap);
         return new RowData(line, kg, hash(kg), hash(fullBuilder.toString()), fieldMap);
     }
 
 
-
-
     private static String hash(String s) {
         // Apache commons
         return DigestUtils.md5Hex(s);
     }
+
     /**
      * 根據指定的 byte 長度與編碼，回傳可以安全 substring 的字元位置。
      *
@@ -244,7 +247,7 @@ public class LineParser {
         //實際字串長度
         int bytesLen = bytes.length;
 
-        if(show) LogProcess.info(log,"bytesLen = {}",bytesLen);
+        if (show) LogProcess.info(log, "bytesLen = {}", bytesLen);
         int currentBytes = 0;
 
         for (int i = 0; i < str.length(); i++) {
@@ -258,7 +261,7 @@ public class LineParser {
             currentBytes += byteLen;
 
         }
-            str= str + " ".repeat(maxBytes -str.length());
+        str = str + " ".repeat(maxBytes - str.length());
         // 全部都沒超過就整段可以用
         return str.length();
     }
@@ -279,7 +282,8 @@ public class LineParser {
 
     /**
      * 補長度
-     * */
+     *
+     */
     private static String padToByteLength(String value, int byteLength, Charset charset) {
         if (value == null) value = "";
 

@@ -48,7 +48,7 @@ public class CompareExec {
         LogProcess.info(log, "fileNamefileNamefileName = {}",fileName);
         //取得定義檔案的內容
         XmlData xmlData = xmlDataList.stream()
-                .filter(v -> finalFileName.contains(v.getFileName()))
+                .filter(v -> finalFileName.equals(v.getFileName()))
                 .findFirst()
                 .orElse(null);
 
@@ -84,8 +84,10 @@ public class CompareExec {
             compareResultBean = compareExecService.compare(Path.of(pathA), Path.of(pathB), defs, fileName, fileType);
 
         } catch (IOException e) {
+            LogProcess.error(log, "error = {}",e.getMessage(),e);
             throw new RuntimeException(e);
         } catch (Exception e) {
+            LogProcess.error(log, "error = {}",e.getMessage(),e);
             throw new RuntimeException(e);
         }
 

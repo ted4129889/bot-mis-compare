@@ -199,6 +199,7 @@ public class CompareExecService {
                 }
 
                 if ("0".equals(flag)) {
+                    missCount++;
                     // A 有， B 沒有
                     OutputReporter.reportMissing(rawA, missOutPutPath);
                 }

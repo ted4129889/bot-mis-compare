@@ -53,7 +53,7 @@ public class LineParser {
 
             String value = new String(fieldBytes, charset).trim();
             if (def.getName().contains("separator")) {
-                LogProcess.info(log, "separator = {} ", value);
+                LogProcess.info(log, "separator = {}", value);
                 if (",".equals(value)) {
                     globalSeparator.set(value);
                     useSplitMode.set(true);
@@ -122,37 +122,43 @@ public class LineParser {
 
         //初始位置
         int sPos = 0;
+        try {
+            for (FieldDef def : defs) {
 
-        for (FieldDef def : defs) {
+                int length = def.getLength();
 
-            int length = def.getLength();
-
-            byte[] fieldBytes =
-                    Arrays.copyOfRange(
-                            lineBytes, sPos, sPos + length);
+                byte[] fieldBytes =
+                        Arrays.copyOfRange(
+                                lineBytes, sPos, sPos + length);
 
 
-            String value = new String(fieldBytes, charset);
+                String value = new String(fieldBytes, charset);
 
-            if (show) LogProcess.info(log, "fieldBytes = {}", fieldBytes);
-            if (show) LogProcess.info(log, "fieldBytes length = {}", fieldBytes.length);
-            if (show) LogProcess.info(log, "value = {}", value);
+                if (show) LogProcess.info(log, "fieldBytes = {}", fieldBytes);
+                if (show) LogProcess.info(log, "fieldBytes length = {}", fieldBytes.length);
+                if (show) LogProcess.info(log, "value = {}", value);
 
-            fieldMap.put(def.getName(), value);
-            // key hash
-            if (def.isKey()) {
-                keyGroup.append(def.getName()).append("=").append(value.trim()).append(",");
+                fieldMap.put(def.getName(), value);
+                // key hash
+                if (def.isKey()) {
+                    keyGroup.append(def.getName()).append("=").append(value.trim()).append(",");
+                }
+
+                // full hash
+                fullBuilder.append(value);
+
+                sPos += length;
+
             }
+            String kg = keyGroup.length() > 0 ? keyGroup.substring(0, keyGroup.length() - 1) : "";
 
-            // full hash
-            fullBuilder.append(value);
+            return new RowData(line, kg, hash(kg), hash(fullBuilder.toString()), fieldMap);
 
-            sPos += length;
-
+        } catch (Exception e) {
+            LogProcess.error(log, "error lines = {}", line, e);
+            throw e;
         }
-        String kg = keyGroup.length() > 0 ? keyGroup.substring(0, keyGroup.length() - 1) : "";
 
-        return new RowData(line, kg, hash(kg), hash(fullBuilder.toString()), fieldMap);
     }
 
 
@@ -186,45 +192,47 @@ public class LineParser {
         }
 
         int idx = 0;
+        try {
+            for (FieldDef def : defs) {
 
-        for (FieldDef def : defs) {
+                // separator 欄略過
+                if (def.getName().contains("separator")) {
+                    continue;
+                }
+                if (show) LogProcess.info(log, "def.getName() = {}", def.getName());
+                // 取出 value
+                String value = lines[idx].trim();
+                idx++;
+                if (show) LogProcess.info(log, "1.value = {}", value);
 
-            // separator 欄略過
-            if (def.getName().contains("separator")) {
-                continue;
+                // 依照欄位長度補滿
+                value = padToByteLength(value, def.getLength(), charset);
+
+                if (show) LogProcess.info(log, "2.value = {}", value);
+
+                // 放入 map
+                fieldMap.put(def.getName(), value);
+
+                // key hash
+                if (def.isKey()) {
+                    keyGroup.append(def.getName()).append("=").append(value.trim()).append(",");
+                }
+
+                // full hash
+                fullBuilder.append(value);
+
+
             }
-            if (show) LogProcess.info(log, "def.getName() = {}", def.getName());
+            String kg = keyGroup.length() > 0 ? keyGroup.substring(0, keyGroup.length() - 1) : "";
+            if (show) LogProcess.info(log, "kg = {}", kg);
+            if (show) LogProcess.info(log, "hash(kg) = {}", hash(kg));
+            return new RowData(line, kg, hash(kg), hash(fullBuilder.toString()), fieldMap);
 
-            // 取出 value
-            String value = lines[idx].trim();
-            idx++;
-            if (show) LogProcess.info(log, "1.value = {}", value);
-
-            // 依照欄位長度補滿
-            value = padToByteLength(value, def.getLength(), charset);
-
-            if (show) LogProcess.info(log, "2.value = {}", value);
-
-            // 放入 map
-            fieldMap.put(def.getName(), value);
-
-            // key hash
-            if (def.isKey()) {
-                keyGroup.append(def.getName()).append("=").append(value.trim()).append(",");
-            }
-
-            // full hash
-            fullBuilder.append(value);
-
-
+        } catch (Exception e) {
+            LogProcess.error(log, "error lines = {}", lines, e);
+            throw e;
         }
-        String kg = keyGroup.length() > 0 ? keyGroup.substring(0, keyGroup.length() - 1) : "";
-        if (show) LogProcess.info(log, "kg = {}", kg);
 
-        if (show) LogProcess.info(log, "hash(kg) = {}", hash(kg));
-
-//        LogProcess.info(log,"fieldMap = {}",fieldMap);
-        return new RowData(line, kg, hash(kg), hash(fullBuilder.toString()), fieldMap);
     }
 
 

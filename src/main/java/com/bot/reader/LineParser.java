@@ -176,7 +176,6 @@ public class LineParser {
         Map<String, String> fieldMap = new HashMap<>();
         StringBuilder fullBuilder = new StringBuilder();
         StringBuilder keyGroup = new StringBuilder();
-        show = false;
 
         line = line.replaceAll("[☆□]", "?").replaceAll("[*?]", " ").replaceAll("\"", " ");        // 這些改成空白
 
@@ -186,11 +185,6 @@ public class LineParser {
 
         String[] lines = line.split(regex, -1);
 
-        if (line.contains("ABOC,130,BJ,CN,00000000335,4,0000001,202506")) {
-            show = true;
-            if (show) LogProcess.info(log, "lineBytes = {}", line);
-        }
-
         int idx = 0;
         try {
             for (FieldDef def : defs) {
@@ -199,16 +193,13 @@ public class LineParser {
                 if (def.getName().contains("separator")) {
                     continue;
                 }
-                if (show) LogProcess.info(log, "def.getName() = {}", def.getName());
                 // 取出 value
                 String value = lines[idx].trim();
                 idx++;
-                if (show) LogProcess.info(log, "1.value = {}", value);
 
                 // 依照欄位長度補滿
                 value = padToByteLength(value, def.getLength(), charset);
 
-                if (show) LogProcess.info(log, "2.value = {}", value);
 
                 // 放入 map
                 fieldMap.put(def.getName(), value);
@@ -224,8 +215,7 @@ public class LineParser {
 
             }
             String kg = keyGroup.length() > 0 ? keyGroup.substring(0, keyGroup.length() - 1) : "";
-            if (show) LogProcess.info(log, "kg = {}", kg);
-            if (show) LogProcess.info(log, "hash(kg) = {}", hash(kg));
+
             return new RowData(line, kg, hash(kg), hash(fullBuilder.toString()), fieldMap);
 
         } catch (Exception e) {

@@ -80,9 +80,12 @@ public class CompareExec {
 
         CompareResultBean compareResultBean = new CompareResultBean();
         try {
+            if(keyList.isEmpty()){
+                compareResultBean = compareExecService.compare2(Path.of(pathA), Path.of(pathB), defs, fileName, fileType);
 
-            compareResultBean = compareExecService.compare(Path.of(pathA), Path.of(pathB), defs, fileName, fileType);
-
+            }else {
+                compareResultBean = compareExecService.compare(Path.of(pathA), Path.of(pathB), defs, fileName, fileType);
+            }
         } catch (IOException e) {
             LogProcess.error(log, "error = {}",e.getMessage(),e);
             throw new RuntimeException(e);

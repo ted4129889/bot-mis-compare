@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
@@ -211,6 +212,162 @@ public class CompareExecService {
 
         }
     }
+
+    //依照hash排序比對
+    public CompareResultBean compare2(Path fileA, Path fileB, List<FieldDef> defs, String fileName, String fileType) throws Exception {
+
+        LocalDateTime dateTime = LocalDateTime.now();
+
+        String dateTimeStr = dateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmm"));
+        String dateTimeStr2 = dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+
+        String finalFileName = fileName + "_" + dateTimeStr;
+
+        Path finalOutputFolder = Path.of(resultMain).resolve(fileType).resolve(fileName);
+        Path aFileOutPutPath = finalOutputFolder.resolve(finalFileName + "_bot.txt");
+        Path bFileOutPutPath = finalOutputFolder.resolve(finalFileName + "_misbh.txt");
+        Path missOutPutPath = finalOutputFolder.resolve(finalFileName + "_miss.txt");
+        Path extraOutPutPath = finalOutputFolder.resolve(finalFileName + "_extra.txt");
+        Path diffOutPutPath = finalOutputFolder.resolve(finalFileName + "_diff.txt");
+        Path rockDbOutPutPath = finalOutputFolder.resolve("rocksdb\\A_DB");
+
+        System.out.println("finalOutputFolder :  " + finalOutputFolder);
+        System.out.println("missOutPutPath :  " + missOutPutPath);
+        System.out.println("extraOutPutPath :  " + extraOutPutPath);
+        System.out.println("diffOutPutPath :  " + diffOutPutPath);
+        System.out.println("rockDbOutPutPath :  " + rockDbOutPutPath);
+        aCount = 0;
+        bCount = 0;
+        missCount = 0;
+        extraCount = 0;
+        diffCount = 0;
+
+        long seq = 0;
+
+        try (RocksDbManager db = new RocksDbManager(rockDbOutPutPath.toString())) {
+
+            try (BufferedReader br = Files.newBufferedReader(fileA, Charset.forName("MS950"))) {
+
+                String line;
+                long count = 0;
+
+                while ((line = br.readLine()) != null) {
+
+                    aCount++;
+
+                    RowData rawA = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs);
+
+                    String hash = rawA.getFullHash();
+
+                    //新 key：hash 排序 + 支援重複 hash
+                    String key = hash + "|" + String.format("%010d", seq++);
+
+                    // 使用你的原格式：flag=0|fullHash|rawJson
+                    String value = "0|" + hash + "|" + rawA.toJson();
+
+                    db.put(key, value);
+
+                    if (++count % 100000 == 0) {
+                        System.out.println("A file indexed: " + count);
+                    }
+                }
+
+                System.out.println("A file indexed: " + count);
+            }
+
+            long seqB = 0;
+
+            try (BufferedReader br = Files.newBufferedReader(fileB, Charset.forName("MS950"))) {
+
+                String line;
+                long count = 0;
+
+                RocksIterator it = db.newIterator();
+
+                while ((line = br.readLine()) != null) {
+
+                    bCount++;
+
+                    RowData rawB = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs);
+
+                    String hashB = rawB.getFullHash();
+
+                    //B 的 key 格式一樣（hash 排序）
+                    String searchKey = hashB + "|";
+
+                    //定位到 hashB 的起始位置
+                    it.seek(searchKey.getBytes(StandardCharsets.UTF_8));
+
+                    boolean matched = false;
+
+                    while (it.isValid()) {
+
+                        String foundKey = new String(it.key());
+
+                        // 遇到下一個 hash 代表找完了
+                        if (!foundKey.startsWith(searchKey)) break;
+
+                        String valueInA = new String(it.value());
+                        String[] parts = valueInA.split("\\|", 3);
+                        String flag = parts[0];
+                        String hashA = parts[1];
+                        String rawAJson = parts[2];
+
+                        // 只比對未消耗（flag == 0）的
+                        if (flag.equals("0")) {
+
+                            matched = true;
+
+                            //consume（標記成使用過）
+                            db.put(it.key().toString(), "1|" + hashA + "|" + rawAJson);
+
+                            // 若 hash 不同 → 欄位差異
+                            if (!hashA.equals(hashB)) {
+                                diffCount++;
+                                OutputReporter.reportFieldDiff(
+                                        compareFields(RowData.fromJson(rawAJson), rawB, defs),
+                                        diffOutPutPath
+                                );
+                            }
+
+                            break;
+                        }
+
+                        // flag=1 → 已配對過 → 找下一筆相同 hash
+                        it.next();
+                    }
+
+                    if (!matched) {
+                        extraCount++;
+                        OutputReporter.reportExtra(rawB, extraOutPutPath);
+                    }
+
+                    if (++count % 100000 == 0) {
+                        System.out.println("B file compared: " + count);
+                    }
+                }
+            }
+            //3：找 B 少資料
+            RocksIterator it = db.newIterator();
+            for (it.seekToFirst(); it.isValid(); it.next()) {
+
+                String value = new String(it.value());
+                String[] parts = value.split("\\|", 3);
+                String flag = parts[0];
+                String rawAJson = parts[2];
+
+                if (flag.equals("0")) {
+                    missCount++;
+                    OutputReporter.reportMissing(rawAJson, missOutPutPath);
+                }
+            }
+            it.close();
+
+            return exportTextFile(Path.of(fileName).getFileName().toString());
+
+        }
+    }
+
 
 
     private String compareFields(RowData a, RowData b, List<FieldDef> defs) {

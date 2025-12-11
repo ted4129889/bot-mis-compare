@@ -1496,7 +1496,7 @@
     "sortFields" : [ ]
   },
   "CRVT_DB" : {
-    "primaryKeys" : [ "aptype", "aptypenm", "swfbkcd", "swfbrno", "swfloc", "swfnal", "amt", "apcode", "cnt", "yymm" ],
+    "primaryKeys" : [ ],
     "sortFields" : [ ]
   },
   "DACNO_DB" : {
@@ -1505,6 +1505,10 @@
   },
   "MLYNUM_DB" : {
     "primaryKeys" : [ "cusno", "brno", "apid", "yyyymm" ],
+    "sortFields" : [ ]
+  },
+  "CRVTEIGHT" : {
+    "primaryKeys" : [ ],
     "sortFields" : [ ]
   }
 }

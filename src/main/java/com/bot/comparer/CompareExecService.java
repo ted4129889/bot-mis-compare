@@ -98,19 +98,19 @@ public class CompareExecService {
                     // flag=0 + fullHash + A raw
                     String value = "0|" + fullHash + "|" + rawA.toJson();
 
-                    if (line.contains("ABOC,130,BJ,CN,00000000335,4,0000001,202506")) {
-                        LogProcess.info(log, "A value ={},{}", keyHash, value);
-                    }
                     //寫進RocksDb
                     db.put(keyHash, value);
 
                     if (++count % 100000 == 0) {
-                        System.out.println("A file indexed: " + count);
+                        System.out.println("aFileOutPutPath indexed: " + count);
                     }
                 }
 
                 System.out.println("A file indexed: " + count);
+
+                LogProcess.info(log, "bot file {} ,totalCnt = {} ", finalFileName, count);
             }
+
 
             // 2:讀 B 比對 A
             try (BufferedReader br = Files.newBufferedReader(fileB, Charset.forName("MS950"))) {
@@ -129,17 +129,9 @@ public class CompareExecService {
                     // B full raw hash
                     String fullHashB = rawB.getFullHash();
 
-                    if (line.contains("ABOC,130,BJ,CN,00000000335,4,0000001,202506")) {
-                        LogProcess.info(log, "B value ={},{}", keyHash, fullHashB);
-                    }
-
-
                     //用 B key hash 找 A raw data
                     String valueInA = db.get(keyHash);
 
-                    if (line.contains("ABOC,130,BJ,CN,00000000335,4,0000001,202506")) {
-                        LogProcess.info(log, "valueInA ={}", valueInA);
-                    }
                     //找不到，表示 B 多資料
                     if (valueInA == null) {
                         extraCount++;
@@ -156,15 +148,6 @@ public class CompareExecService {
                         String newValue = "1|" + fullHashA + "|" + rawA;
                         db.put(keyHash, newValue);
 
-                        if (line.contains("ABOC,130,BJ,CN,00000000335,4,0000001,202506")) {
-
-                            LogProcess.info(log, "A =>B value ={},{}", keyHash, newValue);
-
-                            LogProcess.info(log, "fullHashA ={}", fullHashA);
-                            LogProcess.info(log, "fullHashB ={}", fullHashB);
-
-                        }
-
                         // 比 hash → 欄位差異
                         if (!fullHashA.equals(fullHashB)) {
                             diffCount++;
@@ -178,6 +161,11 @@ public class CompareExecService {
                     if (++count % 100000 == 0) {
                         System.out.println("B file compared: " + count);
                     }
+
+
+                    LogProcess.info(log, "mis file {} ,totalCnt = {} ", finalFileName, count);
+                    LogProcess.info(log, "mis file {} ,extraCount = {} ", finalFileName, extraCount);
+                    LogProcess.info(log, "bot file vs. mis file,diffCount = {} ", diffCount);
                 }
             }
 
@@ -193,18 +181,13 @@ public class CompareExecService {
                 String fullHash = parts[1];
                 String rawA = parts[2];
 
-                if (value.contains("ABOC,130,BJ,CN,00000000335,4,0000001,202506")) {
-                    LogProcess.info(log, "flag => {}", flag);
-                    LogProcess.info(log, "fullHash => {}", fullHash);
-                    LogProcess.info(log, "rawA => {}", rawA);
-                }
-
                 if ("0".equals(flag)) {
                     missCount++;
                     // A 有， B 沒有
                     OutputReporter.reportMissing(rawA, missOutPutPath);
                 }
             }
+            LogProcess.info(log, "mis file {} ,missCount = {} ", finalFileName, missCount);
 
             it.close();
 
@@ -367,7 +350,6 @@ public class CompareExecService {
 
         }
     }
-
 
 
     private String compareFields(RowData a, RowData b, List<FieldDef> defs) {

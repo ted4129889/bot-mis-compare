@@ -114,11 +114,6 @@ public class LineParser {
 
         byte[] lineBytes = line.getBytes(charset);
 
-        if (line.contains("36818587")) {
-            show = true;
-            if (show) LogProcess.info(log, "lineBytes = {}", lineBytes);
-            if (show) LogProcess.info(log, "lineBytes length = {}", lineBytes.length);
-        }
 
         //初始位置
         int sPos = 0;
@@ -133,10 +128,6 @@ public class LineParser {
 
 
                 String value = new String(fieldBytes, charset);
-
-                if (show) LogProcess.info(log, "fieldBytes = {}", fieldBytes);
-                if (show) LogProcess.info(log, "fieldBytes length = {}", fieldBytes.length);
-                if (show) LogProcess.info(log, "value = {}", value);
 
                 fieldMap.put(def.getName(), value);
                 // key hash

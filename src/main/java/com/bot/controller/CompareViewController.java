@@ -741,6 +741,8 @@ public class CompareViewController {
         FileConfigManager.updateOneFile(saveFileCongigMap);
 
         showAlert("儲存成功");
+        //儲存後，重新reload
+        loadFieldSetting();
 
     }
 

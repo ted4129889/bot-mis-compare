@@ -1216,7 +1216,7 @@
     "sortFields" : [ ]
   },
   "A116699" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "yy", "mm", "atmno" ],
     "sortFields" : [ ]
   },
   "2MIS-ENTX" : {

@@ -177,35 +177,71 @@ public class LineParser {
         String[] lines = line.split(regex, -1);
 
         int idx = 0;
+        int length = 0;
+        StringBuilder fieldName = new StringBuilder();
+        boolean isKey = false;
+
         try {
             for (FieldDef def : defs) {
+                if (!def.getName().contains("separator")) {
+                    fieldName.append(def.getName()).append(" ");
+                    length = length + def.getLength();
+                    //只要過程中有key，直到下一個分隔符號前都是true
+                    if (def.isKey()) {
+                        isKey = true;
+                    }
+                }
 
-                // separator 欄略過
+                // 遇到 separator 時候才開始紀錄前面欄位(才算1位)
                 if (def.getName().contains("separator")) {
-                    continue;
+                    // 取出 value
+                    String value = lines[idx].trim();
+                    idx++;
+
+                    // 依照欄位長度補滿
+                    value = padToByteLength(value, length, charset);
+
+                    // 放入 map
+                    fieldMap.put(fieldName.toString(), value);
+
+                    // full hash
+                    fullBuilder.append(value);
+
+                    // key hash
+                    if (isKey) {
+                        keyGroup.append(fieldName.append("=").append(value.trim()).append(","));
+                    }
+                    LogProcess.info(log, "fieldMap = {}", fieldMap );
+
+                    isKey = false;
+                    length = 0;
+                    fieldName = new StringBuilder("");
+
                 }
-                // 取出 value
-                String value = lines[idx].trim();
-                idx++;
-
-                // 依照欄位長度補滿
-                value = padToByteLength(value, def.getLength(), charset);
-
-
-                // 放入 map
-                fieldMap.put(def.getName(), value);
-
-                // key hash
-                if (def.isKey()) {
-                    keyGroup.append(def.getName()).append("=").append(value.trim()).append(",");
-                }
-
-                // full hash
-                fullBuilder.append(value);
-
-
             }
+            // 取出 value
+            String value = lines[idx].trim();
+            idx++;
+
+            // 依照欄位長度補滿
+            value = padToByteLength(value, length, charset);
+
+            // 放入 map
+            fieldMap.put(fieldName.toString(), value);
+
+            // full hash
+            fullBuilder.append(value);
+
+
+            // key hash
+            if (isKey) {
+                keyGroup.append(fieldName.append("=").append(value.trim()).append(","));
+            }
+
             String kg = keyGroup.length() > 0 ? keyGroup.substring(0, keyGroup.length() - 1) : "";
+            LogProcess.info(log, "fieldMap = {}", fieldMap );
+
+            LogProcess.info(log, "kg = {}", kg);
 
             return new RowData(line, kg, hash(kg), hash(fullBuilder.toString()), fieldMap);
 

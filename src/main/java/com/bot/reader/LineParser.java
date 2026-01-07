@@ -54,11 +54,10 @@ public class LineParser {
             String value = new String(fieldBytes, charset).trim();
             if (def.getName().contains("separator")) {
                 LogProcess.info(log, "separator = {}", value);
-                if (",".equals(value)) {
+                if (",".equals(value) || "*".equals(value)) {
                     globalSeparator.set(value);
                     useSplitMode.set(true);
                     LogProcess.info(log, "use parseLineBySplit ");
-
 
                 } else {
                     // separator為逗號以外，改用長度處理
@@ -109,6 +108,8 @@ public class LineParser {
         StringBuilder keyGroup = new StringBuilder();
         show = false;
         Charset charset = Charset.forName("MS950");
+
+        if(line.isEmpty()) return null;
 
         line = line.replaceAll("[☆□]", "?").replaceAll("[*?]", " ").replaceAll("\"", " ");        // 這些改成空白
 
@@ -168,6 +169,8 @@ public class LineParser {
         StringBuilder fullBuilder = new StringBuilder();
         StringBuilder keyGroup = new StringBuilder();
 
+        if(line.isEmpty()) return null;
+
         line = line.replaceAll("[☆□]", "?").replaceAll("[*?]", " ").replaceAll("\"", " ");        // 這些改成空白
 
         Charset charset = Charset.forName("MS950");
@@ -211,7 +214,7 @@ public class LineParser {
                     if (isKey) {
                         keyGroup.append(fieldName.append("=").append(value.trim()).append(","));
                     }
-                    LogProcess.info(log, "fieldMap = {}", fieldMap );
+//                    LogProcess.debug(log, "fieldMap = {}", fieldMap );
 
                     isKey = false;
                     length = 0;
@@ -221,7 +224,6 @@ public class LineParser {
             }
             // 取出 value
             String value = lines[idx].trim();
-            idx++;
 
             // 依照欄位長度補滿
             value = padToByteLength(value, length, charset);
@@ -239,9 +241,9 @@ public class LineParser {
             }
 
             String kg = keyGroup.length() > 0 ? keyGroup.substring(0, keyGroup.length() - 1) : "";
-            LogProcess.info(log, "fieldMap = {}", fieldMap );
+//            LogProcess.debug(log, "fieldMap = {}", fieldMap );
 
-            LogProcess.info(log, "kg = {}", kg);
+//            LogProcess.info(log, "kg = {}", kg);
 
             return new RowData(line, kg, hash(kg), hash(fullBuilder.toString()), fieldMap);
 

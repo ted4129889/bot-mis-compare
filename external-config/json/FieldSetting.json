@@ -1236,7 +1236,7 @@
     "sortFields" : [ ]
   },
   "BRORD" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "brord_brno", "brord_curcd", "brord_apid", "brord_cusno", "brord_genyymm" ],
     "sortFields" : [ ]
   },
   "CIF" : {
@@ -1248,7 +1248,7 @@
     "sortFields" : [ ]
   },
   "CRVT" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "swfbkcd", "swfnal", "swfloc", "swfbrno", "apcode", "aptype", "yymm", "aptypenm", "amt", "cnt", "bkcd", "nal", "loc", "brno" ],
     "sortFields" : [ ]
   },
   "CRVTDATE" : {

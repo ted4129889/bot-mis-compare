@@ -27,6 +27,10 @@ public class LineParser {
     // 沒 separator → fixed-length
     private static final AtomicBoolean useSplitMode = new AtomicBoolean(false);
 
+    private static String commonReplace(String line){
+        return line.replaceAll("[☆□]", "?").replaceAll("[*?]", " ").replaceAll("\"", " ");
+    }
+
     public static String detectSeparator(String line, List<FieldDef> defs) {
 
         // 已經偵測過就直接回傳（不用再掃）
@@ -36,7 +40,10 @@ public class LineParser {
 
         Charset charset = Charset.forName("MS950");
 
-        line = line.replaceAll("[☆□]", "?").replaceAll("[*?]", " ");       // 這些改成空白
+        line = commonReplace(line);
+
+
+        LogProcess.info(log, "取第一筆資料判斷使用切欄位方式 = {}", line);
 
         byte[] lineBytes = line.getBytes(charset);
 
@@ -54,7 +61,7 @@ public class LineParser {
             String value = new String(fieldBytes, charset).trim();
             if (def.getName().contains("separator")) {
                 LogProcess.info(log, "separator = {}", value);
-                if (",".equals(value) || "*".equals(value)) {
+                if (",".equals(value)) {
                     globalSeparator.set(value);
                     useSplitMode.set(true);
                     LogProcess.info(log, "use parseLineBySplit ");
@@ -111,7 +118,7 @@ public class LineParser {
 
         if(line.isEmpty()) return null;
 
-        line = line.replaceAll("[☆□]", "?").replaceAll("[*?]", " ").replaceAll("\"", " ");        // 這些改成空白
+        line = commonReplace(line);
 
         byte[] lineBytes = line.getBytes(charset);
 
@@ -130,7 +137,7 @@ public class LineParser {
 
                 String value = new String(fieldBytes, charset);
 
-                fieldMap.put(def.getName(), value);
+                fieldMap.put(def.getName().trim(), value);
                 // key hash
                 if (def.isKey()) {
                     keyGroup.append(def.getName()).append("=").append(value.trim()).append(",");
@@ -171,7 +178,7 @@ public class LineParser {
 
         if(line.isEmpty()) return null;
 
-        line = line.replaceAll("[☆□]", "?").replaceAll("[*?]", " ").replaceAll("\"", " ");        // 這些改成空白
+        line = commonReplace(line);
 
         Charset charset = Charset.forName("MS950");
 
@@ -205,7 +212,7 @@ public class LineParser {
                     value = padToByteLength(value, length, charset);
 
                     // 放入 map
-                    fieldMap.put(fieldName.toString(), value);
+                    fieldMap.put(fieldName.toString().trim(), value);
 
                     // full hash
                     fullBuilder.append(value);
@@ -229,7 +236,7 @@ public class LineParser {
             value = padToByteLength(value, length, charset);
 
             // 放入 map
-            fieldMap.put(fieldName.toString(), value);
+            fieldMap.put(fieldName.toString().trim(), value);
 
             // full hash
             fullBuilder.append(value);
@@ -274,7 +281,7 @@ public class LineParser {
         //實際字串長度
         int bytesLen = bytes.length;
 
-        if (show) LogProcess.info(log, "bytesLen = {}", bytesLen);
+//        if (show) LogProcess.info(log, "bytesLen = {}", bytesLen);
         int currentBytes = 0;
 
         for (int i = 0; i < str.length(); i++) {

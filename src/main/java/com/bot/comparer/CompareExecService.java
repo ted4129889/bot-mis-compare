@@ -61,12 +61,6 @@ public class CompareExecService {
         Path diffOutPutPath = finalOutputFolder.resolve(finalFileName + "_diff.txt");
         Path rockDbOutPutPath = finalOutputFolder.resolve("rocksdb\\A_DB");
 
-        System.out.println("finalOutputFolder :  " + finalOutputFolder);
-        System.out.println("missOutPutPath :  " + missOutPutPath);
-        System.out.println("extraOutPutPath :  " + extraOutPutPath);
-        System.out.println("diffOutPutPath :  " + diffOutPutPath);
-        System.out.println("rockDbOutPutPath :  " + rockDbOutPutPath);
-
         try (RocksDbManager db = new RocksDbManager(rockDbOutPutPath.toString())) {
 
             aCount = 0;
@@ -88,6 +82,8 @@ public class CompareExecService {
                     //轉map
                     RowData rawA = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs);
 
+                    if (rawA == null) continue;
+
 //                    OutputReporter.reportFileA(rawA, aFileOutPutPath);
                     // A key hash
                     String keyHash = rawA.getKeyHash();
@@ -102,11 +98,11 @@ public class CompareExecService {
                     db.put(keyHash, value);
 
                     if (++count % 100000 == 0) {
-                        System.out.println("aFileOutPutPath indexed: " + count);
+                        //System.out.println("aFileOutPutPath indexed: " + count);
                     }
                 }
 
-                System.out.println("A file indexed: " + count);
+                //System.out.println("A file indexed: " + count);
 
                 LogProcess.info(log, "bot file {} ,totalCnt = {} ", finalFileName, count);
             }
@@ -122,6 +118,9 @@ public class CompareExecService {
                     bCount++;
                     //轉map
                     RowData rawB = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs);
+
+                    if (rawB == null) continue;
+
 //                    OutputReporter.reportFileA(rawB, bFileOutPutPath);
                     // B key hash
                     String keyHash = rawB.getKeyHash();
@@ -159,14 +158,17 @@ public class CompareExecService {
                     }
 
                     if (++count % 100000 == 0) {
-                        System.out.println("B file compared: " + count);
+                        //System.out.println("B file compared: " + count);
                     }
 
 
-                    LogProcess.info(log, "mis file {} ,totalCnt = {} ", finalFileName, count);
-                    LogProcess.info(log, "mis file {} ,extraCount = {} ", finalFileName, extraCount);
-                    LogProcess.info(log, "bot file vs. mis file,diffCount = {} ", diffCount);
+//                    LogProcess.info(log, "mis file {} ,totalCnt = {} ", finalFileName, count);
+//                    LogProcess.info(log, "mis file {} ,extraCount = {} ", finalFileName, extraCount);
+//                    LogProcess.info(log, "bot file vs. mis file,diffCount = {} ", diffCount);
                 }
+                LogProcess.info(log, "mis file {} ,totalCnt = {} ", finalFileName, count);
+                LogProcess.info(log, "mis file {} ,extraCount = {} ", finalFileName, extraCount);
+                LogProcess.info(log, "bot file vs. mis file,diffCount = {} ", diffCount);
             }
 
             //3：找 B 少資料
@@ -214,11 +216,11 @@ public class CompareExecService {
         Path diffOutPutPath = finalOutputFolder.resolve(finalFileName + "_diff.txt");
         Path rockDbOutPutPath = finalOutputFolder.resolve("rocksdb\\A_DB");
 
-        System.out.println("finalOutputFolder :  " + finalOutputFolder);
-        System.out.println("missOutPutPath :  " + missOutPutPath);
-        System.out.println("extraOutPutPath :  " + extraOutPutPath);
-        System.out.println("diffOutPutPath :  " + diffOutPutPath);
-        System.out.println("rockDbOutPutPath :  " + rockDbOutPutPath);
+        //System.out.println("finalOutputFolder :  " + finalOutputFolder);
+        //System.out.println("missOutPutPath :  " + missOutPutPath);
+        //System.out.println("extraOutPutPath :  " + extraOutPutPath);
+        //System.out.println("diffOutPutPath :  " + diffOutPutPath);
+        //System.out.println("rockDbOutPutPath :  " + rockDbOutPutPath);
         aCount = 0;
         bCount = 0;
         missCount = 0;
@@ -251,11 +253,12 @@ public class CompareExecService {
                     db.put(key, value);
 
                     if (++count % 100000 == 0) {
-                        System.out.println("A file indexed: " + count);
+                        //System.out.println("A file indexed: " + count);
                     }
                 }
 
-                System.out.println("A file indexed: " + count);
+                LogProcess.info(log, "bot file {} ,totalCnt = {} ", finalFileName, count);
+                //System.out.println("A file indexed: " + count);
             }
 
             long seqB = 0;
@@ -326,9 +329,13 @@ public class CompareExecService {
                     }
 
                     if (++count % 100000 == 0) {
-                        System.out.println("B file compared: " + count);
+                        //System.out.println("B file compared: " + count);
                     }
                 }
+
+                LogProcess.info(log, "mis file {} ,totalCnt = {} ", finalFileName, count);
+                LogProcess.info(log, "mis file {} ,extraCount = {} ", finalFileName, extraCount);
+                LogProcess.info(log, "bot file vs. mis file,diffCount = {} ", diffCount);
             }
             //3：找 B 少資料
             RocksIterator it = db.newIterator();
@@ -344,6 +351,9 @@ public class CompareExecService {
                     OutputReporter.reportMissing(rawAJson, missOutPutPath);
                 }
             }
+
+            LogProcess.info(log, "mis file {} ,missCount = {} ", finalFileName, missCount);
+
             it.close();
 
             return exportTextFile(Path.of(fileName).getFileName().toString());
@@ -382,7 +392,7 @@ public class CompareExecService {
 
         double accuracyPercent = 0.0;
         accuracyPercent = 100.0 - Math.round(errorCount * 10000.0 / botTotal) / 100.0;
-        System.out.println("accuracyPercent = " + accuracyPercent + "%");
+        //System.out.println("accuracyPercent = " + accuracyPercent + "%");
         String note = "";
 
         return new CompareResultBean(fileName, botTotal, misTotal, diffCount, diffColCount, missCount, extraCount, accuracyPercent, note);

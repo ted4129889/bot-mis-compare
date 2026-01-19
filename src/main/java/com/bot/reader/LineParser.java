@@ -64,11 +64,15 @@ public class LineParser {
             String value = new String(fieldBytes, charset).trim();
             if (def.getName().contains("separator")) {
                 LogProcess.info(log, "separator = {}", value);
-                if (",".equals(value) || "$".equals(value) || separator.equals(value)) {
+                LogProcess.info(log, "self separator = {}", separator);
+                if(!separator.isBlank()){
                     globalSeparator.set(value);
                     useSplitMode.set(true);
-                    LogProcess.info(log, "use parseLineBySplit ");
-
+                    LogProcess.info(log, "use parseLineBySplit 1 ");
+                }else if (",".equals(value) || "$".equals(value) ) {
+                    globalSeparator.set(value);
+                    useSplitMode.set(true);
+                    LogProcess.info(log, "use parseLineBySplit 2");
                 } else {
                     // separator為逗號以外，改用長度處理
                     globalSeparator.set(""); // 或 null 亦可

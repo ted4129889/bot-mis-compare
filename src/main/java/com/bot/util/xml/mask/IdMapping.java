@@ -22,6 +22,8 @@ import java.util.function.Function;
 public class IdMapping {
     @Value("${localFile.mis.xml.mask.convert}")
     private String xmlFileDir;
+    @Value("${common.separator}")
+    private String SEPARATOR;
 
     public static TextFileUtil textFileUtil = new TextFileUtil();
     private static final String UNIFIED_NUMBER = "UNIFIED_NUMBER";
@@ -55,6 +57,7 @@ public class IdMapping {
         } else {
             LogProcess.info(log,"config file is exist: " + unifiedMaskFile);
         }
+        LogProcess.info(log,"separator ='"+SEPARATOR+"'");
 
         XmlParser xmlParser = new XmlParser();
         XmlData randomMaskData = xmlParser.parseFileRtnXmlData(randomMask);

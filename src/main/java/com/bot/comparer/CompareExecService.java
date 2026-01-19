@@ -35,6 +35,8 @@ public class CompareExecService {
     private int extraCount = 0;
     private int diffCount = 0;
 
+    @Value("${common.separator}")
+    private String SEPARATOR;
 
     @Value("${localFile.mis.compare_result.main}")
     private String resultMain;
@@ -80,7 +82,7 @@ public class CompareExecService {
                     aCount++;
 
                     //轉map
-                    RowData rawA = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs);
+                    RowData rawA = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs,SEPARATOR);
 
                     if (rawA == null) continue;
 
@@ -117,7 +119,7 @@ public class CompareExecService {
                 while ((line = br.readLine()) != null) {
                     bCount++;
                     //轉map
-                    RowData rawB = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs);
+                    RowData rawB = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs,SEPARATOR);
 
                     if (rawB == null) continue;
 
@@ -240,7 +242,7 @@ public class CompareExecService {
 
                     aCount++;
 
-                    RowData rawA = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs);
+                    RowData rawA = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs,SEPARATOR);
 
                     String hash = rawA.getFullHash();
 
@@ -274,7 +276,7 @@ public class CompareExecService {
 
                     bCount++;
 
-                    RowData rawB = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs);
+                    RowData rawB = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs,SEPARATOR);
 
                     String hashB = rawB.getFullHash();
 

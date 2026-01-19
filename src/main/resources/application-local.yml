@@ -6,7 +6,8 @@ spring:
       name: logs/app.log   # 指定 Log 檔案位置
     level:
       root: trace           # 設定全域日誌等級
-
+  config:
+    import: file:external-parameters.properties
 xmlPath: "external-config/xml/"
 batchFilePath: "batch-file/"
 localFile:
@@ -43,6 +44,9 @@ localFile:
         directory: "external-config/json/FieldSetting.json"
 externalSort:
   blockSize: 100000
+
+common:
+  separator: ${SEPARATOR}
 
 app:
   file-processing:

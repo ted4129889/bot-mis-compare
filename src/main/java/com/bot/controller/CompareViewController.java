@@ -113,7 +113,7 @@ public class CompareViewController {
     private String saveFileName = "";
     private List<String> saveFileNameList = new ArrayList<>();
 
-    private Map<String, FileConfig> saveFileCongigMap = new LinkedHashMap<>();
+//    private Map<String, FileConfig> saveFileCongigMap = new LinkedHashMap<>();
     private FileConfig saveFileConfig = new FileConfig();
     private String fontStyle = "-fx-font-size: 12px; -fx-font-family: \"Microsoft JhengHei\", \"Arial\", sans-serif;";
     int dataLength = 0;
@@ -198,6 +198,9 @@ public class CompareViewController {
 
         //刪除清單
         textFileUtil.deleteFile(resultTxt);
+
+        //初始化
+        initFieldSetting();
 
 
     }
@@ -351,7 +354,7 @@ public class CompareViewController {
             //每選擇檔案名稱都要先記錄存檔的
             saveFileName = fileName;
 
-            FileConfig thisFileConfig = saveFileCongigMap.get(fileName);
+            FileConfig thisFileConfig = FileConfigManager.get(fileName);
 
             List<String> pkFieldConfigs = thisFileConfig.getPrimaryKeys();
             List<SortFieldConfig> sortFieldConfigs = thisFileConfig.getSortFields();
@@ -534,19 +537,34 @@ public class CompareViewController {
             loadFieldSetting();
         }
     }
+    /**
+     * 初始化
+     * */
+    private void initFieldSetting() {
+
+        saveFileNameList = new ArrayList<>(maskDataFileService.getXmlAllFileName());
+
+        // 讀 JSON → 記憶體
+        FileConfigManager.loadAll();
+
+        // 補齊不存在的檔案設定 + 寫入 JSON
+        FileConfigManager.ensureAllFilesExist(saveFileNameList);
+    }
 
     /**
      * 載入檔案欄位設定(json)
      */
     private void loadFieldSetting() {
-        // 你目前載入的檔案名稱
+
+        // 目前載入的檔案名稱
         saveFileNameList = new ArrayList<>();
         for (String f : maskDataFileService.getXmlAllFileName()) {
             saveFileNameList.add(f);
         }
-        saveFileCongigMap = FileConfigManager.getConfigMap();
-        FileConfigManager.ensureAllFilesExistAndSave(saveFileNameList);
 
+        FileConfigManager.loadAll();
+
+        FileConfigManager.ensureAllFilesExist(saveFileNameList);
     }
 
     /**
@@ -654,7 +672,7 @@ public class CompareViewController {
         LocalDateTime dateTime = LocalDateTime.now();
         compareFileExportImpl.dateTime = dateTime;
         // 比對後並輸出
-        maskDataFileService.exec(oldFileNameMap, newFileNameMap, saveFileCongigMap, setting);
+        maskDataFileService.exec(oldFileNameMap, newFileNameMap, FileConfigManager.getConfigMap(), setting);
 
         if (!showAlert("比對完成!")) return;
 
@@ -734,21 +752,62 @@ public class CompareViewController {
      */
     @FXML
     private void saveFields() {
-        //暫存設定
-        saveConfigFromUI(saveFileName);
 
-        //將暫存設定，存到json檔案
-        FileConfigManager.updateOneFile(saveFileCongigMap);
+        FileConfig oldConfig = FileConfigManager.get(saveFileName);
 
-        showAlert("儲存成功");
-        //儲存後，重新reload
+        FileConfig newConfig = new FileConfig();
+        newConfig.setPrimaryKeys(pkFieldSetting());
+        newConfig.setSortFields(sortFieldSetting());
+
+        if (!newConfig.equals(oldConfig)) {
+
+            LogProcess.info(log, "FieldSetting changed for file = {}", saveFileName);
+
+            FileConfigManager.put(saveFileName, newConfig);
+            FileConfigManager.saveToFile();
+
+            showAlert("儲存成功 (有變更)");
+
+        } else {
+
+            LogProcess.info(log, "No change for file = {}", saveFileName);
+            showAlert("沒有任何變更");
+        }
+
         loadFieldSetting();
+    }
 
+    private void logDiff(String fileName, FileConfig oldCfg, FileConfig newCfg) {
+
+        if (!Objects.equals(oldCfg.getPrimaryKeys(), newCfg.getPrimaryKeys())) {
+            LogProcess.info(log,
+                    "File {} PK changed: {} -> {}",
+                    fileName,
+                    oldCfg.getPrimaryKeys(),
+                    newCfg.getPrimaryKeys());
+        }
+
+        if (!Objects.equals(oldCfg.getSortFields(), newCfg.getSortFields())) {
+            LogProcess.info(log,
+                    "File {} SortFields changed: {} -> {}",
+                    fileName,
+                    oldCfg.getSortFields(),
+                    newCfg.getSortFields());
+        }
     }
 
     /**
      * 儲存 UI設定
      */
+//    private void saveConfigFromUI(String fileName) {
+//
+//        FileConfig fileConfig = new FileConfig();
+//
+//        fileConfig.setPrimaryKeys(pkFieldSetting());
+//        fileConfig.setSortFields(sortFieldSetting());
+//
+//        saveFileCongigMap.put(fileName, fileConfig);
+//    }
     private void saveConfigFromUI(String fileName) {
 
         FileConfig fileConfig = new FileConfig();
@@ -756,8 +815,7 @@ public class CompareViewController {
         fileConfig.setPrimaryKeys(pkFieldSetting());
         fileConfig.setSortFields(sortFieldSetting());
 
-//        LogProcess.info("fileName.. =" + fileName);
-        saveFileCongigMap.put(fileName, fileConfig);
+        FileConfigManager.put(fileName, fileConfig);
     }
 
     /**

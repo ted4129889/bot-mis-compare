@@ -35,6 +35,10 @@ public class CompareExecService {
     private int extraCount = 0;
     private int diffCount = 0;
 
+    String missTxt = "_miss.txt";
+    String extraTxt = "_extra.txt";
+    String diffTxt = "_diff.txt";
+
     @Value("${common.separator}")
     private String SEPARATOR;
 
@@ -55,12 +59,16 @@ public class CompareExecService {
 
         String finalFileName = fileName + "_" + dateTimeStr;
 
+        int missPage = 1;
+        int extraPage = 1;
+        int diffPage = 1;
+
         Path finalOutputFolder = Path.of(resultMain).resolve(fileType).resolve(fileName);
         Path aFileOutPutPath = finalOutputFolder.resolve(finalFileName + "_bot.txt");
         Path bFileOutPutPath = finalOutputFolder.resolve(finalFileName + "_misbh.txt");
-        Path missOutPutPath = finalOutputFolder.resolve(finalFileName + "_miss.txt");
-        Path extraOutPutPath = finalOutputFolder.resolve(finalFileName + "_extra.txt");
-        Path diffOutPutPath = finalOutputFolder.resolve(finalFileName + "_diff.txt");
+        Path missOutPutPath = finalOutputFolder.resolve(finalFileName + "_" + missPage + missTxt);
+        Path extraOutPutPath = finalOutputFolder.resolve(finalFileName + "_" + extraPage + extraTxt);
+        Path diffOutPutPath = finalOutputFolder.resolve(finalFileName + "_" + diffPage + diffTxt);
         Path rockDbOutPutPath = finalOutputFolder.resolve("rocksdb\\A_DB");
 
         try (RocksDbManager db = new RocksDbManager(rockDbOutPutPath.toString())) {
@@ -82,7 +90,7 @@ public class CompareExecService {
                     aCount++;
 
                     //轉map
-                    RowData rawA = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs,SEPARATOR);
+                    RowData rawA = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs, SEPARATOR);
 
                     if (rawA == null) continue;
 
@@ -119,7 +127,7 @@ public class CompareExecService {
                 while ((line = br.readLine()) != null) {
                     bCount++;
                     //轉map
-                    RowData rawB = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs,SEPARATOR);
+                    RowData rawB = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs, SEPARATOR);
 
                     if (rawB == null) continue;
 
@@ -136,6 +144,10 @@ public class CompareExecService {
                     //找不到，表示 B 多資料
                     if (valueInA == null) {
                         extraCount++;
+                        if (extraCount % 500000 == 0) {
+                            extraPage++;
+                            extraOutPutPath = finalOutputFolder.resolve(finalFileName + "_" + extraPage + extraTxt);
+                        }
                         //寫到多的檔案
                         OutputReporter.reportExtra(rawB, extraOutPutPath);
                     } else {
@@ -152,6 +164,11 @@ public class CompareExecService {
                         // 比 hash → 欄位差異
                         if (!fullHashA.equals(fullHashB)) {
                             diffCount++;
+
+                            if (diffCount % 500000 == 0) {
+                                diffPage++;
+                                diffOutPutPath = finalOutputFolder.resolve(finalFileName + "_" + diffPage + diffTxt);
+                            }
 
                             String diffResult = compareFields(RowData.fromJson(rawA), rawB, defs);
                             //有符合，但是內容有差異
@@ -187,6 +204,11 @@ public class CompareExecService {
 
                 if ("0".equals(flag)) {
                     missCount++;
+                    if (missCount % 500000 == 0) {
+                        missPage++;
+                        missOutPutPath = finalOutputFolder.resolve(finalFileName + "_" + missPage + missTxt);
+                    }
+
                     // A 有， B 沒有
                     OutputReporter.reportMissing(rawA, missOutPutPath);
                 }
@@ -242,7 +264,7 @@ public class CompareExecService {
 
                     aCount++;
 
-                    RowData rawA = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs,SEPARATOR);
+                    RowData rawA = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs, SEPARATOR);
 
                     String hash = rawA.getFullHash();
 
@@ -276,7 +298,7 @@ public class CompareExecService {
 
                     bCount++;
 
-                    RowData rawB = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs,SEPARATOR);
+                    RowData rawB = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs, SEPARATOR);
 
                     String hashB = rawB.getFullHash();
 

@@ -5,7 +5,6 @@ import com.bot.domain.RowData;
 import com.bot.util.log.LogProcess;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
@@ -21,7 +20,6 @@ import java.util.regex.Pattern;
 public class LineParser {
 
 
-
     static boolean show = false;
 
     private static final AtomicReference<String> globalSeparator = new AtomicReference<>(null);
@@ -30,11 +28,12 @@ public class LineParser {
     // 沒 separator → fixed-length
     private static final AtomicBoolean useSplitMode = new AtomicBoolean(false);
 
-    private static String commonReplace(String line){
-        return line.replaceAll("[☆□]", "?").replaceAll("[*?]", " ").replaceAll("\"", " ");
+    private static String commonReplace(String line) {
+//        return line.replaceAll("[☆□]", "?").replaceAll("[*?]", " ").replaceAll("\"", " ");
+        return line;
     }
 
-    public static String detectSeparator(String line, List<FieldDef> defs,String separator) {
+    public static String detectSeparator(String line, List<FieldDef> defs, String separator) {
 
         // 已經偵測過就直接回傳（不用再掃）
         if (globalSeparator.get() != null) {
@@ -65,11 +64,11 @@ public class LineParser {
             if (def.getName().contains("separator")) {
                 LogProcess.info(log, "separator = {}", value);
                 LogProcess.info(log, "self separator = {}", separator);
-                if(!separator.isBlank()){
+                if (!separator.isBlank()) {
                     globalSeparator.set(value);
                     useSplitMode.set(true);
                     LogProcess.info(log, "use parseLineBySplit 1 ");
-                }else if (",".equals(value) || "$".equals(value) ) {
+                } else if (",".equals(value) || "$".equals(value)) {
                     globalSeparator.set(value);
                     useSplitMode.set(true);
                     LogProcess.info(log, "use parseLineBySplit 2");
@@ -93,10 +92,10 @@ public class LineParser {
 
     }
 
-    public static RowData parseLine(String line, List<FieldDef> defs,String separator) {
+    public static RowData parseLine(String line, List<FieldDef> defs, String separator) {
 
         //先檢查分隔符號決定使用哪一種方式處理
-        detectSeparator(line, defs,separator);
+        detectSeparator(line, defs, separator);
 
         if (useSplitMode.get()) {
             return parseLineBySplit(line, defs, globalSeparator.get());
@@ -123,7 +122,7 @@ public class LineParser {
         show = false;
         Charset charset = Charset.forName("MS950");
 
-        if(line.isEmpty()) return null;
+        if (line.isEmpty()) return null;
 
         line = commonReplace(line);
 
@@ -183,7 +182,7 @@ public class LineParser {
         StringBuilder fullBuilder = new StringBuilder();
         StringBuilder keyGroup = new StringBuilder();
 
-        if(line.isEmpty()) return null;
+        if (line.isEmpty()) return null;
 
         line = commonReplace(line);
 

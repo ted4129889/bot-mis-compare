@@ -1,9 +1,61 @@
 spring:
-  profiles:
-    active: local
+#  profiles:
+#    active: local
 #  config:
 #    import:
 #      - optional:classpath:application-local.yml
 #      - optional:/app/fsap/fsap-mis/application-config.yml
 #      - optional:/app/config/application-config.yml
-  doubleLine: 0
+  main:
+    web-application-type: none
+  logging:
+    file:
+      name: logs/app.log   # 指定 Log 檔案位置
+    level:
+      root: trace           # 設定全域日誌等級
+  config:
+    import: file:external-parameters.properties
+xmlPath: "external-config/xml/"
+batchFilePath: "batch-file/"
+localFile:
+  mis:
+    batch:
+      input: "${batchFilePath}input/"
+      output: "${batchFilePath}output/"
+      output_original_data: "${batchFilePath}output_original_data/"
+      compare:
+        new:
+          directory: "${batchFilePath}compare/new/"
+        old:
+          directory: "${batchFilePath}compare/old/"
+    xml:
+      input:
+        directory: "${xmlPath}input/"
+        bot_directory: "${xmlPath}bot_input/"
+      output:
+        directory: "${xmlPath}output/"
+        bot_directory: "${xmlPath}bot_output/"
+      file_def: "${xmlPath}file/DailyBatchFileDefinition.xml"
+      file_def2: "${xmlPath}file/MonthlyBatchFileDefinition.xml"
+      mask:
+        directory: "${xmlPath}mask/"
+        convert: "${xmlPath}mask/convert/"
+    compare_result:
+      main : "ComparisonResult/"
+      excel: "ComparisonResult/excel/"
+      csv: "ComparisonResult/csv/"
+      txt: "ComparisonResult/txt/"
+      final: "ComparisonResult/CheckResultList.txt"
+    json:
+      field_setting:
+        directory: "external-config/json/FieldSetting.json"
+externalSort:
+  blockSize: 100000
+
+common:
+  separator: ${SEPARATOR}
+
+app:
+  file-processing:
+    max-lines: 2000
+    timeout: 5000

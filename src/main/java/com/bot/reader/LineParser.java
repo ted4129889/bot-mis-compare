@@ -61,14 +61,14 @@ public class LineParser {
                             lineBytes, sPos, sPos + length);
 
             String value = new String(fieldBytes, charset).trim();
+            LogProcess.info(log, "separator = {}", value);
             if (def.getName().contains("separator")) {
-                LogProcess.info(log, "separator = {}", value);
                 LogProcess.info(log, "self separator = {}", separator);
                 if (!separator.isBlank()) {
                     globalSeparator.set(value);
                     useSplitMode.set(true);
                     LogProcess.info(log, "use parseLineBySplit 1 ");
-                } else if (",".equals(value) || "$".equals(value)) {
+                } else if (",".equals(value) || "$".equals(value)  || separator.equals(value) ) {
                     globalSeparator.set(value);
                     useSplitMode.set(true);
                     LogProcess.info(log, "use parseLineBySplit 2");

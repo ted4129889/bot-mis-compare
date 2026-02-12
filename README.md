@@ -1,11 +1,9 @@
-### Version:20250203
+### Version:20260210
 # Main Project
-### com-bot-tools
+### 比對工具
 # Env Setting
 ### Install JDK 21
 ### Install IntelliJ lombok Plugins
-### LOG 位置：LOG/MIS/
-- #### log檔案名稱輸出格式： %d{yyyy-MM-dd}-${userId}-%i.log
 ### external-parameters.properties：外部參數檔(ex:設定資料庫連線參數)
 ### external-config 定義檔文件
 - #### external-config/xml/input 讀取檔案使用之定義檔(for 程式使用)

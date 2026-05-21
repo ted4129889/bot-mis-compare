@@ -12,25 +12,23 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 
 @Slf4j
 public class LineParser {
 
-
     static boolean show = false;
 
-    private static final AtomicReference<String> globalSeparator = new AtomicReference<>(null);
-
-    // 有 separator → split
-    // 沒 separator → fixed-length
-    private static final AtomicBoolean useSplitMode = new AtomicBoolean(false);
+    private String detectedSeparator;
+    private boolean useSplitMode;
 
     public static void resetDetection() {
-        globalSeparator.set(null);
-        useSplitMode.set(false);
+        // Kept for backward compatibility. New code should create one LineParser per compare run.
+    }
+
+    public void reset() {
+        detectedSeparator = null;
+        useSplitMode = false;
     }
 
     private static String commonReplace(String line) {
@@ -39,18 +37,20 @@ public class LineParser {
     }
 
     public static String detectSeparator(String line, List<FieldDef> defs, String separator) {
+        return new LineParser().detectSeparatorForFile(line, defs, separator);
+    }
 
-        // 已經偵測過就直接回傳（不用再掃）
-        if (globalSeparator.get() != null) {
-            return globalSeparator.get();
+    public String detectSeparatorForFile(String line, List<FieldDef> defs, String separator) {
+        if (detectedSeparator != null) {
+            return detectedSeparator;
         }
 
+        String configuredSeparator = separator == null ? "" : separator;
         Charset charset = Charset.forName("MS950");
 
         line = commonReplace(line);
 
-
-        LogProcess.info(log, "取第一筆資料判斷使用切欄位方式 = {}", line);
+        LogProcess.info(log, "Detect parser mode from first data line = {}", line);
 
         byte[] lineBytes = line.getBytes(charset);
 
@@ -58,29 +58,25 @@ public class LineParser {
         int sPos = 0;
 
         for (FieldDef def : defs) {
-
             int length = def.getLength();
 
-            byte[] fieldBytes =
-                    Arrays.copyOfRange(
-                            lineBytes, sPos, sPos + length);
-
+            byte[] fieldBytes = Arrays.copyOfRange(lineBytes, sPos, sPos + length);
             String value = new String(fieldBytes, charset).trim();
+
             LogProcess.info(log, "separator = {}", value);
             if (def.getName().contains("separator")) {
-                LogProcess.info(log, "self separator = {}", separator);
-                if (!separator.isBlank()) {
-                    globalSeparator.set(value);
-                    useSplitMode.set(true);
-                    LogProcess.info(log, "use parseLineBySplit 1 ");
-                } else if (",".equals(value) || "$".equals(value) || separator.equals(value)) {
-                    globalSeparator.set(value);
-                    useSplitMode.set(true);
+                LogProcess.info(log, "configured separator = {}", separator);
+                if (!configuredSeparator.isBlank()) {
+                    detectedSeparator = value;
+                    useSplitMode = true;
+                    LogProcess.info(log, "use parseLineBySplit 1");
+                } else if (",".equals(value) || "$".equals(value) || configuredSeparator.equals(value)) {
+                    detectedSeparator = value;
+                    useSplitMode = true;
                     LogProcess.info(log, "use parseLineBySplit 2");
                 } else {
-                    // separator為逗號以外，改用長度處理
-                    globalSeparator.set(""); // 或 null 亦可
-                    useSplitMode.set(false);
+                    detectedSeparator = "";
+                    useSplitMode = false;
                     LogProcess.info(log, "use parseLineByFixed1");
                     return "";
                 }
@@ -89,25 +85,25 @@ public class LineParser {
             }
             sPos += length;
         }
-        // 找不到 separator
-        globalSeparator.set(""); // 或 null 亦可
-        useSplitMode.set(false);
+
+        detectedSeparator = "";
+        useSplitMode = false;
         LogProcess.info(log, "use parseLineByFixed2");
         return "";
-
     }
 
     public static RowData parseLine(String line, List<FieldDef> defs, String separator) {
+        return new LineParser().parse(line, defs, separator);
+    }
 
-        //先檢查分隔符號決定使用哪一種方式處理
-        detectSeparator(line, defs, separator);
+    public RowData parse(String line, List<FieldDef> defs, String separator) {
+        detectSeparatorForFile(line, defs, separator);
 
-        if (useSplitMode.get()) {
-            return parseLineBySplit(line, defs, globalSeparator.get());
+        if (useSplitMode) {
+            return parseLineBySplit(line, defs, detectedSeparator);
         } else {
             return parseLineByFixed(line, defs);
         }
-
     }
 
 
@@ -120,7 +116,6 @@ public class LineParser {
      *
      */
     public static RowData parseLineByFixed(String line, List<FieldDef> defs) {
-
         Map<String, String> fieldMap = new HashMap<>();
         StringBuilder fullBuilder = new StringBuilder();
         StringBuilder keyGroup = new StringBuilder();
@@ -130,45 +125,31 @@ public class LineParser {
         if (line.isEmpty()) return null;
 
         line = commonReplace(line);
-
         byte[] lineBytes = line.getBytes(charset);
 
-
-        //初始位置
         int sPos = 0;
         try {
             for (FieldDef def : defs) {
-
                 int length = def.getLength();
-
-                byte[] fieldBytes =
-                        Arrays.copyOfRange(
-                                lineBytes, sPos, sPos + length);
-
-
+                byte[] fieldBytes = Arrays.copyOfRange(lineBytes, sPos, sPos + length);
                 String value = new String(fieldBytes, charset);
 
                 fieldMap.put(def.getName().trim(), value);
-                // key hash
+
                 if (def.isKey()) {
                     keyGroup.append(def.getName()).append("=").append(value.trim()).append(",");
                 }
 
-                // full hash
                 fullBuilder.append(value);
-
                 sPos += length;
-
             }
+
             String kg = keyGroup.length() > 0 ? keyGroup.substring(0, keyGroup.length() - 1) : "";
-
             return new RowData(line, kg, hash(kg), hash(fullBuilder.toString()), fieldMap);
-
         } catch (Exception e) {
             LogProcess.error(log, "error lines = {}", line, e);
             throw e;
         }
-
     }
 
 
@@ -182,7 +163,6 @@ public class LineParser {
      *
      */
     public static RowData parseLineBySplit(String line, List<FieldDef> defs, String separator) {
-
         Map<String, String> fieldMap = new HashMap<>();
         StringBuilder fullBuilder = new StringBuilder();
         StringBuilder keyGroup = new StringBuilder();
@@ -192,9 +172,7 @@ public class LineParser {
         line = commonReplace(line);
 
         Charset charset = Charset.forName("MS950");
-
         String regex = Pattern.quote(separator);
-
         String[] lines = line.split(regex, -1);
 
         int idx = 0;
@@ -202,14 +180,14 @@ public class LineParser {
         StringBuilder fieldName = new StringBuilder();
         boolean isKey = false;
 
-        String resultKey = "";
-        int keyLen = 0;
+        String resultKey;
+        int keyLen;
         try {
             for (FieldDef def : defs) {
                 if (!def.getName().contains("separator")) {
                     fieldName.append(def.getName()).append("+");
-                    length = length + def.getLength();
-                    //只要過程中有key，直到下一個分隔符號前都是true
+                    length += def.getLength();
+
                     if (def.isKey()) {
                         isKey = true;
                     }
@@ -217,7 +195,6 @@ public class LineParser {
 
                 // 遇到 separator 時候才開始紀錄前面欄位(才算1位)
                 if (def.getName().contains("separator")) {
-                    // 取出 value
                     String value = lines[idx].trim();
                     idx++;
 
@@ -236,14 +213,13 @@ public class LineParser {
 
                     // key hash
                     if (isKey) {
-                        keyGroup.append(resultKey + " = " + value.trim() + ",");
+                        keyGroup.append(resultKey).append(" = ").append(value.trim()).append(",");
                     }
 //                    LogProcess.debug(log, "fieldMap = {}", fieldMap );
 
                     isKey = false;
                     length = 0;
-                    fieldName = new StringBuilder("");
-
+                    fieldName = new StringBuilder();
                 }
             }
             // 取出 value
@@ -261,26 +237,18 @@ public class LineParser {
 
             // key hash
             if (isKey) {
-                keyGroup.append(fieldName.append("=").append(value.trim()).append(","));
+                keyGroup.append(fieldName).append("=").append(value.trim()).append(",");
             }
 
             String kg = keyGroup.length() > 0 ? keyGroup.substring(0, keyGroup.length() - 1) : "";
-//            LogProcess.debug(log, "fieldMap = {}", fieldMap );
-
-//            LogProcess.info(log, "kg = {}", kg);
-
             return new RowData(line, kg, hash(kg), hash(fullBuilder.toString()), fieldMap);
-
         } catch (Exception e) {
-            LogProcess.error(log, "error lines = {}", lines, e);
+            LogProcess.error(log, "error lines = {}", Arrays.toString(lines), e);
             throw e;
         }
-
     }
 
-
     private static String hash(String s) {
-        // Apache commons
         return DigestUtils.md5Hex(s);
     }
 
@@ -297,10 +265,9 @@ public class LineParser {
 
         //實際字串長度
         int bytesLen = bytes.length;
-
 //        if (show) LogProcess.info(log, "bytesLen = {}", bytesLen);
-        int currentBytes = 0;
 
+        int currentBytes = 0;
         for (int i = 0; i < str.length(); i++) {
             String ch = str.substring(i, i + 1);
             int byteLen = ch.getBytes(charset).length;
@@ -310,8 +277,8 @@ public class LineParser {
                 return i;
             }
             currentBytes += byteLen;
-
         }
+
         str = str + " ".repeat(maxBytes - str.length());
         // 全部都沒超過就整段可以用
         return str.length();
@@ -323,9 +290,9 @@ public class LineParser {
 
         for (char c : input.toCharArray()) {
             if (encoder.canEncode(c)) {
-                sb.append(c);  // 可編碼 → 保留
+                sb.append(c);
             } else {
-                sb.append("?"); // 不可編碼 → 兩個半形空白
+                sb.append("?");
             }
         }
         return sb.toString();
@@ -340,7 +307,6 @@ public class LineParser {
 
         byte[] bytes = value.getBytes(charset);
 
-        // 剛好或超過長度 → 截斷
         if (bytes.length >= byteLength) {
             return new String(Arrays.copyOf(bytes, byteLength), charset);
         }
@@ -355,5 +321,4 @@ public class LineParser {
 
         return sb.toString();
     }
-
 }

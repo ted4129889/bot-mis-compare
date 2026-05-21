@@ -53,7 +53,7 @@ public class CompareExecService {
 
     public CompareResultBean compare(Path fileA, Path fileB, List<FieldDef> defs, String fileName, String fileType) throws Exception {
 
-        LineParser.resetDetection();
+        LineParser parser = new LineParser();
 
         LocalDateTime dateTime = LocalDateTime.now();
 
@@ -93,7 +93,7 @@ public class CompareExecService {
                     aCount++;
 
                     //轉map
-                    RowData rawA = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs, SEPARATOR);
+                    RowData rawA = parser.parse(formatData.getReplaceSpace(line, " "), defs, SEPARATOR);
 
                     if (rawA == null) continue;
 
@@ -130,7 +130,7 @@ public class CompareExecService {
                 while ((line = br.readLine()) != null) {
                     bCount++;
                     //轉map
-                    RowData rawB = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs, SEPARATOR);
+                    RowData rawB = parser.parse(formatData.getReplaceSpace(line, " "), defs, SEPARATOR);
 
                     if (rawB == null) continue;
 
@@ -228,7 +228,7 @@ public class CompareExecService {
     //依照hash排序比對
     public CompareResultBean compare2(Path fileA, Path fileB, List<FieldDef> defs, String fileName, String fileType) throws Exception {
 
-        LineParser.resetDetection();
+        LineParser parser = new LineParser();
 
         LocalDateTime dateTime = LocalDateTime.now();
 
@@ -269,7 +269,7 @@ public class CompareExecService {
 
                     aCount++;
 
-                    RowData rawA = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs, SEPARATOR);
+                    RowData rawA = parser.parse(formatData.getReplaceSpace(line, " "), defs, SEPARATOR);
 
                     String hash = rawA.getFullHash();
 
@@ -303,7 +303,7 @@ public class CompareExecService {
 
                     bCount++;
 
-                    RowData rawB = LineParser.parseLine(formatData.getReplaceSpace(line, " "), defs, SEPARATOR);
+                    RowData rawB = parser.parse(formatData.getReplaceSpace(line, " "), defs, SEPARATOR);
 
                     String hashB = rawB.getFullHash();
 

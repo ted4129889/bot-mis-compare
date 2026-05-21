@@ -5,6 +5,7 @@ import org.rocksdb.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 
 public class RocksDbManager implements AutoCloseable {
 
@@ -19,6 +20,7 @@ public class RocksDbManager implements AutoCloseable {
         RocksDB.loadLibrary();
 
         File dir = new File(dbPath);
+        validateManagedRocksDbPath(dir.toPath());
 
         //若資料夾存在，先刪除
         if (dir.exists()) {
@@ -41,6 +43,24 @@ public class RocksDbManager implements AutoCloseable {
                 .setAllowMmapReads(true)
                 .setAllowMmapWrites(true);
         this.db = RocksDB.open(options, dbPath);
+    }
+
+    private void validateManagedRocksDbPath(Path path) {
+        Path normalized = path.toAbsolutePath().normalize();
+        Path fileName = normalized.getFileName();
+        Path parent = normalized.getParent();
+        Path grandParent = parent == null ? null : parent.getParent();
+
+        boolean isExpectedDbFolder = fileName != null
+                && parent != null
+                && grandParent != null
+                && "A_DB".equals(fileName.toString())
+                && "rocksdb".equals(parent.getFileName().toString())
+                && normalized.toString().contains("ComparisonResult");
+
+        if (!isExpectedDbFolder) {
+            throw new IllegalArgumentException("Refuse to manage unexpected RocksDB path: " + normalized);
+        }
     }
 
     public void put(String key, String value) throws RocksDBException {

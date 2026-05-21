@@ -11772,17 +11772,16 @@
             <separator></separator>
         </footer>
     </data>
-    <data fileName="DACNO_DB">
+    <data fileName="DACNO">
         <header></header>
         <body>
-            <separator>,</separator>
             <field>
-                <fieldName>brno</fieldName>
+                <fieldName>apid</fieldName>
                 <fieldType>string</fieldType>
                 <length>3</length>
             </field>
             <field>
-                <fieldName>separator</fieldName>
+                <fieldName>separator1</fieldName>
                 <fieldType>string</fieldType>
                 <length>1</length>
             </field>
@@ -11793,7 +11792,17 @@
                 <maskType>1</maskType>
             </field>
             <field>
-                <fieldName>separator</fieldName>
+                <fieldName>separator2</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>gactno</fieldName>
+                <fieldType>string</fieldType>
+                <length>15</length>
+            </field>
+            <field>
+                <fieldName>separator3</fieldName>
                 <fieldType>string</fieldType>
                 <length>1</length>
             </field>
@@ -11803,37 +11812,7 @@
                 <length>1</length>
             </field>
             <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>yymm</fieldName>
-                <fieldType>string</fieldType>
-                <length>6</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>actno</fieldName>
-                <fieldType>string</fieldType>
-                <length>12</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>curcd</fieldName>
-                <fieldType>string</fieldType>
-                <length>2</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
+                <fieldName>separator4</fieldName>
                 <fieldType>string</fieldType>
                 <length>1</length>
             </field>
@@ -11843,157 +11822,7 @@
                 <length>3</length>
             </field>
             <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>charcd</fieldName>
-                <fieldType>string</fieldType>
-                <length>2</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>bcode</fieldName>
-                <fieldType>string</fieldType>
-                <length>4</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>opday</fieldName>
-                <fieldType>string</fieldType>
-                <length>8</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>eday</fieldName>
-                <fieldType>string</fieldType>
-                <length>8</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>mlybal</fieldName>
-                <fieldType>string</fieldType>
-                <length>13</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>mlynum</fieldName>
-                <fieldType>string</fieldType>
-                <length>15</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>numintr</fieldName>
-                <fieldType>string</fieldType>
-                <length>15</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>mlyday</fieldName>
-                <fieldType>string</fieldType>
-                <length>2</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>avbal</fieldName>
-                <fieldType>string</fieldType>
-                <length>13</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>avintrt</fieldName>
-                <fieldType>string</fieldType>
-                <length>9</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>avexrt</fieldName>
-                <fieldType>string</fieldType>
-                <length>9</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>gins</fieldName>
-                <fieldType>string</fieldType>
-                <length>10</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>nins</fieldName>
-                <fieldType>string</fieldType>
-                <length>10</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>costnumwt</fieldName>
-                <fieldType>string</fieldType>
-                <length>15</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>netavbal</fieldName>
-                <fieldType>string</fieldType>
-                <length>12</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
+                <fieldName>separator5</fieldName>
                 <fieldType>string</fieldType>
                 <length>1</length>
             </field>
@@ -12003,27 +11832,17 @@
                 <length>15</length>
             </field>
             <field>
-                <fieldName>separator</fieldName>
+                <fieldName>separator6</fieldName>
                 <fieldType>string</fieldType>
                 <length>1</length>
             </field>
             <field>
-                <fieldName>ntavalnum</fieldName>
+                <fieldName>avbal</fieldName>
                 <fieldType>string</fieldType>
-                <length>15</length>
+                <length>13</length>
             </field>
             <field>
-                <fieldName>separator</fieldName>
-                <fieldType>string</fieldType>
-                <length>1</length>
-            </field>
-            <field>
-                <fieldName>costrt</fieldName>
-                <fieldType>string</fieldType>
-                <length>7</length>
-            </field>
-            <field>
-                <fieldName>separator</fieldName>
+                <fieldName>separator7</fieldName>
                 <fieldType>string</fieldType>
                 <length>1</length>
             </field>
@@ -12033,17 +11852,147 @@
                 <length>15</length>
             </field>
             <field>
-                <fieldName>separator</fieldName>
+                <fieldName>separator8</fieldName>
                 <fieldType>string</fieldType>
                 <length>1</length>
             </field>
             <field>
-                <fieldName>ninsnt</fieldName>
+                <fieldName>avexrt</fieldName>
+                <fieldType>string</fieldType>
+                <length>9</length>
+            </field>
+            <field>
+                <fieldName>separator9</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>avintrt</fieldName>
+                <fieldType>string</fieldType>
+                <length>9</length>
+            </field>
+            <field>
+                <fieldName>separator10</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>bcode</fieldName>
+                <fieldType>string</fieldType>
+                <length>6</length>
+            </field>
+            <field>
+                <fieldName>separator11</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>brno</fieldName>
+                <fieldType>string</fieldType>
+                <length>3</length>
+            </field>
+            <field>
+                <fieldName>separator12</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>charcd</fieldName>
+                <fieldType>string</fieldType>
+                <length>2</length>
+            </field>
+            <field>
+                <fieldName>separator13</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>costnumwt</fieldName>
+                <fieldType>string</fieldType>
+                <length>15</length>
+            </field>
+            <field>
+                <fieldName>separator14</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>costrt</fieldName>
+                <fieldType>string</fieldType>
+                <length>7</length>
+            </field>
+            <field>
+                <fieldName>separator15</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>curcd</fieldName>
+                <fieldType>string</fieldType>
+                <length>2</length>
+            </field>
+            <field>
+                <fieldName>separator16</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>eday</fieldName>
+                <fieldType>string</fieldType>
+                <length>8</length>
+            </field>
+            <field>
+                <fieldName>separator17</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>gins</fieldName>
+                <fieldType>string</fieldType>
+                <length>10</length>
+            </field>
+            <field>
+                <fieldName>separator18</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>mlybal</fieldName>
+                <fieldType>string</fieldType>
+                <length>13</length>
+            </field>
+            <field>
+                <fieldName>separator19</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>mlyday</fieldName>
+                <fieldType>string</fieldType>
+                <length>2</length>
+            </field>
+            <field>
+                <fieldName>separator20</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>mlynum</fieldName>
+                <fieldType>string</fieldType>
+                <length>15</length>
+            </field>
+            <field>
+                <fieldName>separator21</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>netavbal</fieldName>
                 <fieldType>string</fieldType>
                 <length>12</length>
             </field>
             <field>
-                <fieldName>separator</fieldName>
+                <fieldName>separator22</fieldName>
                 <fieldType>string</fieldType>
                 <length>1</length>
             </field>
@@ -12053,17 +12002,57 @@
                 <length>15</length>
             </field>
             <field>
-                <fieldName>separator</fieldName>
+                <fieldName>separator23</fieldName>
                 <fieldType>string</fieldType>
                 <length>1</length>
             </field>
             <field>
-                <fieldName>apid</fieldName>
+                <fieldName>nins</fieldName>
                 <fieldType>string</fieldType>
-                <length>3</length>
+                <length>10</length>
             </field>
             <field>
-                <fieldName>separator</fieldName>
+                <fieldName>separator24</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>ninsnt</fieldName>
+                <fieldType>string</fieldType>
+                <length>12</length>
+            </field>
+            <field>
+                <fieldName>separator25</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>ntavalnum</fieldName>
+                <fieldType>string</fieldType>
+                <length>15</length>
+            </field>
+            <field>
+                <fieldName>separator26</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>numintr</fieldName>
+                <fieldType>string</fieldType>
+                <length>15</length>
+            </field>
+            <field>
+                <fieldName>separator27</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>opday</fieldName>
+                <fieldType>string</fieldType>
+                <length>8</length>
+            </field>
+            <field>
+                <fieldName>separator28</fieldName>
                 <fieldType>string</fieldType>
                 <length>1</length>
             </field>
@@ -12071,6 +12060,16 @@
                 <fieldName>prdcd</fieldName>
                 <fieldType>string</fieldType>
                 <length>2</length>
+            </field>
+            <field>
+                <fieldName>separator29</fieldName>
+                <fieldType>string</fieldType>
+                <length>1</length>
+            </field>
+            <field>
+                <fieldName>yymm</fieldName>
+                <fieldType>string</fieldType>
+                <length>6</length>
             </field>
         </body>
         <footer>

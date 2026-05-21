@@ -72,7 +72,6 @@ public class CompareResultRpt {
                     totalExtra += r.getExtraCount();
                     totalAccuracy += r.getAccuracy();
                 }
-                totalAccuracy = totalAccuracy / end;
                 // 每頁都重新載入樣板（不同頁數變數）
                 String tplPath = "templates/CompareResultRpt.tpl";
 
@@ -91,9 +90,10 @@ public class CompareResultRpt {
 
                 // 最後一頁才加 SUMMARY
                 if (page == totalPages - 1) {
+                    double averageAccuracy = records.isEmpty() ? 0.0 : totalAccuracy / records.size();
                     String summary = String.format(
                             "                總計 %10d %10d %10d %10d %10d %10.2f%%",
-                            totalBot, totalMis, totalDiff, totalMiss, totalExtra, totalAccuracy);
+                            totalBot, totalMis, totalDiff, totalMiss, totalExtra, averageAccuracy);
                     template = template.replace("{{SUMMARY}}", summary)
                             .replace("{{FILETOTAL}}", String.valueOf(records.size()));
                 } else {

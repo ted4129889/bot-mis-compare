@@ -4,6 +4,7 @@ import com.bot.config.XmlDef;
 import com.bot.domain.FieldDef;
 import com.bot.domain.RowData;
 import com.bot.mask.config.FileConfig;
+import com.bot.mask.config.FileConfigManager;
 import com.bot.output.templates.CompareResultBean;
 import com.bot.util.log.LogProcess;
 import com.bot.util.xml.vo.XmlData;
@@ -52,13 +53,24 @@ public class CompareExec {
                 .findFirst()
                 .orElse(null);
 
+        if (xmlData == null) {
+            throw new IllegalArgumentException("No XML definition found for file: " + finalFileName);
+        }
+
         //取得欄位訊息
         List<XmlField> fieldList = xmlData.getBody().getFieldList();
         //特殊排除有分割檔案 並且 檔案名稱後面為 底線+流水號的
 //        idx = fileName.lastIndexOf("_");
 //        String jsonFileName = (idx > 0) ? fileName.substring(0, idx) : fileName;
         //檔案設定(key或sort)
-        FileConfig cfg = jsonFile.getOrDefault(finalFileName, null);
+        FileConfig cfg = FileConfigManager.get(finalFileName);
+        if (cfg == null) {
+            cfg = jsonFile.getOrDefault(finalFileName, null);
+        }
+
+        if (cfg == null) {
+            throw new IllegalArgumentException("No field setting found for file: " + finalFileName);
+        }
 
         //取得key
         List<String> keyList = cfg.getPrimaryKeys();

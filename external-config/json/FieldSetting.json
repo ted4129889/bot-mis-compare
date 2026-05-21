@@ -1264,7 +1264,7 @@
     "sortFields" : [ ]
   },
   "CUSBKCUS1" : {
-    "primaryKeys" : [ ],
+    "primaryKeys" : [ "cusno", "code", "cavbal", "davbal" ],
     "sortFields" : [ ]
   },
   "CUSBSDT" : {
@@ -1499,8 +1499,8 @@
     "primaryKeys" : [ ],
     "sortFields" : [ ]
   },
-  "DACNO_DB" : {
-    "primaryKeys" : [ "brno", "cusno", "alcd", "yymm", "actno", "curcd" ],
+  "DACNO" : {
+    "primaryKeys" : [ "apid", "gactno", "alcd", "apno", "avalnum", "avbal", "avbalnt", "bcode", "brno", "charcd", "curcd", "mlybal", "mlynum", "ntavalnum", "numintr", "opday", "prdcd", "yymm" ],
     "sortFields" : [ ]
   },
   "MLYNUM_DB" : {

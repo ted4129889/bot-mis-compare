@@ -22,6 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -51,6 +52,8 @@ public class CompareExecService {
     private CompareResultRpt compareResultRpt;
 
     public CompareResultBean compare(Path fileA, Path fileB, List<FieldDef> defs, String fileName, String fileType) throws Exception {
+
+        LineParser.resetDetection();
 
         LocalDateTime dateTime = LocalDateTime.now();
 
@@ -225,6 +228,8 @@ public class CompareExecService {
     //依照hash排序比對
     public CompareResultBean compare2(Path fileA, Path fileB, List<FieldDef> defs, String fileName, String fileType) throws Exception {
 
+        LineParser.resetDetection();
+
         LocalDateTime dateTime = LocalDateTime.now();
 
         String dateTimeStr = dateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmm"));
@@ -387,20 +392,54 @@ public class CompareExecService {
 
 
     private String compareFields(RowData a, RowData b, List<FieldDef> defs) {
+
+        List<String> groupNames = new ArrayList<>();
+
+        StringBuilder fieldName = new StringBuilder();
+
+        String resultKey = "";
+        int keyLen = 0;
+        for (FieldDef def : defs) {
+
+            if (!def.getName().contains("separator")) {
+                fieldName.append(def.getName()).append("+");
+            }
+
+            if (def.getName().contains("separator")) {
+                resultKey = fieldName.toString().trim();
+                keyLen = resultKey.length();
+                resultKey = resultKey.substring(0, keyLen - 1);
+                groupNames.add(resultKey);
+                fieldName = new StringBuilder();
+            }
+        }
+//        LogProcess.info(log, "groupNames = {}", groupNames.toString());
         StringBuilder sb = new StringBuilder();
         sb.append("key : ").append(a.getKeyRaw()).append("\n");
         sb.append("bot data : ").append(a.getFieldMap()).append("\n");
         sb.append("mis data : ").append(b.getFieldMap()).append("\n");
 
-        for (FieldDef def : defs) {
-            String v1 = a.getFieldMap().get(def.getName());
-            String v2 = b.getFieldMap().get(def.getName());
+        for (String groupName : groupNames) {
+
+            String v1 = a.getFieldMap().get(groupName);
+            String v2 = b.getFieldMap().get(groupName);
 
             if (!Objects.equals(v1, v2)) {
-                sb.append(String.format("欄位[%s] 不同: bot='%s', mis='%s'\n",
-                        def.getName(), v1, v2));
+                sb.append(String.format(
+                        "欄位[%s] 不同: bot='%s', mis='%s'%n",
+                        groupName, v1, v2));
             }
         }
+
+//        for (FieldDef def : defs) {
+//            String v1 = a.getFieldMap().get(def.getName());
+//            String v2 = b.getFieldMap().get(def.getName());
+//
+//            if (!Objects.equals(v1, v2)) {
+//                sb.append(String.format("欄位[%s] 不同: bot='%s', mis='%s'\n",
+//                        def.getName(), v1, v2));
+//            }
+//        }
         sb.append("----------------------------------\n");
         return sb.toString();
     }
@@ -414,8 +453,9 @@ public class CompareExecService {
         int diffColCount = diffCount;//差異欄位數
         int errorCount = diffCount + missCount + extraCount;
 
-        double accuracyPercent = 0.0;
-        accuracyPercent = 100.0 - Math.round(errorCount * 10000.0 / botTotal) / 100.0;
+        double accuracyPercent = botTotal == 0
+                ? 0.0
+                : 100.0 - Math.round(errorCount * 10000.0 / botTotal) / 100.0;
         //System.out.println("accuracyPercent = " + accuracyPercent + "%");
         String note = "";
 

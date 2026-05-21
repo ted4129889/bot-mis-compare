@@ -28,6 +28,11 @@ public class LineParser {
     // 沒 separator → fixed-length
     private static final AtomicBoolean useSplitMode = new AtomicBoolean(false);
 
+    public static void resetDetection() {
+        globalSeparator.set(null);
+        useSplitMode.set(false);
+    }
+
     private static String commonReplace(String line) {
 //        return line.replaceAll("[☆□]", "?").replaceAll("[*?]", " ").replaceAll("\"", " ");
         return line;
@@ -68,7 +73,7 @@ public class LineParser {
                     globalSeparator.set(value);
                     useSplitMode.set(true);
                     LogProcess.info(log, "use parseLineBySplit 1 ");
-                } else if (",".equals(value) || "$".equals(value)  || separator.equals(value) ) {
+                } else if (",".equals(value) || "$".equals(value) || separator.equals(value)) {
                     globalSeparator.set(value);
                     useSplitMode.set(true);
                     LogProcess.info(log, "use parseLineBySplit 2");
@@ -197,10 +202,12 @@ public class LineParser {
         StringBuilder fieldName = new StringBuilder();
         boolean isKey = false;
 
+        String resultKey = "";
+        int keyLen = 0;
         try {
             for (FieldDef def : defs) {
                 if (!def.getName().contains("separator")) {
-                    fieldName.append(def.getName()).append(" ");
+                    fieldName.append(def.getName()).append("+");
                     length = length + def.getLength();
                     //只要過程中有key，直到下一個分隔符號前都是true
                     if (def.isKey()) {
@@ -217,15 +224,19 @@ public class LineParser {
                     // 依照欄位長度補滿
                     value = padToByteLength(value, length, charset);
 
+                    resultKey = fieldName.toString().trim();
+                    keyLen = resultKey.length();
+                    resultKey = resultKey.substring(0, keyLen - 1);
+
                     // 放入 map
-                    fieldMap.put(fieldName.toString().trim(), value);
+                    fieldMap.put(resultKey, value);
 
                     // full hash
                     fullBuilder.append(value);
 
                     // key hash
                     if (isKey) {
-                        keyGroup.append(fieldName.append("=").append(value.trim()).append(","));
+                        keyGroup.append(resultKey + " = " + value.trim() + ",");
                     }
 //                    LogProcess.debug(log, "fieldMap = {}", fieldMap );
 

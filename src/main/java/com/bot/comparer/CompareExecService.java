@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -29,6 +30,9 @@ import java.util.Objects;
 @Slf4j
 @Component
 public class CompareExecService {
+
+    private static final Charset DATA_CHARSET = Charset.forName("MS950");
+    private static final int OUTPUT_PAGE_SIZE = 500000;
 
     private int aCount = 0;
     private int bCount = 0;
@@ -66,25 +70,20 @@ public class CompareExecService {
         int extraPage = 1;
         int diffPage = 1;
 
-        Path finalOutputFolder = Path.of(resultMain).resolve(fileType).resolve(fileName);
-        Path aFileOutPutPath = finalOutputFolder.resolve(finalFileName + "_bot.txt");
-        Path bFileOutPutPath = finalOutputFolder.resolve(finalFileName + "_misbh.txt");
-        Path missOutPutPath = finalOutputFolder.resolve(finalFileName + "_" + missPage + missTxt);
-        Path extraOutPutPath = finalOutputFolder.resolve(finalFileName + "_" + extraPage + extraTxt);
-        Path diffOutPutPath = finalOutputFolder.resolve(finalFileName + "_" + diffPage + diffTxt);
-        Path rockDbOutPutPath = finalOutputFolder.resolve("rocksdb\\A_DB");
+        Path finalOutputFolder = resultFolder(fileName, fileType);
+        Path missOutPutPath = pagedOutputPath(finalOutputFolder, finalFileName, missPage, missTxt);
+        Path extraOutPutPath = pagedOutputPath(finalOutputFolder, finalFileName, extraPage, extraTxt);
+        Path diffOutPutPath = pagedOutputPath(finalOutputFolder, finalFileName, diffPage, diffTxt);
+        Path rockDbOutPutPath = rocksDbPath(finalOutputFolder);
 
-        try (RocksDbManager db = new RocksDbManager(rockDbOutPutPath.toString())) {
+        try (RocksDbManager db = new RocksDbManager(rockDbOutPutPath.toString());
+             OutputReporter reporter = new OutputReporter()) {
 
-            aCount = 0;
-            bCount = 0;
-            missCount = 0;
-            extraCount = 0;
-            diffCount = 0;
+            resetCounters();
 
 
             // 1:讀 A，建RocksDB
-            try (BufferedReader br = Files.newBufferedReader(fileA, Charset.forName("MS950"))) {
+            try (BufferedReader br = newDataReader(fileA)) {
 
                 String line;
                 long count = 0;
@@ -122,7 +121,7 @@ public class CompareExecService {
 
 
             // 2:讀 B 比對 A
-            try (BufferedReader br = Files.newBufferedReader(fileB, Charset.forName("MS950"))) {
+            try (BufferedReader br = newDataReader(fileB)) {
 
                 String line;
                 long count = 0;
@@ -147,12 +146,12 @@ public class CompareExecService {
                     //找不到，表示 B 多資料
                     if (valueInA == null) {
                         extraCount++;
-                        if (extraCount % 500000 == 0) {
+                        if (extraCount % OUTPUT_PAGE_SIZE == 0) {
                             extraPage++;
-                            extraOutPutPath = finalOutputFolder.resolve(finalFileName + "_" + extraPage + extraTxt);
+                            extraOutPutPath = pagedOutputPath(finalOutputFolder, finalFileName, extraPage, extraTxt);
                         }
                         //寫到多的檔案
-                        OutputReporter.reportExtra(rawB, extraOutPutPath);
+                        reporter.writeExtra(rawB, extraOutPutPath);
                     } else {
                         String[] parts = valueInA.split("\\|", 3); // fullHash | map
 
@@ -168,14 +167,14 @@ public class CompareExecService {
                         if (!fullHashA.equals(fullHashB)) {
                             diffCount++;
 
-                            if (diffCount % 500000 == 0) {
+                            if (diffCount % OUTPUT_PAGE_SIZE == 0) {
                                 diffPage++;
-                                diffOutPutPath = finalOutputFolder.resolve(finalFileName + "_" + diffPage + diffTxt);
+                                diffOutPutPath = pagedOutputPath(finalOutputFolder, finalFileName, diffPage, diffTxt);
                             }
 
                             String diffResult = compareFields(RowData.fromJson(rawA), rawB, defs);
                             //有符合，但是內容有差異
-                            OutputReporter.reportFieldDiff(diffResult, diffOutPutPath);
+                            reporter.writeFieldDiff(diffResult, diffOutPutPath);
                         }
                     }
 
@@ -207,13 +206,13 @@ public class CompareExecService {
 
                 if ("0".equals(flag)) {
                     missCount++;
-                    if (missCount % 500000 == 0) {
+                    if (missCount % OUTPUT_PAGE_SIZE == 0) {
                         missPage++;
-                        missOutPutPath = finalOutputFolder.resolve(finalFileName + "_" + missPage + missTxt);
+                        missOutPutPath = pagedOutputPath(finalOutputFolder, finalFileName, missPage, missTxt);
                     }
 
                     // A 有， B 沒有
-                    OutputReporter.reportMissing(rawA, missOutPutPath);
+                    reporter.writeMissing(rawA, missOutPutPath);
                 }
             }
             LogProcess.info(log, "mis file {} ,missCount = {} ", finalFileName, missCount);
@@ -237,30 +236,25 @@ public class CompareExecService {
 
         String finalFileName = fileName + "_" + dateTimeStr;
 
-        Path finalOutputFolder = Path.of(resultMain).resolve(fileType).resolve(fileName);
-        Path aFileOutPutPath = finalOutputFolder.resolve(finalFileName + "_bot.txt");
-        Path bFileOutPutPath = finalOutputFolder.resolve(finalFileName + "_misbh.txt");
-        Path missOutPutPath = finalOutputFolder.resolve(finalFileName + "_miss.txt");
-        Path extraOutPutPath = finalOutputFolder.resolve(finalFileName + "_extra.txt");
-        Path diffOutPutPath = finalOutputFolder.resolve(finalFileName + "_diff.txt");
-        Path rockDbOutPutPath = finalOutputFolder.resolve("rocksdb\\A_DB");
+        Path finalOutputFolder = resultFolder(fileName, fileType);
+        Path missOutPutPath = outputPath(finalOutputFolder, finalFileName, missTxt);
+        Path extraOutPutPath = outputPath(finalOutputFolder, finalFileName, extraTxt);
+        Path diffOutPutPath = outputPath(finalOutputFolder, finalFileName, diffTxt);
+        Path rockDbOutPutPath = rocksDbPath(finalOutputFolder);
 
         //System.out.println("finalOutputFolder :  " + finalOutputFolder);
         //System.out.println("missOutPutPath :  " + missOutPutPath);
         //System.out.println("extraOutPutPath :  " + extraOutPutPath);
         //System.out.println("diffOutPutPath :  " + diffOutPutPath);
         //System.out.println("rockDbOutPutPath :  " + rockDbOutPutPath);
-        aCount = 0;
-        bCount = 0;
-        missCount = 0;
-        extraCount = 0;
-        diffCount = 0;
+        resetCounters();
 
         long seq = 0;
 
-        try (RocksDbManager db = new RocksDbManager(rockDbOutPutPath.toString())) {
+        try (RocksDbManager db = new RocksDbManager(rockDbOutPutPath.toString());
+             OutputReporter reporter = new OutputReporter()) {
 
-            try (BufferedReader br = Files.newBufferedReader(fileA, Charset.forName("MS950"))) {
+            try (BufferedReader br = newDataReader(fileA)) {
 
                 String line;
                 long count = 0;
@@ -292,7 +286,7 @@ public class CompareExecService {
 
             long seqB = 0;
 
-            try (BufferedReader br = Files.newBufferedReader(fileB, Charset.forName("MS950"))) {
+            try (BufferedReader br = newDataReader(fileB)) {
 
                 String line;
                 long count = 0;
@@ -339,7 +333,7 @@ public class CompareExecService {
                             // 若 hash 不同 → 欄位差異
                             if (!hashA.equals(hashB)) {
                                 diffCount++;
-                                OutputReporter.reportFieldDiff(
+                                reporter.writeFieldDiff(
                                         compareFields(RowData.fromJson(rawAJson), rawB, defs),
                                         diffOutPutPath
                                 );
@@ -354,7 +348,7 @@ public class CompareExecService {
 
                     if (!matched) {
                         extraCount++;
-                        OutputReporter.reportExtra(rawB, extraOutPutPath);
+                        reporter.writeExtra(rawB, extraOutPutPath);
                     }
 
                     if (++count % 100000 == 0) {
@@ -377,7 +371,7 @@ public class CompareExecService {
 
                 if (flag.equals("0")) {
                     missCount++;
-                    OutputReporter.reportMissing(rawAJson, missOutPutPath);
+                    reporter.writeMissing(rawAJson, missOutPutPath);
                 }
             }
 
@@ -390,6 +384,34 @@ public class CompareExecService {
         }
     }
 
+
+    private BufferedReader newDataReader(Path file) throws IOException {
+        return Files.newBufferedReader(file, DATA_CHARSET);
+    }
+
+    private void resetCounters() {
+        aCount = 0;
+        bCount = 0;
+        missCount = 0;
+        extraCount = 0;
+        diffCount = 0;
+    }
+
+    private Path resultFolder(String fileName, String fileType) {
+        return Path.of(resultMain).resolve(fileType).resolve(fileName);
+    }
+
+    private Path pagedOutputPath(Path outputFolder, String finalFileName, int page, String suffix) {
+        return outputFolder.resolve(finalFileName + "_" + page + suffix);
+    }
+
+    private Path outputPath(Path outputFolder, String finalFileName, String suffix) {
+        return outputFolder.resolve(finalFileName + suffix);
+    }
+
+    private Path rocksDbPath(Path outputFolder) {
+        return outputFolder.resolve(Path.of("rocksdb", "A_DB"));
+    }
 
     private String compareFields(RowData a, RowData b, List<FieldDef> defs) {
 

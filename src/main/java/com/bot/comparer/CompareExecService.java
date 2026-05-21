@@ -32,6 +32,7 @@ import java.util.Objects;
 public class CompareExecService {
 
     private static final Charset DATA_CHARSET = Charset.forName("MS950");
+    private static final int LOG_PROGRESS_SIZE = 100000;
     private static final int OUTPUT_PAGE_SIZE = 500000;
 
     private int aCount = 0;
@@ -49,6 +50,7 @@ public class CompareExecService {
 
     @Value("${localFile.mis.compare_result.main}")
     private String resultMain;
+
     @Autowired
     private FormatData formatData;
 
@@ -56,264 +58,207 @@ public class CompareExecService {
     private CompareResultRpt compareResultRpt;
 
     public CompareResultBean compare(Path fileA, Path fileB, List<FieldDef> defs, String fileName, String fileType) throws Exception {
-
         LineParser parser = new LineParser();
+        String finalFileName = timestampedFileName(fileName);
+        Path outputFolder = resultFolder(fileName, fileType);
 
-        LocalDateTime dateTime = LocalDateTime.now();
+        PagedOutput missOutput = new PagedOutput(outputFolder, finalFileName, missTxt);
+        PagedOutput extraOutput = new PagedOutput(outputFolder, finalFileName, extraTxt);
+        PagedOutput diffOutput = new PagedOutput(outputFolder, finalFileName, diffTxt);
 
-        String dateTimeStr = dateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmm"));
-        String dateTimeStr2 = dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
-
-        String finalFileName = fileName + "_" + dateTimeStr;
-
-        int missPage = 1;
-        int extraPage = 1;
-        int diffPage = 1;
-
-        Path finalOutputFolder = resultFolder(fileName, fileType);
-        Path missOutPutPath = pagedOutputPath(finalOutputFolder, finalFileName, missPage, missTxt);
-        Path extraOutPutPath = pagedOutputPath(finalOutputFolder, finalFileName, extraPage, extraTxt);
-        Path diffOutPutPath = pagedOutputPath(finalOutputFolder, finalFileName, diffPage, diffTxt);
-        Path rockDbOutPutPath = rocksDbPath(finalOutputFolder);
-
-        try (RocksDbManager db = new RocksDbManager(rockDbOutPutPath.toString());
+        try (RocksDbManager db = new RocksDbManager(rocksDbPath(outputFolder).toString());
              OutputReporter reporter = new OutputReporter()) {
 
             resetCounters();
+            indexByPrimaryKey(fileA, defs, parser, db, finalFileName);
+            compareByPrimaryKey(fileB, defs, parser, db, reporter, extraOutput, diffOutput, finalFileName);
+            writeMissingByPrimaryKey(db, reporter, missOutput, finalFileName);
 
+            return exportTextFile(Path.of(fileName).getFileName().toString());
+        }
+    }
 
-            // 1:讀 A，建RocksDB
-            try (BufferedReader br = newDataReader(fileA)) {
+    public CompareResultBean compare2(Path fileA, Path fileB, List<FieldDef> defs, String fileName, String fileType) throws Exception {
+        LineParser parser = new LineParser();
+        String finalFileName = timestampedFileName(fileName);
+        Path outputFolder = resultFolder(fileName, fileType);
 
-                String line;
-                long count = 0;
+        Path missOutPutPath = outputPath(outputFolder, finalFileName, missTxt);
+        Path extraOutPutPath = outputPath(outputFolder, finalFileName, extraTxt);
+        Path diffOutPutPath = outputPath(outputFolder, finalFileName, diffTxt);
 
-                while ((line = br.readLine()) != null) {
-                    aCount++;
+        try (RocksDbManager db = new RocksDbManager(rocksDbPath(outputFolder).toString());
+             OutputReporter reporter = new OutputReporter()) {
 
-                    //轉map
-                    RowData rawA = parser.parse(formatData.getReplaceSpace(line, " "), defs, SEPARATOR);
+            resetCounters();
+            indexByFullHash(fileA, defs, parser, db, finalFileName);
+            compareByFullHash(fileB, defs, parser, db, reporter, extraOutPutPath, diffOutPutPath, finalFileName);
+            writeMissingByFullHash(db, reporter, missOutPutPath, finalFileName);
 
-                    if (rawA == null) continue;
+            return exportTextFile(Path.of(fileName).getFileName().toString());
+        }
+    }
 
-//                    OutputReporter.reportFileA(rawA, aFileOutPutPath);
-                    // A key hash
-                    String keyHash = rawA.getKeyHash();
+    private void indexByPrimaryKey(Path fileA, List<FieldDef> defs, LineParser parser, RocksDbManager db, String finalFileName) throws Exception {
+        try (BufferedReader br = newDataReader(fileA)) {
+            String line;
+            long count = 0;
 
-                    // A full raw hash
-                    String fullHash = rawA.getFullHash();
+            while ((line = br.readLine()) != null) {
+                aCount++;
 
-                    // flag=0 + fullHash + A raw
-                    String value = "0|" + fullHash + "|" + rawA.toJson();
+                RowData rawA = parser.parse(formatData.getReplaceSpace(line, " "), defs, SEPARATOR);
+                if (rawA == null) continue;
 
-                    //寫進RocksDb
-                    db.put(keyHash, value);
+                String value = "0|" + rawA.getFullHash() + "|" + rawA.toJson();
+                db.put(rawA.getKeyHash(), value);
 
-                    if (++count % 100000 == 0) {
-                        //System.out.println("aFileOutPutPath indexed: " + count);
+                if (++count % LOG_PROGRESS_SIZE == 0) {
+                    // reserved for progress logging
+                }
+            }
+
+            LogProcess.info(log, "bot file {} ,totalCnt = {} ", finalFileName, count);
+        }
+    }
+
+    private void compareByPrimaryKey(
+            Path fileB,
+            List<FieldDef> defs,
+            LineParser parser,
+            RocksDbManager db,
+            OutputReporter reporter,
+            PagedOutput extraOutput,
+            PagedOutput diffOutput,
+            String finalFileName
+    ) throws Exception {
+        try (BufferedReader br = newDataReader(fileB)) {
+            String line;
+            long count = 0;
+
+            while ((line = br.readLine()) != null) {
+                bCount++;
+
+                RowData rawB = parser.parse(formatData.getReplaceSpace(line, " "), defs, SEPARATOR);
+                if (rawB == null) continue;
+
+                String keyHash = rawB.getKeyHash();
+                String fullHashB = rawB.getFullHash();
+                String valueInA = db.get(keyHash);
+
+                if (valueInA == null) {
+                    extraCount++;
+                    if (extraCount % OUTPUT_PAGE_SIZE == 0) {
+                        extraOutput.advance();
+                    }
+                    reporter.writeExtra(rawB, extraOutput.current());
+                } else {
+                    String[] parts = valueInA.split("\\|", 3);
+                    String fullHashA = parts[1];
+                    String rawA = parts[2];
+
+                    db.put(keyHash, "1|" + fullHashA + "|" + rawA);
+
+                    if (!fullHashA.equals(fullHashB)) {
+                        diffCount++;
+                        if (diffCount % OUTPUT_PAGE_SIZE == 0) {
+                            diffOutput.advance();
+                        }
+
+                        String diffResult = compareFields(RowData.fromJson(rawA), rawB, defs);
+                        reporter.writeFieldDiff(diffResult, diffOutput.current());
                     }
                 }
 
-                //System.out.println("A file indexed: " + count);
-
-                LogProcess.info(log, "bot file {} ,totalCnt = {} ", finalFileName, count);
-            }
-
-
-            // 2:讀 B 比對 A
-            try (BufferedReader br = newDataReader(fileB)) {
-
-                String line;
-                long count = 0;
-
-                while ((line = br.readLine()) != null) {
-                    bCount++;
-                    //轉map
-                    RowData rawB = parser.parse(formatData.getReplaceSpace(line, " "), defs, SEPARATOR);
-
-                    if (rawB == null) continue;
-
-//                    OutputReporter.reportFileA(rawB, bFileOutPutPath);
-                    // B key hash
-                    String keyHash = rawB.getKeyHash();
-
-                    // B full raw hash
-                    String fullHashB = rawB.getFullHash();
-
-                    //用 B key hash 找 A raw data
-                    String valueInA = db.get(keyHash);
-
-                    //找不到，表示 B 多資料
-                    if (valueInA == null) {
-                        extraCount++;
-                        if (extraCount % OUTPUT_PAGE_SIZE == 0) {
-                            extraPage++;
-                            extraOutPutPath = pagedOutputPath(finalOutputFolder, finalFileName, extraPage, extraTxt);
-                        }
-                        //寫到多的檔案
-                        reporter.writeExtra(rawB, extraOutPutPath);
-                    } else {
-                        String[] parts = valueInA.split("\\|", 3); // fullHash | map
-
-                        String oldFlag = parts[0];
-                        String fullHashA = parts[1];
-                        String rawA = parts[2];
-
-                        // 更新 flag = 1
-                        String newValue = "1|" + fullHashA + "|" + rawA;
-                        db.put(keyHash, newValue);
-
-                        // 比 hash → 欄位差異
-                        if (!fullHashA.equals(fullHashB)) {
-                            diffCount++;
-
-                            if (diffCount % OUTPUT_PAGE_SIZE == 0) {
-                                diffPage++;
-                                diffOutPutPath = pagedOutputPath(finalOutputFolder, finalFileName, diffPage, diffTxt);
-                            }
-
-                            String diffResult = compareFields(RowData.fromJson(rawA), rawB, defs);
-                            //有符合，但是內容有差異
-                            reporter.writeFieldDiff(diffResult, diffOutPutPath);
-                        }
-                    }
-
-                    if (++count % 100000 == 0) {
-                        //System.out.println("B file compared: " + count);
-                    }
-
-
-//                    LogProcess.info(log, "mis file {} ,totalCnt = {} ", finalFileName, count);
-//                    LogProcess.info(log, "mis file {} ,extraCount = {} ", finalFileName, extraCount);
-//                    LogProcess.info(log, "bot file vs. mis file,diffCount = {} ", diffCount);
+                if (++count % LOG_PROGRESS_SIZE == 0) {
+                    // reserved for progress logging
                 }
-                LogProcess.info(log, "mis file {} ,totalCnt = {} ", finalFileName, count);
-                LogProcess.info(log, "mis file {} ,extraCount = {} ", finalFileName, extraCount);
-                LogProcess.info(log, "bot file vs. mis file,diffCount = {} ", diffCount);
             }
 
-            //3：找 B 少資料
-            RocksIterator it = db.newIterator();
+            LogProcess.info(log, "mis file {} ,totalCnt = {} ", finalFileName, count);
+            LogProcess.info(log, "mis file {} ,extraCount = {} ", finalFileName, extraCount);
+            LogProcess.info(log, "bot file vs. mis file,diffCount = {} ", diffCount);
+        }
+    }
 
+    private void writeMissingByPrimaryKey(RocksDbManager db, OutputReporter reporter, PagedOutput missOutput, String finalFileName) throws IOException {
+        RocksIterator it = db.newIterator();
+        try {
             for (it.seekToFirst(); it.isValid(); it.next()) {
-
                 String value = new String(it.value());
-
                 String[] parts = value.split("\\|", 3);
                 String flag = parts[0];
-                String fullHash = parts[1];
                 String rawA = parts[2];
 
                 if ("0".equals(flag)) {
                     missCount++;
                     if (missCount % OUTPUT_PAGE_SIZE == 0) {
-                        missPage++;
-                        missOutPutPath = pagedOutputPath(finalOutputFolder, finalFileName, missPage, missTxt);
+                        missOutput.advance();
                     }
-
-                    // A 有， B 沒有
-                    reporter.writeMissing(rawA, missOutPutPath);
+                    reporter.writeMissing(rawA, missOutput.current());
                 }
             }
-            LogProcess.info(log, "mis file {} ,missCount = {} ", finalFileName, missCount);
-
+        } finally {
             it.close();
+        }
 
-            return exportTextFile(Path.of(fileName).getFileName().toString());
+        LogProcess.info(log, "mis file {} ,missCount = {} ", finalFileName, missCount);
+    }
 
+    private void indexByFullHash(Path fileA, List<FieldDef> defs, LineParser parser, RocksDbManager db, String finalFileName) throws Exception {
+        long seq = 0;
+
+        try (BufferedReader br = newDataReader(fileA)) {
+            String line;
+            long count = 0;
+
+            while ((line = br.readLine()) != null) {
+                aCount++;
+
+                RowData rawA = parser.parse(formatData.getReplaceSpace(line, " "), defs, SEPARATOR);
+                String hash = rawA.getFullHash();
+                String key = hash + "|" + String.format("%010d", seq++);
+                String value = "0|" + hash + "|" + rawA.toJson();
+
+                db.put(key, value);
+
+                if (++count % LOG_PROGRESS_SIZE == 0) {
+                    // reserved for progress logging
+                }
+            }
+
+            LogProcess.info(log, "bot file {} ,totalCnt = {} ", finalFileName, count);
         }
     }
 
-    //依照hash排序比對
-    public CompareResultBean compare2(Path fileA, Path fileB, List<FieldDef> defs, String fileName, String fileType) throws Exception {
+    private void compareByFullHash(
+            Path fileB,
+            List<FieldDef> defs,
+            LineParser parser,
+            RocksDbManager db,
+            OutputReporter reporter,
+            Path extraOutPutPath,
+            Path diffOutPutPath,
+            String finalFileName
+    ) throws Exception {
+        try (BufferedReader br = newDataReader(fileB)) {
+            String line;
+            long count = 0;
+            RocksIterator it = db.newIterator();
 
-        LineParser parser = new LineParser();
-
-        LocalDateTime dateTime = LocalDateTime.now();
-
-        String dateTimeStr = dateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmm"));
-        String dateTimeStr2 = dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
-
-        String finalFileName = fileName + "_" + dateTimeStr;
-
-        Path finalOutputFolder = resultFolder(fileName, fileType);
-        Path missOutPutPath = outputPath(finalOutputFolder, finalFileName, missTxt);
-        Path extraOutPutPath = outputPath(finalOutputFolder, finalFileName, extraTxt);
-        Path diffOutPutPath = outputPath(finalOutputFolder, finalFileName, diffTxt);
-        Path rockDbOutPutPath = rocksDbPath(finalOutputFolder);
-
-        //System.out.println("finalOutputFolder :  " + finalOutputFolder);
-        //System.out.println("missOutPutPath :  " + missOutPutPath);
-        //System.out.println("extraOutPutPath :  " + extraOutPutPath);
-        //System.out.println("diffOutPutPath :  " + diffOutPutPath);
-        //System.out.println("rockDbOutPutPath :  " + rockDbOutPutPath);
-        resetCounters();
-
-        long seq = 0;
-
-        try (RocksDbManager db = new RocksDbManager(rockDbOutPutPath.toString());
-             OutputReporter reporter = new OutputReporter()) {
-
-            try (BufferedReader br = newDataReader(fileA)) {
-
-                String line;
-                long count = 0;
-
+            try {
                 while ((line = br.readLine()) != null) {
-
-                    aCount++;
-
-                    RowData rawA = parser.parse(formatData.getReplaceSpace(line, " "), defs, SEPARATOR);
-
-                    String hash = rawA.getFullHash();
-
-                    //新 key：hash 排序 + 支援重複 hash
-                    String key = hash + "|" + String.format("%010d", seq++);
-
-                    // 使用你的原格式：flag=0|fullHash|rawJson
-                    String value = "0|" + hash + "|" + rawA.toJson();
-
-                    db.put(key, value);
-
-                    if (++count % 100000 == 0) {
-                        //System.out.println("A file indexed: " + count);
-                    }
-                }
-
-                LogProcess.info(log, "bot file {} ,totalCnt = {} ", finalFileName, count);
-                //System.out.println("A file indexed: " + count);
-            }
-
-            long seqB = 0;
-
-            try (BufferedReader br = newDataReader(fileB)) {
-
-                String line;
-                long count = 0;
-
-                RocksIterator it = db.newIterator();
-
-                while ((line = br.readLine()) != null) {
-
                     bCount++;
 
                     RowData rawB = parser.parse(formatData.getReplaceSpace(line, " "), defs, SEPARATOR);
-
                     String hashB = rawB.getFullHash();
-
-                    //B 的 key 格式一樣（hash 排序）
                     String searchKey = hashB + "|";
 
-                    //定位到 hashB 的起始位置
                     it.seek(searchKey.getBytes(StandardCharsets.UTF_8));
 
                     boolean matched = false;
-
                     while (it.isValid()) {
-
                         String foundKey = new String(it.key());
-
-                        // 遇到下一個 hash 代表找完了
                         if (!foundKey.startsWith(searchKey)) break;
 
                         String valueInA = new String(it.value());
@@ -322,15 +267,10 @@ public class CompareExecService {
                         String hashA = parts[1];
                         String rawAJson = parts[2];
 
-                        // 只比對未消耗（flag == 0）的
-                        if (flag.equals("0")) {
-
+                        if ("0".equals(flag)) {
                             matched = true;
-
-                            //consume（標記成使用過）
                             db.put(it.key().toString(), "1|" + hashA + "|" + rawAJson);
 
-                            // 若 hash 不同 → 欄位差異
                             if (!hashA.equals(hashB)) {
                                 diffCount++;
                                 reporter.writeFieldDiff(
@@ -338,11 +278,9 @@ public class CompareExecService {
                                         diffOutPutPath
                                 );
                             }
-
                             break;
                         }
 
-                        // flag=1 → 已配對過 → 找下一筆相同 hash
                         it.next();
                     }
 
@@ -351,39 +289,40 @@ public class CompareExecService {
                         reporter.writeExtra(rawB, extraOutPutPath);
                     }
 
-                    if (++count % 100000 == 0) {
-                        //System.out.println("B file compared: " + count);
+                    if (++count % LOG_PROGRESS_SIZE == 0) {
+                        // reserved for progress logging
                     }
                 }
-
-                LogProcess.info(log, "mis file {} ,totalCnt = {} ", finalFileName, count);
-                LogProcess.info(log, "mis file {} ,extraCount = {} ", finalFileName, extraCount);
-                LogProcess.info(log, "bot file vs. mis file,diffCount = {} ", diffCount);
+            } finally {
+                it.close();
             }
-            //3：找 B 少資料
-            RocksIterator it = db.newIterator();
-            for (it.seekToFirst(); it.isValid(); it.next()) {
 
+            LogProcess.info(log, "mis file {} ,totalCnt = {} ", finalFileName, count);
+            LogProcess.info(log, "mis file {} ,extraCount = {} ", finalFileName, extraCount);
+            LogProcess.info(log, "bot file vs. mis file,diffCount = {} ", diffCount);
+        }
+    }
+
+    private void writeMissingByFullHash(RocksDbManager db, OutputReporter reporter, Path missOutPutPath, String finalFileName) throws IOException {
+        RocksIterator it = db.newIterator();
+        try {
+            for (it.seekToFirst(); it.isValid(); it.next()) {
                 String value = new String(it.value());
                 String[] parts = value.split("\\|", 3);
                 String flag = parts[0];
                 String rawAJson = parts[2];
 
-                if (flag.equals("0")) {
+                if ("0".equals(flag)) {
                     missCount++;
                     reporter.writeMissing(rawAJson, missOutPutPath);
                 }
             }
-
-            LogProcess.info(log, "mis file {} ,missCount = {} ", finalFileName, missCount);
-
+        } finally {
             it.close();
-
-            return exportTextFile(Path.of(fileName).getFileName().toString());
-
         }
-    }
 
+        LogProcess.info(log, "mis file {} ,missCount = {} ", finalFileName, missCount);
+    }
 
     private BufferedReader newDataReader(Path file) throws IOException {
         return Files.newBufferedReader(file, DATA_CHARSET);
@@ -395,6 +334,11 @@ public class CompareExecService {
         missCount = 0;
         extraCount = 0;
         diffCount = 0;
+    }
+
+    private String timestampedFileName(String fileName) {
+        String dateTimeStr = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmm"));
+        return fileName + "_" + dateTimeStr;
     }
 
     private Path resultFolder(String fileName, String fileType) {
@@ -413,36 +357,53 @@ public class CompareExecService {
         return outputFolder.resolve(Path.of("rocksdb", "A_DB"));
     }
 
+    private class PagedOutput {
+        private final Path outputFolder;
+        private final String finalFileName;
+        private final String suffix;
+        private int page = 1;
+        private Path currentPath;
+
+        private PagedOutput(Path outputFolder, String finalFileName, String suffix) {
+            this.outputFolder = outputFolder;
+            this.finalFileName = finalFileName;
+            this.suffix = suffix;
+            this.currentPath = pagedOutputPath(outputFolder, finalFileName, page, suffix);
+        }
+
+        private Path current() {
+            return currentPath;
+        }
+
+        private void advance() {
+            page++;
+            currentPath = pagedOutputPath(outputFolder, finalFileName, page, suffix);
+        }
+    }
+
     private String compareFields(RowData a, RowData b, List<FieldDef> defs) {
-
         List<String> groupNames = new ArrayList<>();
-
         StringBuilder fieldName = new StringBuilder();
 
-        String resultKey = "";
-        int keyLen = 0;
         for (FieldDef def : defs) {
-
             if (!def.getName().contains("separator")) {
                 fieldName.append(def.getName()).append("+");
             }
 
             if (def.getName().contains("separator")) {
-                resultKey = fieldName.toString().trim();
-                keyLen = resultKey.length();
-                resultKey = resultKey.substring(0, keyLen - 1);
+                String resultKey = fieldName.toString().trim();
+                resultKey = resultKey.substring(0, resultKey.length() - 1);
                 groupNames.add(resultKey);
                 fieldName = new StringBuilder();
             }
         }
-//        LogProcess.info(log, "groupNames = {}", groupNames.toString());
+
         StringBuilder sb = new StringBuilder();
         sb.append("key : ").append(a.getKeyRaw()).append("\n");
         sb.append("bot data : ").append(a.getFieldMap()).append("\n");
         sb.append("mis data : ").append(b.getFieldMap()).append("\n");
 
         for (String groupName : groupNames) {
-
             String v1 = a.getFieldMap().get(groupName);
             String v2 = b.getFieldMap().get(groupName);
 
@@ -453,35 +414,21 @@ public class CompareExecService {
             }
         }
 
-//        for (FieldDef def : defs) {
-//            String v1 = a.getFieldMap().get(def.getName());
-//            String v2 = b.getFieldMap().get(def.getName());
-//
-//            if (!Objects.equals(v1, v2)) {
-//                sb.append(String.format("欄位[%s] 不同: bot='%s', mis='%s'\n",
-//                        def.getName(), v1, v2));
-//            }
-//        }
         sb.append("----------------------------------\n");
         return sb.toString();
     }
 
-    //計算要輸出結果檔案的筆數資訊
     private CompareResultBean exportTextFile(String fileName) {
-
-        //扣1是因為扣除欄位
         int botTotal = aCount;
         int misTotal = bCount;
-        int diffColCount = diffCount;//差異欄位數
+        int diffColCount = diffCount;
         int errorCount = diffCount + missCount + extraCount;
 
         double accuracyPercent = botTotal == 0
                 ? 0.0
                 : 100.0 - Math.round(errorCount * 10000.0 / botTotal) / 100.0;
-        //System.out.println("accuracyPercent = " + accuracyPercent + "%");
         String note = "";
 
         return new CompareResultBean(fileName, botTotal, misTotal, diffCount, diffColCount, missCount, extraCount, accuracyPercent, note);
     }
-
 }
